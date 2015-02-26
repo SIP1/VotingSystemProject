@@ -1,11 +1,13 @@
 package control;
 
-import control.Controller.ProposedElectiveSubjects;
+import control.Controller.ProposedElectiveSubject;
+import control.Controller.Vote;
 import java.util.ArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import utilities.AcceptanceProtocol;
 
 public class ControllerTest {
 
@@ -17,7 +19,6 @@ public class ControllerTest {
     @Before
     public void before() {
         controller = new Controller();
-        System.out.println("before each");
     }
 
     @Test
@@ -30,28 +31,34 @@ public class ControllerTest {
     }
 
     @Test
-    public void testGetAllAvailableSubjects() {
-        ArrayList subjects = new ArrayList();
-        subjects.add(controller.new ProposedElectiveSubjects("AI", "make it think", Boolean.TRUE));
-        subjects.add(controller.new ProposedElectiveSubjects("C#", "java like", Boolean.TRUE));
-        subjects.add(controller.new ProposedElectiveSubjects("C++", "complicated", Boolean.FALSE));
-        subjects.add(controller.new ProposedElectiveSubjects("Game Design", "WOW", Boolean.TRUE));
-        assertEquals(subjects.size(), controller.getAllAvailableSubjects().size());
+    public void testAddSubject() {
+        assertEquals((Integer) 0, controller.addSubject(controller.new ProposedElectiveSubject("AI", "make it think", Boolean.TRUE)).getId());
     }
 
     @Test
-    public void testAddSubjectToDB() {
-        assertEquals((Integer) 4, controller.addSubject(controller
-        .new ProposedElectiveSubjects("AI", "make it think", Boolean.TRUE)).getId());
+    public void testGetAllAvailableSubjects() {
+        ArrayList<ProposedElectiveSubject> testSubjects = new ArrayList();
+        testSubjects.add(controller.new ProposedElectiveSubject("AI", "make it think", Boolean.TRUE));
+        testSubjects.add(controller.new ProposedElectiveSubject("C#", "java like", Boolean.TRUE));
+        testSubjects.add(controller.new ProposedElectiveSubject("C++", "complicated", Boolean.FALSE));
+        testSubjects.add(controller.new ProposedElectiveSubject("Game Design", "WOW", Boolean.TRUE));
+        controller.addSubject(testSubjects.get(0));
+        controller.addSubject(testSubjects.get(1));
+        controller.addSubject(testSubjects.get(2));
+        controller.addSubject(testSubjects.get(3));
+
+        assertEquals(testSubjects.size(), controller.getAllAvailableSubjects().size());
     }
-    
+
     @Test
-    public void testVote(){
-        ArrayList<ProposedElectiveSubjects> alPES = new ArrayList();
-        alPES.add(controller.new ProposedElectiveSubjects("AI", "make it think", Boolean.TRUE));
-        alPES.add(controller.new ProposedElectiveSubjects("C#", "java like", Boolean.TRUE));
-        alPES.add(controller.new ProposedElectiveSubjects("C++", "complicated", Boolean.FALSE));
-        alPES.add(controller.new ProposedElectiveSubjects("Game Design", "WOW", Boolean.TRUE));
+    public void testVote() {
+        String expected = AcceptanceProtocol.VOTE_SUCCESS;
+        ArrayList<Vote> testVotes = new ArrayList();
+        testVotes.add(controller.new Vote("bobkoo", 1, 4, 1));
+        testVotes.add(controller.new Vote("bobkoo", 2, 3, 1));
+        testVotes.add(controller.new Vote("bobkoo", 1, 2, 1));
+        testVotes.add(controller.new Vote("bobkoo", 2, 5, 1));
+        assertEquals(expected, controller.vote(testVotes));
     }
 
 }
