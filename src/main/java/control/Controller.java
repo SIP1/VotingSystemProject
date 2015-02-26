@@ -1,14 +1,17 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import utilities.AcceptanceProtocol;
 
 public class Controller {
 
-//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("JA6QQDBPU");
-//    EntityManager em = emf.createEntityManager();
     User user;
-    public ArrayList subjects = new ArrayList();
+    public ArrayList<ProposedElectiveSubject> subjects = new ArrayList();
+    public ArrayList<User> users = new ArrayList();
 
     public static void main(String[] args) {
         new Controller().testingBase();
@@ -19,14 +22,41 @@ public class Controller {
     }
 
     private void testingBase() {
+        users.add(new User(1, "bobkoo", "boyko", "12345", "user@email"));
         authenticate("bobkoo", "12345");
-        user = new User(1, "bobkoo", "boyko", "12345", "user@email");
+
     }
 
     public String authenticate(String userName, String password) {
-        return AcceptanceProtocol.LOGIN_SUCCESS;
+        for (User x : users) {
+            if (x.getUserName().equals(userName) && x.getPassword().equals(password)) {
+                user = x;
+                return AcceptanceProtocol.LOGIN_SUCCESS;
+            }
+        }
+        return AcceptanceProtocol.LOGIN_FAILED;
     }
 
+    public String register(User u) {
+        for(User x : users) {
+            if(x.getUserName().equals(u.userName)){
+                return AcceptanceProtocol.REGISTRATION_FAILED;
+            }
+        }
+        users.add(u);
+        return AcceptanceProtocol.REGISTRATION_SUCCESS;
+    }
+
+    public String deleteAccount(String userName){
+        for(User x : users) {
+            if(x.getUserName().equals(userName)){
+                users.remove(x);
+                return AcceptanceProtocol.ACCOUNT_DELETION;
+            }
+        }
+        return AcceptanceProtocol.ACCOUNT_DELETION_FAIL;
+    }
+    
     public ArrayList getAllAvailableSubjects() {
         return subjects;
     }
@@ -45,18 +75,47 @@ public class Controller {
     }
 
     private String isChoiceAccepted(ArrayList<Vote> votes) {
-        if (votes.size() != 4) {
+        Set<Integer> values = new HashSet<Integer>(Arrays.asList(4, 2));
+        int votesSize = votes.size();
+        if (!values.contains(votesSize)) {
             return AcceptanceProtocol.ERROR_AMMOUNT;
         }
-        ArrayList<Number> pesIDs = new ArrayList();
-        for (int i = 0; i < votes.size(); i++) {
-            if (!pesIDs.contains(votes.get(i).getProposedElectiveSubjectsID())) {
-                pesIDs.add(i);
-            } else {
-                return AcceptanceProtocol.ERROR_REPETITION;
-            }
+        List<Integer> pesIDs = new ArrayList();
+        List<Integer> roundNos = new ArrayList();
+        for (int i = 0; i < votesSize; i++) {
+            pesIDs.add(votes.get(i).getProposedElectiveSubjectsID());
+            roundNos.add(votes.get(i).getRoundNo());
+        }
+        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
+        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
+        if (setPesIDs.size() < pesIDs.size()) {
+            return AcceptanceProtocol.ERROR_REPETITION;
+            /* There are duplicates */
+        }
+        if (1 != setRoundNos.size()) {
+            return AcceptanceProtocol.ERROR_ROUNDS;
+            /* There are votes for more than 1 round */
         }
         return AcceptanceProtocol.VOTE_SUCCESS;
+    }
+
+    public ArrayList<Vote> getUserVotes() {
+        return user.userVotes;
+    }
+
+    public Vote updateUserVote(Vote nv) {
+        for (Vote v : user.userVotes) {
+            if (v.id == nv.id) {
+                v = nv;
+                break;
+            }
+        }
+        return nv;
+    }
+
+    public String deleteUserVotes() {
+        user.userVotes.clear();
+        return AcceptanceProtocol.VOTE_DELETION;
     }
 
     //Nested class representing the ProposedSubject table (until it's created)
@@ -97,10 +156,21 @@ public class Controller {
             this.userNameStudent = userNameStudent;
         }
 
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public Integer getRoundNo() {
+            return roundNo;
+        }
+
         public Integer getProposedElectiveSubjectsID() {
             return proposedElectiveSubjectsID;
         }
-
     }
 
     class User {
@@ -115,6 +185,14 @@ public class Controller {
             this.name = name;
             this.password = password;
             this.email = email;
+        }
+
+        public String getUserName() {
+            return userName;
+        }
+
+        public String getPassword() {
+            return password;
         }
 
         public void addVote(Vote v) {
