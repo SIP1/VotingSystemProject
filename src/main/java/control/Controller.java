@@ -1,6 +1,8 @@
 package control;
 
+
 import java.util.ArrayList;
+import utilities.AcceptanceProtocol;
 
 public class Controller {
     
@@ -12,20 +14,20 @@ public class Controller {
 
     public Controller() {
         mainer();
+//        AcceptanceProtocol ac
     }
-    
-    
+
     private void mainer() {
-        authenticateUser("bobkoo", "12345");
+        authenticate("bobkoo", "12345");
         subjects = new ArrayList();
-        addSubjectToDB(new ProposedElectiveSubjects("AI", "make it think", Boolean.TRUE));
-        addSubjectToDB(new ProposedElectiveSubjects("C#", "java like", Boolean.TRUE));
-        addSubjectToDB(new ProposedElectiveSubjects("C++", "complicated", Boolean.FALSE));
-        addSubjectToDB(new ProposedElectiveSubjects("Game Design", "WOW", Boolean.TRUE));
+        addSubject(new ProposedElectiveSubjects("AI", "make it think", Boolean.TRUE));
+        addSubject(new ProposedElectiveSubjects("C#", "java like", Boolean.TRUE));
+        addSubject(new ProposedElectiveSubjects("C++", "complicated", Boolean.FALSE));
+        addSubject(new ProposedElectiveSubjects("Game Design", "WOW", Boolean.TRUE));
         getAllAvailableSubjects();
     }
     
-    public String authenticateUser(String userName, String password) {
+    public String authenticate(String userName, String password) {
         return "Authentication successfull";
     }
     
@@ -33,8 +35,13 @@ public class Controller {
        return subjects;
     }
     
-    public void addSubjectToDB(ProposedElectiveSubjects pes) {
+    public ProposedElectiveSubjects addSubject(ProposedElectiveSubjects pes) {
         subjects.add(pes);
+        return pes;
+    }
+    
+    public String vote(ArrayList<ProposedElectiveSubjects> alPES, User user){
+        return AcceptanceProtocol.SUCCESS;
     }
     
     
@@ -42,10 +49,8 @@ public class Controller {
     private Integer pesIDCreator = 0;
     public class ProposedElectiveSubjects {
         private Integer id;
-        private String name;
-        private String description;
+        private String name, description, poolOptions;
         private Boolean isAlive;
-        private String poolOptions;
 
         public ProposedElectiveSubjects(String name, String description, Boolean isAlive) {
             this.id = pesIDCreator++;
@@ -55,6 +60,10 @@ public class Controller {
             this.poolOptions = "";
         }
 
+        public Integer getId() {
+            return id;
+        }
+        
         public void setName(String name) {
             this.name = name;
         }
