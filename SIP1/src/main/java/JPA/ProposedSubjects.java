@@ -17,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,8 +40,8 @@ public class ProposedSubjects implements Serializable {
     
 
     
-   @ManyToMany(mappedBy="userName")
-    List<Users> users = new ArrayList();
+   @ManyToMany(mappedBy="proposedSubjects")
+    private List<Users> users = new ArrayList();
     
     public void addUsers(Users u){
       users.add(u);  

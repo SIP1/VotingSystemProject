@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
@@ -39,11 +40,14 @@ public class Users implements Serializable {
   @JoinColumn(name="userTypes")
   private UserTypes userTypes;
     
-  @OneToOne(fetch=FetchType.LAZY)
+  @OneToOne(optional=false)//(fetch=FetchType.LAZY)
   private Votes votes;
   
-   @ManyToMany(mappedBy="id")
+  // @ManyToMany//(mappedBy="id")
     List<ProposedSubjects> proposedSubjects = new ArrayList();
+   
+
+   
     
     public void addProposedSubjects(ProposedSubjects ps){
       proposedSubjects.add(ps);  
