@@ -6,39 +6,67 @@
 package JPA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Tomascik
  */
 @Entity
+
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String userName;
     private String name;
     private String email;
     private String password;
+    
+//  @OneToOne(fetch=FetchType.LAZY)
+//  @JoinColumn(name="ProposedSubjectsTeacher_ID")
+//  private ProposedSubjectsTeacher proposedSubjectTeacher;
+    
+  @OneToOne(fetch=FetchType.LAZY)
+  @JoinColumn(name="userTypes")
+  private UserTypes userTypes;
+    
+  @OneToOne(fetch=FetchType.LAZY, mappedBy="id")
+  private Votes votes;
+  
+   @ManyToMany(mappedBy="id")
+    List<ProposedSubjects> proposedSubjects = new ArrayList();
+    
+    public void addProposedSubjects(ProposedSubjects ps){
+      proposedSubjects.add(ps);  
+    } 
 
     public Users() {
     }
 
-    public Users(String userName, String name, String email, String password) {
+
+    public UserTypes getUserTypes() {
+        return userTypes;
+    }
+
+    public Users(String userName, String name, String email, String password, UserTypes userTypes) {
         this.userName = userName;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.userTypes = userTypes;
     }
+    
+    
 
-    public Long getId() {
-        return id;
-    }
 
     public String getUserName() {
         return userName;
