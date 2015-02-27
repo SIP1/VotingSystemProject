@@ -9,18 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 /**
  *
@@ -47,13 +40,15 @@ public class ProposedSubjects implements Serializable {
       users.add(u);  
     } 
     
+   
+    // MAKES JOIN TABLES BETWEEN PROPOSED SUBJ and VOTES
     
-  @OneToMany//(mappedBy="id")
-    private List<Votes> votes;
-
-    public void addVote(Votes v){
-        votes.add(v);
-    }
+//  @OneToMany//(mappedBy="id")
+//    private List<Votes> votes;
+//
+//    public void addVote(Votes v){
+//        votes.add(v);
+//    }
     
 
     public ProposedSubjects() {
