@@ -42,6 +42,14 @@ public class FacadeLogic {
         tr.commit();
         return ut;
     }
+    
+     public Users addUser(Users u) {
+        initializeTransactions();
+        tr.begin();
+        em.persist(u);
+        tr.commit();
+        return u;
+    }
       
       
     public static void main(String[] args) {
@@ -58,6 +66,9 @@ public class FacadeLogic {
         UserTypes ut1 = new UserTypes ("headOfProgram");
        // UserTypes ut2 = new UserTypes ("administrator");
         UserTypes ut3 = new UserTypes ("student");
+        
+        //Users u =  new Users ("username1","Name1Sur","email@email.sk","pass1",u.);
+    
   
         addUserTypes(ut);
         addUserTypes(ut1);
@@ -66,6 +77,9 @@ public class FacadeLogic {
        
  
 
+
+        
+        
       }
     
 }
