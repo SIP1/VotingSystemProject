@@ -17,6 +17,11 @@
             <version>2.5.2</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.protobufel</groupId>
+            <artifactId>resource-exec-maven-plugin</artifactId>
+            <version>0.6</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
