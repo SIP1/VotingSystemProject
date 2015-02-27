@@ -39,7 +39,7 @@ public class Users implements Serializable {
   @JoinColumn(name="userTypes")
   private UserTypes userTypes;
     
-  @OneToOne(fetch=FetchType.LAZY, mappedBy="id")
+  @OneToOne(fetch=FetchType.LAZY)
   private Votes votes;
   
    @ManyToMany(mappedBy="id")

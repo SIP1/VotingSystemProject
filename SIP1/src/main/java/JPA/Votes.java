@@ -31,13 +31,17 @@ public class Votes implements Serializable {
     private Integer roundNumber;
     private Integer points;
     
-  @OneToOne(fetch=FetchType.LAZY)
+  @OneToOne(fetch=FetchType.LAZY, mappedBy="userName")
   @JoinColumn(name="USERS_ID")
-  private Users users;   //  usage of users ? 
+  private Users users;  
     
+  
   @ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="SUBJECT_ID")
   private ProposedSubjects ps;
+  
+  
+  
     
       
     

@@ -4,6 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>JPA.Users</class>
     <class>JPA.UserTypes</class>
+    <class>JPA.ProposedSubjects</class>
+    <class>JPA.ProposedSubjectsTeacher</class>
+    <class>JPA.Votes</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@datdb.cphbusiness.dk:1521:dat"/>
       <property name="javax.persistence.jdbc.user" value="cphbs96"/>
