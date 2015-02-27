@@ -36,9 +36,8 @@ public class Votes implements Serializable {
 //  @JoinColumn(name="USERS_ID")
 //  private Users users;  
     
-      @OneToOne(optional=false,cascade=CascadeType.ALL, 
-       mappedBy="votes",targetEntity=Users.class)
-       private Users users;  
+  @OneToOne(optional=false)//(fetch=FetchType.LAZY)
+  private Users users; 
     
   
   @ManyToOne(fetch=FetchType.LAZY)

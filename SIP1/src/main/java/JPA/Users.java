@@ -8,6 +8,7 @@ package JPA;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -39,9 +40,13 @@ public class Users implements Serializable {
   @OneToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="userTypes")
   private UserTypes userTypes;
+  
+  
+   @OneToOne(optional=false,cascade=CascadeType.ALL, 
+       mappedBy="users",targetEntity=Votes.class)
+       private Votes votes;
     
-  @OneToOne(optional=false)//(fetch=FetchType.LAZY)
-  private Votes votes;
+
   
   // @ManyToMany//(mappedBy="id")
     List<ProposedSubjects> proposedSubjects = new ArrayList();
