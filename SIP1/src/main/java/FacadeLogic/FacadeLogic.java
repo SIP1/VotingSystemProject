@@ -5,6 +5,7 @@
  */
 package FacadeLogic;
 
+import JPA.UserTypes;
 import JPA.Users;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,7 +18,7 @@ import javax.persistence.Persistence;
  */
 public class FacadeLogic {
     
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.mySIP_SIP1_jar_1.0-SNAPSHOTPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIP_PU");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tr;
     
@@ -34,29 +35,36 @@ public class FacadeLogic {
         tr = em.getTransaction();
     }
       
-    public String addUser(Users u) {
+    public UserTypes addUserTypes(UserTypes ut) {
         initializeTransactions();
         tr.begin();
-        em.persist(u);
+        em.persist(ut);
         tr.commit();
-        return u.toString();
+        return ut;
     }
       
       
-          public static void main(String[] args) {
+    public static void main(String[] args) {
           new FacadeLogic().base();
         
     }
       
-      public void base(){
-       EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA_TestingPU");
+      public void base()
+      {
+       EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIP_PU");
        EntityManager em = emf.createEntityManager();
         
-        Users u = new Users ("userName1","name1","email1","passW1");
+        UserTypes ut = new UserTypes ("teacher");
+        UserTypes ut1 = new UserTypes ("headOfProgram");
+       // UserTypes ut2 = new UserTypes ("administrator");
+        UserTypes ut3 = new UserTypes ("student");
   
-        addUser(u);
+        addUserTypes(ut);
+        addUserTypes(ut1);
+       // addUserTypes(ut2);
+        addUserTypes(ut3);
        
-         System.out.println("Adding user : "+ u);  
+ 
 
       }
     
