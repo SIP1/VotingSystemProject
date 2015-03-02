@@ -27,13 +27,13 @@ public class ControllerTest {
         String expectedResult = AcceptanceProtocol.LOGIN_SUCCESS;
         String userName = "bobkoo";
         String password = "12345";
-        String actualResult = controller.authenticate(userName, password);
+        String actualResult = controller.authenticateUser(userName, password);
         assertThat(actualResult, is(expectedResult));
     }
 
     @Test
     public void testAddSubject() {
-        assertEquals((Integer) 0, controller.addSubject(controller
+        assertEquals((Integer) 0, controller.addProposedElectiveSubject(controller
         .new ProposedElectiveSubject("AI", "make it think", Boolean.TRUE)).getId());
     }
 
@@ -44,11 +44,11 @@ public class ControllerTest {
         testSubjects.add(controller.new ProposedElectiveSubject("C#", "java like", Boolean.TRUE));
         testSubjects.add(controller.new ProposedElectiveSubject("C++", "complicated", Boolean.FALSE));
         testSubjects.add(controller.new ProposedElectiveSubject("Game Design", "WOW", Boolean.TRUE));
-        controller.addSubject(testSubjects.get(0));
-        controller.addSubject(testSubjects.get(1));
-        controller.addSubject(testSubjects.get(2));
-        controller.addSubject(testSubjects.get(3));
-        assertEquals(testSubjects.size(), controller.getAllAvailableSubjects().size());
+        controller.addProposedElectiveSubject(testSubjects.get(0));
+        controller.addProposedElectiveSubject(testSubjects.get(1));
+        controller.addProposedElectiveSubject(testSubjects.get(2));
+        controller.addProposedElectiveSubject(testSubjects.get(3));
+        assertEquals(testSubjects.size(), controller.getAllAvailableProposedElectiveSubjects().size());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ControllerTest {
         testVotes.add(controller.new Vote("bobkoo", 2, 3, 1));
         testVotes.add(controller.new Vote("bobkoo", 1, 2, 1));
         testVotes.add(controller.new Vote("bobkoo", 2, 5, 1));
-        assertEquals(expected, controller.vote(testVotes));
+        assertEquals(expected, controller.addVoteFromParticularUser(testVotes));
     }
     
     @Test
@@ -69,8 +69,8 @@ public class ControllerTest {
         expectedVotes.add(controller.new Vote("bobkoo", 2, 3, 1));
         expectedVotes.add(controller.new Vote("bobkoo", 1, 2, 1));
         expectedVotes.add(controller.new Vote("bobkoo", 2, 5, 1));
-        controller.vote(expectedVotes);
-        assertThat("getUserVotes() should return the testVotes list", controller.getUserVotes(), is(expectedVotes));
+        controller.addVoteFromParticularUser(expectedVotes);
+        assertThat("getUserVotes() should return the testVotes list", controller.getAllVotesOfParticularUser(), is(expectedVotes));
     }
     
     @Test
@@ -80,18 +80,18 @@ public class ControllerTest {
         votes.add(controller.new Vote("bobkoo", 2, 3, 1));
         votes.add(controller.new Vote("bobkoo", 1, 2, 1));
         votes.add(controller.new Vote("bobkoo", 2, 5, 1));
-        controller.vote(votes);
-        ArrayList<Vote> existingVotes = controller.getUserVotes();
+        controller.addVoteFromParticularUser(votes);
+        ArrayList<Vote> existingVotes = controller.getAllVotesOfParticularUser();
         Vote expectedVote = controller.new Vote("bobkoo", 2, 5, 2);
         expectedVote.setId(existingVotes.get(0).getId());
-        Vote actualResult = controller.updateUserVote(expectedVote);
+        Vote actualResult = controller.updateParticularVoteOfParticularUser(expectedVote);
         assertThat("updateUserVotes() should update the votes of a user", actualResult, is(expectedVote));
     }
     
     @Test
     public void testDeleteUserVotes() {
         String expected = AcceptanceProtocol.VOTE_DELETION;
-        String actual = controller.deleteUserVotes();
+        String actual = controller.deleteAllVotesOfParticularUser();
         assertThat("deleteUserVotes() should delete ALL votes of that user", actual, is(expected));
     }
     
@@ -103,7 +103,7 @@ public class ControllerTest {
         String email = "bobanka@bulgaria.bg";
         Controller.User user = controller.new User(1, userName, name, password, email);
         String expectedResult = AcceptanceProtocol.REGISTRATION_SUCCESS;
-        String actualResult = controller.register(user);
+        String actualResult = controller.registerUser(user);
         assertThat("CreateUser() should return success a user is registered", actualResult, is(expectedResult));
     }
     
@@ -111,7 +111,8 @@ public class ControllerTest {
     public void deleteAccount(){
         String userName = "bobkoo";
         String expected = AcceptanceProtocol.ACCOUNT_DELETION;
-        String actualResult = controller.deleteAccount(userName);
+        String actualResult = controller.deleteParticularUser(userName);
         assertThat("deleteAccont() should return a confirmation if acc is deleted", actualResult, is(expected));
     }
 }
+

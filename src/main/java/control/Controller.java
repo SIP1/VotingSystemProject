@@ -1,13 +1,13 @@
 package control;
 
+import interfaces.ControllerInterface;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import utilities.AcceptanceProtocol;
 
-public class Controller {
+public class Controller implements ControllerInterface {
 
     User user;
     public ArrayList<ProposedElectiveSubject> subjects = new ArrayList();
@@ -23,11 +23,13 @@ public class Controller {
 
     private void testingBase() {
         users.add(new User(1, "bobkoo", "boyko", "12345", "user@email"));
-        authenticate("bobkoo", "12345");
+        authenticateUser("bobkoo", "12345");
 
     }
 
-    public String authenticate(String userName, String password) {
+    //Users
+    @Override
+    public String authenticateUser(String userName, String password) {
         for (User x : users) {
             if (x.getUserName().equals(userName) && x.getPassword().equals(password)) {
                 user = x;
@@ -37,7 +39,8 @@ public class Controller {
         return AcceptanceProtocol.LOGIN_FAILED;
     }
 
-    public String register(User u) {
+    @Override
+    public String registerUser(User u) {
         for(User x : users) {
             if(x.getUserName().equals(u.userName)){
                 return AcceptanceProtocol.REGISTRATION_FAILED;
@@ -47,7 +50,8 @@ public class Controller {
         return AcceptanceProtocol.REGISTRATION_SUCCESS;
     }
 
-    public String deleteAccount(String userName){
+    @Override
+    public String deleteParticularUser(String userName){
         for(User x : users) {
             if(x.getUserName().equals(userName)){
                 users.remove(x);
@@ -56,17 +60,23 @@ public class Controller {
         }
         return AcceptanceProtocol.ACCOUNT_DELETION_FAIL;
     }
+    //missing updateUser
     
-    public ArrayList getAllAvailableSubjects() {
+    @Override
+    public ArrayList<ProposedElectiveSubject> getAllAvailableProposedElectiveSubjects() {
         return subjects;
     }
 
-    public ProposedElectiveSubject addSubject(ProposedElectiveSubject pes) {
+    @Override
+    public ProposedElectiveSubject addProposedElectiveSubject(ProposedElectiveSubject pes) {
         subjects.add(pes);
         return pes;
     }
-
-    public String vote(ArrayList<Vote> votes) {
+    //missing updateUser
+    
+    //Subjects
+    @Override
+    public String addVoteFromParticularUser(ArrayList<Vote> votes) {
         String checkingResult = isChoiceAccepted(votes);
         if (checkingResult.equals(AcceptanceProtocol.VOTE_SUCCESS)) {
             user.addVotes(votes);
@@ -75,9 +85,8 @@ public class Controller {
     }
 
     private String isChoiceAccepted(ArrayList<Vote> votes) {
-        Set<Integer> values = new HashSet<Integer>(Arrays.asList(4, 2));
         int votesSize = votes.size();
-        if (!values.contains(votesSize)) {
+        if (votesSize != 4) {
             return AcceptanceProtocol.ERROR_AMMOUNT;
         }
         List<Integer> pesIDs = new ArrayList();
@@ -98,12 +107,15 @@ public class Controller {
         }
         return AcceptanceProtocol.VOTE_SUCCESS;
     }
-
-    public ArrayList<Vote> getUserVotes() {
+    //missing update, delete subject
+    
+    @Override
+    public ArrayList<Vote> getAllVotesOfParticularUser() {
         return user.userVotes;
     }
 
-    public Vote updateUserVote(Vote nv) {
+    @Override
+    public Vote updateParticularVoteOfParticularUser(Vote nv) {
         for (Vote v : user.userVotes) {
             if (v.id == nv.id) {
                 v = nv;
@@ -113,14 +125,14 @@ public class Controller {
         return nv;
     }
 
-    public String deleteUserVotes() {
+    @Override
+    public String deleteAllVotesOfParticularUser() {
         user.userVotes.clear();
         return AcceptanceProtocol.VOTE_DELETION;
     }
 
     //Nested class representing the ProposedSubject table (until it's created)
     private Integer pesIDCreator = 0;
-
     public class ProposedElectiveSubject {
 
         private Integer id;
@@ -142,8 +154,7 @@ public class Controller {
     }
 
     private Integer votesIDCreator = 0;
-
-    class Vote {
+    public class Vote {
 
         private Integer id, points, proposedElectiveSubjectsID, roundNo;
         private String userNameStudent;
@@ -173,7 +184,7 @@ public class Controller {
         }
     }
 
-    class User {
+    public class User {
 
         private Integer useTypeID;
         private String userName, name, password, email;
@@ -204,3 +215,4 @@ public class Controller {
         }
     }
 }
+
