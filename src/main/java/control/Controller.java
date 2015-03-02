@@ -1,275 +1,111 @@
 package control;
 
-import interfaces.ControllerInterface;
+import JPA2.ProposedSubject;
+import JPA2.User;
+import JPA2.UserType;
+import JPA2.Vote;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import utilities.AcceptanceProtocol;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
-public class Controller implements ControllerInterface {
+public class Controller
+{
 
-    User user;
-    public ArrayList<ProposedElectiveSubject> subjects = new ArrayList();
-    public ArrayList<User> users = new ArrayList();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIP_PU");
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction tr;
 
-    public static void main(String[] args) {
-        new Controller().testingBase();
-    }
-
-    public Controller() {
-        testingBase();
-    }
-
-    private void testingBase() {
-        users.add(new User(1, "bobkoo", "boyko", "12345", "user@email"));
-        authenticateUser("bobkoo", "12345");
-    }
-
-    //Users
-    @Override
-    public String authenticateUser(String userName, String password) {
-        for (User x : users) {
-            if (x.getUserName().equals(userName) && x.getPassword().equals(password)) {
-                user = x;
-                return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
-            }
-        }
-        return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
-    }
-
-    @Override
-    public String registerUser(User u) {
-        for (User x : users) {
-            if (x.getUserName().equals(u.userName)) {
-                return AcceptanceProtocol.ACCOUNT_REGISTRATION_ERROR;
-            }
-        }
-        users.add(u);
-        return AcceptanceProtocol.ACCOUNT_REGISTRATION_SUCCESS;
-    }
-
-    @Override
-    public String deleteParticularUser() {
-        for (User x : users) {
-            if (x.getUserName().equals(user.getUserName())) {
-                users.remove(x);
-                return AcceptanceProtocol.ACCOUNT_DELETION;
-            }
-        }
-        return AcceptanceProtocol.ACCOUNT_DELETION_ERROR;
-    }
-
-    @Override
-    public String updateParticularUser(String password, User newUserInfo) {
-        if (user.getPassword().equals(password)) {
-            System.out.println("swag");
-            for (User x : users) {
-                if (x.getUserName().equals(user.getUserName())) {
-                    user.setPassword(newUserInfo.getPassword());
-                    user.setEmail(newUserInfo.getEmail());
-                    user.setUseTypeID(newUserInfo.getUseTypeID());
-                    x = user;
-                    return AcceptanceProtocol.ACCOUNT_UPDATE_SUCCESS;
-                }
-            }
-        }
-        return AcceptanceProtocol.ACCOUNT_UPDATE_ERROR;
-    }
-
-    @Override
-    public ArrayList<ProposedElectiveSubject> getAllAvailableProposedElectiveSubjects() {
-        return subjects;
-    }
-
-    @Override
-    public ProposedElectiveSubject addProposedElectiveSubject(ProposedElectiveSubject pes) {
-        subjects.add(pes);
-        return pes;
-    }
-    //missing updateUser
-
-    //Subjects
-    @Override
-    public String addVoteFromParticularUser(ArrayList<Vote> votes) {
-        String checkingResult = isChoiceAccepted(votes);
-        if (checkingResult.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS)) {
-            user.addVotes(votes);
-        }
-        return checkingResult;
-    }
-
-    private String isChoiceAccepted(ArrayList<Vote> votes) {
-        int votesSize = votes.size();
-        if (votesSize != 4) {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
-        }
-        List<Integer> pesIDs = new ArrayList();
-        List<Integer> roundNos = new ArrayList();
-        for (int i = 0; i < votesSize; i++) {
-            pesIDs.add(votes.get(i).getProposedElectiveSubjectsID());
-            roundNos.add(votes.get(i).getRoundNo());
-        }
-        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
-        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
-        if (setPesIDs.size() < pesIDs.size()) {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
-
-        }
-        if (1 != setRoundNos.size()) {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
-
-        }
-        return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
-    }
-    //missing update, delete subject
-
-    @Override
-    public ArrayList<Vote> getAllVotesOfParticularUser() {
-        return user.userVotes;
-    }
-
-    @Override
-    public Vote updateParticularVoteOfParticularUser(Vote nv) {
-        for (Vote v : user.userVotes) {
-            if (v.id == nv.id) {
-                v = nv;
-                break;
-            }
-        }
-        return nv;
-    }
-
-    @Override
-    public String deleteAllVotesOfParticularUser() {
-        user.userVotes.clear();
-        return AcceptanceProtocol.VOTE_DELETION_SUCCESS;
-    }
-
-    //Nested class representing the ProposedSubject table (until it's created)
-    private Integer pesIDCreator = 0;
-
-    public class ProposedElectiveSubject {
-
-        private Integer id;
-        private String name, description, poolOptions;
-        private Boolean isAlive;
-
-        public ProposedElectiveSubject(String name, String description, Boolean isAlive) {
-            this.id = pesIDCreator++;
-            this.name = name;
-            this.description = description;
-            this.isAlive = isAlive;
-            this.poolOptions = "";
-        }
-
-        public Integer getId() {
-            return id;
-        }
+//    private static Controller instance = null;
+//
+//    public static Controller getInstance()
+//    {
+//        if (instance == null)
+//        {
+//            instance = new Controller();
+//        }
+//        return instance;
+//    }
+    public static void main(String[] args)
+    {
+        new Controller().base();
 
     }
 
-    private Integer votesIDCreator = 0;
+    public void base()
+    {
+        UserType ut1 = new UserType("Student");
+        UserType ut2 = new UserType("Teacher");
+        UserType ut3 = new UserType("GOD");
 
-    public class Vote {
+        ProposedSubject ps1 = new ProposedSubject("C#", "Java Like", Boolean.TRUE, "non");
+        ProposedSubject ps2 = new ProposedSubject("C++", "complex", Boolean.TRUE, "non");
+        ProposedSubject ps3 = new ProposedSubject("Game Design", "World Of Warcraft", Boolean.TRUE, "non");
+        ProposedSubject ps4 = new ProposedSubject("AI", "Make it think", Boolean.TRUE, "non");
 
-        private Integer id, points, proposedElectiveSubjectsID, roundNo;
-        private String userNameStudent;
+        User user1 = new User("bobkoo", "12345", "boyko", "mail@mail.com");
+        User user2 = new User("bobkoo1", "67890", "smara", "mail@mail.com");
+        User user3 = new User("peterto", "abcde", "peter", "mail@mail.com");
+        User user4 = new User("mada1994", "qwerty", "mada", "mail@mail.com");
 
-        public Vote(String userNameStudent, Integer points, Integer proposedElectiveSubjectsID, Integer roundNo) {
-            this.id = votesIDCreator++;
-            this.points = points;
-            this.proposedElectiveSubjectsID = proposedElectiveSubjectsID;
-            this.roundNo = roundNo;
-            this.userNameStudent = userNameStudent;
-        }
+        user1.setUserType(ut3);
+        user2.setUserType(ut1);
+        user3.setUserType(ut2);
+        user4.setUserType(ut1);
 
-        public void setId(Integer id) {
-            this.id = id;
-        }
+        List<User> usersList = new ArrayList();
+        List<ProposedSubject> subjectsList = new ArrayList();
 
-        public Integer getId() {
-            return id;
-        }
+        subjectsList.add(ps3);
+        subjectsList.add(ps1);
+        usersList.add(user1);
+        user1.setProposedSubjects(subjectsList);
+        ps1.setUsers(usersList);
+        ps3.setUsers(usersList);
+        
+        List<User> usersList2 = new ArrayList();
+        List<ProposedSubject> subjectsList2 = new ArrayList();
 
-        public Integer getRoundNo() {
-            return roundNo;
-        }
-
-        public Integer getProposedElectiveSubjectsID() {
-            return proposedElectiveSubjectsID;
-        }
+        subjectsList2.add(ps2);
+        usersList2.add(user2);
+        user2.setProposedSubjects(subjectsList2);
+        ps2.setUsers(usersList2);
+        subjectsList2.add(ps4);
+        usersList2.add(user3);
+        user3.setProposedSubjects(subjectsList2);
+        ps4.setUsers(usersList2);
+        
+        Vote v1 = new Vote(user1, ps4, 1, 2);
+        Vote v2 = new Vote(user1, ps3, 1, 2);
+        Vote v3 = new Vote(user1, ps2, 1, 1);
+        Vote v4 = new Vote(user1, ps1, 1, 2);
+        
+        initializeTransactions();
+        tr.begin();
+        em.persist(ut1);
+        em.persist(ut2);
+        em.persist(ut3);
+        em.persist(ps1);
+        em.persist(ps2);
+        em.persist(ps3);
+        em.persist(ps4);
+        em.persist(user1);
+        em.persist(user2);
+        em.persist(user3);
+        em.persist(user4);
+        em.persist(v1);
+        em.persist(v2);
+        em.persist(v3);
+        em.persist(v4);
+        tr.commit();
+        em.close();
     }
 
-    public class User {
-
-        private Integer useTypeID;
-        private String userName, name, password, email;
-        private ArrayList<Vote> userVotes = new ArrayList();
-
-        public User(Integer useTypeID, String userName, String name, String password, String email) {
-            this.useTypeID = useTypeID;
-            this.userName = userName;
-            this.name = name;
-            this.password = password;
-            this.email = email;
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void addVote(Vote v) {
-            userVotes.add(v);
-        }
-
-        public void addVotes(ArrayList<Vote> aLv) {
-            userVotes.addAll(aLv);
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public void setUseTypeID(Integer useTypeID) {
-            this.useTypeID = useTypeID;
-        }
-
-        public void setUserName(String userName) {
-            this.userName = userName;
-        }
-
-        public void setUserVotes(ArrayList<Vote> userVotes) {
-            this.userVotes = userVotes;
-        }
-
-        public String getEmail() {
-            return email;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Integer getUseTypeID() {
-            return useTypeID;
-        }
-
-        public ArrayList<Vote> getUserVotes() {
-            return userVotes;
-        }
-
+    private void initializeTransactions()
+    {
+        tr = em.getTransaction();
     }
 }

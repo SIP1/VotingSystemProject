@@ -20,6 +20,9 @@ public class AcceptanceProtocol {
 
     public static final String ACCOUNT_DELETION_ERROR = "You failed to delete your "
             + "account";
+    
+    public static final String SUBJECT_DELETION_SUCCESS = "The subject was deleted "
+            + "successfully";
 
     public static final String VOTE_REGISTRATION_SUCCESS = "Your vote are registered "
             + "successfully!";
