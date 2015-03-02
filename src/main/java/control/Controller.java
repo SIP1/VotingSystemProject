@@ -24,7 +24,6 @@ public class Controller implements ControllerInterface {
     private void testingBase() {
         users.add(new User(1, "bobkoo", "boyko", "12345", "user@email"));
         authenticateUser("bobkoo", "12345");
-
     }
 
     //Users
@@ -33,35 +32,51 @@ public class Controller implements ControllerInterface {
         for (User x : users) {
             if (x.getUserName().equals(userName) && x.getPassword().equals(password)) {
                 user = x;
-                return AcceptanceProtocol.LOGIN_SUCCESS;
+                return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
             }
         }
-        return AcceptanceProtocol.LOGIN_FAILED;
+        return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
     }
 
     @Override
     public String registerUser(User u) {
-        for(User x : users) {
-            if(x.getUserName().equals(u.userName)){
-                return AcceptanceProtocol.REGISTRATION_FAILED;
+        for (User x : users) {
+            if (x.getUserName().equals(u.userName)) {
+                return AcceptanceProtocol.ACCOUNT_REGISTRATION_ERROR;
             }
         }
         users.add(u);
-        return AcceptanceProtocol.REGISTRATION_SUCCESS;
+        return AcceptanceProtocol.ACCOUNT_REGISTRATION_SUCCESS;
     }
 
     @Override
-    public String deleteParticularUser(String userName){
-        for(User x : users) {
-            if(x.getUserName().equals(userName)){
+    public String deleteParticularUser() {
+        for (User x : users) {
+            if (x.getUserName().equals(user.getUserName())) {
                 users.remove(x);
                 return AcceptanceProtocol.ACCOUNT_DELETION;
             }
         }
-        return AcceptanceProtocol.ACCOUNT_DELETION_FAIL;
+        return AcceptanceProtocol.ACCOUNT_DELETION_ERROR;
     }
-    //missing updateUser
-    
+
+    @Override
+    public String updateParticularUser(String password, User newUserInfo) {
+        if (user.getPassword().equals(password)) {
+            System.out.println("swag");
+            for (User x : users) {
+                if (x.getUserName().equals(user.getUserName())) {
+                    user.setPassword(newUserInfo.getPassword());
+                    user.setEmail(newUserInfo.getEmail());
+                    user.setUseTypeID(newUserInfo.getUseTypeID());
+                    x = user;
+                    return AcceptanceProtocol.ACCOUNT_UPDATE_SUCCESS;
+                }
+            }
+        }
+        return AcceptanceProtocol.ACCOUNT_UPDATE_ERROR;
+    }
+
     @Override
     public ArrayList<ProposedElectiveSubject> getAllAvailableProposedElectiveSubjects() {
         return subjects;
@@ -73,12 +88,12 @@ public class Controller implements ControllerInterface {
         return pes;
     }
     //missing updateUser
-    
+
     //Subjects
     @Override
     public String addVoteFromParticularUser(ArrayList<Vote> votes) {
         String checkingResult = isChoiceAccepted(votes);
-        if (checkingResult.equals(AcceptanceProtocol.VOTE_SUCCESS)) {
+        if (checkingResult.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS)) {
             user.addVotes(votes);
         }
         return checkingResult;
@@ -87,7 +102,7 @@ public class Controller implements ControllerInterface {
     private String isChoiceAccepted(ArrayList<Vote> votes) {
         int votesSize = votes.size();
         if (votesSize != 4) {
-            return AcceptanceProtocol.ERROR_AMMOUNT;
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
         }
         List<Integer> pesIDs = new ArrayList();
         List<Integer> roundNos = new ArrayList();
@@ -98,17 +113,17 @@ public class Controller implements ControllerInterface {
         Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
         Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
         if (setPesIDs.size() < pesIDs.size()) {
-            return AcceptanceProtocol.ERROR_REPETITION;
-            /* There are duplicates */
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
+
         }
         if (1 != setRoundNos.size()) {
-            return AcceptanceProtocol.ERROR_ROUNDS;
-            /* There are votes for more than 1 round */
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
+
         }
-        return AcceptanceProtocol.VOTE_SUCCESS;
+        return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
     }
     //missing update, delete subject
-    
+
     @Override
     public ArrayList<Vote> getAllVotesOfParticularUser() {
         return user.userVotes;
@@ -128,11 +143,12 @@ public class Controller implements ControllerInterface {
     @Override
     public String deleteAllVotesOfParticularUser() {
         user.userVotes.clear();
-        return AcceptanceProtocol.VOTE_DELETION;
+        return AcceptanceProtocol.VOTE_DELETION_SUCCESS;
     }
 
     //Nested class representing the ProposedSubject table (until it's created)
     private Integer pesIDCreator = 0;
+
     public class ProposedElectiveSubject {
 
         private Integer id;
@@ -154,6 +170,7 @@ public class Controller implements ControllerInterface {
     }
 
     private Integer votesIDCreator = 0;
+
     public class Vote {
 
         private Integer id, points, proposedElectiveSubjectsID, roundNo;
@@ -213,6 +230,46 @@ public class Controller implements ControllerInterface {
         public void addVotes(ArrayList<Vote> aLv) {
             userVotes.addAll(aLv);
         }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public void setUseTypeID(Integer useTypeID) {
+            this.useTypeID = useTypeID;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public void setUserVotes(ArrayList<Vote> userVotes) {
+            this.userVotes = userVotes;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Integer getUseTypeID() {
+            return useTypeID;
+        }
+
+        public ArrayList<Vote> getUserVotes() {
+            return userVotes;
+        }
+
     }
 }
-
