@@ -39,4 +39,6 @@ public class AcceptanceProtocol {
     public static final String VOTE_UPDATE_SUCCESS = "Your votes are updated successfully!";
 
     public static final String VOTE_DELETION_SUCCESS = "Your votes are deleted.";
+    
+    public static final String VOTE_DELETION_FAIL = "You failed to delete your votes";
 }
