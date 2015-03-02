@@ -74,6 +74,8 @@ public class FacadeLogic {
         addUserTypes(ut1);
        // addUserTypes(ut2);
         addUserTypes(ut3);
+        
+        em.close();
        
  
 

@@ -73,9 +73,6 @@ public class Users implements Serializable {
         this.password = password;
         this.userTypes = userTypes;
     }
-    
-    
-
 
     public String getUserName() {
         return userName;

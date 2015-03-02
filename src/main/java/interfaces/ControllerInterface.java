@@ -22,8 +22,9 @@ public interface ControllerInterface {
     
     String registerUser(User u);
 
-    String deleteParticularUser(String userName);
-    //missing updateUser
+    String deleteParticularUser();
+    
+    String updateParticularUser(String password, User newUserInfo);
     
     //Subjects
     ArrayList<ProposedElectiveSubject> getAllAvailableProposedElectiveSubjects();
