@@ -36,7 +36,7 @@ public class User implements Serializable
     //, unique= true, nullable=true, insertable=true, updatable=true
 
     @OneToMany(mappedBy = "user")
-    private List<Vote> votes;
+    private List<Vote> votes = new ArrayList();
 
     private String password;
     private String name;
@@ -47,12 +47,13 @@ public class User implements Serializable
         // default constructor
     }
 
-    public User(String username, String password, String name, String email)
+    public User(String username, String password, String name, String email, UserType userType)
     {
         this.username = username;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.userType = userType;
     }
 
     public List<ProposedSubject> getProposedSubjects()
