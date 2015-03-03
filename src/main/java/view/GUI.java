@@ -5,7 +5,10 @@
  */
 package view;
 
+import JPA2.Vote;
+import control.Controller;
 import javax.swing.DefaultComboBoxModel;
+import utilities.AcceptanceProtocol;
 
 /**
  *
@@ -16,6 +19,8 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
+    Controller control;
+    String username;
     public GUI() {
         initComponents();
         jPanelMain.setVisible(false);
@@ -26,6 +31,8 @@ public class GUI extends javax.swing.JFrame {
         jPanelHelp.setVisible(false);
         jMenuLogout.setVisible(false);
         setUpComboBoxes();
+        setUpComboBoxesRound2();
+        control= new Controller();  
     }
 
     /**
@@ -44,6 +51,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButtonLogin = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jLabelLoginError = new javax.swing.JLabel();
         jPanelMain = new javax.swing.JPanel();
         jLabelWelcome = new javax.swing.JLabel();
         jPanelRound1 = new javax.swing.JPanel();
@@ -66,7 +74,7 @@ public class GUI extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox();
         jComboBox7 = new javax.swing.JComboBox();
         jComboBox8 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jButtonSubmitRound2 = new javax.swing.JButton();
         jLabelError2 = new javax.swing.JLabel();
         jPanelHelp = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -106,6 +114,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jLabelLoginError.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout jPanelLoginLayout = new javax.swing.GroupLayout(jPanelLogin);
         jPanelLogin.setLayout(jPanelLoginLayout);
         jPanelLoginLayout.setHorizontalGroup(
@@ -113,11 +123,12 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanelLoginLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -125,7 +136,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonLogin)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addGap(112, 112, 112))
         );
         jPanelLoginLayout.setVerticalGroup(
             jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,11 +149,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonLogin))
-                .addGap(82, 82, 82))
+                .addGap(35, 35, 35)
+                .addComponent(jLabelLoginError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
@@ -270,10 +283,14 @@ public class GUI extends javax.swing.JFrame {
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setText("Submit");
+        jButtonSubmitRound2.setText("Submit");
+        jButtonSubmitRound2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitRound2ActionPerformed(evt);
+            }
+        });
 
         jLabelError2.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelError2.setText("jLabel12");
 
         javax.swing.GroupLayout jPanelRound2Layout = new javax.swing.GroupLayout(jPanelRound2);
         jPanelRound2.setLayout(jPanelRound2Layout);
@@ -289,7 +306,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelRound2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonSubmitRound2))
                     .addGroup(jPanelRound2Layout.createSequentialGroup()
                         .addGroup(jPanelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelRound2Layout.createSequentialGroup()
@@ -337,10 +354,10 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addComponent(jButtonSubmitRound2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelError2)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jLabelError2, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanelHelp.setBackground(new java.awt.Color(255, 255, 255));
@@ -455,13 +472,25 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        jPanelLogin.setVisible(false);
-        jPanelMain.setVisible(true);
-        jMenuRound1.setVisible(true);
-        jMenuRound2.setVisible(true);
-        jMenuHelp.setVisible(false);
-        jPanelHelp.setVisible(false);
-        jMenuLogout.setVisible(true);
+        if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS)) 
+{
+            jPanelLogin.setVisible(false);
+            jPanelMain.setVisible(true);
+            jMenuRound1.setVisible(true);
+            jMenuRound2.setVisible(true);
+            jMenuHelp.setVisible(false);
+            jPanelHelp.setVisible(false);
+            jMenuLogout.setVisible(true);
+            username = jTextFieldUsername.getText();
+            jTextFieldUsername.setText("");
+            jTextFieldPassword.setText("");
+        }
+        else
+        {
+            jLabelLoginError.setText(control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()));
+            jTextFieldUsername.setText("");
+            jTextFieldPassword.setText("");
+        }       
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jMenuRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRound1ActionPerformed
@@ -529,7 +558,27 @@ public class GUI extends javax.swing.JFrame {
         } else {
             jLabelError.setText("Please select 2 first priorities and 2 second priorities!");
         }
+        
+        control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(), 
+                jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),1);
+        
+        
     }//GEN-LAST:event_jButtonSubmitRound1ActionPerformed
+
+    private void jButtonSubmitRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound2ActionPerformed
+        if (jComboBox5.getSelectedIndex() != -1 && jComboBox8.getSelectedIndex() != -1 &&
+                jComboBox6.getSelectedIndex() != -1 && jComboBox7.getSelectedIndex() != -1) {
+            if (!jComboBox5.getSelectedItem().toString().equals(jComboBox7.getSelectedItem().toString())
+                    && !jComboBox6.getSelectedItem().toString().equals(jComboBox8.getSelectedItem().toString())) {
+                //do something
+                jLabelError2.setText("OK");
+            } else {
+                jLabelError2.setText("Options must be different!");
+            }
+        } else {
+            jLabelError2.setText("Please select 2 first priorities and 2 second priorities!");
+        }
+    }//GEN-LAST:event_jButtonSubmitRound2ActionPerformed
 
     private void setUpComboBoxes() {
         String[] comboBoxItems = new String[5];
@@ -551,6 +600,30 @@ public class GUI extends javax.swing.JFrame {
 
         jComboBox4.setModel(new DefaultComboBoxModel(comboBoxItems));
         jComboBox4.setSelectedIndex(-1);
+
+    }
+    
+    private void setUpComboBoxesRound2() {
+        String[] comboBoxItemsA = new String[2];
+        String[] comboBoxItemsB = new String[3];
+
+        comboBoxItemsA[0] = "Android";
+        comboBoxItemsA[1] = "C#";
+        comboBoxItemsB[0] = "Arduino";
+        comboBoxItemsB[1] = "AI";
+        comboBoxItemsB[2] = "Game design";
+
+        jComboBox5.setModel(new DefaultComboBoxModel(comboBoxItemsA));
+        jComboBox5.setSelectedIndex(-1);
+
+        jComboBox6.setModel(new DefaultComboBoxModel(comboBoxItemsB));
+        jComboBox6.setSelectedIndex(-1);
+
+        jComboBox7.setModel(new DefaultComboBoxModel(comboBoxItemsA));
+        jComboBox7.setSelectedIndex(-1);
+
+        jComboBox8.setModel(new DefaultComboBoxModel(comboBoxItemsB));
+        jComboBox8.setSelectedIndex(-1);
 
     }
 
@@ -590,11 +663,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JButton jButtonSubmitRound1;
+    private javax.swing.JButton jButtonSubmitRound2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -616,6 +689,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelError;
     private javax.swing.JLabel jLabelError2;
+    private javax.swing.JLabel jLabelLoginError;
     private javax.swing.JLabel jLabelWelcome;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
