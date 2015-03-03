@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-import JPA2.Vote;
 import control.Controller;
 import javax.swing.DefaultComboBoxModel;
 import utilities.AcceptanceProtocol;
@@ -170,14 +164,14 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -237,7 +231,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanelRound1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jLabel3)))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPanelRound1Layout.setVerticalGroup(
             jPanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +248,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSubmitRound1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelError, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -536,10 +530,6 @@ public class GUI extends javax.swing.JFrame {
         jPanelLogin.setVisible(true);
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButtonSubmitRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound1ActionPerformed
 
         if (jComboBox1.getSelectedIndex() != -1 && jComboBox2.getSelectedIndex() != -1 &&
@@ -550,7 +540,9 @@ public class GUI extends javax.swing.JFrame {
                     && !jComboBox2.getSelectedItem().toString().equals(jComboBox3.getSelectedItem().toString())
                     && !jComboBox2.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString())
                     && !jComboBox3.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString())) {
-                //do something
+                
+                control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(), 
+                jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),1);
                 jLabelError.setText("OK");
             } else {
                 jLabelError.setText("Options must be different!");
@@ -558,11 +550,6 @@ public class GUI extends javax.swing.JFrame {
         } else {
             jLabelError.setText("Please select 2 first priorities and 2 second priorities!");
         }
-        
-        control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(), 
-                jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(),1);
-        
-        
     }//GEN-LAST:event_jButtonSubmitRound1ActionPerformed
 
     private void jButtonSubmitRound2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound2ActionPerformed
@@ -570,7 +557,9 @@ public class GUI extends javax.swing.JFrame {
                 jComboBox6.getSelectedIndex() != -1 && jComboBox7.getSelectedIndex() != -1) {
             if (!jComboBox5.getSelectedItem().toString().equals(jComboBox7.getSelectedItem().toString())
                     && !jComboBox6.getSelectedItem().toString().equals(jComboBox8.getSelectedItem().toString())) {
-                //do something
+                
+                control.addVoteFromParticularUser(jComboBox5.getSelectedItem().toString(), jComboBox6.getSelectedItem().toString(), 
+                jComboBox7.getSelectedItem().toString(), jComboBox8.getSelectedItem().toString(),2);
                 jLabelError2.setText("OK");
             } else {
                 jLabelError2.setText("Options must be different!");
@@ -579,6 +568,10 @@ public class GUI extends javax.swing.JFrame {
             jLabelError2.setText("Please select 2 first priorities and 2 second priorities!");
         }
     }//GEN-LAST:event_jButtonSubmitRound2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        System.out.println("clicked!");
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void setUpComboBoxes() {
         String[] comboBoxItems = new String[5];
