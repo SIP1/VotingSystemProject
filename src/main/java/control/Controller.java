@@ -6,11 +6,14 @@ import JPA2.UserType;
 import JPA2.Vote;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import utilities.AcceptanceProtocol;
 
 public class Controller implements ControllerInterface
 {
@@ -46,8 +49,7 @@ public class Controller implements ControllerInterface
     public String authenticateUser(String userName, String password)
     {
         // this is where we will initialize loggedInUser
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String updateParticularUser(String password, User newUserInfo)
+    public User updateParticularUser(String password, User newUserInfo)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -81,7 +83,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String updateParticularUserType(Integer id)
+    public UserType updateParticularUserType(Integer id, UserType newUserType)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -112,7 +114,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String updateParticularElectiveSubject(Integer id)
+    public ProposedSubject updateParticularElectiveSubject(Integer id,  ProposedSubject newProposedSubject)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -126,7 +128,7 @@ public class Controller implements ControllerInterface
     @Override
     public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber)
     {
-        List<Vote> votedSubjects = new ArrayList<>();
+        ArrayList<Vote> votedSubjects = new ArrayList<>();
         for (ProposedSubject p : proposedSubjects) {
             if (p.getName().equals(vote1) || p.getName().equals(vote2)) {
                 votedSubjects.add(new Vote(loggedInUser, p, roundNumber, 2));
@@ -137,8 +139,41 @@ public class Controller implements ControllerInterface
                 votedSubjects.add(new Vote(loggedInUser, p, roundNumber, 1));
             }
         }
-        loggedInUser.setVotes(votedSubjects);
-        return "to be completed";
+        String checkup = isChoiceAccepted(votedSubjects);
+        if (checkup.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
+        {
+           loggedInUser.setVotes(votedSubjects);
+        }
+        return checkup;
+    }
+    
+      private String isChoiceAccepted(ArrayList<Vote> votes)
+    {
+        int votesSize = votes.size();
+        if (votesSize != 4)
+        {
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
+        }
+        List<Integer> pesIDs = new ArrayList();
+        List<Integer> roundNos = new ArrayList();
+        for (int i = 0; i < votesSize; i++)
+        {
+            pesIDs.add(votes.get(i).getProposedSubject().getId());
+            roundNos.add(votes.get(i).getRoundNumber());
+        }
+        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
+        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
+        if (setPesIDs.size() < pesIDs.size())
+        {
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
+
+        }
+        if (1 != setRoundNos.size())
+        {
+            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
+
+        }
+        return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
     }
 
     @Override
