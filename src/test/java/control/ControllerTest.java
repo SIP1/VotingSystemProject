@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package control;
 
 import JPA2.ProposedSubject;
@@ -8,191 +13,247 @@ import java.util.ArrayList;
 import java.util.List;
 import mocks.ControllerMock;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import org.hamcrest.Matchers;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import utilities.AcceptanceProtocol;
 
-public class ControllerTest
-{
+/**
+ *
+ * @author Marek
+ */
+public class ControllerTest {
 
     private ControllerMock controller;
 
-    public ControllerTest()
-    {
-    }
-
     @Before
-    public void before()
-    {
+    public void setUp() {
         controller = new ControllerMock();
+        System.out.println("Controller SET UP");
     }
 
-     @Test
-    public void testAuthenticateUser()
-    {
+    /**
+     * Test of authenticateUser method, of class Controller.
+     */
+    @Test
+    public void testAuthenticateUser() {
+        System.out.println("authenticateUser");
         String expectedResult = AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
-        String userName = "bobkoo";
+        String userName = "TestUser";
         String password = "12345";
         String actualResult = controller.authenticateUser(userName, password);
-        assertThat("AuthenticateUser() should return confirmation string", actualResult,
-                   is(expectedResult));
+        assertEquals(expectedResult, actualResult);
     }
-    
+
+    /**
+     * Test of registerUser method, of class Controller.
+     */
     @Test
-    public void testRegisterUser()
-    {
-        String userName = "mada";
-        String name = "mada";
+    public void testRegisterUser() {
+        System.out.println("registerUser");
+        String userName = "Hahaha";
+        String name = "NoName";
         String password = "qwerty";
-        String email = "bobanka@bulgaria.bg";
-        User user = new User(userName, name, email, password, new UserType("Student"));
+        String email = "bobanka@email.com";
+        User user = new User(userName, name, email, password, controller.userTypes.get(0));
         String expectedResult = AcceptanceProtocol.ACCOUNT_REGISTRATION_SUCCESS;
         String actualResult = controller.registerUser(user);
-        assertThat("registerUser() should return confirmation string", actualResult,
-                   is(expectedResult));
+        assertEquals(expectedResult, actualResult);
     }
 
+    /**
+     * Test of deleteParticularUser method, of class Controller.
+     */
     @Test
-    public void testDeleteParticularUser()
-    {
-        //Actual Deletion Test
+    public void testDeleteParticularUser() {
+        System.out.println("deleteParticularUser");
         String expected = AcceptanceProtocol.ACCOUNT_DELETION;
         String actualResult = controller.deleteParticularUser();
-        assertThat("deleteParticularUser() should return a confirmation if acc is deleted", actualResult, is(expected));
+        assertEquals(expected, actualResult);
     }
 
+    /**
+     * Test of updateParticularUser method, of class Controller.
+     */
     @Test
-    public void testUpdateParticularUser()
-    {
-        String userName = "boyko";
-        String password = "67890a";
-        //Authenticate User
-        String haha = controller.authenticateUser(userName, password);
-        //Actual Update Test
+    public void testUpdateParticularUser() {
+        System.out.println("updateParticularUser");
+        String userName = "TestUser";
+        String password = "12345";
+        String newPassword = "54321";
+        String name = "Changed";
+        String email = "changed@email.com";
         String expectedResult = AcceptanceProtocol.ACCOUNT_UPDATE_SUCCESS;
-        String actualResult = controller.updateParticularUser(password, new User("bobkoo", "boyko", "user@email", "12345", new UserType("Student")));
-        assertThat("updateParticularUser() should return a confirmation String",
-                   actualResult, is(expectedResult));
+        String actualResult = controller.updateParticularUser(password, new User(userName, newPassword, name, email, controller.userTypes.get(0)));
+        assertEquals(expectedResult, actualResult);
     }
 
-    //Test get User
-    
-    //Test addUserType
-    
-    //Test updateParticularUserType
-    
-    //Test deleteParticularUserType
-    
-    //Test getAllUserTypes
-    
+    /**
+     * Test of getUser method, of class Controller.
+     */
     @Test
-    public void testAddSubject()
-    {
-        ProposedSubject ps1 = new ProposedSubject("AI", "makeasasd", Boolean.TRUE, "A");
-        ps1.setId(0);
-        Integer expectedResult = ps1.getId();
-        Integer actualResult = controller.addProposedElectiveSubject(ps1).getId();
-        assertThat("addSubject() should return a new ProposedSubject object", actualResult, is(expectedResult));
-
+    public void testGetUser() {
+        System.out.println("getUser");
+        User expResult = controller.user;
+        User result = controller.getUser();
+        assertEquals(expResult, result);
     }
 
+    /**
+     * Test of addUserType method, of class Controller.
+     */
     @Test
-    public void testGetAllAvailableSubjects()
-    {
-        ArrayList<ProposedSubject> testSubjects = new ArrayList();
-        testSubjects.add(new ProposedSubject("AI", "makeasasd", Boolean.TRUE, "A"));
-        testSubjects.add(new ProposedSubject("C#", "java like", Boolean.TRUE, "B"));
-        testSubjects.add(new ProposedSubject("C++", "complicated", Boolean.FALSE, "A"));
-        testSubjects.add(new ProposedSubject("Game Design", "WOW", Boolean.TRUE, "A"));
-        controller.addProposedElectiveSubject(testSubjects.get(0));
-        controller.addProposedElectiveSubject(testSubjects.get(1));
-        controller.addProposedElectiveSubject(testSubjects.get(2));
-        controller.addProposedElectiveSubject(testSubjects.get(3));
-        assertEquals(testSubjects.size(), controller.getAllAvailableProposedElectiveSubjects().size());
+    public void testAddUserType() {
+        System.out.println("addUserType");
+        String name = "New Usertype";
+        String expResult = AcceptanceProtocol.USERTYPE_ADD_SUCCESS;
+        String result = controller.addUserType(name);
+        assertEquals(expResult, result);
     }
-    
-    //Test Update ParticularElectiveSubject
 
-    //Test Delete ParticularES
-//    @Test
-//    public void testDeleteParticularElectiveSubject()
-//    {
-//        ArrayList<ProposedSubject> testSubjects = new ArrayList();
-//        testSubjects.add(new ProposedSubject("AI", "makeasasd", Boolean.TRUE, "A"));
-//        testSubjects.add(new ProposedSubject("C#", "java like", Boolean.TRUE, "B"));
-//        controller.addProposedElectiveSubject(testSubjects.get(0));
-//        controller.addProposedElectiveSubject(testSubjects.get(1));
-//
-//    }
+    /**
+     * Test of updateParticularUserType method, of class Controller.
+     */
+    @Test()
+    public void testUpdateParticularUserType() {
+        System.out.println("updateParticularUserType FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
+//        Integer id = null;
+//        Controller instance = new Controller();
+//        String expResult = "";
+//        String result = instance.updateParticularUserType(id);
+//        assertEquals(expResult, result);
+        fail("Interface needs to be changed");
+    }
+
+    /**
+     * Test of deleteParticularUserType method, of class Controller.
+     */
     @Test
-    public void testAddVoteFromParticularUser()
-    {
-        ArrayList<Vote> testVotes = votesGenerator();
+    public void testDeleteParticularUserType() {
+        System.out.println("deleteParticularUserType");
+        String expResult = AcceptanceProtocol.USERTYPE_DELETION_SUCCESS;
+        String result = controller.deleteParticularUserType(2);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllUserTypes method, of class Controller.
+     */
+    @Test
+    public void testGetAllUserTypes() {
+        System.out.println("getAllUserTypes");
+        List<UserType> result = controller.getAllUserTypes();
+        int expectedResult = controller.userTypes.size();
+        assertEquals(expectedResult, result.size());
+    }
+
+    /**
+     * Test of getAllAvailableProposedElectiveSubjects method, of class
+     * Controller.
+     */
+    @Test
+    public void testGetAllAvailableProposedElectiveSubjects() {
+        System.out.println("getAllAvailableProposedElectiveSubjects");
+        ArrayList<ProposedSubject> actualResult = controller.getAllAvailableProposedElectiveSubjects();
+        ArrayList<ProposedSubject> expectedResult = controller.proposedSubjects;
+        assertEquals(expectedResult, actualResult);
+    }
+
+    /**
+     * Test of addProposedElectiveSubject method, of class Controller.
+     */
+    @Test
+    public void testAddProposedElectiveSubject() {
+        System.out.println("addProposedElectiveSubject");
+        ProposedSubject expectedResult = new ProposedSubject("AI", "testing add", true, "A");
+        ProposedSubject actualResult = controller.addProposedElectiveSubject(expectedResult);
+        assertEquals(expectedResult, actualResult);
+    }
+
+    /**
+     * Test of updateParticularElectiveSubject method, of class Controller.
+     */
+    @Test
+    public void testUpdateParticularElectiveSubject() {
+        System.out.println("updateParticularElectiveSubject FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//      
+//        String expResult = "";
+//        String result = controller.updateParticularElectiveSubject(1);
+//        assertEquals(expResult, result);
+        fail("Interface needs to be changed");
+    }
+
+    /**
+     * Test of deleteParticularElectiveSubject method, of class Controller.
+     */
+    @Test
+    public void testDeleteParticularElectiveSubject() {
+        System.out.println("deleteParticularElectiveSubject");
+        String expected = AcceptanceProtocol.SUBJECT_DELETION_SUCCESS;
+        assertEquals(expected, controller.deleteParticularElectiveSubject(1));
+    }
+
+    /**
+     * Test of addVoteFromParticularUser method, of class Controller.
+     */
+    @Test
+    public void testAddVoteFromParticularUser() {
+        System.out.println("addVoteFromParticularUser");
+        String vote1 = "Vote 1";
+        String vote2 = "Vote 2";
+        String vote3 = "Vote 3";
+        String vote4 = "Vote 4";
+        int roundNumber = 1;
         String expected = AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
-        assertEquals("addVoteFromParticularUser() should return a confirmation String",
-                     expected, controller.addVoteFromParticularUser(testVotes));
+        assertEquals(expected, controller.addVoteFromParticularUser(vote1, vote2, vote3, vote4, roundNumber));
     }
 
+    /**
+     * Test of getAllVotesOfParticularUser method, of class Controller.
+     */
     @Test
-    public void testGetAllVotesOfParticularUser()
-    {
-        //First we have to add votes
-        List<Vote> testVotes = votesGenerator();
-        controller.addVoteFromParticularUser((ArrayList<Vote>) testVotes);
-        assertThat("getAllVotesOfParticularUser() should return a list full with all votes",
-                   controller.getAllVotesOfParticularUser(), is(testVotes));
-    }
-    @Test
-    public void updateUserVotes()
-    {
-        //First we have to add votes
-        List<Vote> testVotes = votesGenerator();
-        controller.addVoteFromParticularUser((ArrayList<Vote>) testVotes);
-        //Then we get them
-        List<Vote> existingVotes = controller.getAllVotesOfParticularUser();
-        //Now we set the new values of the vote
-        User newUser = new User("bobkoo", "boyko", "user@email", "12345", new UserType("Student"));
-        ProposedSubject newps = new ProposedSubject("AI", "makeasasd", Boolean.TRUE, "B");
-        Vote expectedVote = new Vote(newUser, newps, 1, 2);
-        //We use the same ID as the one we received from getAll
-        expectedVote.setId(existingVotes.get(0).getId());
-        //We update and save the result
-        Vote actualResult = controller.updateParticularVoteOfParticularUser(expectedVote);
-        assertThat("updateUserVotes() should update the votes of a user", actualResult,
-                   is(expectedVote));
+    public void testGetAllVotesOfParticularUser() {
+        System.out.println("getAllVotesOfParticularUser");
+
+        List<Vote> votes = controller.getAllVotesOfParticularUser();
+        int expResult = controller.user.getVotes().size();
+        assertEquals(expResult, votes.size());
     }
 
+    /**
+     * Test of deleteAllVotesOfParticularUser method, of class Controller.
+     */
     @Test
-    public void testDeleteUserVotes()
-    {
+    public void testDeleteAllVotesOfParticularUser() {
+        System.out.println("deleteAllVotesOfParticularUser");
         //First we have to add votes
-        ArrayList<Vote> testVotes = votesGenerator();
-        controller.addVoteFromParticularUser(testVotes);
+        //   ArrayList<Vote> testVotes = votesGenerator();
+//        controller.addVoteFromParticularUser(testVotes);
         //Then we try to delete them
         String expectedResult = AcceptanceProtocol.VOTE_DELETION_SUCCESS;
         String actualResult = controller.deleteAllVotesOfParticularUser();
-        assertThat("deleteUserVotes() should delete ALL votes of that user", actualResult,
-                   is(expectedResult));
+        assertThat(actualResult, is(expectedResult));
     }
 
-    private ArrayList<Vote> votesGenerator()
-    {
-        User user1 = new User("bobkoo", "boyko", "user@email", "12345", new UserType("Student"));
-        ProposedSubject ps1 = new ProposedSubject("Game Design", "WOW", Boolean.TRUE, "A");
-        ProposedSubject ps2 = new ProposedSubject("C#", "java like", Boolean.TRUE, "A");
-        ProposedSubject ps3 = new ProposedSubject("C++", "complicated", Boolean.FALSE, "B");
-        ProposedSubject ps4 = new ProposedSubject("AI", "makeasasd", Boolean.TRUE, "B");
-        ps1.setId(0);
-        ps2.setId(1);
-        ps3.setId(2);
-        ps4.setId(3);
-        ArrayList<Vote> testVotes = new ArrayList();
-        testVotes.add(new Vote(user1, ps1, 1, 2));
-        testVotes.add(new Vote(user1, ps2, 1, 1));
-        testVotes.add(new Vote(user1, ps3, 1, 1));
-        testVotes.add(new Vote(user1, ps4, 1, 2));
-        return testVotes;
+    /**
+     * Test of updateParticularVoteOfParticularUser method, of class Controller.
+     */
+    @Test
+    public void testUpdateParticularVoteOfParticularUser() {
+        System.out.println("updateParticularVoteOfParticularUser");
+        
+        
+        Vote expResult = controller.user.getVotes().get(0);
+        expResult.setPoints(1);
+        expResult.setProposedSubject(controller.proposedSubjects.get(3));
+        expResult.setRoundNumber(3);
+        
+        Vote actualResult = controller.updateParticularVoteOfParticularUser(expResult);
+        assertEquals(expResult,actualResult);
     }
 }

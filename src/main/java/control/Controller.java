@@ -18,6 +18,8 @@ public class Controller implements ControllerInterface
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIP_PU");
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
+    private User loggedInUser;
+    private List<ProposedSubject> proposedSubjects = new ArrayList<>();
 
     public static void main(String[] args)
     {
@@ -43,6 +45,8 @@ public class Controller implements ControllerInterface
     @Override
     public String authenticateUser(String userName, String password)
     {
+        // this is where we will initialize loggedInUser
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -97,13 +101,14 @@ public class Controller implements ControllerInterface
     @Override
     public List<ProposedSubject> getAllAvailableProposedElectiveSubjects()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return proposedSubjects;
     }
 
     @Override
     public ProposedSubject addProposedElectiveSubject(ProposedSubject pes)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        proposedSubjects.add(pes);
+        return pes;
     }
 
     @Override
@@ -119,9 +124,21 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String addVoteFromParticularUser(ArrayList<Vote> votes)
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Vote> votedSubjects = new ArrayList<>();
+        for (ProposedSubject p : proposedSubjects) {
+            if (p.getName().equals(vote1) || p.getName().equals(vote2)) {
+                votedSubjects.add(new Vote(loggedInUser, p, roundNumber, 2));
+            }
+        }
+        for (ProposedSubject p : proposedSubjects) {
+            if (p.getName().equals(vote3) || p.getName().equals(vote4)) {
+                votedSubjects.add(new Vote(loggedInUser, p, roundNumber, 1));
+            }
+        }
+        loggedInUser.setVotes(votedSubjects);
+        return "to be completed";
     }
 
     @Override
@@ -141,5 +158,7 @@ public class Controller implements ControllerInterface
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    //getUserByUsername
 
 }
