@@ -39,7 +39,7 @@ public interface ControllerInterface {
     String deleteParticularElectiveSubject(Integer id);
     
     //Votes
-    String addVoteFromParticularUser(ArrayList<Vote> votes);
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber);
 
     List<Vote> getAllVotesOfParticularUser();
 
