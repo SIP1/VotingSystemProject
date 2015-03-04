@@ -6,45 +6,63 @@ import JPA2.UserType;
 import JPA2.Vote;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import utilities.AcceptanceProtocol;
 
-public class ControllerMock implements ControllerInterface
-{
+public class ControllerMock implements ControllerInterface {
     //getVote.clear won't work... neither for any other delete... TODO
 
-    User user = new User();
-    public ArrayList<ProposedSubject> subjects = new ArrayList();
+    public User user = new User();
+    public ArrayList<ProposedSubject> proposedSubjects = new ArrayList();
     public ArrayList<User> users = new ArrayList();
+    public ArrayList<UserType> userTypes = new ArrayList<>();
+    public ArrayList<Vote> votes = new ArrayList<>();
 
-    public static void main(String[] args)
-    {
-        new ControllerMock().testingBase();
+    public static void main(String[] args) {
+        ControllerMock controllerMock = new ControllerMock();
     }
+//
+//    public ControllerMock() {
+//        testingBase();
+//    }
 
-    public ControllerMock()
-    {
-        testingBase();
-    }
+    public ControllerMock() {
+        //create user types
+        userTypes.add(new UserType("Student"));
+        userTypes.add(new UserType("Teacher"));
+        userTypes.add(new UserType("Administrator"));
 
-    private void testingBase()
-    {
-        users.add(new User("bobkoo", "12345", "boyko", "email@email.mail", new UserType("Student")));
-        users.add(new User("boyko", "67890a", "Bobanka", "bobanka@bulgaria.bg", new UserType("Student")));
-        authenticateUser("bobkoo", "12345");
+        //create users
+        users.add(new User("TestUser", "12345", "boyko", "email@email.mail", userTypes.get(0)));
+        users.add(new User("TestUser2", "test", "Testing user 2", "test@test.com", userTypes.get(1)));
+        users.add(new User("TestUser3", "test", "Admin", "admin@test.com", userTypes.get(2)));
+
+        //create proposed subjects
+        proposedSubjects.add(new ProposedSubject("Test subject 1", "It was only just a test", true, null));
+        proposedSubjects.add(new ProposedSubject("Test subject 2", "It was only just a test", true, null));
+        proposedSubjects.add(new ProposedSubject("Test subject 3", "It was only just a test", true, null));
+        proposedSubjects.add(new ProposedSubject("Test subject 4", "It was only just a test", true, null));
+
+        //assing the current user which will be the student
+        user = users.get(0);
+
+        //create votes
+        votes.add(new Vote(user, proposedSubjects.get(0), 1, 2));
+        votes.add(new Vote(user, proposedSubjects.get(1), 1, 2));
+        votes.add(new Vote(user, proposedSubjects.get(2), 1, 1));
+        votes.add(new Vote(user, proposedSubjects.get(3), 1, 1));
+
+        //set votes to user
+        user.setVotes(votes);
+        // authenticateUser("bobkoo", "12345");
     }
 
     //Users
     @Override
-    public String authenticateUser(String userName, String password)
-    {
-        for (User x : users)
-        {
-            if (x.getUsername().equals(userName) && x.getPassword().equals(password))
-            {
+    public String authenticateUser(String userName, String password) {
+        for (User x : users) {
+            if (x.getUsername().equals(userName) && x.getPassword().equals(password)) {
                 user = x;
                 return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
             }
@@ -53,12 +71,9 @@ public class ControllerMock implements ControllerInterface
     }
 
     @Override
-    public String registerUser(User u)
-    {
-        for (User x : users)
-        {
-            if (x.getUsername().equals(u.getUsername()))
-            {
+    public String registerUser(User u) {
+        for (User x : users) {
+            if (x.getUsername().equals(u.getUsername())) {
                 return AcceptanceProtocol.ACCOUNT_REGISTRATION_ERROR;
             }
         }
@@ -67,12 +82,9 @@ public class ControllerMock implements ControllerInterface
     }
 
     @Override
-    public String deleteParticularUser()
-    {
-        for (User x : users)
-        {
-            if (x.getUsername().equals(user.getUsername()))
-            {
+    public String deleteParticularUser() {
+        for (User x : users) {
+            if (x.getUsername().equals(user.getUsername())) {
                 users.remove(x);
                 return AcceptanceProtocol.ACCOUNT_DELETION;
             }
@@ -81,14 +93,10 @@ public class ControllerMock implements ControllerInterface
     }
 
     @Override
-    public String updateParticularUser(String password, User newUserInfo)
-    {
-        if (user.getPassword().equals(password))
-        {
-            for (User x : users)
-            {
-                if (x.getUsername().equals(user.getUsername()))
-                {
+    public String updateParticularUser(String password, User newUserInfo) {
+        if (user.getPassword().equals(password)) {
+            for (User x : users) {
+                if (x.getUsername().equals(user.getUsername())) {
                     user.setPassword(newUserInfo.getPassword());
                     user.setEmail(newUserInfo.getEmail());
                     user.setUserType(newUserInfo.getUserType());
@@ -101,117 +109,107 @@ public class ControllerMock implements ControllerInterface
     }
 
     @Override
-    public User getUser()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User getUser() {
+        return user;
     }
 
     //UserTypes
     @Override
-    public String addUserType(String name)
-    {
+    public String addUserType(String name) {
+        userTypes.add(new UserType(name));
+        return AcceptanceProtocol.USERTYPE_ADD_SUCCESS;
+
+    }
+
+    @Override
+    public String updateParticularUserType(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String updateParticularUserType(Integer id)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String deleteParticularUserType(Integer id) {
+        userTypes.remove(id);
+        return AcceptanceProtocol.USERTYPE_DELETION_SUCCESS;
     }
 
     @Override
-    public String deleteParticularUserType(Integer id)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<UserType> getAllUserTypes()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<UserType> getAllUserTypes() {
+        return userTypes;
     }
 
     //Subjects
     @Override
-    public ArrayList<ProposedSubject> getAllAvailableProposedElectiveSubjects()
-    {
-        return subjects;
+    public ArrayList<ProposedSubject> getAllAvailableProposedElectiveSubjects() {
+        return proposedSubjects;
     }
 
     @Override
-    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes)
-    {
-        subjects.add(pes);
+    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes) {
+        proposedSubjects.add(pes);
         return pes;
     }
 
     @Override
-    public String updateParticularElectiveSubject(Integer id)
-    {
+    public String updateParticularElectiveSubject(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String deleteParticularElectiveSubject(Integer id)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String deleteParticularElectiveSubject(Integer id) {
+        proposedSubjects.remove(id);
+        return AcceptanceProtocol.SUBJECT_DELETION_SUCCESS;
     }
 
     //Votes
     @Override
-    public String addVoteFromParticularUser(ArrayList<Vote> votes)
-    {
-        String checkingResult = isChoiceAccepted(votes);
-        if (checkingResult.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
-        {
-            user.setVotes(votes);
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber) {
 
-        }
-        return checkingResult;
-    }
+        votes.add(new Vote(user, new ProposedSubject(vote1, "TEST", true, ""), roundNumber, 2));
+        votes.add(new Vote(user, new ProposedSubject(vote2, "TEST", true, ""), roundNumber, 2));
+        votes.add(new Vote(user, new ProposedSubject(vote3, "TEST", true, ""), roundNumber, 1));
+        votes.add(new Vote(user, new ProposedSubject(vote4, "TEST", true, ""), roundNumber, 1));
 
-    private String isChoiceAccepted(ArrayList<Vote> votes)
-    {
-        int votesSize = votes.size();
-        if (votesSize != 4)
-        {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
-        }
-        List<Integer> pesIDs = new ArrayList();
-        List<Integer> roundNos = new ArrayList();
-        for (int i = 0; i < votesSize; i++)
-        {
-            pesIDs.add(votes.get(i).getProposedSubject().getId());
-            roundNos.add(votes.get(i).getRoundNumber());
-        }
-        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
-        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
-        if (setPesIDs.size() < pesIDs.size())
-        {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
-
-        }
-        if (1 != setRoundNos.size())
-        {
-            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
-
-        }
         return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
     }
 
+//       probably can be removed
+//    private String isChoiceAccepted(ArrayList<Vote> votes)
+//    {
+//        int votesSize = votes.size();
+//        if (votesSize != 4)
+//        {
+//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
+//        }
+//        List<Integer> pesIDs = new ArrayList();
+//        List<Integer> roundNos = new ArrayList();
+//        for (int i = 0; i < votesSize; i++)
+//        {
+//            pesIDs.add(votes.get(i).getProposedSubject().getId());
+//            roundNos.add(votes.get(i).getRoundNumber());
+//        }
+//        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
+//        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
+//        if (setPesIDs.size() < pesIDs.size())
+//        {
+//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
+//
+//        }
+//        if (1 != setRoundNos.size())
+//        {
+//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
+//
+//        }
+//        return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
+//    }
     @Override
-    public List<Vote> getAllVotesOfParticularUser()
-    {
+    public List<Vote> getAllVotesOfParticularUser() {
         return user.getVotes();
     }
 
     @Override
-    public Vote updateParticularVoteOfParticularUser(Vote nv)
-    {
-        for (Vote v : user.getVotes())
-        {
-            if (Objects.equals(v.getId(), nv.getId()))
-            {
+    public Vote updateParticularVoteOfParticularUser(Vote nv) {
+        for (Vote v : user.getVotes()) {
+            if (Objects.equals(v.getId(), nv.getId())) {
                 v = nv;
                 break;
             }
@@ -220,20 +218,21 @@ public class ControllerMock implements ControllerInterface
     }
 
     @Override
-    public String deleteAllVotesOfParticularUser()
-    {
-        if (user.getVotes().size() > 0)
-        {
+    public String deleteAllVotesOfParticularUser() {
+        if (user.getVotes().size() > 0) {
             user.getVotes().clear();
             return AcceptanceProtocol.VOTE_DELETION_SUCCESS;
+        }
+        if (user.getVotes().isEmpty()) {
+            return AcceptanceProtocol.VOTE_DELETION_NOTHING;
         }
         return AcceptanceProtocol.VOTE_DELETION_FAIL;
     }
 
-/*
-    Those nested classes were used while the database was not created
-    we decided to comment them out and leave them as part of our project.
-    */
+    /*
+     Those nested classes were used while the database was not created
+     we decided to comment them out and leave them as part of our project.
+     */
 //******************************************************************************    
 //    private Integer pesIDCreator = 0;
 //    public class ProposedElectiveSubject

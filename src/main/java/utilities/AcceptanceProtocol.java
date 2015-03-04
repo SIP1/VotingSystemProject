@@ -24,7 +24,7 @@ public class AcceptanceProtocol {
     public static final String SUBJECT_DELETION_SUCCESS = "The subject was deleted "
             + "successfully";
 
-    public static final String VOTE_REGISTRATION_SUCCESS = "Your vote are registered "
+    public static final String VOTE_REGISTRATION_SUCCESS = "Your votes are registered "
             + "successfully!";
 
     public static final String VOTE_REGISTRATION_ERROR_AMMOUNT = "You have to select "
@@ -40,5 +40,11 @@ public class AcceptanceProtocol {
 
     public static final String VOTE_DELETION_SUCCESS = "Your votes are deleted.";
     
+     public static final String VOTE_DELETION_NOTHING = "You have no votes to delete.";
+    
     public static final String VOTE_DELETION_FAIL = "You failed to delete your votes";
+   
+    public static final String USERTYPE_ADD_SUCCESS = "You have successfully added a usertype";
+    
+    public static final String USERTYPE_DELETION_SUCCESS = "You have successfully deleted a usertype";
 }
