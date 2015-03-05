@@ -10,7 +10,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuRound1MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRound1ActionPerformed"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuRound2">
@@ -45,11 +44,12 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -74,9 +74,6 @@
               <Component id="jPanelRound1" alignment="1" pref="466" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
-              <Component id="jPanelRound2" alignment="1" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
               <Component id="jPanelHelp" alignment="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -85,15 +82,12 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanelLogin" alignment="0" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="jPanelMain" alignment="1" pref="364" max="32767" attributes="0"/>
+              <Component id="jPanelMain" alignment="1" pref="279" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
-              <Component id="jPanelRound1" alignment="0" pref="364" max="32767" attributes="0"/>
+              <Component id="jPanelRound1" alignment="0" pref="279" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
-              <Component id="jPanelRound2" alignment="1" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
               <Component id="jPanelHelp" alignment="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -111,33 +105,34 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelLoginError" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="101" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldPassword" min="-2" pref="166" max="-2" attributes="0"/>
-                              <Component id="jTextFieldUsername" min="-2" pref="166" max="-2" attributes="0"/>
+                              <Component id="jTextFieldUsername" max="32767" attributes="0"/>
+                              <Component id="jTextFieldPassword" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabelLoginError" pref="160" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButtonLogin" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+                  <EmptySpace min="112" pref="112" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -148,13 +143,12 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="117" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabelLoginError" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonLogin" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="jLabelLoginError" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -162,11 +156,11 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jTextFieldUsername">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldUsernameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jTextFieldPassword">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldPasswordKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -188,7 +182,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonCancel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="text" type="java.lang.String" value="Exit"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
@@ -216,19 +210,30 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                  <Component id="jLabelWelcome" min="-2" pref="125" max="-2" attributes="0"/>
-                  <EmptySpace pref="165" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabelWelcome" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="383" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jButtonSelectSubjectsToVote" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                  <Component id="jLabelWelcome" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace pref="210" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelWelcome" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="201" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButtonSelectSubjectsToVote" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -239,6 +244,35 @@
             <Property name="text" type="java.lang.String" value="Welcome text"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="jButtonSelectSubjectsToVote">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Select subjects to vote"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSelectSubjectsToVoteActionPerformed"/>
+          </Events>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jTableSubjects">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="10">
+                    <Column editable="false" title="Title" type="java.lang.Object"/>
+                    <Column editable="false" title="Poll" type="java.lang.Object"/>
+                    <Column editable="false" title="Teachers" type="java.lang.Object"/>
+                    <Column editable="false" title="Description" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanelRound1">
@@ -255,75 +289,93 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelError" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelPollA" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox1" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="jLabelFirstPriorityA" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBox3" min="-2" pref="160" max="-2" attributes="0"/>
+                              <Component id="jLabelSecondPriorityA" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButtonSubmitRound1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelError" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelRoundTitle" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="183" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelPollB" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBox2" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="jLabelFirstPriorityB" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelSecondPriorityB" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBox4" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jButtonBackRound1" min="-2" pref="73" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jButtonSubmitRound1" min="-2" pref="73" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="183" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelRoundTitle" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelPollA" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPollB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelFirstPriorityA" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelFirstPriorityB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelSecondPriorityA" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelSecondPriorityB" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="39" max="32767" attributes="0"/>
-                  <Component id="jButtonSubmitRound1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabelError" min="-2" pref="12" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelError" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonBackRound1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonSubmitRound1" alignment="3" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLabelFirstPriorityA">
           <Properties>
             <Property name="text" type="java.lang.String" value="Please choose two first priorities:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="jLabelSecondPriorityA">
           <Properties>
             <Property name="text" type="java.lang.String" value="Please choose two second priorities:"/>
           </Properties>
@@ -331,11 +383,8 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="- no subject -"/>
               </StringArray>
             </Property>
           </Properties>
@@ -346,38 +395,38 @@
         <Component class="javax.swing.JComboBox" name="jComboBox2">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="- no subject -"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox3">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="- no subject -"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox3ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox4">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="1">
+                <StringItem index="0" value="- no subject -"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox4ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSubmitRound1">
           <Properties>
@@ -394,194 +443,43 @@
             </Property>
           </Properties>
         </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanelRound2">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButtonSubmitRound2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBox7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jComboBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jComboBox8" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBox6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
-                  <Component id="jLabelError2" min="-2" pref="397" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jButtonSubmitRound2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelError2" pref="20" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="jLabelRoundTitle">
           <Properties>
-            <Property name="text" type="java.lang.String" value="POOL A"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="POOL B"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="First priority:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Second priority:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="First priority:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Second priority:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox5">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="12" style="1"/>
             </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Title"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox6">
+        <Component class="javax.swing.JLabel" name="jLabelPollA">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
+            <Property name="text" type="java.lang.String" value="POLL A"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox7">
+        <Component class="javax.swing.JLabel" name="jLabelPollB">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
+            <Property name="text" type="java.lang.String" value="POLL B"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox8">
+        <Component class="javax.swing.JLabel" name="jLabelFirstPriorityB">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
+            <Property name="text" type="java.lang.String" value="First Priority:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonSubmitRound2">
+        <Component class="javax.swing.JLabel" name="jLabelSecondPriorityB">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Submit"/>
+            <Property name="text" type="java.lang.String" value="Second Priority:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonBackRound1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitRound2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBackRound1ActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelError2">
-          <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -595,26 +493,26 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="208" max="32767" attributes="0"/>
-              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="227" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="240" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" pref="24" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace pref="210" max="32767" attributes="0"/>
                   <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
