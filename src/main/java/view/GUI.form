@@ -120,11 +120,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabelLoginError" pref="160" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="168" max="32767" attributes="0"/>
                           <Component id="jButtonLogin" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabelLoginError" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="112" pref="112" max="-2" attributes="0"/>
               </Group>
@@ -143,11 +142,12 @@
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelLoginError" alignment="1" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jButtonCancel" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonLogin" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                  <Component id="jLabelLoginError" min="-2" pref="28" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jButtonLogin" max="32767" attributes="0"/>
+                      <Component id="jButtonCancel" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>

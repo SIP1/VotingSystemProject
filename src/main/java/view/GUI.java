@@ -2,11 +2,17 @@ package view;
 
 import JPA2.ProposedSubject;
 import control.Controller;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import utilities.AcceptanceProtocol;
 
 /**
@@ -140,10 +146,9 @@ public class GUI extends javax.swing.JFrame
                             .addComponent(jTextFieldPassword)))
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
                         .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLogin)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin))
+                    .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(112, 112, 112))
         );
         jPanelLoginLayout.setVerticalGroup(
@@ -157,11 +162,12 @@ public class GUI extends javax.swing.JFrame
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelLoginError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(jLabelLoginError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
 
@@ -489,6 +495,33 @@ public class GUI extends javax.swing.JFrame
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
+    private void setupSubjectsTable()
+    {
+        subjectsToBeDisplayed = control.getAllAvailableProposedElectiveSubjects();
+        Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
+        for (int i = 0; i < subjectsToBeDisplayed.size(); i++)
+        {
+            data[i][0] = subjectsToBeDisplayed.get(i).getName();
+            data[i][1] = subjectsToBeDisplayed.get(i).getPoolOptions();
+            data[i][2] = subjectsToBeDisplayed.get(i).getTeachersNames();
+            data[i][3] = subjectsToBeDisplayed.get(i).getDescription();
+        }
+        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+        });
+
+        jTableSubjects.getColumnModel().getColumn(0).setPreferredWidth(60);
+        jTableSubjects.getColumnModel().getColumn(1).setPreferredWidth(20);
+        jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTableSubjects.getColumnModel().getColumn(3).setPreferredWidth(140);
+//        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
+    }
+
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS))
         {
@@ -501,23 +534,7 @@ public class GUI extends javax.swing.JFrame
             jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
             jTextFieldUsername.setText("");
             jTextFieldPassword.setText("");
-            subjectsToBeDisplayed = control.getAllAvailableProposedElectiveSubjects();
-            Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
-            for (int i = 0; i < subjectsToBeDisplayed.size(); i++)
-            {
-                data[i][0] = subjectsToBeDisplayed.get(i).getName();
-                data[i][1] = subjectsToBeDisplayed.get(i).getPoolOptions();
-                data[i][2] = subjectsToBeDisplayed.get(i).getTeachersNames();
-                data[i][3] = subjectsToBeDisplayed.get(i).getDescription();
-            }
-            jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames)
-            {
-                @Override
-                public boolean isCellEditable(int row, int column)
-                {
-                    return false;
-                }
-            });
+            setupSubjectsTable();
         }
         else
         {
@@ -543,7 +560,7 @@ public class GUI extends javax.swing.JFrame
         jLabelFirstPriorityA.setText("Please choose two first priorities:");
         jLabelFirstPriorityB.setVisible(false);
         jLabelSecondPriorityA.setText("Please choose two second priorities:");
-        jLabelFirstPriorityB.setVisible(false);
+        jLabelSecondPriorityB.setVisible(false);
         jLabelError.setText("");
     }//GEN-LAST:event_jMenuRound1MouseClicked
 
@@ -563,7 +580,7 @@ public class GUI extends javax.swing.JFrame
         jLabelFirstPriorityA.setText("First Priority:");
         jLabelFirstPriorityB.setVisible(true);
         jLabelSecondPriorityA.setText("Second Priority:");
-        jLabelFirstPriorityB.setVisible(true);
+        jLabelSecondPriorityB.setVisible(true);
         jLabelError.setText("");
     }//GEN-LAST:event_jMenuRound2MouseClicked
 
@@ -639,8 +656,11 @@ public class GUI extends javax.swing.JFrame
         {
             if (!jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
             {
-                comboBoxSubjects[poz] = sb.getName();
-                poz++;
+                if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                {
+                    comboBoxSubjects[poz] = sb.getName();
+                    poz++;
+                }
             }
         }
         String[] comboBoxItemsV2 = new String[poz + 1];
@@ -659,8 +679,11 @@ public class GUI extends javax.swing.JFrame
         {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
             {
-                comboBoxSubjects[poz] = sb.getName();
-                poz++;
+                if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                {
+                    comboBoxSubjects[poz] = sb.getName();
+                    poz++;
+                }
             }
         }
         comboBoxItemsV2 = new String[poz + 1];
@@ -679,8 +702,11 @@ public class GUI extends javax.swing.JFrame
         {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
             {
-                comboBoxSubjects[poz] = sb.getName();
-                poz++;
+                if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                {
+                    comboBoxSubjects[poz] = sb.getName();
+                    poz++;
+                }
             }
         }
         comboBoxItemsV2 = new String[poz + 1];
@@ -699,8 +725,11 @@ public class GUI extends javax.swing.JFrame
         {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()))
             {
-                comboBoxSubjects[poz] = sb.getName();
-                poz++;
+                if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                {
+                    comboBoxSubjects[poz] = sb.getName();
+                    poz++;
+                }
             }
         }
         comboBoxItemsV2 = new String[poz + 1];
