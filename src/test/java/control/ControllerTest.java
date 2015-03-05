@@ -13,11 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mocks.ControllerMock;
 import static org.hamcrest.CoreMatchers.is;
-import org.hamcrest.Matchers;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utilities.AcceptanceProtocol;
@@ -87,8 +83,8 @@ public class ControllerTest {
         String newPassword = "54321";
         String name = "Changed";
         String email = "changed@email.com";
-        String expectedResult = AcceptanceProtocol.ACCOUNT_UPDATE_SUCCESS;
-        String actualResult = controller.updateParticularUser(password, new User(userName, newPassword, name, email, controller.userTypes.get(0)));
+        User expectedResult = new User(userName, newPassword, name, email, controller.userTypes.get(1));
+        User actualResult = controller.updateParticularUser(password, expectedResult);
         assertEquals(expectedResult, actualResult);
     }
 
@@ -120,14 +116,12 @@ public class ControllerTest {
      */
     @Test()
     public void testUpdateParticularUserType() {
-        System.out.println("updateParticularUserType FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-//        Integer id = null;
-//        Controller instance = new Controller();
-//        String expResult = "";
-//        String result = instance.updateParticularUserType(id);
-//        assertEquals(expResult, result);
-        fail("Interface needs to be changed");
+        System.out.println("updateParticularUserType");
+        int id = 1;
+        String userType = "Test";
+        UserType expectedResult = new UserType(userType);
+        UserType actualResult = controller.updateParticularUserType(id, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     /**
@@ -180,12 +174,15 @@ public class ControllerTest {
      */
     @Test
     public void testUpdateParticularElectiveSubject() {
-        System.out.println("updateParticularElectiveSubject FIX ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//      
-//        String expResult = "";
-//        String result = controller.updateParticularElectiveSubject(1);
-//        assertEquals(expResult, result);
-        fail("Interface needs to be changed");
+        System.out.println("updateParticularElectiveSubject");
+        int id = 1;
+        String name = "Test Subject";
+        String description = "Testing desc";
+        Boolean isAlive = true;
+        String poolOption = "B";
+        ProposedSubject expectedResult = new ProposedSubject(name, description, isAlive, poolOption);
+        ProposedSubject actualResult = controller.updateParticularElectiveSubject(id, expectedResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     /**
@@ -246,14 +243,13 @@ public class ControllerTest {
     @Test
     public void testUpdateParticularVoteOfParticularUser() {
         System.out.println("updateParticularVoteOfParticularUser");
-        
-        
+
         Vote expResult = controller.user.getVotes().get(0);
         expResult.setPoints(1);
         expResult.setProposedSubject(controller.proposedSubjects.get(3));
         expResult.setRoundNumber(3);
-        
+
         Vote actualResult = controller.updateParticularVoteOfParticularUser(expResult);
-        assertEquals(expResult,actualResult);
+        assertEquals(expResult, actualResult);
     }
 }
