@@ -114,15 +114,15 @@ public class Controller implements ControllerInterface
     public List<ProposedSubject> getAllAvailableProposedElectiveSubjects()
     {
         proposedSubjects = new ArrayList<ProposedSubject>();
-        proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "none"));
+        proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(101);
-        proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, "none"));
+        proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, "B"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(102);
-        proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, "none"));
+        proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, "B"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(103);
-        proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, "none"));
+        proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(104);
-        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "none"));
+        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
 
         return proposedSubjects;
