@@ -93,19 +93,16 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String updateParticularUser(String password, User newUserInfo) {
+    public User updateParticularUser(String password, User newUserInfo) {
         if (user.getPassword().equals(password)) {
-            for (User x : users) {
-                if (x.getUsername().equals(user.getUsername())) {
-                    user.setPassword(newUserInfo.getPassword());
-                    user.setEmail(newUserInfo.getEmail());
-                    user.setUserType(newUserInfo.getUserType());
-                    x = user;
-                    return AcceptanceProtocol.ACCOUNT_UPDATE_SUCCESS;
+            for (User oldUser : users) {
+                if (oldUser.getUsername().equals(newUserInfo.getUsername())) {
+                    oldUser = newUserInfo;
+                    return oldUser;
                 }
             }
         }
-        return AcceptanceProtocol.ACCOUNT_UPDATE_ERROR;
+        return null;
     }
 
     @Override
@@ -122,8 +119,10 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String updateParticularUserType(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UserType updateParticularUserType(Integer id, UserType newUserType) {
+        UserType oldUserType = userTypes.get(id);
+        oldUserType = newUserType;
+        return oldUserType;
     }
 
     @Override
@@ -150,8 +149,10 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String updateParticularElectiveSubject(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ProposedSubject updateParticularElectiveSubject(Integer id, ProposedSubject newProposedSubject) {
+        ProposedSubject oldProposedSubject = proposedSubjects.get(id);
+        oldProposedSubject = newProposedSubject;
+        return oldProposedSubject;
     }
 
     @Override
@@ -172,35 +173,6 @@ public class ControllerMock implements ControllerInterface {
         return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
     }
 
-//       probably can be removed
-//    private String isChoiceAccepted(ArrayList<Vote> votes)
-//    {
-//        int votesSize = votes.size();
-//        if (votesSize != 4)
-//        {
-//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
-//        }
-//        List<Integer> pesIDs = new ArrayList();
-//        List<Integer> roundNos = new ArrayList();
-//        for (int i = 0; i < votesSize; i++)
-//        {
-//            pesIDs.add(votes.get(i).getProposedSubject().getId());
-//            roundNos.add(votes.get(i).getRoundNumber());
-//        }
-//        Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
-//        Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
-//        if (setPesIDs.size() < pesIDs.size())
-//        {
-//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
-//
-//        }
-//        if (1 != setRoundNos.size())
-//        {
-//            return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
-//
-//        }
-//        return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
-//    }
     @Override
     public List<Vote> getAllVotesOfParticularUser() {
         return user.getVotes();
