@@ -96,6 +96,23 @@ public class ProposedSubject implements Serializable
         return users;
     }
 
+    public String getTeachersNames()
+    {
+        String result = "";
+        for (User u : users)
+        {
+            if (u.getUserType().getName().equals("Teacher"))
+            {
+                result = result + u.getName() + ", ";
+            }
+        }
+        if (result.length() > 1)
+        {
+            result = result.substring(0, result.length() - 2);
+        }
+        return result;
+    }
+
     public void setUsers(List<User> users)
     {
         this.users = users;

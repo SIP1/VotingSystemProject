@@ -16,14 +16,14 @@ public interface ControllerInterface {
 
     String deleteParticularUser();
     
-    String updateParticularUser(String password, User newUserInfo);
+    User updateParticularUser(String password, User newUserInfo);
     
     User getUser();
     
     //UserTypes
     String addUserType(String name);
     
-    String updateParticularUserType(Integer id);
+    UserType updateParticularUserType(Integer id, UserType newUserType);
     
     String deleteParticularUserType(Integer id);
     
@@ -34,12 +34,12 @@ public interface ControllerInterface {
     
     ProposedSubject addProposedElectiveSubject(ProposedSubject pes);
     
-    String updateParticularElectiveSubject(Integer id);
+    ProposedSubject updateParticularElectiveSubject(Integer id, ProposedSubject newProposedSubject);
     
     String deleteParticularElectiveSubject(Integer id);
     
     //Votes
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber);
+    String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber);
 
     List<Vote> getAllVotesOfParticularUser();
 
