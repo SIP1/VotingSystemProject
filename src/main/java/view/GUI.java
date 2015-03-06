@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -534,6 +535,7 @@ public class GUI extends javax.swing.JFrame
             jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
             jTextFieldUsername.setText("");
             jTextFieldPassword.setText("");
+            jButtonSelectSubjectsToVote.setVisible(false);
             setupSubjectsTable();
         }
         else
@@ -589,6 +591,7 @@ public class GUI extends javax.swing.JFrame
         jPanelRound1.setVisible(false);
         jPanelLogin.setVisible(false);
         jPanelHelp.setVisible(true);
+        jLabelLoginError.setText("");
     }//GEN-LAST:event_jMenuHelpMouseClicked
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
@@ -627,6 +630,12 @@ public class GUI extends javax.swing.JFrame
                 {
                     jLabelError.setForeground(Color.GREEN);
                     jLabelError.setText("OK");
+                    jComboBox1.setEnabled(false);
+                    jComboBox2.setEnabled(false);
+                    jComboBox3.setEnabled(false);
+                    jComboBox4.setEnabled(false);
+                    jButtonSubmitRound1.setEnabled(false);
+                    JOptionPane.showMessageDialog(this, "Your votes have been registered!");
                 }
                 else
                 {
@@ -774,6 +783,7 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonBackRound1ActionPerformed
         jPanelMain.setVisible(true);
         jPanelRound1.setVisible(false);
+        jButtonSelectSubjectsToVote.setVisible(true);
     }//GEN-LAST:event_jButtonBackRound1ActionPerformed
 
     private void jButtonSelectSubjectsToVoteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSelectSubjectsToVoteActionPerformed
