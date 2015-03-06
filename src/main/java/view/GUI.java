@@ -4,6 +4,7 @@ import JPA2.ProposedSubject;
 import control.Controller;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class GUI extends javax.swing.JFrame {
         jPanelMain.setVisible(false);
         jMenuRound1.setVisible(false);
         jMenuRound2.setVisible(false);
+        jMenuProposeSubject.setVisible(false);
+        jPanelProposeSubject.setVisible(false);
         jPanelRound1.setVisible(false);
         jPanelHelp.setVisible(false);
         jMenuLogout.setVisible(false);
@@ -99,11 +102,19 @@ public class GUI extends javax.swing.JFrame {
         jLabelB = new javax.swing.JLabel();
         jButtonSubmit = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jPanelProposeSubject = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldProposedSubjectName = new javax.swing.JTextField();
+        jTextFieldProposedSubjectDescription = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonProposeSubject = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuRound1 = new javax.swing.JMenu();
         jMenuRound2 = new javax.swing.JMenu();
         jMenuLogout = new javax.swing.JMenu();
         jMenuHelp = new javax.swing.JMenu();
+        jMenuProposeSubject = new javax.swing.JMenu();
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -156,7 +167,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jTextFieldPassword)))
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
                         .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 641, Short.MAX_VALUE)
                         .addComponent(jButtonLogin))
                     .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(112, 112, 112))
@@ -172,7 +183,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                 .addComponent(jLabelLoginError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -228,7 +239,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonSelectSubjectsToVote)))
@@ -240,7 +251,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSelectSubjectsToVote)
                 .addContainerGap())
@@ -330,7 +341,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jLabelError, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelRoundTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelRound1Layout.createSequentialGroup()
-                                .addGap(0, 183, Short.MAX_VALUE)
+                                .addGap(0, 719, Short.MAX_VALUE)
                                 .addGroup(jPanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelPollB)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -399,14 +410,14 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanelHelpLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addContainerGap(758, Short.MAX_VALUE))
         );
         jPanelHelpLayout.setVerticalGroup(
             jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 423, Short.MAX_VALUE)
                 .addComponent(jButtonBack)
                 .addContainerGap())
         );
@@ -471,24 +482,28 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButtonSubmit)
                 .addGap(41, 41, 41))
             .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabelA)
-                .addGap(175, 175, 175)
-                .addComponent(jLabelB)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPollLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jLabelA))
+                    .addGroup(jPanelPollLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(194, 194, 194)
+                .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelPollLayout.createSequentialGroup()
+                        .addComponent(jLabelB)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelPollLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62))))
         );
         jPanelPollLayout.setVerticalGroup(
             jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(201, Short.MAX_VALUE)
                 .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelA, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelB, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -500,6 +515,68 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jButtonSubmit)
                 .addGap(16, 16, 16))
+        );
+
+        jLabel3.setText("Name");
+
+        jLabel4.setText("Description");
+
+        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProposedSubjectDescriptionActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Propose subject");
+
+        jButtonProposeSubject.setText("Submit");
+        jButtonProposeSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProposeSubjectActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelProposeSubjectLayout = new javax.swing.GroupLayout(jPanelProposeSubject);
+        jPanelProposeSubject.setLayout(jPanelProposeSubjectLayout);
+        jPanelProposeSubjectLayout.setHorizontalGroup(
+            jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProposeSubjectLayout.createSequentialGroup()
+                .addGroup(jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelProposeSubjectLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(119, 119, 119)
+                        .addGroup(jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                            .addComponent(jTextFieldProposedSubjectDescription)))
+                    .addGroup(jPanelProposeSubjectLayout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jLabel7)))
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProposeSubjectLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonProposeSubject)
+                .addGap(60, 60, 60))
+        );
+        jPanelProposeSubjectLayout.setVerticalGroup(
+            jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProposeSubjectLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(jPanelProposeSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(jButtonProposeSubject)
+                .addGap(19, 19, 19))
         );
 
         jMenuRound1.setText("Round 1");
@@ -534,6 +611,14 @@ public class GUI extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenuHelp);
 
+        jMenuProposeSubject.setText("Propose subject");
+        jMenuProposeSubject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuProposeSubjectMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuProposeSubject);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -542,25 +627,35 @@ public class GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
+                .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(258, 258, 258)
+                    .addComponent(jPanelProposeSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(258, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(107, 107, 107)
+                    .addComponent(jPanelProposeSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(108, Short.MAX_VALUE)))
         );
 
         pack();
@@ -605,6 +700,7 @@ public class GUI extends javax.swing.JFrame {
                     jMenuRound2.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
+                    jMenuProposeSubject.setVisible(true);
                     jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
@@ -946,11 +1042,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jListPollBValueChanged
 
     private void jListPollAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseClicked
-        
+
     }//GEN-LAST:event_jListPollAMouseClicked
 
     private void jListPollBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollBMouseClicked
-        
+
     }//GEN-LAST:event_jListPollBMouseClicked
 
     private void jListPollAMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseReleased
@@ -960,7 +1056,7 @@ public class GUI extends javax.swing.JFrame {
         ArrayList selectedIndecesBNew = new ArrayList();
         int[] selected;
         boolean found;
-        
+
         for (int i = 0; i < selectedIndicesB.length; i++) {
             found = false;
             for (int j = 0; j < selectedIndicesA.length; j++) {
@@ -968,15 +1064,13 @@ public class GUI extends javax.swing.JFrame {
                     found = true;
                 }
             }
-            if(found==false)
-            {
+            if (found == false) {
                 selectedIndecesBNew.add(selectedIndicesB[i]);
             }
         }
         selected = new int[selectedIndecesBNew.size()];
         int k = 0;
-        for(Object o :  selectedIndecesBNew)
-        {
+        for (Object o : selectedIndecesBNew) {
             selected[k] = Integer.parseInt(o.toString());
             k++;
         }
@@ -990,7 +1084,7 @@ public class GUI extends javax.swing.JFrame {
         ArrayList selectedIndecesANew = new ArrayList();
         int[] selected;
         boolean found;
-        
+
         for (int i = 0; i < selectedIndicesA.length; i++) {
             found = false;
             for (int j = 0; j < selectedIndicesB.length; j++) {
@@ -998,20 +1092,38 @@ public class GUI extends javax.swing.JFrame {
                     found = true;
                 }
             }
-            if(found==false)
-            {
+            if (found == false) {
                 selectedIndecesANew.add(selectedIndicesA[i]);
             }
         }
         selected = new int[selectedIndecesANew.size()];
         int k = 0;
-        for(Object o :  selectedIndecesANew)
-        {
+        for (Object o : selectedIndecesANew) {
             selected[k] = Integer.parseInt(o.toString());
             k++;
         }
         jListPollA.setSelectedIndices(selected);
     }//GEN-LAST:event_jListPollBMouseReleased
+
+    private void jTextFieldProposedSubjectDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProposedSubjectDescriptionActionPerformed
+
+    }//GEN-LAST:event_jTextFieldProposedSubjectDescriptionActionPerformed
+
+    private void jButtonProposeSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectActionPerformed
+        ProposedSubject p = new ProposedSubject(jTextFieldProposedSubjectName.getText().toString(), jTextFieldProposedSubjectDescription.getText().toString(), true, null);
+        control.addProposedElectiveSubject(p);
+        jTextFieldProposedSubjectName.setText("");
+        jTextFieldProposedSubjectDescription.setText("");
+    }//GEN-LAST:event_jButtonProposeSubjectActionPerformed
+
+    private void jMenuProposeSubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuProposeSubjectMouseClicked
+        jPanelProposeSubject.setVisible(true);
+        jPanelMain.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelHelp.setVisible(false);
+        jPanelLogin.setVisible(false);
+        jPanelPoll.setVisible(false);
+    }//GEN-LAST:event_jMenuProposeSubjectMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1053,6 +1165,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBackRound1;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonProposeSubject;
     private javax.swing.JButton jButtonSelectSubjectsToVote;
     private javax.swing.JButton jButtonSubmit;
     private javax.swing.JButton jButtonSubmitRound1;
@@ -1063,7 +1176,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelA;
     private javax.swing.JLabel jLabelB;
     private javax.swing.JLabel jLabelError;
@@ -1081,12 +1197,14 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuLogout;
+    private javax.swing.JMenu jMenuProposeSubject;
     private javax.swing.JMenu jMenuRound1;
     private javax.swing.JMenu jMenuRound2;
     private javax.swing.JPanel jPanelHelp;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelPoll;
+    private javax.swing.JPanel jPanelProposeSubject;
     private javax.swing.JPanel jPanelRound1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1094,6 +1212,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableSubjects;
     private javax.swing.JPasswordField jTextFieldPassword;
+    private javax.swing.JTextField jTextFieldProposedSubjectDescription;
+    private javax.swing.JTextField jTextFieldProposedSubjectName;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
 }
