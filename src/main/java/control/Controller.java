@@ -53,7 +53,11 @@ public class Controller implements ControllerInterface
 //        where we can add the received password as an extra property, so it will return the object only if it matches.
         if (userName.equals("1") && password.equals("1"))
         {
-            loggedInUser = new User("1", "1", "Peter Lorensen", "pelo", new UserType("teacher"));
+            loggedInUser = new User("1", "1", "Peter Lorensen", "pelo", new UserType("Teacher"));
+        }
+        else if(userName.equals("2") && password.equals("2"))
+        {
+            loggedInUser = new User("2", "2", "Caroline", "caro", new UserType("Head"));
         }
         if (loggedInUser != null)
         {
