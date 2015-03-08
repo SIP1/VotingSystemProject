@@ -53,7 +53,11 @@ public class Controller implements ControllerInterface
 //        where we can add the received password as an extra property, so it will return the object only if it matches.
         if (userName.equals("1") && password.equals("1"))
         {
-            loggedInUser = new User("1", "1", "Peter Lorensen", "pelo", new UserType("teacher"));
+            loggedInUser = new User("1", "1", "Peter Lorensen", "pelo", new UserType("Teacher"));
+        }
+        else if(userName.equals("2") && password.equals("2"))
+        {
+            loggedInUser = new User("2", "2", "Caroline", "caro", new UserType("Head"));
         }
         if (loggedInUser != null)
         {
@@ -116,12 +120,19 @@ public class Controller implements ControllerInterface
         proposedSubjects = new ArrayList<ProposedSubject>();
         proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(101);
+        ArrayList<User> teachers = new ArrayList<>();
+        teachers.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", new UserType("Teacher")));
+        teachers.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", new UserType("Teacher")));
+        proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachers);
         proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, "B"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(102);
         proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, "B"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(103);
         proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(104);
+        teachers = new ArrayList<>();
+        teachers.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", new UserType("Teacher")));
+        proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachers);
         proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
 
