@@ -130,6 +130,9 @@ public class DbMock {
         users.add(new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student")));
         users.add(new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student")));
         
+        //make head of program
+        users.add(new User("caroline", "caroline", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
+        
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();
         proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
