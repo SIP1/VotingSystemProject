@@ -126,9 +126,9 @@ public class DbMock {
         
         //populate student
         users.add(new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student")));
-        users.add(new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student")));
-        users.add(new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student")));
-        users.add(new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student")));
+//        users.add(new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student")));
+//        users.add(new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student")));
+//        users.add(new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student")));
         
         //make head of program
         users.add(new User("caroline", "caroline", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
@@ -157,5 +157,6 @@ public class DbMock {
         votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(102), 1, 2));
         votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(103), 1, 1));
         votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(104), 1, 1));
+        getUserByUsername("boyko").setVotes(votes);
     }
 }
