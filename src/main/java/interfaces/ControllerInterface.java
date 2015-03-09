@@ -20,6 +20,10 @@ public interface ControllerInterface {
     
     User getUser();
     
+    List<User> getUsersByUserTpe(UserType ut);
+    
+    List<User> getAllUsers();
+    
     //UserTypes
     String addUserType(String name);
     
