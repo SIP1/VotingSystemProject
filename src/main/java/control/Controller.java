@@ -341,6 +341,7 @@ public class Controller implements ControllerInterface
             toAdd.add(allTeachers.get(selectedIndices[i]));
         }
         ps.setUsers(toAdd);
+        db.addProposedSubject(ps);
         return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
     }
 }
