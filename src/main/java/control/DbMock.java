@@ -112,6 +112,11 @@ public class DbMock {
         }
     }
     
+    public void addProposedSubject(ProposedSubject ps)
+    {
+        proposedSubjects.add(ps);
+    }
+    
     private void populate()
     {
         //populate usertypes
