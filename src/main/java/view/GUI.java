@@ -428,7 +428,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanelHelpLayout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel5)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonBack)
@@ -441,7 +441,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(jButtonBack)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         jPanelPoll.setBackground(new java.awt.Color(255, 255, 255));
@@ -641,7 +641,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(jLabel7)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddProposedSubjectLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButtonProposeSubject)
@@ -662,7 +662,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(79, 79, 79)
                 .addComponent(jButtonProposeSubject)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         jMenuProposeSubject.setText("Propose subject");
