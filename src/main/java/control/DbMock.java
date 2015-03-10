@@ -7,26 +7,28 @@ import JPA2.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbMock {
+public class DbMock
+{
 
     private List<ProposedSubject> proposedSubjects;
     private List<User> users;
     private List<UserType> userTypes;
     private List<Vote> votes;
 
-    public DbMock() {
+    public DbMock()
+    {
         proposedSubjects = new ArrayList();
         users = new ArrayList();
         userTypes = new ArrayList();
         votes = new ArrayList();
         populate();
     }
-    
+
     private static DbMock instance = null;
 
     public static DbMock getInstance()
     {
-        
+
         if (instance == null)
         {
             instance = new DbMock();
@@ -34,64 +36,71 @@ public class DbMock {
         return instance;
     }
 
-    public List<ProposedSubject> getProposedSubjects() {
+    public List<ProposedSubject> getProposedSubjects()
+    {
         return proposedSubjects;
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers()
+    {
         return users;
     }
 
-    public List<UserType> getUserTypes() {
+    public List<UserType> getUserTypes()
+    {
         return userTypes;
     }
 
-    public List<Vote> getVotes() {
+    public List<Vote> getVotes()
+    {
         return votes;
     }
-    
-    public User getUserByUsername(String username){
-        for(User user : users)
+
+    public User getUserByUsername(String username)
+    {
+        for (User user : users)
         {
-            if(user.getUsername().equals(username) )
+            if (user.getUsername().equals(username))
             {
                 return user;
             }
         }
         return null;
     }
-    
+
     public UserType getUserTypeByName(String type)
     {
-        for(UserType ut : userTypes)
+        for (UserType ut : userTypes)
         {
-            if(ut.getName().endsWith(type))
+            if (ut.getName().endsWith(type))
             {
                 return ut;
             }
         }
         return null;
     }
-    
+
     public ProposedSubject getProposedSubjectById(int id)
     {
-        for(ProposedSubject ps : proposedSubjects)
+        for (ProposedSubject ps : proposedSubjects)
         {
-            if(ps.getId() == id)
+            if (ps.getId() == id)
             {
                 return ps;
             }
         }
         return null;
     }
-    
-    public List<User> getUsersByUserTpe(UserType ut) {
-        switch (ut.getName()) {
+
+    public List<User> getUsersByUserTpe(UserType ut)
+    {
+        switch (ut.getName())
+        {
             case "Teacher":
                 List<User> teachers = new ArrayList<>();
-                for(User user : users)
+                for (User user : users)
                 {
-                    if(user.getUserType().getName().equals("Teacher"))
+                    if (user.getUserType().getName().equals("Teacher"))
                     {
                         teachers.add(user);
                     }
@@ -99,9 +108,9 @@ public class DbMock {
                 return teachers;
             case "Student":
                 List<User> students = new ArrayList<>();
-                for(User user : users)
+                for (User user : users)
                 {
-                    if(user.getUserType().getName().equals("Student"))
+                    if (user.getUserType().getName().equals("Student"))
                     {
                         students.add(user);
                     }
@@ -111,31 +120,31 @@ public class DbMock {
                 return null;
         }
     }
-    
+
     public void addProposedSubject(ProposedSubject ps)
     {
         proposedSubjects.add(ps);
     }
-    
+
     private void populate()
     {
         //populate usertypes
         userTypes.add(new UserType("Teacher"));
         userTypes.add(new UserType("Student"));
         userTypes.add(new UserType("Head"));
-        
+
         //populate teachers
         users.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", getUserTypeByName("Teacher")));
-        
+
         //populate student
         User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
         User smara = new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student"));
         User mada = new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student"));
         User cristi = new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student"));
-        User peter = new User("peter","peter","Peter", "peter@mail.peter", getUserTypeByName("Student"));
-        User marek = new User("marek","marek","Marek", "marek@mail.peter", getUserTypeByName("Student"));
+        User peter = new User("peter", "peter", "Peter", "peter@mail.peter", getUserTypeByName("Student"));
+        User marek = new User("marek", "marek", "Marek", "marek@mail.peter", getUserTypeByName("Student"));
         boyko.setSatisfaction(50);
         smara.setSatisfaction(25);
         cristi.setSatisfaction(50);
@@ -148,10 +157,10 @@ public class DbMock {
         users.add(cristi);
         users.add(peter);
         users.add(marek);
-        
+
         //make head of program
         users.add(new User("caroline", "caroline", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
-        
+
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();
         proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
@@ -170,12 +179,54 @@ public class DbMock {
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
         proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
-        
+
         //populate votes
-        votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(101), 1, 2));
-        votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(102), 1, 2));
-        votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(103), 1, 1));
-        votes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(104), 1, 1));
-        getUserByUsername("boyko").setVotes(votes);
+        List<Vote> boykoVotes = new ArrayList();
+        boykoVotes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(101), 1, 2));
+        boykoVotes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(102), 1, 2));
+        boykoVotes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(103), 1, 1));
+        boykoVotes.add(new Vote(getUserByUsername("boyko"), getProposedSubjectById(104), 1, 1));
+        votes.addAll(boykoVotes);
+        getUserByUsername("boyko").setVotes(boykoVotes);
+
+        List<Vote> smaraVotes = new ArrayList();
+        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(101), 1, 2));
+        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(102), 1, 1));
+        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(103), 1, 1));
+        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(105), 1, 2));
+        votes.addAll(smaraVotes);
+        getUserByUsername("smara").setVotes(smaraVotes);
+
+        List<Vote> madaVotes = new ArrayList();
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(101), 1, 1));
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(104), 1, 2));
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(103), 1, 1));
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(105), 1, 2));
+        votes.addAll(madaVotes);
+        getUserByUsername("mada").setVotes(madaVotes);
+
+        List<Vote> cristiVotes = new ArrayList();
+        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(101), 1, 1));
+        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(102), 1, 2));
+        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(104), 1, 2));
+        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(105), 1, 1));
+        votes.addAll(cristiVotes);
+        getUserByUsername("cristi").setVotes(cristiVotes);
+
+        List<Vote> peterVotes = new ArrayList();
+        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(104), 1, 2));
+        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(102), 1, 1));
+        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(103), 1, 1));
+        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(105), 1, 2));
+        votes.addAll(peterVotes);
+        getUserByUsername("peter").setVotes(peterVotes);
+
+        List<Vote> marekVotes = new ArrayList();
+        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(101), 1, 2));
+        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(102), 1, 1));
+        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(103), 1, 2));
+        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(104), 1, 1));
+        votes.addAll(marekVotes);
+        getUserByUsername("marek").setVotes(marekVotes);
     }
 }
