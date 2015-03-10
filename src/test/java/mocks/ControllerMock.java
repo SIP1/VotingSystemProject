@@ -4,14 +4,17 @@ import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
 import JPA2.Vote;
+import edu.emory.mathcs.backport.java.util.Collections;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import org.apache.velocity.runtime.directive.Foreach;
+import org.hibernate.cfg.CollectionSecondPass;
 import utilities.AcceptanceProtocol;
 
 public class ControllerMock implements ControllerInterface {
-    //getVote.clear won't work... neither for any other delete... TODO
 
     public User user = new User();
     public ArrayList<ProposedSubject> proposedSubjects = new ArrayList();
@@ -22,10 +25,6 @@ public class ControllerMock implements ControllerInterface {
     public static void main(String[] args) {
         ControllerMock controllerMock = new ControllerMock();
     }
-//
-//    public ControllerMock() {
-//        testingBase();
-//    }
 
     public ControllerMock() {
         //create user types
@@ -37,6 +36,7 @@ public class ControllerMock implements ControllerInterface {
         users.add(new User("TestUser", "12345", "boyko", "email@email.mail", userTypes.get(0)));
         users.add(new User("TestUser2", "test", "Testing user 2", "test@test.com", userTypes.get(1)));
         users.add(new User("TestUser3", "test", "Admin", "admin@test.com", userTypes.get(2)));
+        users.add(new User("TestUser4", "test", "Lala", "skat@test.com", userTypes.get(0)));
 
         //create proposed subjects
         proposedSubjects.add(new ProposedSubject("Test subject 1", "It was only just a test", true, null));
@@ -46,6 +46,10 @@ public class ControllerMock implements ControllerInterface {
 
         //assing the current user which will be the student
         user = users.get(0);
+        
+        //satisfaction
+        user.setSatisfaction(0);
+        users.get(3).setSatisfaction(25);
 
         //create votes
         votes.add(new Vote(user, proposedSubjects.get(0), 1, 2));
@@ -201,158 +205,84 @@ public class ControllerMock implements ControllerInterface {
         return AcceptanceProtocol.VOTE_DELETION_FAIL;
     }
 
-    /*
-     Those nested classes were used while the database was not created
-     we decided to comment them out and leave them as part of our project.
-     */
-//******************************************************************************    
-//    private Integer pesIDCreator = 0;
-//    public class ProposedElectiveSubject
-//    {
-//
-//        private Integer id;
-//        private String name, description, poolOptions;
-//        private Boolean isAlive;
-//
-//        public ProposedElectiveSubject(String name, String description, Boolean isAlive)
-//        {
-//            this.id = pesIDCreator++;
-//            this.name = name;
-//            this.description = description;
-//            this.isAlive = isAlive;
-//            this.poolOptions = "";
-//        }
-//
-//        public Integer getId()
-//        {
-//            return id;
-//        }
-//
-//    }
-//
-//******************************************************************************
-//    private Integer votesIDCreator = 0;
-//    public class Vote
-//    {
-//
-//        private Integer id, points, proposedElectiveSubjectsID, roundNo;
-//        private String userNameStudent;
-//
-//        public Vote(String userNameStudent, Integer points, Integer proposedElectiveSubjectsID, Integer roundNo)
-//        {
-//            this.id = votesIDCreator++;
-//            this.points = points;
-//            this.proposedElectiveSubjectsID = proposedElectiveSubjectsID;
-//            this.roundNo = roundNo;
-//            this.userNameStudent = userNameStudent;
-//        }
-//
-//        public void setId(Integer id)
-//        {
-//            this.id = id;
-//        }
-//
-//        public Integer getId()
-//        {
-//            return id;
-//        }
-//
-//        public Integer getRoundNo()
-//        {
-//            return roundNo;
-//        }
-//
-//        public Integer getProposedElectiveSubjectsID()
-//        {
-//            return proposedElectiveSubjectsID;
-//        }
-//    }
-//******************************************************************************
-//    public class User
-//    {
-//
-//        private Integer useTypeID;
-//        private String userName, name, password, email;
-//        private ArrayList<Vote> userVotes = new ArrayList();
-//
-//        public User(Integer useTypeID, String userName, String name, String password, String email)
-//        {
-//            this.useTypeID = useTypeID;
-//            this.userName = userName;
-//            this.name = name;
-//            this.password = password;
-//            this.email = email;
-//        }
-//
-//        public String getUserName()
-//        {
-//            return userName;
-//        }
-//
-//        public String getPassword()
-//        {
-//            return password;
-//        }
-//
-//        public void addVote(Vote v)
-//        {
-//            userVotes.add(v);
-//        }
-//
-//        public void addVotes(ArrayList<Vote> aLv)
-//        {
-//            userVotes.addAll(aLv);
-//        }
-//
-//        public void setEmail(String email)
-//        {
-//            this.email = email;
-//        }
-//
-//        public void setName(String name)
-//        {
-//            this.name = name;
-//        }
-//
-//        public void setPassword(String password)
-//        {
-//            this.password = password;
-//        }
-//
-//        public void setUseTypeID(Integer useTypeID)
-//        {
-//            this.useTypeID = useTypeID;
-//        }
-//
-//        public void setUserName(String userName)
-//        {
-//            this.userName = userName;
-//        }
-//
-//        public void setUserVotes(ArrayList<Vote> userVotes)
-//        {
-//            this.userVotes = userVotes;
-//        }
-//
-//        public String getEmail()
-//        {
-//            return email;
-//        }
-//
-//        public String getName()
-//        {
-//            return name;
-//        }
-//
-//        public Integer getUseTypeID()
-//        {
-//            return useTypeID;
-//        }
-//
-//        public ArrayList<Vote> getUserVotes()
-//        {
-//            return userVotes;
-//        }
-//    }
-//******************************************************************************
+    @Override
+    public List<User> getUsersByUserType(UserType ut) {
+        List<User> filteredUsers = new ArrayList<>();
+        for (User u : users) {
+            if (u.getUserType() == ut) {
+                filteredUsers.add(u);
+            }
+        }
+
+        return filteredUsers;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return users;
+    }
+
+    @Override
+    public void setSatisfactionForStudent(int[] a, int[] b, User student) {
+        if (a[0] == 1) {
+            student.setSatisfaction(50);
+        }
+        if (b[0] == 2) {
+            student.setSatisfaction(student.getSatisfaction() + 25);
+        }
+    }
+
+    @Override
+    public int getOverallSatisfaction(int[] a, int[] b) {
+        int overall = 0;
+        if (a[0] == 1) {
+            overall = 25;
+        }
+        if (b[0] == 2) {
+            overall = overall + 25;
+        }
+        return overall;
+    }
+
+    @Override
+    public List<User> getTop5UnsatissfiedStudents() {
+        List<User> unsatisfied = new ArrayList<>();
+        for (User u : users) {
+            if(u.getUserType() == userTypes.get(0))
+            {
+               unsatisfied.add(u);
+            }
+        }
+        
+        Collections.sort(unsatisfied, new Comparator<User>() {
+
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getSatisfaction() - o2.getSatisfaction();
+            }
+        });
+        return unsatisfied;
+    }
+
+    @Override
+    public List<User> getAllTeachers() {
+        List<User> teachers = new ArrayList<>();
+        for (User user : users) {
+            if (user.getUserType().getName().equals("Teacher")) {
+                teachers.add(user);
+            }
+        }
+        return teachers;
+    }
+
+    @Override
+    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices) {
+        List<User> teachers = getAllTeachers();
+        List<User> subjectTeachers = new ArrayList<>();
+        for (int i = 0; i < selectedIndices.length; i++) {
+            subjectTeachers.add(teachers.get(selectedIndices[i]));
+        }
+        ps.setUsers(subjectTeachers);
+        return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
+    }
 }
