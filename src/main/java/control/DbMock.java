@@ -130,10 +130,24 @@ public class DbMock {
         users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", getUserTypeByName("Teacher")));
         
         //populate student
-        users.add(new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student")));
-//        users.add(new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student")));
-//        users.add(new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student")));
-//        users.add(new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student")));
+        User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
+        User smara = new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student"));
+        User mada = new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student"));
+        User cristi = new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student"));
+        User peter = new User("peter","peter","Peter", "peter@mail.peter", getUserTypeByName("Student"));
+        User marek = new User("marek","marek","Marek", "marek@mail.peter", getUserTypeByName("Student"));
+        boyko.setSatisfaction(50);
+        smara.setSatisfaction(25);
+        cristi.setSatisfaction(50);
+        mada.setSatisfaction(0);
+        peter.setSatisfaction(75);
+        marek.setSatisfaction(100);
+        users.add(boyko);
+        users.add(smara);
+        users.add(mada);
+        users.add(cristi);
+        users.add(peter);
+        users.add(marek);
         
         //make head of program
         users.add(new User("caroline", "caroline", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
