@@ -251,7 +251,7 @@ public class Controller implements ControllerInterface
     public void setSatisfactionForStudent(int[] a, int[] b, User student)
     {
         proposedSubjects = db.getProposedSubjects();
-        List<Vote> currentVotes = student.getVotesByRound(1);
+        List<Vote> currentVotes = student.getVotesByRound(1);   
         List<ProposedSubject> pollA = new ArrayList<>();
         List<ProposedSubject> pollB = new ArrayList<>();
         for (int i = 0; i < a.length; i++)
@@ -320,16 +320,27 @@ public class Controller implements ControllerInterface
 
     @Override
     public int getOverallSatisfaction(int[] a, int[] b)
-    {
+    {   
         users = db.getUsers();
         int totalSatisfaction = 0;
         List<User> allStudents = getUsersByUserType(db.getUserTypeByName("Student"));
-        for (User student : allStudents)
+        List<User> allUsersWhoVotedInParticularRound = getAllStudentsWhoHadVotedForParticularRound(allStudents);
+        for (User student : allUsersWhoVotedInParticularRound)
         {
             setSatisfactionForStudent(a, b, student);
             totalSatisfaction += student.getSatisfaction();
         }
         return totalSatisfaction / allStudents.size();
+    }
+    
+    private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents){
+        List<User> allStudentsWhoHadVotedForParticularRound = new ArrayList();
+        for(User x : allStudents){
+            if(!x.getVotesByRound(1).isEmpty() && x.getVotesByRound(1).size()==4){
+                allStudentsWhoHadVotedForParticularRound.add(x);
+            }
+        }
+        return allStudentsWhoHadVotedForParticularRound;
     }
 
     @Override
