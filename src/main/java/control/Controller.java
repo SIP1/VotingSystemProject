@@ -397,4 +397,22 @@ public class Controller implements ControllerInterface
         db.addProposedSubject(ps);
         return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
     }
+
+    @Override
+    public String addSubjectsToPolls(int[] a, int[] b)
+    {
+        List<ProposedSubject> pollA = new ArrayList<>();
+        List<ProposedSubject> pollB = new ArrayList<>();
+        for (int i = 0; i < a.length; i++)
+        {
+            pollA.add(proposedSubjects.get(a[i]));
+        }
+        for (int i = 0; i < b.length; i++)
+        {
+            pollB.add(proposedSubjects.get(b[i]));
+        }
+        //db.fillPolls(pollA, pollB);
+        return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS + "\n" + db.fillPolls(pollA, pollB);
+    }
+    
 }

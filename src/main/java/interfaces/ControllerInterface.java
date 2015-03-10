@@ -60,4 +60,6 @@ public interface ControllerInterface {
     List<User> getAllTeachers();
     
     String addProposedSubject(ProposedSubject ps, int[] selectedIndices);
+    
+    String addSubjectsToPolls(int[] a, int[] b);
 }
