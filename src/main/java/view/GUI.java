@@ -455,7 +455,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanelHelpLayout.createSequentialGroup()
                 .addGap(133, 133, 133)
                 .addComponent(jLabel5)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonBack)
@@ -468,7 +468,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(jButtonBack)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jPanelPoll.setBackground(new java.awt.Color(255, 255, 255));
@@ -747,7 +747,7 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabelTeachers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanelAddProposedSubjectLayout.setVerticalGroup(
             jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,7 +767,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
                         .addComponent(jLabelTeachers)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonProposeSubject)
                 .addGap(34, 34, 34))
@@ -1446,7 +1446,7 @@ public class GUI extends javax.swing.JFrame {
     }
     
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, control.addSubjectsToPolls(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
     }//GEN-LAST:event_jButtonSubmitActionPerformed
     private void setupJListSubjectsToChooseFromForRound1() {
         DefaultListModel model = new DefaultListModel();

@@ -14,6 +14,7 @@ public class DbMock
     private List<User> users;
     private List<UserType> userTypes;
     private List<Vote> votes;
+    private List<ProposedSubject> pollA, pollB;
 
     public DbMock()
     {
@@ -119,6 +120,13 @@ public class DbMock
             default:
                 return null;
         }
+    }
+    
+    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b)
+    {
+        pollA = a;
+        pollB = b;
+        return "Size of poll A: "+pollA.size()+", size of poll B: "+pollB.size();
     }
 
     public void addProposedSubject(ProposedSubject ps)
