@@ -20,6 +20,10 @@ public interface ControllerInterface {
     
     User getUser();
     
+    List<User> getUsersByUserType(UserType ut);
+    
+    List<User> getAllUsers();
+    
     //UserTypes
     String addUserType(String name);
     
@@ -46,4 +50,14 @@ public interface ControllerInterface {
     String deleteAllVotesOfParticularUser();
 
     Vote updateParticularVoteOfParticularUser(Vote nv);
+    
+    void setSatisfactionForStudent(int a[], int b[], User student);
+    
+    int getOverallSatisfaction(int[] a, int[] b);
+    
+    List<User> getTop5UnsatissfiedStudents();
+    
+    List<User> getAllTeachers();
+    
+    String addProposedSubject(ProposedSubject ps, int[] selectedIndices);
 }

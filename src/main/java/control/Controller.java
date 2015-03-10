@@ -6,8 +6,12 @@ import JPA2.UserType;
 import JPA2.Vote;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,11 +26,33 @@ public class Controller implements ControllerInterface
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
     private User loggedInUser;
-    private List<ProposedSubject> proposedSubjects = new ArrayList<>();
+    private List<ProposedSubject> proposedSubjects;
+    private ArrayList<User> teachers;
+    private ArrayList<User> students;
+    private DbMock db;
+    private List<User> users;
 
     public static void main(String[] args)
     {
+        //new Controller().base();
+    }
 
+    private void base()
+    {
+        List<User> topFiveUnsatissfiedStudents = getTop5UnsatissfiedStudents();
+        for (int i = 0; i < topFiveUnsatissfiedStudents.size(); i++)
+        {
+            System.out.println("i:" + i + ">>" + topFiveUnsatissfiedStudents.get(i).getName());
+        }
+    }
+
+    public Controller()
+    {
+        proposedSubjects = new ArrayList<>();
+        teachers = new ArrayList<>();
+        students = new ArrayList<>();
+        users = new ArrayList<>();
+        db = DbMock.getInstance();
     }
 
     private static Controller instance = null;
@@ -49,19 +75,16 @@ public class Controller implements ControllerInterface
     public String authenticateUser(String userName, String password)
     {
         loggedInUser = null;
-//        should be loggedInUser = em.find(Class<T> entityClass, Object primaryKey, Map<String,Object> properties),
-//        where we can add the received password as an extra property, so it will return the object only if it matches.
-        if (userName.equals("1") && password.equals("1"))
+        //        should be loggedInUser = em.find(Class<T> entityClass, Object primaryKey, Map<String,Object> properties),
+        //        where we can add the received password as an extra property, so it will return the object only if it matches.
+        users = getAllUsers();
+        for (User x : users)
         {
-            loggedInUser = new User("1", "1", "Peter Lorensen", "pelo", new UserType("Teacher"));
-        }
-        else if(userName.equals("2") && password.equals("2"))
-        {
-            loggedInUser = new User("2", "2", "Caroline", "caro", new UserType("Head"));
-        }
-        if (loggedInUser != null)
-        {
-            return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
+            if (x.getUsername().equals(userName) && x.getPassword().equals(password))
+            {
+                loggedInUser = x;
+                return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
+            }
         }
         return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
     }
@@ -117,26 +140,7 @@ public class Controller implements ControllerInterface
     @Override
     public List<ProposedSubject> getAllAvailableProposedElectiveSubjects()
     {
-        proposedSubjects = new ArrayList<ProposedSubject>();
-        proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
-        proposedSubjects.get(proposedSubjects.size() - 1).setId(101);
-        ArrayList<User> teachers = new ArrayList<>();
-        teachers.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", new UserType("Teacher")));
-        teachers.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", new UserType("Teacher")));
-        proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachers);
-        proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, "B"));
-        proposedSubjects.get(proposedSubjects.size() - 1).setId(102);
-        proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, "B"));
-        proposedSubjects.get(proposedSubjects.size() - 1).setId(103);
-        proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, "A"));
-        proposedSubjects.get(proposedSubjects.size() - 1).setId(104);
-        teachers = new ArrayList<>();
-        teachers.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", new UserType("Teacher")));
-        proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachers);
-        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
-        proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
-
-        return proposedSubjects;
+        return db.getProposedSubjects();
     }
 
     @Override
@@ -231,4 +235,155 @@ public class Controller implements ControllerInterface
     }
 
     //getUserByUsername
+    @Override
+    public List<User> getUsersByUserType(UserType ut)
+    {
+        return db.getUsersByUserTpe(ut);
+    }
+
+    @Override
+    public List<User> getAllUsers()
+    {
+        return db.getUsers();
+    }
+
+    @Override
+    public void setSatisfactionForStudent(int[] a, int[] b, User student)
+    {
+        proposedSubjects = db.getProposedSubjects();
+        List<Vote> currentVotes = student.getVotesByRound(1);
+        List<ProposedSubject> pollA = new ArrayList<>();
+        List<ProposedSubject> pollB = new ArrayList<>();
+        for (int i = 0; i < a.length; i++)
+        {
+            pollA.add(proposedSubjects.get(a[i]));
+        }
+        for (int i = 0; i < b.length; i++)
+        {
+            pollB.add(proposedSubjects.get(b[i]));
+        }
+        int satisfactionA = 0;
+        int satisfactionB = 0;
+        boolean found;
+        for (Vote vote : currentVotes)
+        {
+            found = false;
+            for (ProposedSubject ps : pollA)
+            {
+                if (vote.getProposedSubject().equals(ps))
+                {
+                    found = true;
+                    // vote is a first priority
+                    if (vote.getPoints() == 2)
+                    {
+                        satisfactionA = 50;
+                        break;
+                    }
+                    //vote is a second priority
+                    else
+                    {
+                        if (satisfactionA < 50)
+                        {
+                            satisfactionA = 25;
+                        }
+
+                    }
+                }
+            }
+            if (!found)
+            {
+                for (ProposedSubject ps : pollB)
+                {
+                    if (vote.getProposedSubject().equals(ps))
+                    {
+                        if (vote.getPoints() == 2)
+                        {
+                            satisfactionB = 50;
+                            break;
+                        }
+                        //vote is a second priority
+                        else
+                        {
+                            if (satisfactionB < 50)
+                            {
+                                satisfactionB = 25;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(satisfactionA + satisfactionB);
+        student.setSatisfaction(satisfactionA + satisfactionB);
+
+    }
+
+    @Override
+    public int getOverallSatisfaction(int[] a, int[] b)
+    {
+        users = db.getUsers();
+        int totalSatisfaction = 0;
+        List<User> allStudents = getUsersByUserType(db.getUserTypeByName("Student"));
+        for (User student : allStudents)
+        {
+            setSatisfactionForStudent(a, b, student);
+            totalSatisfaction += student.getSatisfaction();
+        }
+        return totalSatisfaction / allStudents.size();
+    }
+
+    @Override
+    public List<User> getTop5UnsatissfiedStudents()
+    {
+        users = db.getUsers();
+        List<User> unsatisfied = new ArrayList();
+
+        
+        for (User x : users)
+        {
+            if ("Student".equals(x.getUserType().getName()))
+            {
+                unsatisfied.add(x);
+            }
+        }
+
+        Collections.sort(unsatisfied, new Comparator<User>()
+                 {
+
+                     public int compare(User o1, User o2)
+                     {
+                         return (Integer) o1.getSatisfaction() - (Integer) o2.getSatisfaction();
+                     }
+        });
+
+        if(unsatisfied.size()<5){
+            return unsatisfied;
+        }
+        List<User> topFiveUnsatisfied = new ArrayList();
+        for (int i = 0; i < 5; i++)
+        {
+            topFiveUnsatisfied.add(unsatisfied.get(i));
+        }
+        return topFiveUnsatisfied;
+    }
+
+    @Override
+    public List<User> getAllTeachers()
+    {
+        return db.getUsersByUserTpe(db.getUserTypeByName("Teacher"));
+    }
+
+    @Override
+    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices)
+    {
+        List<User> allTeachers = getAllTeachers();
+        List<User> toAdd = new ArrayList<>();
+        for (int i = 0; i < selectedIndices.length; i++)
+        {
+            toAdd.add(allTeachers.get(selectedIndices[i]));
+        }
+        ps.setUsers(toAdd);
+        db.addProposedSubject(ps);
+        return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
+    }
 }

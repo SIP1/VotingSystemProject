@@ -1,25 +1,19 @@
 package view;
 
 import JPA2.ProposedSubject;
+import JPA2.User;
+import JPA2.UserType;
 import control.Controller;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import utilities.AcceptanceProtocol;
 
 /**
@@ -35,18 +29,22 @@ public class GUI extends javax.swing.JFrame {
 
     public GUI() {
         initComponents();
-        jPanelMain.setVisible(false);
         jMenuRound1.setVisible(false);
         jMenuRound2.setVisible(false);
-        jPanelRound1.setVisible(false);
-        jPanelHelp.setVisible(false);
+        jMenuProposeSubject.setVisible(false);
         jMenuLogout.setVisible(false);
+        jPanelAddProposedSubject.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelPoll.setVisible(false);
+        jPanelHelp.setVisible(false);
+        jPanelChooseProposedSubjectsForRound1.setVisible(false);
+        jPanelMain.setVisible(false);
         control = new Controller();
         roundNumber = 0;
         subjectsTableColumnNames = new String[]{
             "Name", "Poll", "Teachers", "Description"
         };
-        jProgressBar1.setValue(75);
+        jProgressBar1.setValue(0);
     }
 
     /**
@@ -59,6 +57,8 @@ public class GUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox5 = new javax.swing.JComboBox();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanelLogin = new javax.swing.JPanel();
         jTextFieldUsername = new javax.swing.JTextField();
         jTextFieldPassword = new javax.swing.JPasswordField();
@@ -99,7 +99,25 @@ public class GUI extends javax.swing.JFrame {
         jLabelB = new javax.swing.JLabel();
         jButtonSubmit = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jPanelChooseProposedSubjectsForRound1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListAllProposedSubjects = new javax.swing.JList();
+        jButtonSubmitProposedSubjectsForRound1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabelFeedbackChooseProposedSubjectsForRound1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanelAddProposedSubject = new javax.swing.JPanel();
+        jLabelName = new javax.swing.JLabel();
+        jLabelDescription = new javax.swing.JLabel();
+        jTextFieldProposedSubjectName = new javax.swing.JTextField();
+        jTextFieldProposedSubjectDescription = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonProposeSubject = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListProposedTeachers = new javax.swing.JList();
+        jLabelTeachers = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuProposeSubject = new javax.swing.JMenu();
         jMenuRound1 = new javax.swing.JMenu();
         jMenuRound2 = new javax.swing.JMenu();
         jMenuLogout = new javax.swing.JMenu();
@@ -109,9 +127,14 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(517, 377));
+        setMinimumSize(new java.awt.Dimension(517, 377));
+        setPreferredSize(new java.awt.Dimension(517, 377));
         setResizable(false);
 
         jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelLogin.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelLogin.setPreferredSize(new java.awt.Dimension(517, 355));
 
         jTextFieldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -154,11 +177,11 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldUsername)
                             .addComponent(jTextFieldPassword)))
+                    .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelLoginLayout.createSequentialGroup()
                         .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                        .addComponent(jButtonLogin))
-                    .addComponent(jLabelLoginError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLogin)))
                 .addGap(112, 112, 112))
         );
         jPanelLoginLayout.setVerticalGroup(
@@ -172,17 +195,18 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonLogin))
+                .addGap(18, 18, 18)
                 .addComponent(jLabelLoginError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19))
+                .addGap(60, 60, 60))
         );
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMain.setPreferredSize(new java.awt.Dimension(403, 293));
+        jPanelMain.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelMain.setPreferredSize(new java.awt.Dimension(517, 355));
 
         jLabelWelcome.setText("Welcome text");
 
@@ -228,10 +252,12 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMainLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonSelectSubjectsToVote)))
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonSelectSubjectsToVote)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -240,14 +266,15 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabelWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(jButtonSelectSubjectsToVote)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelRound1.setPreferredSize(new java.awt.Dimension(403, 293));
+        jPanelRound1.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelRound1.setPreferredSize(new java.awt.Dimension(517, 355));
 
         jLabelFirstPriorityA.setText("Please choose two first priorities:");
 
@@ -330,7 +357,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(jLabelError, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabelRoundTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelRound1Layout.createSequentialGroup()
-                                .addGap(0, 183, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelPollB)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,6 +405,8 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jPanelHelp.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelHelp.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelHelp.setPreferredSize(new java.awt.Dimension(517, 355));
 
         jLabel5.setText("Here you can find some instructions");
 
@@ -392,26 +421,28 @@ public class GUI extends javax.swing.JFrame {
         jPanelHelp.setLayout(jPanelHelpLayout);
         jPanelHelpLayout.setHorizontalGroup(
             jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHelpLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jLabel5)
+                .addContainerGap(213, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonBack)
-                .addGap(33, 33, 33))
-            .addGroup(jPanelHelpLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addGap(210, 210, 210))
         );
         jPanelHelpLayout.setVerticalGroup(
             jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(74, 74, 74)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 246, Short.MAX_VALUE)
+                .addGap(79, 79, 79)
                 .addComponent(jButtonBack)
-                .addContainerGap())
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         jPanelPoll.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelPoll.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelPoll.setPreferredSize(new java.awt.Dimension(517, 355));
 
         jListPollA.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -419,11 +450,11 @@ public class GUI extends javax.swing.JFrame {
             public Object getElementAt(int i) { return strings[i]; }
         });
         jListPollA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jListPollAMouseReleased(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListPollAMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jListPollAMouseReleased(evt);
             }
         });
         jListPollA.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -458,6 +489,11 @@ public class GUI extends javax.swing.JFrame {
         jLabelB.setText("B");
 
         jButtonSubmit.setText("Submit");
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitActionPerformed(evt);
+            }
+        });
 
         jProgressBar1.setOrientation(1);
         jProgressBar1.setToolTipText("");
@@ -466,41 +502,192 @@ public class GUI extends javax.swing.JFrame {
         jPanelPoll.setLayout(jPanelPollLayout);
         jPanelPollLayout.setHorizontalGroup(
             jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPollLayout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jLabelA)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelB)
+                .addGap(218, 218, 218))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPollLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSubmit)
-                .addGap(41, 41, 41))
-            .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jLabelA)
-                .addGap(175, 175, 175)
-                .addComponent(jLabelB)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPollLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPollLayout.createSequentialGroup()
+                        .addComponent(jButtonSubmit)
+                        .addGap(47, 47, 47))))
         );
         jPanelPollLayout.setVerticalGroup(
             jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPollLayout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
+                .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelA)
+                    .addComponent(jLabelB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelA, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelB, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jButtonSubmit)
-                .addGap(16, 16, 16))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
+
+        jPanelChooseProposedSubjectsForRound1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelChooseProposedSubjectsForRound1.setMaximumSize(new java.awt.Dimension(517, 355));
+
+        jListAllProposedSubjects.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Android", "Arduino", "C#", "Game design", "3D printer", "Artificial Inteligence" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jListAllProposedSubjects);
+
+        jButtonSubmitProposedSubjectsForRound1.setText("Submit");
+        jButtonSubmitProposedSubjectsForRound1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubmitProposedSubjectsForRound1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Select proposed subjects for round 1 from the list:");
+
+        jLabelFeedbackChooseProposedSubjectsForRound1.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Choose proposed subjects or round 1");
+
+        javax.swing.GroupLayout jPanelChooseProposedSubjectsForRound1Layout = new javax.swing.GroupLayout(jPanelChooseProposedSubjectsForRound1);
+        jPanelChooseProposedSubjectsForRound1.setLayout(jPanelChooseProposedSubjectsForRound1Layout);
+        jPanelChooseProposedSubjectsForRound1Layout.setHorizontalGroup(
+            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
+                            .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                                .addGap(390, 390, 390)
+                                .addComponent(jButtonSubmitProposedSubjectsForRound1))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanelChooseProposedSubjectsForRound1Layout.setVerticalGroup(
+            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSubmitProposedSubjectsForRound1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanelAddProposedSubject.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelAddProposedSubject.setMaximumSize(new java.awt.Dimension(517, 355));
+        jPanelAddProposedSubject.setPreferredSize(new java.awt.Dimension(517, 355));
+
+        jLabelName.setText("Name");
+
+        jLabelDescription.setText("Description");
+
+        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProposedSubjectDescriptionActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Propose subject");
+
+        jButtonProposeSubject.setText("Submit");
+        jButtonProposeSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProposeSubjectActionPerformed(evt);
+            }
+        });
+
+        jListProposedTeachers.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jListProposedTeachers);
+
+        jLabelTeachers.setText("Teachers");
+
+        javax.swing.GroupLayout jPanelAddProposedSubjectLayout = new javax.swing.GroupLayout(jPanelAddProposedSubject);
+        jPanelAddProposedSubject.setLayout(jPanelAddProposedSubjectLayout);
+        jPanelAddProposedSubjectLayout.setHorizontalGroup(
+            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelDescription)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonProposeSubject, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelName)
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jTextFieldProposedSubjectName)))
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelTeachers)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(78, Short.MAX_VALUE))
+        );
+        jPanelAddProposedSubjectLayout.setVerticalGroup(
+            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(22, 22, 22)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelName)
+                    .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDescription)
+                    .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelTeachers)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonProposeSubject)
+                .addGap(34, 34, 34))
+        );
+
+        jMenuProposeSubject.setText("Propose subject");
+        jMenuProposeSubject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuProposeSubjectMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuProposeSubject);
 
         jMenuRound1.setText("Round 1");
         jMenuRound1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -540,27 +727,29 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanelLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanelAddProposedSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanelAddProposedSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 1, Short.MAX_VALUE)))
         );
 
         pack();
@@ -605,6 +794,7 @@ public class GUI extends javax.swing.JFrame {
                     jMenuRound2.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
+                    jMenuProposeSubject.setVisible(true);
                     jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
@@ -614,7 +804,7 @@ public class GUI extends javax.swing.JFrame {
                 case "Head":
                     jPanelLogin.setVisible(false);
                     jPanelMain.setVisible(true);
-                    jMenuRound1.setVisible(false); //to be changed when we implement user story 1
+                    jMenuRound1.setVisible(true); //to be changed when we implement user story 1
                     jMenuRound2.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
@@ -622,6 +812,7 @@ public class GUI extends javax.swing.JFrame {
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
                     jButtonSelectSubjectsToVote.setVisible(false);
+                    setupSubjectsTable();
                     break;
             }
 
@@ -633,23 +824,39 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jMenuRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound1MouseClicked
-        roundNumber = 1;
-        setupComboBoxItemsForRound();
-        jComboBox1.setSelectedIndex(0);
-        jComboBox2.setSelectedIndex(0);
-        jComboBox3.setSelectedIndex(0);
-        jComboBox4.setSelectedIndex(0);
-        jPanelMain.setVisible(false);
-        jPanelRound1.setVisible(true);
-        jPanelHelp.setVisible(false);
-        jLabelRoundTitle.setText("Round 1");
-        jLabelPollA.setVisible(false);
-        jLabelPollB.setVisible(false);
-        jLabelFirstPriorityA.setText("Please choose two first priorities:");
-        jLabelFirstPriorityB.setVisible(false);
-        jLabelSecondPriorityA.setText("Please choose two second priorities:");
-        jLabelSecondPriorityB.setVisible(false);
-        jLabelError.setText("");
+        switch (control.getUser().getUserType().getName()) {
+            case "Teacher":
+            case "Student":
+                roundNumber = 1;
+                setupComboBoxItemsForRound();
+                jComboBox1.setSelectedIndex(0);
+                jComboBox2.setSelectedIndex(0);
+                jComboBox3.setSelectedIndex(0);
+                jComboBox4.setSelectedIndex(0);
+                jPanelMain.setVisible(false);
+                jPanelRound1.setVisible(true);
+                jPanelHelp.setVisible(false);
+                jPanelChooseProposedSubjectsForRound1.setVisible(false);
+                jLabelRoundTitle.setText("Round 1");
+                jLabelPollA.setVisible(false);
+                jLabelPollB.setVisible(false);
+                jLabelFirstPriorityA.setText("Please choose two first priorities:");
+                jLabelFirstPriorityB.setVisible(false);
+                jLabelSecondPriorityA.setText("Please choose two second priorities:");
+                jLabelSecondPriorityB.setVisible(false);
+                jLabelError.setText("");
+                break;
+            case "Head":
+                jPanelChooseProposedSubjectsForRound1.setVisible(true);
+                jPanelAddProposedSubject.setVisible(false);
+                jPanelMain.setVisible(false);
+                jPanelRound1.setVisible(false);
+                jPanelHelp.setVisible(false);
+                jPanelLogin.setVisible(false);
+                jPanelPoll.setVisible(false);
+                setupJListSubjectsToChooseFromForRound1();
+                break;
+        }
     }//GEN-LAST:event_jMenuRound1MouseClicked
 
     private void jMenuRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound2MouseClicked
@@ -665,6 +872,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelMain.setVisible(false);
                 jPanelRound1.setVisible(true);
                 jPanelHelp.setVisible(false);
+                jPanelChooseProposedSubjectsForRound1.setVisible(false);
                 jLabelRoundTitle.setText("Round 2");
                 jLabelPollA.setVisible(true);
                 jLabelPollB.setVisible(true);
@@ -689,6 +897,7 @@ public class GUI extends javax.swing.JFrame {
         jPanelRound1.setVisible(false);
         jPanelLogin.setVisible(false);
         jPanelHelp.setVisible(true);
+        jPanelChooseProposedSubjectsForRound1.setVisible(false);
         jLabelLoginError.setText("");
     }//GEN-LAST:event_jMenuHelpMouseClicked
 
@@ -702,11 +911,14 @@ public class GUI extends javax.swing.JFrame {
         jPanelMain.setVisible(false);
         jMenuRound1.setVisible(false);
         jMenuRound2.setVisible(false);
-        jPanelRound1.setVisible(false);
-        jPanelHelp.setVisible(false);
         jMenuLogout.setVisible(false);
         jMenuHelp.setVisible(true);
+        jMenuProposeSubject.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelHelp.setVisible(false);
         jPanelLogin.setVisible(true);
+        jPanelChooseProposedSubjectsForRound1.setVisible(false);
+        jPanelAddProposedSubject.setVisible(false);
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
     private void jButtonSubmitRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound1ActionPerformed
@@ -890,6 +1102,45 @@ public class GUI extends javax.swing.JFrame {
 
     }
 
+    private void setupTeachersForProposedSubjects() {
+        DefaultListModel model = new DefaultListModel();
+        List<User> teachers = control.getAllTeachers();
+        for (User u : teachers) {
+            model.addElement(u.getName());
+        }
+
+        jListProposedTeachers.setModel(model);
+
+        //make the lists enable the multiple selection without having to hold ctrl or shift
+        ListSelectionModel selectionModel1 = new DefaultListSelectionModel() {
+            boolean ajustando;
+
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                if (ajustando) {
+                    return;
+                }
+                if (isSelectedIndex(index1)) {
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                }
+                ajustando = getValueIsAdjusting();
+            }
+
+            @Override
+            public void setValueIsAdjusting(boolean valueIsAdjusting) {
+                if (!valueIsAdjusting) {
+                    ajustando = false;
+                }
+                super.setValueIsAdjusting(valueIsAdjusting);
+            }
+
+        };
+
+        jListProposedTeachers.setSelectionModel(selectionModel1);
+    }
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jComboBox1ActionPerformed
     {//GEN-HEADEREND:event_jComboBox1ActionPerformed
         setupComboBoxItemsForRound();
@@ -935,53 +1186,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSelectSubjectsToVoteActionPerformed
     int[] selectedIndicesA;
     int[] selectedIndicesB;
-    private void jListPollAValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPollAValueChanged
-        selectedIndicesA = jListPollA.getSelectedIndices();
-        selectedIndicesB = jListPollB.getSelectedIndices();
-    }//GEN-LAST:event_jListPollAValueChanged
-
     private void jListPollBValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPollBValueChanged
         selectedIndicesA = jListPollA.getSelectedIndices();
         selectedIndicesB = jListPollB.getSelectedIndices();
     }//GEN-LAST:event_jListPollBValueChanged
 
-    private void jListPollAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseClicked
-        
-    }//GEN-LAST:event_jListPollAMouseClicked
-
     private void jListPollBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollBMouseClicked
-        
+
     }//GEN-LAST:event_jListPollBMouseClicked
-
-    private void jListPollAMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseReleased
-        selectedIndicesA = jListPollA.getSelectedIndices();
-        selectedIndicesB = jListPollB.getSelectedIndices();
-
-        ArrayList selectedIndecesBNew = new ArrayList();
-        int[] selected;
-        boolean found;
-        
-        for (int i = 0; i < selectedIndicesB.length; i++) {
-            found = false;
-            for (int j = 0; j < selectedIndicesA.length; j++) {
-                if (selectedIndicesB[i] == selectedIndicesA[j]) {
-                    found = true;
-                }
-            }
-            if(found==false)
-            {
-                selectedIndecesBNew.add(selectedIndicesB[i]);
-            }
-        }
-        selected = new int[selectedIndecesBNew.size()];
-        int k = 0;
-        for(Object o :  selectedIndecesBNew)
-        {
-            selected[k] = Integer.parseInt(o.toString());
-            k++;
-        }
-        jListPollB.setSelectedIndices(selected);
-    }//GEN-LAST:event_jListPollAMouseReleased
 
     private void jListPollBMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollBMouseReleased
         selectedIndicesA = jListPollA.getSelectedIndices();
@@ -990,7 +1202,7 @@ public class GUI extends javax.swing.JFrame {
         ArrayList selectedIndecesANew = new ArrayList();
         int[] selected;
         boolean found;
-        
+
         for (int i = 0; i < selectedIndicesA.length; i++) {
             found = false;
             for (int j = 0; j < selectedIndicesB.length; j++) {
@@ -998,20 +1210,146 @@ public class GUI extends javax.swing.JFrame {
                     found = true;
                 }
             }
-            if(found==false)
-            {
+            if (found == false) {
                 selectedIndecesANew.add(selectedIndicesA[i]);
             }
         }
         selected = new int[selectedIndecesANew.size()];
         int k = 0;
-        for(Object o :  selectedIndecesANew)
-        {
+        for (Object o : selectedIndecesANew) {
             selected[k] = Integer.parseInt(o.toString());
             k++;
         }
         jListPollA.setSelectedIndices(selected);
+        jProgressBar1.setValue(control.getOverallSatisfaction(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
     }//GEN-LAST:event_jListPollBMouseReleased
+
+    private void jTextFieldProposedSubjectDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProposedSubjectDescriptionActionPerformed
+
+    }//GEN-LAST:event_jTextFieldProposedSubjectDescriptionActionPerformed
+
+    private void jButtonProposeSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectActionPerformed
+        ProposedSubject p = new ProposedSubject(jTextFieldProposedSubjectName.getText().toString(),
+                jTextFieldProposedSubjectDescription.getText().toString(), true, null);
+        String message = control.addProposedSubject(p, jListProposedTeachers.getSelectedIndices());
+        jTextFieldProposedSubjectName.setText("");
+        jTextFieldProposedSubjectDescription.setText("");
+        jLabelFeedbackChooseProposedSubjectsForRound1.setText(message);
+        jListProposedTeachers.clearSelection();
+        jPanelMain.setVisible(true);
+         jPanelAddProposedSubject.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelHelp.setVisible(false);
+        jPanelLogin.setVisible(false);
+        jPanelPoll.setVisible(false);
+        setupSubjectsTable();
+    }//GEN-LAST:event_jButtonProposeSubjectActionPerformed
+
+    private void jMenuProposeSubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuProposeSubjectMouseClicked
+        jPanelAddProposedSubject.setVisible(true);
+        jPanelMain.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelHelp.setVisible(false);
+        jPanelLogin.setVisible(false);
+        jPanelPoll.setVisible(false);
+        setupTeachersForProposedSubjects();
+    }//GEN-LAST:event_jMenuProposeSubjectMouseClicked
+
+    private void jButtonSubmitProposedSubjectsForRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
+//        //control.chooseProposedSubjectsForRound1();
+//        String name = jTextFieldProposedSubjectName.getText();
+//        String description = jTextFieldProposedSubjectDescription.getText();
+//
+//        ProposedSubject pes = new ProposedSubject(name, description, true, null);
+//        int[] teacherIDs = jListProposedTeachers.getSelectedIndices();
+//        for (int i = 0; i < teacherIDs.length; i++) {
+//        }
+//        pes.setUsers(null);
+//
+//        control.addProposedElectiveSubject(pes);
+//
+//        jLabelFeedbackChooseProposedSubjectsForRound1.setText("You chose subjects for round 1!");
+
+    }//GEN-LAST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
+
+    private void jListPollAValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPollAValueChanged
+        selectedIndicesA = jListPollA.getSelectedIndices();
+        selectedIndicesB = jListPollB.getSelectedIndices();
+    }//GEN-LAST:event_jListPollAValueChanged
+
+    private void jListPollAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseClicked
+
+    }//GEN-LAST:event_jListPollAMouseClicked
+
+    private void jListPollAMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseReleased
+        selectedIndicesA = jListPollA.getSelectedIndices();
+        selectedIndicesB = jListPollB.getSelectedIndices();
+
+        ArrayList selectedIndecesBNew = new ArrayList();
+        int[] selected;
+        boolean found;
+
+        for (int i = 0; i < selectedIndicesB.length; i++) {
+            found = false;
+            for (int j = 0; j < selectedIndicesA.length; j++) {
+                if (selectedIndicesB[i] == selectedIndicesA[j]) {
+                    found = true;
+                }
+            }
+            if (found == false) {
+                selectedIndecesBNew.add(selectedIndicesB[i]);
+            }
+        }
+        selected = new int[selectedIndecesBNew.size()];
+        int k = 0;
+        for (Object o : selectedIndecesBNew) {
+            selected[k] = Integer.parseInt(o.toString());
+            k++;
+        }
+        jListPollB.setSelectedIndices(selected);
+        jProgressBar1.setValue(control.getOverallSatisfaction(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
+    }//GEN-LAST:event_jListPollAMouseReleased
+
+    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSubmitActionPerformed
+    private void setupJListSubjectsToChooseFromForRound1() {
+        DefaultListModel model = new DefaultListModel();
+        List<ProposedSubject> subjects = control.getAllAvailableProposedElectiveSubjects();
+        for (ProposedSubject ps : subjects) {
+            model.addElement(ps.getName());
+        }
+
+        jListAllProposedSubjects.setModel(model);
+
+        //make the lists enable the multiple selection without having to hold ctrl or shift       
+        ListSelectionModel selectionModel1 = new DefaultListSelectionModel() {
+            boolean ajustando;
+
+            @Override
+            public void setSelectionInterval(int index0, int index1) {
+                if (ajustando) {
+                    return;
+                }
+                if (isSelectedIndex(index1)) {
+                    super.removeSelectionInterval(index0, index1);
+                } else {
+                    super.addSelectionInterval(index0, index1);
+                }
+                ajustando = getValueIsAdjusting();
+            }
+
+            @Override
+            public void setValueIsAdjusting(boolean valueIsAdjusting) {
+                if (!valueIsAdjusting) {
+                    ajustando = false;
+                }
+                super.setValueIsAdjusting(valueIsAdjusting);
+            }
+
+        };
+        jListAllProposedSubjects.setSelectionModel(selectionModel1);
+    }
 
     /**
      * @param args the command line arguments
@@ -1049,12 +1387,16 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonBackRound1;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLogin;
+    private javax.swing.JButton jButtonProposeSubject;
     private javax.swing.JButton jButtonSelectSubjectsToVote;
     private javax.swing.JButton jButtonSubmit;
+    private javax.swing.JButton jButtonSubmitProposedSubjectsForRound1;
     private javax.swing.JButton jButtonSubmitRound1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
@@ -1064,25 +1406,37 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelA;
     private javax.swing.JLabel jLabelB;
+    private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelError;
+    private javax.swing.JLabel jLabelFeedbackChooseProposedSubjectsForRound1;
     private javax.swing.JLabel jLabelFirstPriorityA;
     private javax.swing.JLabel jLabelFirstPriorityB;
     private javax.swing.JLabel jLabelLoginError;
+    private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelPollA;
     private javax.swing.JLabel jLabelPollB;
     private javax.swing.JLabel jLabelRoundTitle;
     private javax.swing.JLabel jLabelSecondPriorityA;
     private javax.swing.JLabel jLabelSecondPriorityB;
+    private javax.swing.JLabel jLabelTeachers;
     private javax.swing.JLabel jLabelWelcome;
+    private javax.swing.JList jListAllProposedSubjects;
     private javax.swing.JList jListPollA;
     private javax.swing.JList jListPollB;
+    private javax.swing.JList jListProposedTeachers;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuLogout;
+    private javax.swing.JMenu jMenuProposeSubject;
     private javax.swing.JMenu jMenuRound1;
     private javax.swing.JMenu jMenuRound2;
+    private javax.swing.JPanel jPanelAddProposedSubject;
+    private javax.swing.JPanel jPanelChooseProposedSubjectsForRound1;
     private javax.swing.JPanel jPanelHelp;
     private javax.swing.JPanel jPanelLogin;
     private javax.swing.JPanel jPanelMain;
@@ -1092,8 +1446,12 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTableSubjects;
     private javax.swing.JPasswordField jTextFieldPassword;
+    private javax.swing.JTextField jTextFieldProposedSubjectDescription;
+    private javax.swing.JTextField jTextFieldProposedSubjectName;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
 }
