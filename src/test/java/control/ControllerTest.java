@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package control;
 
 import JPA2.ProposedSubject;
@@ -13,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import mocks.ControllerMock;
 import static org.hamcrest.CoreMatchers.is;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import utilities.AcceptanceProtocol;
 
 /**
@@ -251,5 +249,94 @@ public class ControllerTest {
 
         Vote actualResult = controller.updateParticularVoteOfParticularUser(expResult);
         assertEquals(expResult, actualResult);
+    }
+
+    /**
+     * Test of getUsersByUserType method, of class Controller.
+     */
+    @Test
+    public void testGetUsersByUserType() {
+        System.out.println("getUsersByUserType");
+        UserType ut = controller.userTypes.get(0);
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(0));
+        expResult.add(controller.users.get(3));
+        List<User> result = controller.getUsersByUserType(ut);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllUsers method, of class Controller.
+     */
+    @Test
+    public void testGetAllUsers() {
+        System.out.println("getAllUsers");
+        List<User> expResult = controller.users;
+        List<User> result = controller.getAllUsers();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setSatisfactionForStudent method, of class Controller.
+     */
+    @Test
+    public void testSetSatisfactionForStudent() {
+        System.out.println("setSatisfactionForStudent");
+        int[] a = new int[]{1};
+        int[] b = new int[]{2};
+        User student = controller.user;
+        controller.setSatisfactionForStudent(a, b, student);
+        int expected = 75;
+        assertEquals(expected, controller.user.getSatisfaction());
+    }
+
+    /**
+     * Test of getOverallSatisfaction method, of class Controller.
+     */
+    @Test
+    public void testGetOverallSatisfaction() {
+        System.out.println("getOverallSatisfaction");
+        int[] a = new int[]{1};
+        int[] b = new int[]{2};
+        int expected = 50;
+        int actual = controller.getOverallSatisfaction(a, b);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Test of getTop5UnsatissfiedStudents method, of class Controller.
+     */
+    @Test
+    public void testGetTop5UnsatissfiedStudents() {
+        System.out.println("getTop5UnsatissfiedStudents");
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(0));
+        expResult.add(controller.users.get(3));
+        List<User> result = controller.getTop5UnsatissfiedStudents();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllTeachers method, of class Controller.
+     */
+    @Test
+    public void testGetAllTeachers() {
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(1));
+        List<User> result = controller.getAllTeachers();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of addProposedSubject method, of class Controller.
+     */
+    @Test
+    public void testAddProposedSubject() {
+        System.out.println("addProposedSubject");
+        ProposedSubject ps = new ProposedSubject("Test", "It's a test", true, null);
+        int[] selectedIndices = new int[]{0};
+        String expResult = AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
+        String result = controller.addProposedSubject(ps, selectedIndices);
+        assertEquals(expResult, result);
     }
 }
