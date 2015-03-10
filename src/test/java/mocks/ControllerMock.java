@@ -4,14 +4,17 @@ import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
 import JPA2.Vote;
+import edu.emory.mathcs.backport.java.util.Collections;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import org.apache.velocity.runtime.directive.Foreach;
+import org.hibernate.cfg.CollectionSecondPass;
 import utilities.AcceptanceProtocol;
 
 public class ControllerMock implements ControllerInterface {
-    //getVote.clear won't work... neither for any other delete... TODO
 
     public User user = new User();
     public ArrayList<ProposedSubject> proposedSubjects = new ArrayList();
@@ -22,10 +25,6 @@ public class ControllerMock implements ControllerInterface {
     public static void main(String[] args) {
         ControllerMock controllerMock = new ControllerMock();
     }
-//
-//    public ControllerMock() {
-//        testingBase();
-//    }
 
     public ControllerMock() {
         //create user types
@@ -37,6 +36,7 @@ public class ControllerMock implements ControllerInterface {
         users.add(new User("TestUser", "12345", "boyko", "email@email.mail", userTypes.get(0)));
         users.add(new User("TestUser2", "test", "Testing user 2", "test@test.com", userTypes.get(1)));
         users.add(new User("TestUser3", "test", "Admin", "admin@test.com", userTypes.get(2)));
+        users.add(new User("TestUser4", "test", "Lala", "skat@test.com", userTypes.get(0)));
 
         //create proposed subjects
         proposedSubjects.add(new ProposedSubject("Test subject 1", "It was only just a test", true, null));
@@ -46,6 +46,10 @@ public class ControllerMock implements ControllerInterface {
 
         //assing the current user which will be the student
         user = users.get(0);
+        
+        //satisfaction
+        user.setSatisfaction(0);
+        users.get(3).setSatisfaction(25);
 
         //create votes
         votes.add(new Vote(user, proposedSubjects.get(0), 1, 2));
@@ -201,6 +205,7 @@ public class ControllerMock implements ControllerInterface {
         return AcceptanceProtocol.VOTE_DELETION_FAIL;
     }
 
+<<<<<<< HEAD
     /*
      Those nested classes were used while the database was not created
      we decided to comment them out and leave them as part of our project.
@@ -396,5 +401,86 @@ public class ControllerMock implements ControllerInterface {
     public String addProposedSubject(ProposedSubject ps, int[] selectedIndices)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
+    @Override
+    public List<User> getUsersByUserType(UserType ut) {
+        List<User> filteredUsers = new ArrayList<>();
+        for (User u : users) {
+            if (u.getUserType() == ut) {
+                filteredUsers.add(u);
+            }
+        }
+
+        return filteredUsers;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return users;
+    }
+
+    @Override
+    public void setSatisfactionForStudent(int[] a, int[] b, User student) {
+        if (a[0] == 1) {
+            student.setSatisfaction(50);
+        }
+        if (b[0] == 2) {
+            student.setSatisfaction(student.getSatisfaction() + 25);
+        }
+    }
+
+    @Override
+    public int getOverallSatisfaction(int[] a, int[] b) {
+        int overall = 0;
+        if (a[0] == 1) {
+            overall = 25;
+        }
+        if (b[0] == 2) {
+            overall = overall + 25;
+        }
+        return overall;
+    }
+
+    @Override
+    public List<User> getTop5UnsatissfiedStudents() {
+        List<User> unsatisfied = new ArrayList<>();
+        for (User u : users) {
+            if(u.getUserType() == userTypes.get(0))
+            {
+               unsatisfied.add(u);
+            }
+        }
+        
+        Collections.sort(unsatisfied, new Comparator<User>() {
+
+            @Override
+            public int compare(User o1, User o2) {
+                return o1.getSatisfaction() - o2.getSatisfaction();
+            }
+        });
+        return unsatisfied;
+    }
+
+    @Override
+    public List<User> getAllTeachers() {
+        List<User> teachers = new ArrayList<>();
+        for (User user : users) {
+            if (user.getUserType().getName().equals("Teacher")) {
+                teachers.add(user);
+            }
+        }
+        return teachers;
+    }
+
+    @Override
+    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices) {
+        List<User> teachers = getAllTeachers();
+        List<User> subjectTeachers = new ArrayList<>();
+        for (int i = 0; i < selectedIndices.length; i++) {
+            subjectTeachers.add(teachers.get(selectedIndices[i]));
+        }
+        ps.setUsers(subjectTeachers);
+        return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
+>>>>>>> origin/Marek
     }
 }
