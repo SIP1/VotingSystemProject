@@ -47,4 +47,6 @@ public class AcceptanceProtocol {
     public static final String USERTYPE_ADD_SUCCESS = "You have successfully added a usertype";
     
     public static final String USERTYPE_DELETION_SUCCESS = "You have successfully deleted a usertype";
+    
+    public static final String NEW_PROPOSED_SUBJECT_SUCCESS = "You have successfully added a new proposed subject.";
 }
