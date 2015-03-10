@@ -285,4 +285,11 @@ public class ControllerMock implements ControllerInterface {
         return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
     }
 
+    @Override
+    public String addSubjectsToPolls(int[] a, int[] b) {
+        if (a[0] == 1 && b[0] == 2) {
+            return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
+        }
+        return "";
+    }
 }
