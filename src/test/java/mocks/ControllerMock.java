@@ -46,7 +46,7 @@ public class ControllerMock implements ControllerInterface {
 
         //assing the current user which will be the student
         user = users.get(0);
-        
+
         //satisfaction
         user.setSatisfaction(0);
         users.get(3).setSatisfaction(25);
@@ -205,203 +205,6 @@ public class ControllerMock implements ControllerInterface {
         return AcceptanceProtocol.VOTE_DELETION_FAIL;
     }
 
-<<<<<<< HEAD
-    /*
-     Those nested classes were used while the database was not created
-     we decided to comment them out and leave them as part of our project.
-     */
-//******************************************************************************    
-//    private Integer pesIDCreator = 0;
-//    public class ProposedElectiveSubject
-//    {
-//
-//        private Integer id;
-//        private String name, description, poolOptions;
-//        private Boolean isAlive;
-//
-//        public ProposedElectiveSubject(String name, String description, Boolean isAlive)
-//        {
-//            this.id = pesIDCreator++;
-//            this.name = name;
-//            this.description = description;
-//            this.isAlive = isAlive;
-//            this.poolOptions = "";
-//        }
-//
-//        public Integer getId()
-//        {
-//            return id;
-//        }
-//
-//    }
-//
-//******************************************************************************
-//    private Integer votesIDCreator = 0;
-//    public class Vote
-//    {
-//
-//        private Integer id, points, proposedElectiveSubjectsID, roundNo;
-//        private String userNameStudent;
-//
-//        public Vote(String userNameStudent, Integer points, Integer proposedElectiveSubjectsID, Integer roundNo)
-//        {
-//            this.id = votesIDCreator++;
-//            this.points = points;
-//            this.proposedElectiveSubjectsID = proposedElectiveSubjectsID;
-//            this.roundNo = roundNo;
-//            this.userNameStudent = userNameStudent;
-//        }
-//
-//        public void setId(Integer id)
-//        {
-//            this.id = id;
-//        }
-//
-//        public Integer getId()
-//        {
-//            return id;
-//        }
-//
-//        public Integer getRoundNo()
-//        {
-//            return roundNo;
-//        }
-//
-//        public Integer getProposedElectiveSubjectsID()
-//        {
-//            return proposedElectiveSubjectsID;
-//        }
-//    }
-//******************************************************************************
-//    public class User
-//    {
-//
-//        private Integer useTypeID;
-//        private String userName, name, password, email;
-//        private ArrayList<Vote> userVotes = new ArrayList();
-//
-//        public User(Integer useTypeID, String userName, String name, String password, String email)
-//        {
-//            this.useTypeID = useTypeID;
-//            this.userName = userName;
-//            this.name = name;
-//            this.password = password;
-//            this.email = email;
-//        }
-//
-//        public String getUserName()
-//        {
-//            return userName;
-//        }
-//
-//        public String getPassword()
-//        {
-//            return password;
-//        }
-//
-//        public void addVote(Vote v)
-//        {
-//            userVotes.add(v);
-//        }
-//
-//        public void addVotes(ArrayList<Vote> aLv)
-//        {
-//            userVotes.addAll(aLv);
-//        }
-//
-//        public void setEmail(String email)
-//        {
-//            this.email = email;
-//        }
-//
-//        public void setName(String name)
-//        {
-//            this.name = name;
-//        }
-//
-//        public void setPassword(String password)
-//        {
-//            this.password = password;
-//        }
-//
-//        public void setUseTypeID(Integer useTypeID)
-//        {
-//            this.useTypeID = useTypeID;
-//        }
-//
-//        public void setUserName(String userName)
-//        {
-//            this.userName = userName;
-//        }
-//
-//        public void setUserVotes(ArrayList<Vote> userVotes)
-//        {
-//            this.userVotes = userVotes;
-//        }
-//
-//        public String getEmail()
-//        {
-//            return email;
-//        }
-//
-//        public String getName()
-//        {
-//            return name;
-//        }
-//
-//        public Integer getUseTypeID()
-//        {
-//            return useTypeID;
-//        }
-//
-//        public ArrayList<Vote> getUserVotes()
-//        {
-//            return userVotes;
-//        }
-//    }
-//******************************************************************************
-
-    @Override
-    public List<User> getUsersByUserType(UserType ut)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<User> getAllUsers()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setSatisfactionForStudent(int[] a, int[] b, User student)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getOverallSatisfaction(int[] a, int[] b)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<User> getTop5UnsatissfiedStudents()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<User> getAllTeachers()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
     @Override
     public List<User> getUsersByUserType(UserType ut) {
         List<User> filteredUsers = new ArrayList<>();
@@ -445,12 +248,11 @@ public class ControllerMock implements ControllerInterface {
     public List<User> getTop5UnsatissfiedStudents() {
         List<User> unsatisfied = new ArrayList<>();
         for (User u : users) {
-            if(u.getUserType() == userTypes.get(0))
-            {
-               unsatisfied.add(u);
+            if (u.getUserType() == userTypes.get(0)) {
+                unsatisfied.add(u);
             }
         }
-        
+
         Collections.sort(unsatisfied, new Comparator<User>() {
 
             @Override
@@ -481,6 +283,6 @@ public class ControllerMock implements ControllerInterface {
         }
         ps.setUsers(subjectTeachers);
         return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
->>>>>>> origin/Marek
     }
+
 }
