@@ -6,8 +6,12 @@ import JPA2.UserType;
 import JPA2.Vote;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,7 +34,16 @@ public class Controller implements ControllerInterface
 
     public static void main(String[] args)
     {
+        //new Controller().base();
+    }
 
+    private void base()
+    {
+        List<User> topFiveUnsatissfiedStudents = getTop5UnsatissfiedStudents();
+        for (int i = 0; i < topFiveUnsatissfiedStudents.size(); i++)
+        {
+            System.out.println("i:" + i + ">>" + topFiveUnsatissfiedStudents.get(i).getName());
+        }
     }
 
     public Controller()
@@ -322,7 +335,36 @@ public class Controller implements ControllerInterface
     @Override
     public List<User> getTop5UnsatissfiedStudents()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        users = db.getUsers();
+        List<User> unsatisfied = new ArrayList();
+
+        
+        for (User x : users)
+        {
+            if ("Student".equals(x.getUserType().getName()))
+            {
+                unsatisfied.add(x);
+            }
+        }
+
+        Collections.sort(unsatisfied, new Comparator<User>()
+                 {
+
+                     public int compare(User o1, User o2)
+                     {
+                         return (Integer) o1.getSatisfaction() - (Integer) o2.getSatisfaction();
+                     }
+        });
+
+        if(unsatisfied.size()<5){
+            return unsatisfied;
+        }
+        List<User> topFiveUnsatisfied = new ArrayList();
+        for (int i = 0; i < 5; i++)
+        {
+            topFiveUnsatisfied.add(unsatisfied.get(i));
+        }
+        return topFiveUnsatisfied;
     }
 
     @Override
