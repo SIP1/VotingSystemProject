@@ -148,14 +148,13 @@ public class ControllerTest {
      * Test of getAllAvailableProposedElectiveSubjects method, of class
      * Controller.
      */
-    @Test
-    public void testGetAllAvailableProposedElectiveSubjects() {
-        System.out.println("getAllAvailableProposedElectiveSubjects");
-        ArrayList<ProposedSubject> actualResult = controller.getAllAvailableProposedElectiveSubjects();
-        ArrayList<ProposedSubject> expectedResult = controller.proposedSubjects;
-        assertEquals(expectedResult, actualResult);
-    }
-
+//    @Test
+//    public void testGetAllAvailableProposedElectiveSubjects() {
+//        System.out.println("getAllAvailableProposedElectiveSubjects");
+//        ArrayList<ProposedSubject> actualResult = controller.getAllAvailableProposedElectiveSubjects();
+//        ArrayList<ProposedSubject> expectedResult = controller.proposedSubjects;
+//        assertEquals(expectedResult, actualResult);
+//    }
     /**
      * Test of addProposedElectiveSubject method, of class Controller.
      */
@@ -350,6 +349,46 @@ public class ControllerTest {
         int[] b = new int[]{2};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
         String result = controller.addSubjectsToPolls(a, b);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllAliveProposedElectiveSubjects method, of class Controller.
+     */
+    @Test
+    public void testGetAllAliveProposedElectiveSubjects() {
+        System.out.println("getAllAliveProposedElectiveSubjects");
+        List<ProposedSubject> allSubjects = controller.proposedSubjects;
+        List<ProposedSubject> expResult = new ArrayList<>();
+        for (ProposedSubject subject : allSubjects) {
+            if (subject.isIsAlive()) {
+                expResult.add(subject);
+            }
+        }
+        List<ProposedSubject> result = controller.getAllAliveProposedElectiveSubjects();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllProposedElectiveSubjects method, of class Controller.
+     */
+    @Test
+    public void testGetAllProposedElectiveSubjects() {
+        System.out.println("getAllProposedElectiveSubjects");
+        List<ProposedSubject> expResult = controller.proposedSubjects;
+        List<ProposedSubject> result = controller.getAllProposedElectiveSubjects();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of selectSubjectsForRound1 method, of class Controller.
+     */
+    @Test
+    public void testSelectSubjectsForRound1() {
+        System.out.println("selectSubjectsForRound1");
+        int[] selectedIndexes = new int[]{1};
+        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
+        String result = controller.selectSubjectsForRound1(selectedIndexes);
         assertEquals(expResult, result);
     }
 }

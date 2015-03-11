@@ -862,8 +862,8 @@ public class GUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    private void setupSubjectsTable() {
-        subjectsToBeDisplayed = control.getAllAvailableProposedElectiveSubjects();
+    private void setupStudentSubjectsTable() {
+        subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
         Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
         for (int i = 0; i < subjectsToBeDisplayed.size(); i++) {
             data[i][0] = subjectsToBeDisplayed.get(i).getName();
@@ -885,6 +885,28 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
     }
 
+    private void setupHeadSubjectsTable() {
+        subjectsToBeDisplayed = control.getAllProposedElectiveSubjects();
+        Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
+        for (int i = 0; i < subjectsToBeDisplayed.size(); i++) {
+            data[i][0] = subjectsToBeDisplayed.get(i).getName();
+            data[i][1] = subjectsToBeDisplayed.get(i).getPoolOptions();
+            data[i][2] = subjectsToBeDisplayed.get(i).getTeachersNames();
+            data[i][3] = subjectsToBeDisplayed.get(i).getDescription();
+        }
+        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+
+        jTableSubjects.getColumnModel().getColumn(0).setPreferredWidth(60);
+        jTableSubjects.getColumnModel().getColumn(1).setPreferredWidth(20);
+        jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTableSubjects.getColumnModel().getColumn(3).setPreferredWidth(140);
+//        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
+    }
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS)) {
             switch (control.getUser().getUserType().getName()) {
@@ -901,7 +923,7 @@ public class GUI extends javax.swing.JFrame {
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
                     jButtonSelectSubjectsToVote.setVisible(false);
-                    setupSubjectsTable();
+                    setupStudentSubjectsTable();
                     break;
                 case "Head":
                     jPanelLogin.setVisible(false);
@@ -914,7 +936,7 @@ public class GUI extends javax.swing.JFrame {
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
                     jButtonSelectSubjectsToVote.setVisible(false);
-                    setupSubjectsTable();
+                    setupHeadSubjectsTable();
                     //setupUnsatisfiedStudentsTable();
                     break;
             }
@@ -925,7 +947,7 @@ public class GUI extends javax.swing.JFrame {
             jTextFieldPassword.setText("");
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
-    
+
     private void jMenuRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound1MouseClicked
         switch (control.getUser().getUserType().getName()) {
             case "Teacher":
@@ -939,6 +961,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelMain.setVisible(false);
                 jPanelRound1.setVisible(true);
                 jPanelHelp.setVisible(false);
+                jPanelAddProposedSubject.setVisible(false);
                 jPanelChooseProposedSubjectsForRound1.setVisible(false);
                 jLabelRoundTitle.setText("Round 1");
                 jLabelPollA.setVisible(false);
@@ -976,6 +999,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelRound1.setVisible(true);
                 jPanelHelp.setVisible(false);
                 jPanelChooseProposedSubjectsForRound1.setVisible(false);
+                jPanelAddProposedSubject.setVisible(false);
                 jLabelRoundTitle.setText("Round 2");
                 jLabelPollA.setVisible(true);
                 jLabelPollB.setVisible(true);
@@ -989,6 +1013,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelPoll.setVisible(true);
                 jPanelMain.setVisible(false);
                 jPanelHelp.setVisible(false);
+                jPanelChooseProposedSubjectsForRound1.setVisible(false);
                 setupPollSubjects();
                 break;
         }
@@ -1022,6 +1047,7 @@ public class GUI extends javax.swing.JFrame {
         jPanelLogin.setVisible(true);
         jPanelChooseProposedSubjectsForRound1.setVisible(false);
         jPanelAddProposedSubject.setVisible(false);
+        jPanelPoll.setVisible(false);
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
     private void jButtonSubmitRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound1ActionPerformed
@@ -1140,9 +1166,9 @@ public class GUI extends javax.swing.JFrame {
 
     private void setupPollSubjects() {
         DefaultListModel model = new DefaultListModel();
-        List<ProposedSubject> subjects = control.getAllAvailableProposedElectiveSubjects();
+        List<ProposedSubject> subjects = control.getAllAliveProposedElectiveSubjects();
         for (ProposedSubject ps : subjects) {
-            model.addElement(ps.getName() + "("+  ps.getTeachersNames() + ")");
+            model.addElement(ps.getName() + "(" + ps.getTeachersNames() + ")");
         }
 
         jListPollA.setModel(model);
@@ -1334,19 +1360,19 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonProposeSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectActionPerformed
         ProposedSubject p = new ProposedSubject(jTextFieldProposedSubjectName.getText().toString(),
-                jTextFieldProposedSubjectDescription.getText().toString(), true, null);
+                jTextFieldProposedSubjectDescription.getText().toString(), false, null);
         String message = control.addProposedSubject(p, jListProposedTeachers.getSelectedIndices());
         jTextFieldProposedSubjectName.setText("");
         jTextFieldProposedSubjectDescription.setText("");
         jLabelFeedbackChooseProposedSubjectsForRound1.setText(message);
         jListProposedTeachers.clearSelection();
         jPanelMain.setVisible(true);
-         jPanelAddProposedSubject.setVisible(false);
+        jPanelAddProposedSubject.setVisible(false);
         jPanelRound1.setVisible(false);
         jPanelHelp.setVisible(false);
         jPanelLogin.setVisible(false);
         jPanelPoll.setVisible(false);
-        setupSubjectsTable();
+        setupStudentSubjectsTable();
     }//GEN-LAST:event_jButtonProposeSubjectActionPerformed
 
     private void jMenuProposeSubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuProposeSubjectMouseClicked
@@ -1360,20 +1386,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuProposeSubjectMouseClicked
 
     private void jButtonSubmitProposedSubjectsForRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
-//        //control.chooseProposedSubjectsForRound1();
-//        String name = jTextFieldProposedSubjectName.getText();
-//        String description = jTextFieldProposedSubjectDescription.getText();
-//
-//        ProposedSubject pes = new ProposedSubject(name, description, true, null);
-//        int[] teacherIDs = jListProposedTeachers.getSelectedIndices();
-//        for (int i = 0; i < teacherIDs.length; i++) {
-//        }
-//        pes.setUsers(null);
-//
-//        control.addProposedElectiveSubject(pes);
-//
-//        jLabelFeedbackChooseProposedSubjectsForRound1.setText("You chose subjects for round 1!");
-
+        int[] indices = jListAllProposedSubjects.getSelectedIndices();
+        String result = control.selectSubjectsForRound1(indices);
+        JOptionPane.showMessageDialog(this, result);
     }//GEN-LAST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
 
     private void jListPollAValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPollAValueChanged
@@ -1412,12 +1427,12 @@ public class GUI extends javax.swing.JFrame {
         }
         jListPollB.setSelectedIndices(selected);
         jProgressBar1.setValue(control.getOverallSatisfaction(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
-        
+
         setupUnsatisfiedStudentsTable();
     }//GEN-LAST:event_jListPollAMouseReleased
 
-        private void setupUnsatisfiedStudentsTable(){
-            
+    private void setupUnsatisfiedStudentsTable() {
+
         String[] unsatisfiedStudentsTableColumnNames = new String[]{
             "Name", "Choices", "Satisfaction"
         };
@@ -1426,11 +1441,11 @@ public class GUI extends javax.swing.JFrame {
         Object[][] data = new Object[unsatisfiedStudents.size()][4];
         for (int i = 0; i < unsatisfiedStudents.size(); i++) {
             data[i][0] = unsatisfiedStudents.get(i).getName();
-            data[i][1] = 
-                    unsatisfiedStudents.get(i).getVotesByRound(1).get(0).getProposedSubject().getName() +
-                    ", "+ unsatisfiedStudents.get(i).getVotesByRound(1).get(1).getProposedSubject().getName() +
-                    ", "+ unsatisfiedStudents.get(i).getVotesByRound(1).get(2).getProposedSubject().getName() +
-                    ", "+ unsatisfiedStudents.get(i).getVotesByRound(1).get(3).getProposedSubject().getName();
+            data[i][1]
+                    = unsatisfiedStudents.get(i).getVotesByRound(1).get(0).getProposedSubject().getName()
+                    + ", " + unsatisfiedStudents.get(i).getVotesByRound(1).get(1).getProposedSubject().getName()
+                    + ", " + unsatisfiedStudents.get(i).getVotesByRound(1).get(2).getProposedSubject().getName()
+                    + ", " + unsatisfiedStudents.get(i).getVotesByRound(1).get(3).getProposedSubject().getName();
             data[i][2] = unsatisfiedStudents.get(i).getSatisfaction();
         }
         jTableUnsatisfiedStudents.setModel(new DefaultTableModel(data, unsatisfiedStudentsTableColumnNames) {
@@ -1444,13 +1459,13 @@ public class GUI extends javax.swing.JFrame {
         jTableSubjects.getColumnModel().getColumn(1).setPreferredWidth(120);
         jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
-    
+
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
         JOptionPane.showMessageDialog(null, control.addSubjectsToPolls(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
     }//GEN-LAST:event_jButtonSubmitActionPerformed
     private void setupJListSubjectsToChooseFromForRound1() {
         DefaultListModel model = new DefaultListModel();
-        List<ProposedSubject> subjects = control.getAllAvailableProposedElectiveSubjects();
+        List<ProposedSubject> subjects = control.getAllProposedElectiveSubjects();
         for (ProposedSubject ps : subjects) {
             model.addElement(ps.getName());
         }

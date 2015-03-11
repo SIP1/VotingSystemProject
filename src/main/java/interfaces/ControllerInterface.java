@@ -34,7 +34,9 @@ public interface ControllerInterface {
     List<UserType> getAllUserTypes();
     
     //Subjects
-    List<ProposedSubject> getAllAvailableProposedElectiveSubjects();
+    List<ProposedSubject> getAllAliveProposedElectiveSubjects();
+    
+    List<ProposedSubject> getAllProposedElectiveSubjects();
     
     ProposedSubject addProposedElectiveSubject(ProposedSubject pes);
     
@@ -62,4 +64,6 @@ public interface ControllerInterface {
     String addProposedSubject(ProposedSubject ps, int[] selectedIndices);
     
     String addSubjectsToPolls(int[] a, int[] b);
+    
+    String selectSubjectsForRound1(int[] selectedIndexes);
 }

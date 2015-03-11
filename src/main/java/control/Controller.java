@@ -138,9 +138,15 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public List<ProposedSubject> getAllAvailableProposedElectiveSubjects()
+    public List<ProposedSubject> getAllAliveProposedElectiveSubjects()
     {
-        return db.getProposedSubjects();
+        return db.getAliveProposedSubjects();
+    }
+    
+      @Override
+    public List<ProposedSubject> getAllProposedElectiveSubjects()
+    {
+        return db.getAllProposedSubjects();
     }
 
     @Override
@@ -250,7 +256,7 @@ public class Controller implements ControllerInterface
     @Override
     public void setSatisfactionForStudent(int[] a, int[] b, User student)
     {
-        proposedSubjects = db.getProposedSubjects();
+        proposedSubjects = db.getAliveProposedSubjects();
         List<Vote> currentVotes = student.getVotesByRound(1);   
         List<ProposedSubject> pollA = new ArrayList<>();
         List<ProposedSubject> pollB = new ArrayList<>();
@@ -413,6 +419,15 @@ public class Controller implements ControllerInterface
         }
         //db.fillPolls(pollA, pollB);
         return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS + "\n" + db.fillPolls(pollA, pollB);
+    }
+
+    @Override
+    public String selectSubjectsForRound1(int[] selectedIndexes) {
+        List<ProposedSubject> allSubjects= getAllProposedElectiveSubjects();
+        for(int i=0;i<selectedIndexes.length; i++){
+            allSubjects.get(selectedIndexes[i]).setIsAlive(true);
+        }
+        return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
     }
     
 }
