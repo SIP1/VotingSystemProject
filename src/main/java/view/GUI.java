@@ -1092,9 +1092,11 @@ public class GUI extends javax.swing.JFrame {
         Object selectedCBItem = jComboBox1.getSelectedItem();
         for (ProposedSubject sb : subjectsToBeDisplayed) {
             if (!jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
-                    comboBoxSubjects[poz] = sb.getName();
-                    poz++;
+                if (sb.getPoolOptions() != null) {
+                    if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
+                        comboBoxSubjects[poz] = sb.getName();
+                        poz++;
+                    }
                 }
             }
         }
@@ -1111,9 +1113,11 @@ public class GUI extends javax.swing.JFrame {
         poz = 0;
         for (ProposedSubject sb : subjectsToBeDisplayed) {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
-                    comboBoxSubjects[poz] = sb.getName();
-                    poz++;
+                if (sb.getPoolOptions() != null) {
+                    if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
+                        comboBoxSubjects[poz] = sb.getName();
+                        poz++;
+                    }
                 }
             }
         }
@@ -1130,9 +1134,11 @@ public class GUI extends javax.swing.JFrame {
         poz = 0;
         for (ProposedSubject sb : subjectsToBeDisplayed) {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
-                    comboBoxSubjects[poz] = sb.getName();
-                    poz++;
+                if (sb.getPoolOptions() != null) {
+                    if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
+                        comboBoxSubjects[poz] = sb.getName();
+                        poz++;
+                    }
                 }
             }
         }
@@ -1149,9 +1155,11 @@ public class GUI extends javax.swing.JFrame {
         poz = 0;
         for (ProposedSubject sb : subjectsToBeDisplayed) {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName())) {
-                if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
-                    comboBoxSubjects[poz] = sb.getName();
-                    poz++;
+                if (sb.getPoolOptions() != null) {
+                    if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
+                        comboBoxSubjects[poz] = sb.getName();
+                        poz++;
+                    }
                 }
             }
         }

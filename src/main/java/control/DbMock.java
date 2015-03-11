@@ -185,7 +185,7 @@ public class DbMock {
         teachersForProposedSubjects.clear();
         teachersForProposedSubjects.add(getUserByUsername("tor"));
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
-        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
+        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, null));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
 
         //populate votes
