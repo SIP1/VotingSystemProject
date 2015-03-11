@@ -939,6 +939,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelMain.setVisible(false);
                 jPanelRound1.setVisible(true);
                 jPanelHelp.setVisible(false);
+                jPanelAddProposedSubject.setVisible(false);
                 jPanelChooseProposedSubjectsForRound1.setVisible(false);
                 jLabelRoundTitle.setText("Round 1");
                 jLabelPollA.setVisible(false);
@@ -976,6 +977,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelRound1.setVisible(true);
                 jPanelHelp.setVisible(false);
                 jPanelChooseProposedSubjectsForRound1.setVisible(false);
+                jPanelAddProposedSubject.setVisible(false);
                 jLabelRoundTitle.setText("Round 2");
                 jLabelPollA.setVisible(true);
                 jLabelPollB.setVisible(true);
@@ -989,6 +991,7 @@ public class GUI extends javax.swing.JFrame {
                 jPanelPoll.setVisible(true);
                 jPanelMain.setVisible(false);
                 jPanelHelp.setVisible(false);
+                jPanelChooseProposedSubjectsForRound1.setVisible(false);
                 setupPollSubjects();
                 break;
         }
@@ -1022,6 +1025,7 @@ public class GUI extends javax.swing.JFrame {
         jPanelLogin.setVisible(true);
         jPanelChooseProposedSubjectsForRound1.setVisible(false);
         jPanelAddProposedSubject.setVisible(false);
+        jPanelPoll.setVisible(false);
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
     private void jButtonSubmitRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound1ActionPerformed
