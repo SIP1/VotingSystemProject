@@ -42,8 +42,8 @@ public class DbMock {
         }
         return aliveSubject;
     }
-    
-      public List<ProposedSubject> getAllProposedSubjects() {
+
+    public List<ProposedSubject> getAllProposedSubjects() {
         return proposedSubjects;
     }
 
@@ -187,6 +187,8 @@ public class DbMock {
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
         proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
+        proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.FALSE, null));
+        proposedSubjects.get(proposedSubjects.size() - 1).setId(106);
 
         //populate votes
         List<Vote> boykoVotes = new ArrayList();

@@ -172,14 +172,15 @@ public class Controller implements ControllerInterface
     public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber)
     {
         ArrayList<Vote> votedSubjects = new ArrayList<>();
-        for (ProposedSubject p : proposedSubjects)
+        List<ProposedSubject> availableSubjects = getAllAliveProposedElectiveSubjects();
+        for (ProposedSubject p : availableSubjects)
         {
             if (p.getName().equals(vote1) || p.getName().equals(vote2))
             {
                 votedSubjects.add(new Vote(loggedInUser, p, roundNumber, 2));
             }
         }
-        for (ProposedSubject p : proposedSubjects)
+        for (ProposedSubject p : availableSubjects)
         {
             if (p.getName().equals(vote3) || p.getName().equals(vote4))
             {
