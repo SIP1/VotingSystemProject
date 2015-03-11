@@ -1141,7 +1141,8 @@ public class GUI extends javax.swing.JFrame {
                     }
                 }
             }
-        }
+        }  
+        
         comboBoxItemsV2 = new String[poz + 1];
         comboBoxItemsV2[0] = "- no subject -";
         for (int i = 0; i < poz; i++) {
