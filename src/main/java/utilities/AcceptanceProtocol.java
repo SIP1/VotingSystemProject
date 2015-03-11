@@ -20,7 +20,7 @@ public class AcceptanceProtocol {
 
     public static final String ACCOUNT_DELETION_ERROR = "You failed to delete your "
             + "account";
-    
+
     public static final String SUBJECT_DELETION_SUCCESS = "The subject was deleted "
             + "successfully";
 
@@ -39,16 +39,18 @@ public class AcceptanceProtocol {
     public static final String VOTE_UPDATE_SUCCESS = "Your votes are updated successfully!";
 
     public static final String VOTE_DELETION_SUCCESS = "Your votes are deleted.";
-    
-     public static final String VOTE_DELETION_NOTHING = "You have no votes to delete.";
-    
+
+    public static final String VOTE_DELETION_NOTHING = "You have no votes to delete.";
+
     public static final String VOTE_DELETION_FAIL = "You failed to delete your votes";
-   
+
     public static final String USERTYPE_ADD_SUCCESS = "You have successfully added a usertype";
-    
+
     public static final String USERTYPE_DELETION_SUCCESS = "You have successfully deleted a usertype";
-    
+
     public static final String NEW_PROPOSED_SUBJECT_SUCCESS = "You have successfully added a new proposed subject.";
-    
+
     public static final String SUBJECTS_ADDED_TO_POLLS_SUCCESS = "You have successfully formed the polls.";
+
+    public static final String SUBJECTS_ADDED_TO_ROUND_1_SUCCESS = "You have successfully added subjects to round 1";
 }

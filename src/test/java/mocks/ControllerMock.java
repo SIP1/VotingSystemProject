@@ -43,6 +43,7 @@ public class ControllerMock implements ControllerInterface {
         proposedSubjects.add(new ProposedSubject("Test subject 2", "It was only just a test", true, null));
         proposedSubjects.add(new ProposedSubject("Test subject 3", "It was only just a test", true, null));
         proposedSubjects.add(new ProposedSubject("Test subject 4", "It was only just a test", true, null));
+        proposedSubjects.add(new ProposedSubject("Test subject DEAD", "It was only just a dead test", false, null));
 
         //assing the current user which will be the student
         user = users.get(0);
@@ -138,12 +139,6 @@ public class ControllerMock implements ControllerInterface {
     @Override
     public List<UserType> getAllUserTypes() {
         return userTypes;
-    }
-
-    //Subjects
-    @Override
-    public ArrayList<ProposedSubject> getAllAvailableProposedElectiveSubjects() {
-        return proposedSubjects;
     }
 
     @Override
@@ -289,6 +284,30 @@ public class ControllerMock implements ControllerInterface {
     public String addSubjectsToPolls(int[] a, int[] b) {
         if (a[0] == 1 && b[0] == 2) {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
+        }
+        return "";
+    }
+
+    @Override
+    public List<ProposedSubject> getAllAliveProposedElectiveSubjects() {
+        List<ProposedSubject> aliveSubjects = new ArrayList<>();
+        for (ProposedSubject proposedSubject : proposedSubjects) {
+            if (proposedSubject.isIsAlive()) {
+                aliveSubjects.add(proposedSubject);
+            }
+        }
+        return aliveSubjects;
+    }
+
+    @Override
+    public List<ProposedSubject> getAllProposedElectiveSubjects() {
+        return proposedSubjects;
+    }
+
+    @Override
+    public String selectSubjectsForRound1(int[] selectedIndexes) {
+        if (selectedIndexes[0] == 1) {
+            return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
         }
         return "";
     }

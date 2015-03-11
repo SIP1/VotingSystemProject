@@ -7,8 +7,7 @@ import JPA2.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbMock
-{
+public class DbMock {
 
     private List<ProposedSubject> proposedSubjects;
     private List<User> users;
@@ -16,8 +15,7 @@ public class DbMock
     private List<Vote> votes;
     private List<ProposedSubject> pollA, pollB;
 
-    public DbMock()
-    {
+    public DbMock() {
         proposedSubjects = new ArrayList();
         users = new ArrayList();
         userTypes = new ArrayList();
@@ -27,92 +25,81 @@ public class DbMock
 
     private static DbMock instance = null;
 
-    public static DbMock getInstance()
-    {
+    public static DbMock getInstance() {
 
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new DbMock();
         }
         return instance;
     }
 
-    public List<ProposedSubject> getProposedSubjects()
-    {
+    public List<ProposedSubject> getAliveProposedSubjects() {
+        List<ProposedSubject> aliveSubject = new ArrayList<ProposedSubject>();
+        for (ProposedSubject p : proposedSubjects) {
+            if (p.isIsAlive()) {
+                aliveSubject.add(p);
+            }
+        }
+        return aliveSubject;
+    }
+    
+      public List<ProposedSubject> getAllProposedSubjects() {
         return proposedSubjects;
     }
 
-    public List<User> getUsers()
-    {
+    public List<User> getUsers() {
         return users;
     }
 
-    public List<UserType> getUserTypes()
-    {
+    public List<UserType> getUserTypes() {
         return userTypes;
     }
 
-    public List<Vote> getVotes()
-    {
+    public List<Vote> getVotes() {
         return votes;
     }
 
-    public User getUserByUsername(String username)
-    {
-        for (User user : users)
-        {
-            if (user.getUsername().equals(username))
-            {
+    public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
         return null;
     }
 
-    public UserType getUserTypeByName(String type)
-    {
-        for (UserType ut : userTypes)
-        {
-            if (ut.getName().endsWith(type))
-            {
+    public UserType getUserTypeByName(String type) {
+        for (UserType ut : userTypes) {
+            if (ut.getName().endsWith(type)) {
                 return ut;
             }
         }
         return null;
     }
 
-    public ProposedSubject getProposedSubjectById(int id)
-    {
-        for (ProposedSubject ps : proposedSubjects)
-        {
-            if (ps.getId() == id)
-            {
+    public ProposedSubject getProposedSubjectById(int id) {
+        for (ProposedSubject ps : proposedSubjects) {
+            if (ps.getId() == id) {
                 return ps;
             }
         }
         return null;
     }
 
-    public List<User> getUsersByUserTpe(UserType ut)
-    {
-        switch (ut.getName())
-        {
+    public List<User> getUsersByUserTpe(UserType ut) {
+        switch (ut.getName()) {
             case "Teacher":
                 List<User> teachers = new ArrayList<>();
-                for (User user : users)
-                {
-                    if (user.getUserType().getName().equals("Teacher"))
-                    {
+                for (User user : users) {
+                    if (user.getUserType().getName().equals("Teacher")) {
                         teachers.add(user);
                     }
                 }
                 return teachers;
             case "Student":
                 List<User> students = new ArrayList<>();
-                for (User user : users)
-                {
-                    if (user.getUserType().getName().equals("Student"))
-                    {
+                for (User user : users) {
+                    if (user.getUserType().getName().equals("Student")) {
                         students.add(user);
                     }
                 }
@@ -122,42 +109,33 @@ public class DbMock
         }
     }
 
-    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b)
-    {
-        for (ProposedSubject ps : proposedSubjects)
-        {
+    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b) {
+        for (ProposedSubject ps : proposedSubjects) {
             boolean found = false;
-            for (ProposedSubject psa : a)
-            {
-                if(ps.equals(psa))
-                {
+            for (ProposedSubject psa : a) {
+                if (ps.equals(psa)) {
                     ps.setPoolOptions("A");
                     found = true;
                 }
             }
-            for(ProposedSubject psb : b)
-            {
-                if(ps.equals(psb))
-                {
+            for (ProposedSubject psb : b) {
+                if (ps.equals(psb)) {
                     ps.setPoolOptions("B");
                     found = true;
                 }
             }
-            if(found == false)
-            {
+            if (found == false) {
                 ps.setPoolOptions(null);
             }
         }
         return "Size of poll A: " + a.size() + ", size of poll B: " + b.size();
     }
 
-    public void addProposedSubject(ProposedSubject ps)
-    {
+    public void addProposedSubject(ProposedSubject ps) {
         proposedSubjects.add(ps);
     }
 
-    private void populate()
-    {
+    private void populate() {
         //populate usertypes
         userTypes.add(new UserType("Teacher"));
         userTypes.add(new UserType("Student"));
