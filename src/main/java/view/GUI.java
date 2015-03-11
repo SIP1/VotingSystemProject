@@ -1111,6 +1111,7 @@ public class GUI extends javax.swing.JFrame {
         selectedCBItem = jComboBox2.getSelectedItem();
         comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
         poz = 0;
+        subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
         for (ProposedSubject sb : subjectsToBeDisplayed) {
             if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
                 if (sb.getPoolOptions() != null) {

@@ -344,7 +344,7 @@ public class ControllerTest {
      */
     @Test
     public void testAddSubjectsToPolls() {
-        System.out.println("addSubjectsToPolls");
+        System.out .println("addSubjectsToPolls");
         int[] a = new int[]{1};
         int[] b = new int[]{2};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
