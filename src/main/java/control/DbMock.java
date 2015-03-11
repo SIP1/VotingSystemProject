@@ -201,40 +201,40 @@ public class DbMock {
 
         List<Vote> smaraVotes = new ArrayList();
         smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(101), 1, 2));
+        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(105), 1, 2));
         smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(102), 1, 1));
         smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(103), 1, 1));
-        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(105), 1, 2));
         votes.addAll(smaraVotes);
         getUserByUsername("smara").setVotes(smaraVotes);
 
         List<Vote> madaVotes = new ArrayList();
-        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(101), 1, 1));
         madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(104), 1, 2));
-        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(103), 1, 1));
         madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(105), 1, 2));
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(101), 1, 1));
+        madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(103), 1, 1));
         votes.addAll(madaVotes);
         getUserByUsername("mada").setVotes(madaVotes);
 
         List<Vote> cristiVotes = new ArrayList();
-        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(101), 1, 1));
         cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(102), 1, 2));
         cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(104), 1, 2));
+        cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(101), 1, 1));
         cristiVotes.add(new Vote(getUserByUsername("cristi"), getProposedSubjectById(105), 1, 1));
         votes.addAll(cristiVotes);
         getUserByUsername("cristi").setVotes(cristiVotes);
 
         List<Vote> peterVotes = new ArrayList();
         peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(104), 1, 2));
+        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(105), 1, 2));
         peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(102), 1, 1));
         peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(103), 1, 1));
-        peterVotes.add(new Vote(getUserByUsername("peter"), getProposedSubjectById(105), 1, 2));
         votes.addAll(peterVotes);
         getUserByUsername("peter").setVotes(peterVotes);
 
         List<Vote> marekVotes = new ArrayList();
         marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(101), 1, 2));
-        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(102), 1, 1));
         marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(103), 1, 2));
+        marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(102), 1, 1));
         marekVotes.add(new Vote(getUserByUsername("marek"), getProposedSubjectById(104), 1, 1));
         votes.addAll(marekVotes);
         getUserByUsername("marek").setVotes(marekVotes);
