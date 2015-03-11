@@ -121,12 +121,34 @@ public class DbMock
                 return null;
         }
     }
-    
+
     public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b)
     {
-        pollA = a;
-        pollB = b;
-        return "Size of poll A: "+pollA.size()+", size of poll B: "+pollB.size();
+        for (ProposedSubject ps : proposedSubjects)
+        {
+            boolean found = false;
+            for (ProposedSubject psa : a)
+            {
+                if(ps.equals(psa))
+                {
+                    ps.setPoolOptions("A");
+                    found = true;
+                }
+            }
+            for(ProposedSubject psb : b)
+            {
+                if(ps.equals(psb))
+                {
+                    ps.setPoolOptions("B");
+                    found = true;
+                }
+            }
+            if(found == false)
+            {
+                ps.setPoolOptions(null);
+            }
+        }
+        return "Size of poll A: " + a.size() + ", size of poll B: " + b.size();
     }
 
     public void addProposedSubject(ProposedSubject ps)
