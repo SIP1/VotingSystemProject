@@ -8,10 +8,8 @@ import interfaces.ControllerInterface;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,30 +25,36 @@ public class Controller implements ControllerInterface
     private EntityTransaction tr;
     private User loggedInUser;
     private List<ProposedSubject> proposedSubjects;
-    private ArrayList<User> teachers;
-    private ArrayList<User> students;
+   // private ArrayList<User> teachers;
+   // private ArrayList<User> students;
     private DbMock db;
     private List<User> users;
 
     public static void main(String[] args)
     {
-        //new Controller().base();
+        new Controller().base();
     }
 
     private void base()
     {
-        List<User> topFiveUnsatissfiedStudents = getTop5UnsatissfiedStudents();
+        List<User> topFiveUnsatissfiedStudents = getAllStudentsByUnsatisfactionRate();
         for (int i = 0; i < topFiveUnsatissfiedStudents.size(); i++)
         {
             System.out.println("i:" + i + ">>" + topFiveUnsatissfiedStudents.get(i).getName());
+            for (int j = 0; j < topFiveUnsatissfiedStudents.get(i).getVotesByRound(1).size(); j++)
+            {
+                {
+                    System.out.println("i" + i + " j" + j + " >>" + topFiveUnsatissfiedStudents.get(i).getVotesByRound(1).get(j).getPoints());
+                }
+            }
         }
     }
 
     public Controller()
     {
         proposedSubjects = new ArrayList<>();
-        teachers = new ArrayList<>();
-        students = new ArrayList<>();
+ //       teachers = new ArrayList<>();
+//        students = new ArrayList<>();
         users = new ArrayList<>();
         db = DbMock.getInstance();
     }
@@ -142,8 +146,8 @@ public class Controller implements ControllerInterface
     {
         return db.getAliveProposedSubjects();
     }
-    
-      @Override
+
+    @Override
     public List<ProposedSubject> getAllProposedElectiveSubjects()
     {
         return db.getAllProposedSubjects();
@@ -258,7 +262,7 @@ public class Controller implements ControllerInterface
     public void setSatisfactionForStudent(int[] a, int[] b, User student)
     {
         proposedSubjects = db.getAliveProposedSubjects();
-        List<Vote> currentVotes = student.getVotesByRound(1);   
+        List<Vote> currentVotes = student.getVotesByRound(1);
         List<ProposedSubject> pollA = new ArrayList<>();
         List<ProposedSubject> pollB = new ArrayList<>();
         for (int i = 0; i < a.length; i++)
@@ -327,7 +331,7 @@ public class Controller implements ControllerInterface
 
     @Override
     public int getOverallSatisfaction(int[] a, int[] b)
-    {   
+    {
         users = db.getUsers();
         int totalSatisfaction = 0;
         List<User> allStudents = getUsersByUserType(db.getUserTypeByName("Student"));
@@ -339,11 +343,14 @@ public class Controller implements ControllerInterface
         }
         return totalSatisfaction / allStudents.size();
     }
-    
-    private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents){
+
+    private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents)
+    {
         List<User> allStudentsWhoHadVotedForParticularRound = new ArrayList();
-        for(User x : allStudents){
-            if(!x.getVotesByRound(1).isEmpty() && x.getVotesByRound(1).size()==4){
+        for (User x : allStudents)
+        {
+            if (!x.getVotesByRound(1).isEmpty() && x.getVotesByRound(1).size() == 4)
+            {
                 allStudentsWhoHadVotedForParticularRound.add(x);
             }
         }
@@ -351,12 +358,11 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public List<User> getTop5UnsatissfiedStudents()
+    public List<User> getAllStudentsByUnsatisfactionRate()
     {
         users = db.getUsers();
         List<User> unsatisfied = new ArrayList();
 
-        
         for (User x : users)
         {
             if ("Student".equals(x.getUserType().getName()))
@@ -374,15 +380,30 @@ public class Controller implements ControllerInterface
                      }
         });
 
-        if(unsatisfied.size()<5){
-            return unsatisfied;
-        }
-        List<User> topFiveUnsatisfied = new ArrayList();
-        for (int i = 0; i < 5; i++)
+        for (User x : unsatisfied)
         {
-            topFiveUnsatisfied.add(unsatisfied.get(i));
+            List<Vote> votesToBeOrganized = new ArrayList();
+            votesToBeOrganized.addAll(x.getVotesByRound(1));
+            Collections.sort(votesToBeOrganized, new Comparator<Vote>()
+                     {
+
+                         public int compare(Vote o1, Vote o2)
+                         {
+                             return (Integer) o2.getPoints() - (Integer) o1.getPoints();
+                         }
+            });
+            x.setVotes(votesToBeOrganized);
         }
-        return topFiveUnsatisfied;
+
+//        if(unsatisfied.size()<5){
+//            return unsatisfied;
+//        }
+//        List<User> topFiveUnsatisfied = new ArrayList();
+//        for (int i = 0; i < 5; i++)
+//        {
+//            topFiveUnsatisfied.add(unsatisfied.get(i));
+//        }
+        return unsatisfied;
     }
 
     @Override
@@ -423,12 +444,14 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String selectSubjectsForRound1(int[] selectedIndexes) {
-        List<ProposedSubject> allSubjects= getAllProposedElectiveSubjects();
-        for(int i=0;i<selectedIndexes.length; i++){
+    public String selectSubjectsForRound1(int[] selectedIndexes)
+    {
+        List<ProposedSubject> allSubjects = getAllProposedElectiveSubjects();
+        for (int i = 0; i < selectedIndexes.length; i++)
+        {
             allSubjects.get(selectedIndexes[i]).setIsAlive(true);
         }
         return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
     }
-    
+
 }

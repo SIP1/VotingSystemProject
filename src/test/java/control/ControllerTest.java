@@ -311,7 +311,7 @@ public class ControllerTest {
         List<User> expResult = new ArrayList<>();
         expResult.add(controller.users.get(0));
         expResult.add(controller.users.get(3));
-        List<User> result = controller.getTop5UnsatissfiedStudents();
+        List<User> result = controller.getAllStudentsByUnsatisfactionRate();
         assertEquals(expResult, result);
     }
 
