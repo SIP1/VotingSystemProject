@@ -1447,7 +1447,7 @@ public class GUI extends javax.swing.JFrame {
             "Name", "Choices", "Satisfaction"
         };
         //Unsatisfied logic
-        List<User> unsatisfiedStudents = control.getTop5UnsatissfiedStudents();
+        List<User> unsatisfiedStudents = control.getAllStudentsByUnsatisfactionRate();
         Object[][] data = new Object[unsatisfiedStudents.size()][4];
         for (int i = 0; i < unsatisfiedStudents.size(); i++) {
             data[i][0] = unsatisfiedStudents.get(i).getName();

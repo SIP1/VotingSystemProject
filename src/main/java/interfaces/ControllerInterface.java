@@ -57,7 +57,7 @@ public interface ControllerInterface {
     
     int getOverallSatisfaction(int[] a, int[] b);
     
-    List<User> getTop5UnsatissfiedStudents();
+    List<User> getAllStudentsByUnsatisfactionRate();
     
     List<User> getAllTeachers();
     

@@ -240,7 +240,7 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<User> getTop5UnsatissfiedStudents() {
+    public List<User> getAllStudentsByUnsatisfactionRate() {
         List<User> unsatisfied = new ArrayList<>();
         for (User u : users) {
             if (u.getUserType() == userTypes.get(0)) {
