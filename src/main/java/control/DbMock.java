@@ -159,6 +159,7 @@ public class DbMock
             if (found == false)
             {
                 ps.setPoolOptions(null);
+                ps.setIsAlive(false);
             }
         }
         return "Size of poll A: " + a.size() + ", size of poll B: " + b.size();
@@ -230,7 +231,7 @@ public class DbMock
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
         proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
-        proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.FALSE, null));
+        proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.TRUE, null));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(106);
 
         //populate votes

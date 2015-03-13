@@ -24,7 +24,7 @@ public class Controller implements ControllerInterface
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
     private User loggedInUser;
-    private List<ProposedSubject> proposedSubjects;
+    
    // private ArrayList<User> teachers;
    // private ArrayList<User> students;
     private DbMock db;
@@ -52,7 +52,6 @@ public class Controller implements ControllerInterface
 
     public Controller()
     {
-        proposedSubjects = new ArrayList<>();
  //       teachers = new ArrayList<>();
 //        students = new ArrayList<>();
         users = new ArrayList<>();
@@ -156,7 +155,7 @@ public class Controller implements ControllerInterface
     @Override
     public ProposedSubject addProposedElectiveSubject(ProposedSubject pes)
     {
-        proposedSubjects.add(pes);
+        db.addProposedSubject(pes);
         return pes;
     }
 
@@ -261,6 +260,7 @@ public class Controller implements ControllerInterface
     @Override
     public void setSatisfactionForStudent(int[] a, int[] b, User student)
     {
+        List<ProposedSubject> proposedSubjects = new ArrayList();
         proposedSubjects = db.getAliveProposedSubjects();
         List<Vote> currentVotes = student.getVotesByRound(1);
         List<ProposedSubject> pollA = new ArrayList<>();
@@ -431,6 +431,7 @@ public class Controller implements ControllerInterface
     {
         List<ProposedSubject> pollA = new ArrayList<>();
         List<ProposedSubject> pollB = new ArrayList<>();
+        List<ProposedSubject> proposedSubjects = db.getAliveProposedSubjects();
         for (int i = 0; i < a.length; i++)
         {
             pollA.add(proposedSubjects.get(a[i]));
