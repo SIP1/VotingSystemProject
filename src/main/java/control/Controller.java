@@ -24,9 +24,9 @@ public class Controller implements ControllerInterface
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
     private User loggedInUser;
-    
-   // private ArrayList<User> teachers;
-   // private ArrayList<User> students;
+
+    // private ArrayList<User> teachers;
+    // private ArrayList<User> students;
     private DbMock db;
     private List<User> users;
 
@@ -52,7 +52,7 @@ public class Controller implements ControllerInterface
 
     public Controller()
     {
- //       teachers = new ArrayList<>();
+        //       teachers = new ArrayList<>();
 //        students = new ArrayList<>();
         users = new ArrayList<>();
         db = DbMock.getInstance();
@@ -372,12 +372,12 @@ public class Controller implements ControllerInterface
         }
 
         Collections.sort(unsatisfied, new Comparator<User>()
-                 {
+        {
 
-                     public int compare(User o1, User o2)
-                     {
-                         return (Integer) o1.getSatisfaction() - (Integer) o2.getSatisfaction();
-                     }
+            public int compare(User o1, User o2)
+            {
+                return (Integer) o1.getSatisfaction() - (Integer) o2.getSatisfaction();
+            }
         });
 
         for (User x : unsatisfied)
@@ -385,12 +385,12 @@ public class Controller implements ControllerInterface
             List<Vote> votesToBeOrganized = new ArrayList();
             votesToBeOrganized.addAll(x.getVotesByRound(1));
             Collections.sort(votesToBeOrganized, new Comparator<Vote>()
-                     {
+            {
 
-                         public int compare(Vote o1, Vote o2)
-                         {
-                             return (Integer) o2.getPoints() - (Integer) o1.getPoints();
-                         }
+                public int compare(Vote o1, Vote o2)
+                {
+                    return (Integer) o2.getPoints() - (Integer) o1.getPoints();
+                }
             });
             x.setVotes(votesToBeOrganized);
         }
@@ -448,9 +448,17 @@ public class Controller implements ControllerInterface
     public String selectSubjectsForRound1(int[] selectedIndexes)
     {
         List<ProposedSubject> allSubjects = getAllProposedElectiveSubjects();
-        for (int i = 0; i < selectedIndexes.length; i++)
+        for (int i = 0; i < allSubjects.size(); i++)
         {
-            allSubjects.get(selectedIndexes[i]).setIsAlive(true);
+            boolean found = false;
+            for (int j = 0; j < selectedIndexes.length; j++)
+            {
+                if (i == selectedIndexes[j])
+                {
+                    found = true;
+                }
+            }
+            allSubjects.get(i).setIsAlive(found);
         }
         return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
     }
