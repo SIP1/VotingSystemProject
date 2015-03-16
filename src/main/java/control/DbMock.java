@@ -1,5 +1,6 @@
 package control;
 
+import JPA2.FinalClass;
 import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
@@ -15,6 +16,7 @@ public class DbMock
     private List<UserType> userTypes;
     private List<Vote> votes;
     private List<ProposedSubject> pollA, pollB;
+    private List<FinalClass> classes;
 
     public DbMock()
     {
@@ -22,6 +24,7 @@ public class DbMock
         users = new ArrayList();
         userTypes = new ArrayList();
         votes = new ArrayList();
+        classes = new ArrayList();
         populate();
     }
 
@@ -50,6 +53,26 @@ public class DbMock
         return aliveSubject;
     }
 
+    public List<FinalClass> getAllClasses()
+    {
+        return classes;
+    }
+    
+    public String addClass(FinalClass c)
+    {
+        int count = 0;
+        for(FinalClass cl : classes)
+        {
+            if(cl.getSubject().getName().contains(c.getSubject().getName()))
+            {
+                count ++;
+            }
+        }
+        c.setName(c.getSubject().getName() + (count + 1));
+        classes.add(c);
+        return c.getName() + " (" +c.getStudents().size()+ ")";
+    }
+    
     public List<ProposedSubject> getAllProposedSubjects()
     {
         return proposedSubjects;

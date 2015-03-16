@@ -25,6 +25,10 @@ public class FinalClass implements Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    public FinalClass()
+    {
+    }
+
     public Integer getId()
     {
         return id;
@@ -38,7 +42,18 @@ public class FinalClass implements Serializable
     List<User> students = new ArrayList();
     User teacher;
     ProposedSubject subject;
+    String name;
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+    
     public FinalClass(ProposedSubject subject)
     {
         this.subject = subject;

@@ -1,5 +1,6 @@
 package interfaces;
 
+import JPA2.FinalClass;
 import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
@@ -70,4 +71,11 @@ public interface ControllerInterface {
     List<User> getAllStudents ();
     
     List<ProposedSubject> getSubjectsByPool(String pool);
+    
+    String addNewClass(List<User> students, ProposedSubject subject);
+    
+    List<FinalClass> getAllClasses();
+    
+    List<User> getStudentsForClass(FinalClass c);
+    
 }

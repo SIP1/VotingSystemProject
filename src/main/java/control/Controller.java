@@ -1,5 +1,6 @@
 package control;
 
+import JPA2.FinalClass;
 import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
@@ -484,6 +485,26 @@ public class Controller implements ControllerInterface
             }
         }
         return subj;
+    }
+
+    @Override
+    public String addNewClass(List<User> students, ProposedSubject subject)
+    {
+        FinalClass c = new FinalClass(subject);
+        c.setStudents(students);
+        return db.addClass(c);
+    }
+
+    @Override
+    public List<FinalClass> getAllClasses()
+    {
+        return db.getAllClasses();
+    }
+
+    @Override
+    public List<User> getStudentsForClass(FinalClass c)
+    {
+        return c.getStudents();
     }
 
 }
