@@ -192,7 +192,7 @@ public class DbMock
 
         //populate student
         User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
-        User smara = new User("smara", "smara", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student"));
+        User smara = new User("2", "2", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student"));
         User mada = new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student"));
         User cristi = new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student"));
         User peter = new User("peter", "peter", "Peter", "peter@mail.peter", getUserTypeByName("Student"));
@@ -211,7 +211,7 @@ public class DbMock
         users.add(marek);
 
         //make head of program
-        users.add(new User("caroline", "caroline", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
+        users.add(new User("1", "1", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
 
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();
@@ -231,7 +231,7 @@ public class DbMock
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
         proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
-        proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.TRUE, null));
+        proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(106);
 
         //populate votes
@@ -244,12 +244,17 @@ public class DbMock
         getUserByUsername("boyko").setVotes(boykoVotes);
 
         List<Vote> smaraVotes = new ArrayList();
-        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(101), 1, 2));
-        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(102), 1, 1));
-        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(105), 1, 2));
-        smaraVotes.add(new Vote(getUserByUsername("smara"), getProposedSubjectById(103), 1, 1));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(101), 1, 2));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 1, 1));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(105), 1, 2));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(103), 1, 1));
+        
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(101), 2, 2));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(104), 2, 1));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 2, 2));
+        smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(103), 2, 1));
         votes.addAll(smaraVotes);
-        getUserByUsername("smara").setVotes(smaraVotes);
+        getUserByUsername("2").setVotes(smaraVotes);
 
         List<Vote> madaVotes = new ArrayList();
         madaVotes.add(new Vote(getUserByUsername("mada"), getProposedSubjectById(101), 1, 1));

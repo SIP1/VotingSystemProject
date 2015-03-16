@@ -66,4 +66,8 @@ public interface ControllerInterface {
     String addSubjectsToPolls(int[] a, int[] b);
     
     String selectSubjectsForRound1(int[] selectedIndexes);
+    
+    List<User> getAllStudents ();
+    
+    List<ProposedSubject> getSubjectsByPool(String pool);
 }

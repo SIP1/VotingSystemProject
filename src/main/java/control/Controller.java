@@ -463,4 +463,27 @@ public class Controller implements ControllerInterface
         return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
     }
 
+    @Override
+    public List<User> getAllStudents()
+    {
+        return getUsersByUserType(db.getUserTypeByName("Student"));
+    }
+
+    @Override
+    public List<ProposedSubject> getSubjectsByPool(String pool)
+    {
+        List<ProposedSubject> subj = new ArrayList();
+        for (ProposedSubject ps : db.getAliveProposedSubjects())
+        {
+            if (!ps.getPoolOptions().equals(""))
+            {
+                if (ps.getPoolOptions().equals(pool))
+                {
+                    subj.add(ps);
+                }
+            }
+        }
+        return subj;
+    }
+
 }
