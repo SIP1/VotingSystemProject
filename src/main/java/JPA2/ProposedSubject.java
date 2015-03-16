@@ -39,7 +39,7 @@ public class ProposedSubject implements Serializable
         this.isAlive = isAlive;
         this.poolOptions = poolOptions;
     }
-
+    
     public Integer getId()
     {
         return id;
