@@ -1,5 +1,6 @@
 package view;
 
+import JPA2.FinalClass;
 import JPA2.ProposedSubject;
 import JPA2.User;
 import JPA2.UserType;
@@ -28,6 +29,7 @@ public class GUI extends javax.swing.JFrame
     List<ProposedSubject> subjectsToBeDisplayed;
     int roundNumber;
     String[] subjectsTableColumnNames;
+    List<Boolean> isStudentCheckBoxEditable;
 
     public GUI()
     {
@@ -45,6 +47,7 @@ public class GUI extends javax.swing.JFrame
         jPanelEstablishSubjects.setVisible(false);
         control = new Controller();
         roundNumber = 0;
+        isStudentCheckBoxEditable = new ArrayList();
         subjectsTableColumnNames = new String[]
         {
             "Name", "Poll", "Teachers", "Description"
@@ -138,6 +141,10 @@ public class GUI extends javax.swing.JFrame
         jListClasses = new javax.swing.JList();
         jLabel10 = new javax.swing.JLabel();
         jButtonSubmitClass = new javax.swing.JButton();
+        jLabelNewClassError = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jListStudentsForClass = new javax.swing.JList();
+        jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuProposeSubject = new javax.swing.JMenu();
         jMenuRound1 = new javax.swing.JMenu();
@@ -291,7 +298,7 @@ public class GUI extends javax.swing.JFrame
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonSelectSubjectsToVote)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 26, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelMainLayout.setVerticalGroup(
@@ -600,7 +607,7 @@ public class GUI extends javax.swing.JFrame
                 .addComponent(jLabelB)
                 .addGap(218, 218, 218))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelPollLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(62, Short.MAX_VALUE)
                 .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonSubmit)
                     .addGroup(jPanelPollLayout.createSequentialGroup()
@@ -614,8 +621,9 @@ public class GUI extends javax.swing.JFrame
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55))
             .addGroup(jPanelPollLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPollLayout.setVerticalGroup(
             jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,7 +645,7 @@ public class GUI extends javax.swing.JFrame
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSubmit)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jPanelChooseProposedSubjectsForRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -844,6 +852,13 @@ public class GUI extends javax.swing.JFrame
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jListPoolAEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                jListPoolAEstablishClassesMouseReleased(evt);
+            }
+        });
         jScrollPane8.setViewportView(jListPoolAEstablishClasses);
 
         jListPoolBEstablishClasses.setModel(new javax.swing.AbstractListModel()
@@ -852,50 +867,74 @@ public class GUI extends javax.swing.JFrame
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jListPoolBEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                jListPoolBEstablishClassesMouseReleased(evt);
+            }
+        });
         jScrollPane9.setViewportView(jListPoolBEstablishClasses);
 
-        jListClasses.setModel(new javax.swing.AbstractListModel()
+        jListClasses.addMouseListener(new java.awt.event.MouseAdapter()
         {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                jListClassesMouseReleased(evt);
+            }
         });
         jScrollPane10.setViewportView(jListClasses);
 
         jLabel10.setText("Classes");
 
         jButtonSubmitClass.setText("Submit Class");
+        jButtonSubmitClass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonSubmitClassActionPerformed(evt);
+            }
+        });
+
+        jScrollPane11.setViewportView(jListStudentsForClass);
+
+        jLabel11.setText("Sudents");
 
         javax.swing.GroupLayout jPanelEstablishSubjectsLayout = new javax.swing.GroupLayout(jPanelEstablishSubjects);
         jPanelEstablishSubjects.setLayout(jPanelEstablishSubjectsLayout);
         jPanelEstablishSubjectsLayout.setHorizontalGroup(
             jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstablishSubjectsLayout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
-                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel4))
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
-                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jLabel9)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel10)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstablishSubjectsLayout.createSequentialGroup()
-                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButtonSubmitClass)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                        .addComponent(jLabelNewClassError, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(jButtonSubmitClass))
+                    .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
+                            .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
+                                    .addComponent(jLabel4)))
+                            .addGap(9, 9, 9)
+                            .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
+                                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
+                                    .addGap(28, 28, 28)
+                                    .addComponent(jLabel9)
+                                    .addGap(78, 78, 78)
+                                    .addComponent(jLabel10)
+                                    .addGap(76, 76, 76)
+                                    .addComponent(jLabel11))))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanelEstablishSubjectsLayout.setVerticalGroup(
             jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -904,16 +943,22 @@ public class GUI extends javax.swing.JFrame
                 .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                    .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane8)
+                    .addComponent(jScrollPane9)
+                    .addComponent(jScrollPane11)
+                    .addComponent(jScrollPane10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSubmitClass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonSubmitClass)
+                    .addComponent(jLabelNewClassError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jMenuProposeSubject.setText("Propose subject");
@@ -984,10 +1029,10 @@ public class GUI extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-            .addComponent(jPanelLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-            .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jPanelLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jPanelRound1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelAddProposedSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -999,18 +1044,16 @@ public class GUI extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanelHelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-            .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-            .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+            .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+            .addComponent(jPanelPoll, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+            .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelAddProposedSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 1, Short.MAX_VALUE)))
+                    .addGap(0, 3, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanelEstablishSubjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanelEstablishSubjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1836,24 +1879,174 @@ public class GUI extends javax.swing.JFrame
         jPanelHelp.setVisible(false);
         jPanelChooseProposedSubjectsForRound1.setVisible(false);
         jPanelMain.setVisible(false);
-        
+        //jListStudentsForClass.setModel(new DefaultListModel());
         setupRound2VotesTable();
         fillInPoolLists();
-        
+        fillInClassList();
     }//GEN-LAST:event_jMenuEstablishClassesMouseClicked
     
+    private void jListPoolAEstablishClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListPoolAEstablishClassesMouseReleased
+    {//GEN-HEADEREND:event_jListPoolAEstablishClassesMouseReleased
+        jListPoolBEstablishClasses.clearSelection();
+        jTableRound2Votes.clearSelection();
+        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        {
+            jTableRound2Votes.setValueAt(false, i, 3);
+        }
+        
+        List<User> students = control.getAllStudents();
+        for(int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+        {
+            isStudentCheckBoxEditable.set(i, true);
+        }
+        for (FinalClass c : control.getAllClasses())
+        {
+            if (c.getSubject().getPoolOptions().equals("A"))
+            {
+                for (User student : control.getStudentsForClass(c))
+                {
+                    for (int j = 0; j < students.size(); j++)
+                    {
+                        if (student.equals(students.get(j)))
+                        {
+                            isStudentCheckBoxEditable.set(j, false);
+                        }
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jListPoolAEstablishClassesMouseReleased
+
+    private void jListPoolBEstablishClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListPoolBEstablishClassesMouseReleased
+    {//GEN-HEADEREND:event_jListPoolBEstablishClassesMouseReleased
+        jListPoolAEstablishClasses.clearSelection();
+        jTableRound2Votes.clearSelection();
+        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        {
+            jTableRound2Votes.setValueAt(false, i, 3);
+        }
+        
+        List<User> students = control.getAllStudents();
+        for(int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+        {
+            isStudentCheckBoxEditable.set(i, true);
+        }
+        for (FinalClass c : control.getAllClasses())
+        {
+            if (c.getSubject().getPoolOptions().equals("B"))
+            {
+                for (User student : control.getStudentsForClass(c))
+                {
+                    for (int j = 0; j < students.size(); j++)
+                    {
+                        if (student.equals(students.get(j)))
+                        {
+                            isStudentCheckBoxEditable.set(j, false);
+                        }
+                    }
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jListPoolBEstablishClassesMouseReleased
+
+    private void jButtonSubmitClassActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSubmitClassActionPerformed
+    {//GEN-HEADEREND:event_jButtonSubmitClassActionPerformed
+        List<ProposedSubject> poolA = control.getSubjectsByPool("A");
+        List<ProposedSubject> poolB = control.getSubjectsByPool("B");
+        ProposedSubject subject = new ProposedSubject();
+        List<User> students = new ArrayList();
+        if (jListPoolAEstablishClasses.getSelectedIndex() == -1 && (jListPoolBEstablishClasses.getSelectedIndex() == -1))
+        {
+            jLabelNewClassError.setText("Please select a subject!");
+        }
+        else
+        {
+            if (jListPoolAEstablishClasses.getSelectedIndex() != -1)
+            {
+                subject = poolA.get(jListPoolAEstablishClasses.getSelectedIndex());
+            }
+            else
+            {
+                subject = poolB.get(jListPoolBEstablishClasses.getSelectedIndex());
+            }
+
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+            {
+                if (jTableRound2Votes.getValueAt(i, 3) != null)
+                {
+                    if ((Boolean) jTableRound2Votes.getValueAt(i, 3))
+                    {
+                        students.add(control.getAllStudents().get(i));
+                        jTableRound2Votes.setValueAt(false, i, 3);
+                        if (subject.getPoolOptions().equals("A"))
+                        {
+                            jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 1);
+                        }
+                        else
+                        {
+                            jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 2);
+                        }
+                    }
+                }
+            }
+            jLabelNewClassError.setText(control.addNewClass(students, subject));
+            fillInClassList();
+            jListPoolAEstablishClasses.clearSelection();
+            jListPoolBEstablishClasses.clearSelection();
+            jTableRound2Votes.clearSelection();
+        }
+
+    }//GEN-LAST:event_jButtonSubmitClassActionPerformed
+
+    private void jListClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListClassesMouseReleased
+    {//GEN-HEADEREND:event_jListClassesMouseReleased
+        if (jListClasses.getSelectedIndex() != -1)
+        {
+            fillInStudentForClassList();
+        }
+        else
+        {
+            jListStudentsForClass.setModel(new DefaultListModel());
+        }
+    }//GEN-LAST:event_jListClassesMouseReleased
+
+    private void fillInStudentForClassList()
+    {
+        List<User> studentsForClass = control.getStudentsForClass(control.getAllClasses().get(jListClasses.getSelectedIndex()));
+        DefaultListModel model = new DefaultListModel();
+        for (User student : studentsForClass)
+        {
+            model.addElement(student.getName());
+        }
+        jListStudentsForClass.setModel(model);
+    }
+
+    private void fillInClassList()
+    {
+        List<FinalClass> classes = control.getAllClasses();
+        DefaultListModel model = new DefaultListModel();
+        for (FinalClass c : classes)
+        {
+            model.addElement(c.getName() + " (" + c.getStudents().size() + ")");
+        }
+        jListClasses.setModel(model);
+
+    }
+
     private void fillInPoolLists()
     {
         List<ProposedSubject> poolA = control.getSubjectsByPool("A");
         List<ProposedSubject> poolB = control.getSubjectsByPool("B");
-        
+
         DefaultListModel modelA = new DefaultListModel();
         for (ProposedSubject ps : poolA)
         {
             modelA.addElement(ps.getName());
         }
         jListPoolAEstablishClasses.setModel(modelA);
-        
+
         DefaultListModel modelB = new DefaultListModel();
         for (ProposedSubject ps : poolB)
         {
@@ -1861,96 +2054,81 @@ public class GUI extends javax.swing.JFrame
         }
         jListPoolBEstablishClasses.setModel(modelB);
     }
-    
-    private void setupRound2VotesTable(){
+
+    private void setupRound2VotesTable()
+    {
         String[] round2VotesTableColoumnNames =
         {
-            "Name", "Pool A choices", "Pool B choices", "Is in class"
+            "Name", "Pool A choices", "Pool B choices", "Add"
         };
         List<User> allStudents = control.getAllStudents();
         Object[][] data = new Object[allStudents.size()][4];
-        String noVotes = "No votes yet.";
+ 
         for (int i = 0; i < allStudents.size(); i++)
         {
             List<Vote> currentVotes = allStudents.get(i).getVotesByRound(2);
-
+ 
             data[i][0] = allStudents.get(i).getName();
-
+            String error = "No votes yet.";
             if (!currentVotes.isEmpty())
             {
-                String firstChoice = "";
-                String secondChoice = "";
+ 
+                String secondPool = "";
+                String firstPool = "";
                 for (Vote vote : currentVotes)
                 {
+ 
                     if (vote.getProposedSubject().getPoolOptions().equals("A"))
                     {
                         if (vote.getPoints() == 2)
                         {
-                            firstChoice = "1st choice: " + vote.getProposedSubject().getName();
+                            firstPool += "1 " + vote.getProposedSubject().getName();
                         }
                         else if (vote.getPoints() == 1)
                         {
-                            secondChoice = ", 2nd choice: " + vote.getProposedSubject().getName();
+                            firstPool += ", 2 " + vote.getProposedSubject().getName();
                         }
-                    }
-                    if (!(firstChoice + secondChoice).equals(null))
-                    {
-                        data[i][1] = firstChoice + secondChoice;
-                    }
-                    else
-                    {
-                        data[i][1] = noVotes;
-                    }
-                }
-
-                firstChoice = "";
-                secondChoice = "";
-                for (Vote vote : currentVotes)
-                {
-                    if (vote.getProposedSubject().getPoolOptions().equals("B"))
+                        data[i][1] = firstPool;
+                    } else if (vote.getProposedSubject().getPoolOptions().equals("B"))
                     {
                         if (vote.getPoints() == 2)
                         {
-                            firstChoice = "1st choice: " + vote.getProposedSubject().getName();
+                            secondPool += "1 " + vote.getProposedSubject().getName();
                         }
                         else if (vote.getPoints() == 1)
                         {
-                            secondChoice = ", 2nd choice: " + vote.getProposedSubject().getName();
+                            secondPool += ", 2 " + vote.getProposedSubject().getName();
                         }
-                    }
-                    if (!(firstChoice + secondChoice).equals(null))
-                    {
-                        data[i][2] = firstChoice + secondChoice;
-                    }
-                    else
-                    {
-                        data[i][2] = noVotes;
+                        data[i][2] = secondPool;
                     }
                 }
             }
             else
             {
-                data[i][1] = noVotes;
-                data[i][2] = noVotes;
+                data[i][1] = error;
+                data[i][2] = error;
             }
-
+ 
         }
         jTableRound2Votes.setModel(new DefaultTableModel(data, round2VotesTableColoumnNames)
         {
             @Override
             public boolean isCellEditable(int row, int column)
             {
-                switch (column) {
+                switch (column)
+                {
                     case 3:
-                        return true;
+                        return isStudentCheckBoxEditable.get(row);
                     default:
                         return false;
                 }
             }
-            
+
             @Override
-            public Class getColumnClass(int column) {
-                switch (column) {
+            public Class getColumnClass(int column)
+            {
+                switch (column)
+                {
                     case 3:
                         return Boolean.class;
                     default:
@@ -1963,8 +2141,13 @@ public class GUI extends javax.swing.JFrame
         jTableRound2Votes.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(2).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(3).setPreferredWidth(50);
+        
+        for(User s : allStudents)
+        {
+           isStudentCheckBoxEditable.add(true);
+        }
     }
-    
+
     private void setupJListSubjectsToChooseFromForRound1()
     {
         DefaultListModel model = new DefaultListModel();
@@ -2082,6 +2265,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -2099,6 +2283,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabelFirstPriorityB;
     private javax.swing.JLabel jLabelLoginError;
     private javax.swing.JLabel jLabelName;
+    private javax.swing.JLabel jLabelNewClassError;
     private javax.swing.JLabel jLabelPollA;
     private javax.swing.JLabel jLabelPollB;
     private javax.swing.JLabel jLabelRoundTitle;
@@ -2113,6 +2298,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JList jListPoolAEstablishClasses;
     private javax.swing.JList jListPoolBEstablishClasses;
     private javax.swing.JList jListProposedTeachers;
+    private javax.swing.JList jListStudentsForClass;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuEstablishClasses;
     private javax.swing.JMenu jMenuHelp;
@@ -2131,6 +2317,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

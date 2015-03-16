@@ -311,4 +311,16 @@ public class ControllerMock implements ControllerInterface {
         }
         return "";
     }
+
+    @Override
+    public List<User> getAllStudents()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<ProposedSubject> getSubjectsByPool(String pool)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
