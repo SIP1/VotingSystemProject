@@ -1,9 +1,11 @@
 package control;
 
-import JPA2.ProposedSubject;
-import JPA2.User;
-import JPA2.UserType;
-import JPA2.Vote;
+import models.FinalClass;
+import models.ProposedSubject;
+import models.User;
+import models.UserType;
+import models.Vote;
+import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.List;
 import mocks.ControllerMock;
@@ -322,6 +324,7 @@ public class ControllerTest {
     public void testGetAllTeachers() {
         List<User> expResult = new ArrayList<>();
         expResult.add(controller.users.get(1));
+        expResult.add(controller.users.get(4));
         List<User> result = controller.getAllTeachers();
         assertEquals(expResult, result);
     }
@@ -344,7 +347,7 @@ public class ControllerTest {
      */
     @Test
     public void testAddSubjectsToPolls() {
-        System.out .println("addSubjectsToPolls");
+        System.out.println("addSubjectsToPolls");
         int[] a = new int[]{1};
         int[] b = new int[]{2};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
@@ -389,6 +392,97 @@ public class ControllerTest {
         int[] selectedIndexes = new int[]{1};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
         String result = controller.selectSubjectsForRound1(selectedIndexes);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllStudentsByUnsatisfactionRate method, of class Controller.
+     */
+    @Test
+    public void testGetAllStudentsByUnsatisfactionRate() {
+        System.out.println("getAllStudentsByUnsatisfactionRate");
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(0));
+        expResult.add(controller.users.get(3));
+        List<User> result = controller.getAllStudentsByUnsatisfactionRate();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllStudents method, of class Controller.
+     */
+    @Test
+    public void testGetAllStudents() {
+        System.out.println("getAllStudents");
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(0));
+        expResult.add(controller.users.get(3));
+        List<User> result = controller.getAllStudents();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getSubjectsByPool method, of class Controller.
+     */
+    @Test
+    public void testGetSubjectsByPool() {
+        System.out.println("getSubjectsByPool");
+        String pool = "B";
+        List<ProposedSubject> expResult = new ArrayList<>();
+        expResult.add(controller.proposedSubjects.get(0));
+        expResult.add(controller.proposedSubjects.get(3));
+        expResult.add(controller.proposedSubjects.get(4));
+        List<ProposedSubject> result = controller.getSubjectsByPool(pool);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of addNewClass method, of class Controller.
+     */
+    @Test
+    public void testAddNewClass() {
+        System.out.println("addNewClass");
+        List<User> students = controller.students;
+        ProposedSubject subject = controller.proposedSubjects.get(1);
+        String expResult = subject.getName() + "(" + students.size() + ")";
+        String result = controller.addNewClass(students, subject);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getAllClasses method, of class Controller.
+     */
+    @Test
+    public void testGetAllClasses() {
+        System.out.println("getAllClasses");
+        List<FinalClass> expResult = controller.finalClasses;
+        List<FinalClass> result = controller.getAllClasses();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getStudentsForClass method, of class Controller.
+     */
+    @Test
+    public void testGetStudentsForClass() {
+        System.out.println("getStudentsForClass");
+        FinalClass c = controller.finalClasses.get(0);
+        List<User> expResult = new ArrayList<>();
+        expResult.add(controller.users.get(0));
+        expResult.add(controller.users.get(3));
+        List<User> result = controller.getStudentsForClass(c);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of createClassesXML method, of class Controller.
+     */
+    @Test
+    public void testCreateClassesXML() {
+        System.out.println("createClassesXML");
+        XStream x = new XStream();
+        String expResult = x.toXML(controller.proposedSubjects);
+        String result = controller.createClassesXML();
         assertEquals(expResult, result);
     }
 }

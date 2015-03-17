@@ -1,7 +1,6 @@
-package JPA2;
+package models;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -63,7 +62,7 @@ public class User implements Serializable {
     public void setSatisfaction(int satisfaction) {
         this.satisfaction = satisfaction;
     }
-    
+
     public List<ProposedSubject> getProposedSubjects() {
         return proposedSubjects;
     }
@@ -120,14 +119,11 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public List<Vote> getVotesByRound(int roundNo)
-    {
+
+    public List<Vote> getVotesByRound(int roundNo) {
         List<Vote> votesForRound = new ArrayList<>();
-        for(Vote vote : votes)
-        {
-            if(vote.getRoundNumber() == roundNo)
-            {
+        for (Vote vote : votes) {
+            if (vote.getRoundNumber() == roundNo) {
                 votesForRound.add(vote);
             }
         }

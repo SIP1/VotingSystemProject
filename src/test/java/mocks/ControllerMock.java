@@ -1,17 +1,17 @@
 package mocks;
 
-import JPA2.ProposedSubject;
-import JPA2.User;
-import JPA2.UserType;
-import JPA2.Vote;
+import models.FinalClass;
+import models.ProposedSubject;
+import models.User;
+import models.UserType;
+import models.Vote;
+import com.thoughtworks.xstream.XStream;
 import edu.emory.mathcs.backport.java.util.Collections;
 import interfaces.ControllerInterface;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import org.apache.velocity.runtime.directive.Foreach;
-import org.hibernate.cfg.CollectionSecondPass;
 import utilities.AcceptanceProtocol;
 
 public class ControllerMock implements ControllerInterface {
@@ -21,10 +21,9 @@ public class ControllerMock implements ControllerInterface {
     public ArrayList<User> users = new ArrayList();
     public ArrayList<UserType> userTypes = new ArrayList<>();
     public ArrayList<Vote> votes = new ArrayList<>();
-
-    public static void main(String[] args) {
-        ControllerMock controllerMock = new ControllerMock();
-    }
+    public ArrayList<FinalClass> finalClasses = new ArrayList<>();
+    public List<User> teachers = new ArrayList<>();
+    public List<User> students = new ArrayList<>();
 
     public ControllerMock() {
         //create user types
@@ -37,13 +36,23 @@ public class ControllerMock implements ControllerInterface {
         users.add(new User("TestUser2", "test", "Testing user 2", "test@test.com", userTypes.get(1)));
         users.add(new User("TestUser3", "test", "Admin", "admin@test.com", userTypes.get(2)));
         users.add(new User("TestUser4", "test", "Lala", "skat@test.com", userTypes.get(0)));
+        users.add(new User("TestUser5", "test", "Teacher", "test@test.com", userTypes.get(1)));
 
         //create proposed subjects
-        proposedSubjects.add(new ProposedSubject("Test subject 1", "It was only just a test", true, null));
-        proposedSubjects.add(new ProposedSubject("Test subject 2", "It was only just a test", true, null));
-        proposedSubjects.add(new ProposedSubject("Test subject 3", "It was only just a test", true, null));
-        proposedSubjects.add(new ProposedSubject("Test subject 4", "It was only just a test", true, null));
-        proposedSubjects.add(new ProposedSubject("Test subject DEAD", "It was only just a dead test", false, null));
+        proposedSubjects.add(new ProposedSubject("Test subject 1", "It was only just a test", true, "B"));
+        proposedSubjects.add(new ProposedSubject("Test subject 2", "It was only just a test", true, "A"));
+        proposedSubjects.add(new ProposedSubject("Test subject 3", "It was only just a test", true, "A"));
+        proposedSubjects.add(new ProposedSubject("Test subject 4", "It was only just a test", true, "B"));
+        proposedSubjects.add(new ProposedSubject("Test subject DEAD", "It was only just a dead test", false, "B"));
+
+        //add teachers to the proposed subject
+        teachers.add(users.get(1));
+        teachers.add(users.get(4));
+        proposedSubjects.get(0).setUsers(teachers);
+
+        //add teachers to the proposed subject
+        students.add(users.get(0));
+        students.add(users.get(3));
 
         //assing the current user which will be the student
         user = users.get(0);
@@ -60,7 +69,13 @@ public class ControllerMock implements ControllerInterface {
 
         //set votes to user
         user.setVotes(votes);
-        // authenticateUser("bobkoo", "12345");
+
+        //create final classes
+        FinalClass finalClass = new FinalClass(proposedSubjects.get(0));
+        finalClass.setName("This is a test class");
+        finalClass.setStudents(students);
+        finalClass.setTeacher(teachers);
+        finalClasses.add(finalClass);
     }
 
     //Users
@@ -313,14 +328,48 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllStudents()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<User> getAllStudents() {
+        List<User> students = new ArrayList<>();
+        for (User user : users) {
+            if (user.getUserType().equals(userTypes.get(0))) {
+                students.add(user);
+            }
+        }
+        return students;
     }
 
     @Override
-    public List<ProposedSubject> getSubjectsByPool(String pool)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ProposedSubject> getSubjectsByPool(String pool) {
+        List<ProposedSubject> poolSubjects = new ArrayList<>();
+        for (ProposedSubject proposedSubject : proposedSubjects) {
+            if (proposedSubject.getPoolOptions().equals(pool)) {
+                poolSubjects.add(proposedSubject);
+            }
+        }
+        return poolSubjects;
+    }
+
+    @Override
+    public String addNewClass(List<User> students, ProposedSubject subject) {
+        if (students.size() != 0 && subject != null) {
+            return subject.getName() + "(" + students.size() + ")";
+        }
+        return AcceptanceProtocol.FINAL_CLASS_ADDING_ERROR;
+    }
+
+    @Override
+    public List<FinalClass> getAllClasses() {
+        return finalClasses;
+    }
+
+    @Override
+    public List<User> getStudentsForClass(FinalClass c) {
+        return c.getStudents();
+    }
+
+    public String createClassesXML() {
+        XStream x = new XStream();
+        String xml = x.toXML(proposedSubjects);
+        return xml;
     }
 }

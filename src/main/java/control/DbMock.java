@@ -1,10 +1,10 @@
 package control;
 
-import JPA2.FinalClass;
-import JPA2.ProposedSubject;
-import JPA2.User;
-import JPA2.UserType;
-import JPA2.Vote;
+import models.FinalClass;
+import models.ProposedSubject;
+import models.User;
+import models.UserType;
+import models.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
