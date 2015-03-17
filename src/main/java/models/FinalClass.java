@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package JPA2;
+package models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,75 +18,63 @@ import javax.persistence.Id;
  * @author smarandadungeanu
  */
 @Entity
-public class FinalClass implements Serializable
-{
+public class FinalClass implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public FinalClass()
-    {
+    public FinalClass() {
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
-    
+
     List<User> students = new ArrayList();
-    User teacher;
+    List<User> teachers = new ArrayList();
     ProposedSubject subject;
     String name;
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
-    
-    public FinalClass(ProposedSubject subject)
-    {
+
+    public FinalClass(ProposedSubject subject) {
         this.subject = subject;
     }
 
-    public List<User> getStudents()
-    {
+    public List<User> getStudents() {
         return students;
     }
 
-    public ProposedSubject getSubject()
-    {
+    public ProposedSubject getSubject() {
         return subject;
     }
 
-    public User getTeacher()
-    {
-        return teacher;
+    public List<User> getTeacher() {
+        return teachers;
     }
 
-    public void setStudents(List<User> students)
-    {
+    public void setStudents(List<User> students) {
         this.students = students;
     }
 
-    public void setSubject(ProposedSubject subject)
-    {
+    public void setSubject(ProposedSubject subject) {
         this.subject = subject;
     }
 
-    public void setTeacher(User teacher)
-    {
-        this.teacher = teacher;
+    public void setTeacher(List<User> teachers) {
+        this.teachers = teachers;
     }
-    
+
 }

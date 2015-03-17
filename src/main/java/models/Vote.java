@@ -1,4 +1,4 @@
-package JPA2;
+package models;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -13,8 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Vote_TBL")
-public class Vote implements Serializable
-{
+public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,74 +33,61 @@ public class Vote implements Serializable
     private Integer roundNumber;
     private Integer points;
 
-    public Vote()
-    {
+    public Vote() {
         // default constructor
     }
 
-    public Vote(User user, ProposedSubject proposedSubject, Integer roundNumber, Integer points)
-    {
+    public Vote(User user, ProposedSubject proposedSubject, Integer roundNumber, Integer points) {
         this.user = user;
         this.proposedSubject = proposedSubject;
         this.roundNumber = roundNumber;
         this.points = points;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
     //Needed for testing
-    public void setId(Integer id)
-    {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public ProposedSubject getProposedSubject()
-    {
+    public ProposedSubject getProposedSubject() {
         return proposedSubject;
     }
 
-    public void setProposedSubject(ProposedSubject proposedSubject)
-    {
+    public void setProposedSubject(ProposedSubject proposedSubject) {
         this.proposedSubject = proposedSubject;
     }
 
-    public Integer getRoundNumber()
-    {
+    public Integer getRoundNumber() {
         return roundNumber;
     }
 
-    public void setRoundNumber(Integer roundNumber)
-    {
+    public void setRoundNumber(Integer roundNumber) {
         this.roundNumber = roundNumber;
     }
 
-    public Integer getPoints()
-    {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setPoints(Integer points)
-    {
+    public void setPoints(Integer points) {
         this.points = points;
     }
 
     //Needed for testing
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Vote{" + "id=" + id + ", user=" + user + ", proposedSubject="
                 + proposedSubject + ", roundNumber=" + roundNumber
                 + ", points=" + points + '}';
