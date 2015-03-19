@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.6" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.JComboBox" name="jComboBox5">
       <Properties>
@@ -52,12 +52,12 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuEstablishClassesMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuEstablishTeachers">
+        <Menu class="javax.swing.JMenu" name="jMenuAssignTeachers">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Establish teachers"/>
+            <Property name="text" type="java.lang.String" value="Assign teachers"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuEstablishTeachersMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuAssignTeachersMouseClicked"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuSendReport">
@@ -136,7 +136,7 @@
           </Group>
           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanelEstablishTeachers" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanelAssignTeachers" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -169,7 +169,7 @@
           </Group>
           <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jPanelEstablishTeachers" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanelAssignTeachers" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -844,7 +844,7 @@
                       <Component id="jLabelTeachers" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="jScrollPane5" min="-2" pref="330" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
                   <Component id="jButtonProposeSubject" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
@@ -1164,7 +1164,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="36" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1186,7 +1186,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane6" pref="244" max="32767" attributes="0"/>
+                  <Component id="jScrollPane6" pref="252" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButtonSubmitClass" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -1238,6 +1238,9 @@
                       <Renderer/>
                     </Column>
                   </TableColumnModel>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
@@ -1353,7 +1356,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelEstablishTeachers">
+    <Container class="javax.swing.JPanel" name="jPanelAssignTeachers">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1396,9 +1399,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabelEstablishTeachersToClassesError" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonRemoveTeacherFromClass" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonAddTeacherToClass" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonSubmitTeachersToClass" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane11" alignment="0" max="32767" attributes="0"/>
                           </Group>
@@ -1424,14 +1425,11 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane11" pref="250" max="32767" attributes="0"/>
+                  <Component id="jScrollPane11" pref="257" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabelEstablishTeachersToClassesError" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="jButtonAddTeacherToClass" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonRemoveTeacherFromClass" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jButtonSubmitTeachersToClass" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -1465,6 +1463,9 @@
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jListPoolAClassesMouseReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -1482,16 +1483,19 @@
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jListPoolBClassesMouseReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButtonAddTeacherToClass">
+        <Component class="javax.swing.JButton" name="jButtonSubmitTeachersToClass">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add teacher to class"/>
+            <Property name="text" type="java.lang.String" value="Submit changes"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddTeacherToClassActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubmitTeachersToClassActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelEstablishTeachersToClassesError">
@@ -1504,14 +1508,6 @@
             <Property name="text" type="java.lang.String" value="Teachers:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonRemoveTeacherFromClass">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Remove teacher from class"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveTeacherFromClassActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane11">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -1519,14 +1515,14 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTableRound2Votes1">
+            <Component class="javax.swing.JTable" name="jTableAssignTeachersToSubjects">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="false" title="Name" type="java.lang.String"/>
                     <Column editable="false" title="Teaching from Pool A" type="java.lang.String"/>
                     <Column editable="false" title="Teaching from Pool B" type="java.lang.String"/>
-                    <Column editable="false" title="Assigned" type="java.lang.Boolean"/>
+                    <Column editable="false" title="Assign" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1552,6 +1548,9 @@
                       <Renderer/>
                     </Column>
                   </TableColumnModel>
+                </Property>
+                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
+                  <JTableSelectionModel selectionMode="0"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

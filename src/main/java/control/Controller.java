@@ -502,6 +502,11 @@ public class Controller implements ControllerInterface
     {
         return db.editStudentsInClass(students, classIndex);
     }
+    
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
+        return db.editTeachersInClass(teachers, classIndex);
+    }
 
     @Override
     public List<FinalClass> getAllClasses()

@@ -74,7 +74,7 @@ public class ControllerMock implements ControllerInterface {
         FinalClass finalClass = new FinalClass(proposedSubjects.get(0));
         finalClass.setName("This is a test class");
         finalClass.setStudents(students);
-        finalClass.setTeacher(teachers);
+        finalClass.setTeachers(teachers);
         finalClasses.add(finalClass);
     }
 

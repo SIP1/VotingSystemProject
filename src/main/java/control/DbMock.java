@@ -63,6 +63,12 @@ public class DbMock
         classes.get(classIndex).setStudents(students);
         return classes.get(classIndex);
     }
+    
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
+        classes.get(classIndex).setTeachers(teachers);
+        return classes.get(classIndex);
+    }
 
     public String addClass(FinalClass c)
     {
