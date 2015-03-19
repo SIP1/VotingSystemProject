@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utilities;
 
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -22,14 +17,25 @@ import models.ProposedSubject;
 import models.User;
 import models.UserType;
 
-public class EmailSender {
+public class EmailSender
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        new EmailSender().eMailSender();
+    }
+    
+    public boolean emailSender(){
+        return eMailSender();
+    }
 
-        ArrayList<ProposedSubject> proposedSubjects = new ArrayList();
-        ArrayList<User> users = new ArrayList();
-        ArrayList<UserType> userTypes = new ArrayList<>();
+    private List<FinalClass> informationToSend()
+    {
         ArrayList<FinalClass> finalClasses = new ArrayList<>();
+
+        List<ProposedSubject> proposedSubjects = new ArrayList();
+        List<User> users = new ArrayList();
+        List<UserType> userTypes = new ArrayList<>();
         List<User> teachers = new ArrayList<>();
         List<User> students = new ArrayList<>();
 
@@ -64,46 +70,65 @@ public class EmailSender {
         finalClass.setTeacher(teachers);
         finalClasses.add(finalClass);
 
-        XStream x = new XStream();
-        String xml = x.toXML(finalClasses);
-
-        final String from_address = "group2sip@gmail.com";
-        final String to_address = "cristina.madalina.dragan@gmail.com";
-        final String subject = "Testing";
-        final String message_text = "Dear Mail Crawler,\n\n" + xml;
-
-        final String username = "group2sip@gmail.com";
-        final String password = "wejustwanttosendanemail";
-
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        Session session = Session.getInstance(props,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
-
-        try {
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from_address));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(to_address));
-            message.setSubject(subject);
-            message.setText(message_text);
-
-            Transport.send(message);
-
-            System.out.println("Done");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        return finalClasses;
     }
+
+    private boolean eMailSender()
+    {
+
+        XStream x = new XStream();
+        String xml = x.toXML(informationToSend());
+
+        final String senderEmailAccount = "group2sip@gmail.com";
+        final String senderEMailPassword = "letmelogin";
+        final String receiveEmailAccount = "boyko.surlev@gmail.com";
+        final String subject_text = "Title";
+        final String message_text = "Dear Mail Crawler,\n\n" + xml;
+        try
+        {
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com"); // for gmail use smtp.gmail.com
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.debug", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.port", "465");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.socketFactory.fallback", "false");
+
+            Session mailSession = Session.getInstance(props, new javax.mail.Authenticator()
+                                              {
+
+                                                  @Override
+                                                  protected PasswordAuthentication getPasswordAuthentication()
+                                                  {
+                                                      return new PasswordAuthentication(senderEmailAccount, senderEMailPassword);
+                                                  }
+            });
+
+            mailSession.setDebug(true); // Enable the debug mode
+
+            Message msg = new MimeMessage(mailSession);
+
+            //--[ Set the FROM, TO, DATE and SUBJECT fields
+            msg.setFrom(new InternetAddress(senderEmailAccount));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiveEmailAccount));
+            msg.setSentDate(new Date());
+            msg.setSubject(subject_text);
+            //--[ Create the body of the mail
+            msg.setText(message_text);
+
+            //--[ Ask the Transport class to send our mail message
+            Transport.send(msg);
+
+        }
+        catch (MessagingException E)
+        {
+            System.out.println("Oops something has gone pearshaped!");
+            System.out.println(E);
+            return false;
+        }
+        return true;
+    }
+
 }
