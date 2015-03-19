@@ -17,6 +17,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import utilities.AcceptanceProtocol;
+import utilities.EmailSender;
 
 public class Controller implements ControllerInterface
 {
@@ -25,6 +26,7 @@ public class Controller implements ControllerInterface
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
     private User loggedInUser;
+    private EmailSender emailSender;
 
     // private ArrayList<User> teachers;
     // private ArrayList<User> students;
@@ -494,6 +496,11 @@ public class Controller implements ControllerInterface
         c.setStudents(students);
         return db.addClass(c);
     }
+    
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
+        return db.editStudentsInClass(students, classIndex);
+    }
 
     @Override
     public List<FinalClass> getAllClasses()
@@ -507,4 +514,9 @@ public class Controller implements ControllerInterface
         return c.getStudents();
     }
 
+    public Boolean sendMail(String email)
+    {
+        emailSender = new EmailSender();
+        return emailSender.emailSender(email);
+    }
 }

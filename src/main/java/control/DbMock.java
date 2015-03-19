@@ -57,22 +57,28 @@ public class DbMock
     {
         return classes;
     }
-    
+
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
+        classes.get(classIndex).setStudents(students);
+        return classes.get(classIndex);
+    }
+
     public String addClass(FinalClass c)
     {
         int count = 0;
-        for(FinalClass cl : classes)
+        for (FinalClass cl : classes)
         {
-            if(cl.getSubject().getName().contains(c.getSubject().getName()))
+            if (cl.getSubject().getName().contains(c.getSubject().getName()))
             {
-                count ++;
+                count++;
             }
         }
         c.setName(c.getSubject().getName() + (count + 1));
         classes.add(c);
-        return c.getName() + " (" +c.getStudents().size()+ ")";
+        return c.getName() + " (" + c.getStudents().size() + ")";
     }
-    
+
     public List<ProposedSubject> getAllProposedSubjects()
     {
         return proposedSubjects;
@@ -271,7 +277,7 @@ public class DbMock
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 1, 1));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(105), 1, 2));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(103), 1, 1));
-        
+
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(101), 2, 2));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(104), 2, 1));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 2, 2));

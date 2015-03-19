@@ -21,7 +21,8 @@ import utilities.AcceptanceProtocol;
  *
  * @author smarandadungeanu
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame
+{
 
     Controller control;
     List<ProposedSubject> subjectsToBeDisplayed;
@@ -29,13 +30,15 @@ public class GUI extends javax.swing.JFrame {
     String[] subjectsTableColumnNames;
     List<Boolean> isStudentCheckBoxEditable;
 
-    public GUI() {
+    public GUI()
+    {
         initComponents();
         jMenuRound1.setVisible(false);
         jMenuRound2.setVisible(false);
         jMenuProposeSubject.setVisible(false);
         jMenuEstablishClasses.setVisible(false);
         jMenuEstablishTeachers.setVisible(false);
+        jMenuSendReport.setVisible(false);
         jMenuLogout.setVisible(false);
         jPanelAddProposedSubject.setVisible(false);
         jPanelRound1.setVisible(false);
@@ -49,7 +52,8 @@ public class GUI extends javax.swing.JFrame {
         control = new Controller();
         roundNumber = 0;
         isStudentCheckBoxEditable = new ArrayList();
-        subjectsTableColumnNames = new String[]{
+        subjectsTableColumnNames = new String[]
+        {
             "Name", "Poll", "Teachers", "Description"
         };
     }
@@ -61,7 +65,8 @@ public class GUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jComboBox5 = new javax.swing.JComboBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -143,8 +148,6 @@ public class GUI extends javax.swing.JFrame {
         jLabelNewClassError = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanelEstablishTeachers = new javax.swing.JPanel();
-        jScrollPane12 = new javax.swing.JScrollPane();
-        jTableRound2Teachers = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
@@ -155,12 +158,15 @@ public class GUI extends javax.swing.JFrame {
         jLabelEstablishTeachersToClassesError = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jButtonRemoveTeacherFromClass = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTableRound2Votes1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuProposeSubject = new javax.swing.JMenu();
         jMenuRound1 = new javax.swing.JMenu();
         jMenuRound2 = new javax.swing.JMenu();
         jMenuEstablishClasses = new javax.swing.JMenu();
         jMenuEstablishTeachers = new javax.swing.JMenu();
+        jMenuSendReport = new javax.swing.JMenu();
         jMenuLogout = new javax.swing.JMenu();
         jMenuHelp = new javax.swing.JMenu();
 
@@ -175,8 +181,10 @@ public class GUI extends javax.swing.JFrame {
         jPanelLogin.setMaximumSize(new java.awt.Dimension(800, 550));
         jPanelLogin.setPreferredSize(new java.awt.Dimension(800, 550));
 
-        jTextFieldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+        jTextFieldPassword.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
                 jTextFieldPasswordKeyPressed(evt);
             }
         });
@@ -186,15 +194,19 @@ public class GUI extends javax.swing.JFrame {
         jLabel2.setText("Password:");
 
         jButtonLogin.setText("Log in");
-        jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLogin.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLoginActionPerformed(evt);
             }
         });
 
         jButtonCancel.setText("Exit");
-        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonCancelActionPerformed(evt);
             }
         });
@@ -250,14 +262,17 @@ public class GUI extends javax.swing.JFrame {
         jLabelWelcome.setText("Welcome text");
 
         jButtonSelectSubjectsToVote.setText("Select subjects to vote");
-        jButtonSelectSubjectsToVote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSelectSubjectsToVote.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSelectSubjectsToVoteActionPerformed(evt);
             }
         });
 
         jTableSubjects.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -269,15 +284,19 @@ public class GUI extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title", "Poll", "Teachers", "Description"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -322,36 +341,46 @@ public class GUI extends javax.swing.JFrame {
         jLabelSecondPriorityA.setText("Please choose two second priorities:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- no subject -" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- no subject -" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- no subject -" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox3ActionPerformed(evt);
             }
         });
 
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- no subject -" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jComboBox4ActionPerformed(evt);
             }
         });
 
         jButtonSubmitRound1.setText("Submit");
-        jButtonSubmitRound1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSubmitRound1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSubmitRound1ActionPerformed(evt);
             }
         });
@@ -376,8 +405,10 @@ public class GUI extends javax.swing.JFrame {
         jLabelSecondPriorityB.setText("Second Priority:");
 
         jButtonBackRound1.setText("Back");
-        jButtonBackRound1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonBackRound1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonBackRound1ActionPerformed(evt);
             }
         });
@@ -465,8 +496,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel5.setText("Here you can find some instructions");
 
         jButtonBack.setText("Back");
-        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonBackActionPerformed(evt);
             }
         });
@@ -499,7 +532,8 @@ public class GUI extends javax.swing.JFrame {
         jPanelChooseProposedSubjectsForRound1.setMinimumSize(new java.awt.Dimension(800, 550));
         jPanelChooseProposedSubjectsForRound1.setPreferredSize(new java.awt.Dimension(800, 550));
 
-        jListAllProposedSubjects.setModel(new javax.swing.AbstractListModel() {
+        jListAllProposedSubjects.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Android", "Arduino", "C#", "Game design", "3D printer", "Artificial Inteligence" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -507,8 +541,10 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jListAllProposedSubjects);
 
         jButtonSubmitProposedSubjectsForRound1.setText("Submit");
-        jButtonSubmitProposedSubjectsForRound1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSubmitProposedSubjectsForRound1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSubmitProposedSubjectsForRound1ActionPerformed(evt);
             }
         });
@@ -563,8 +599,10 @@ public class GUI extends javax.swing.JFrame {
 
         jLabelDescription.setText("Description");
 
-        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jTextFieldProposedSubjectDescriptionActionPerformed(evt);
             }
         });
@@ -574,13 +612,16 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setText("Propose subject");
 
         jButtonProposeSubject.setText("Submit");
-        jButtonProposeSubject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonProposeSubject.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonProposeSubjectActionPerformed(evt);
             }
         });
 
-        jListProposedTeachers.setModel(new javax.swing.AbstractListModel() {
+        jListProposedTeachers.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -642,41 +683,53 @@ public class GUI extends javax.swing.JFrame {
         jPanelPoll.setMinimumSize(new java.awt.Dimension(800, 550));
         jPanelPoll.setPreferredSize(new java.awt.Dimension(800, 550));
 
-        jListPollA.setModel(new javax.swing.AbstractListModel() {
+        jListPollA.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jListPollA.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        jListPollA.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jListPollAMouseReleased(evt);
             }
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jListPollAMouseClicked(evt);
             }
         });
-        jListPollA.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jListPollA.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            {
                 jListPollAValueChanged(evt);
             }
         });
         jScrollPane2.setViewportView(jListPollA);
 
-        jListPollB.setModel(new javax.swing.AbstractListModel() {
+        jListPollB.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jListPollB.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jListPollB.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jListPollBMouseClicked(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jListPollBMouseReleased(evt);
             }
         });
-        jListPollB.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+        jListPollB.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            {
                 jListPollBValueChanged(evt);
             }
         });
@@ -689,8 +742,10 @@ public class GUI extends javax.swing.JFrame {
         jLabelB.setText("POOL B");
 
         jButtonSubmit.setText("Submit");
-        jButtonSubmit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSubmit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSubmitActionPerformed(evt);
             }
         });
@@ -702,22 +757,27 @@ public class GUI extends javax.swing.JFrame {
         jLabel3.setText("Top unsatisfied students:");
 
         jTableUnsatisfiedStudents.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
                 {null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Name", "Choices", "Satisfaction"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -786,33 +846,41 @@ public class GUI extends javax.swing.JFrame {
         jPanelEstablishSubjects.setPreferredSize(new java.awt.Dimension(800, 550));
 
         jTableRound2Votes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "All students", "Pool A choices", "Pool B choices", "Is in class"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane6.setViewportView(jTableRound2Votes);
-        if (jTableRound2Votes.getColumnModel().getColumnCount() > 0) {
+        if (jTableRound2Votes.getColumnModel().getColumnCount() > 0)
+        {
             jTableRound2Votes.getColumnModel().getColumn(0).setResizable(false);
             jTableRound2Votes.getColumnModel().getColumn(1).setResizable(false);
             jTableRound2Votes.getColumnModel().getColumn(2).setResizable(false);
@@ -825,32 +893,40 @@ public class GUI extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Pool B");
 
-        jListPoolAEstablishClasses.setModel(new javax.swing.AbstractListModel() {
+        jListPoolAEstablishClasses.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jListPoolAEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        jListPoolAEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jListPoolAEstablishClassesMouseReleased(evt);
             }
         });
         jScrollPane8.setViewportView(jListPoolAEstablishClasses);
 
-        jListPoolBEstablishClasses.setModel(new javax.swing.AbstractListModel() {
+        jListPoolBEstablishClasses.setModel(new javax.swing.AbstractListModel()
+        {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jListPoolBEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        jListPoolBEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jListPoolBEstablishClassesMouseReleased(evt);
             }
         });
         jScrollPane9.setViewportView(jListPoolBEstablishClasses);
 
-        jListClasses.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+        jListClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 jListClassesMouseReleased(evt);
             }
         });
@@ -860,8 +936,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel10.setText("Classes");
 
         jButtonSubmitClass.setText("Submit Class");
-        jButtonSubmitClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSubmitClass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSubmitClassActionPerformed(evt);
             }
         });
@@ -878,25 +956,25 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEstablishSubjectsLayout.createSequentialGroup()
-                            .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEstablishSubjectsLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
                         .addComponent(jLabelNewClassError, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonSubmitClass)))
+                        .addComponent(jButtonSubmitClass))
+                    .addGroup(jPanelEstablishSubjectsLayout.createSequentialGroup()
+                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelEstablishSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))))
                 .addGap(0, 36, Short.MAX_VALUE))
         );
         jPanelEstablishSubjectsLayout.setVerticalGroup(
@@ -928,44 +1006,6 @@ public class GUI extends javax.swing.JFrame {
         jPanelEstablishTeachers.setMinimumSize(new java.awt.Dimension(800, 550));
         jPanelEstablishTeachers.setPreferredSize(new java.awt.Dimension(800, 550));
 
-        jTableRound2Teachers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Name", "Teaching from Pool A", "Teaching from Pool B"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane12.setViewportView(jTableRound2Teachers);
-        if (jTableRound2Teachers.getColumnModel().getColumnCount() > 0) {
-            jTableRound2Teachers.getColumnModel().getColumn(0).setResizable(false);
-            jTableRound2Teachers.getColumnModel().getColumn(1).setResizable(false);
-            jTableRound2Teachers.getColumnModel().getColumn(2).setResizable(false);
-        }
-
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Pool A Classes");
 
@@ -980,8 +1020,10 @@ public class GUI extends javax.swing.JFrame {
 
         jButtonAddTeacherToClass.setText("Add teacher to class");
         jButtonAddTeacherToClass.setToolTipText("");
-        jButtonAddTeacherToClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddTeacherToClass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonAddTeacherToClassActionPerformed(evt);
             }
         });
@@ -991,11 +1033,55 @@ public class GUI extends javax.swing.JFrame {
         jLabel17.setText("Teachers:");
 
         jButtonRemoveTeacherFromClass.setText("Remove teacher from class");
-        jButtonRemoveTeacherFromClass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRemoveTeacherFromClass.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonRemoveTeacherFromClassActionPerformed(evt);
             }
         });
+
+        jTableRound2Votes1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Name", "Teaching from Pool A", "Teaching from Pool B", "Assigned"
+            }
+        )
+        {
+            Class[] types = new Class []
+            {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean []
+            {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane11.setViewportView(jTableRound2Votes1);
+        if (jTableRound2Votes1.getColumnModel().getColumnCount() > 0)
+        {
+            jTableRound2Votes1.getColumnModel().getColumn(0).setResizable(false);
+            jTableRound2Votes1.getColumnModel().getColumn(1).setResizable(false);
+            jTableRound2Votes1.getColumnModel().getColumn(2).setResizable(false);
+            jTableRound2Votes1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanelEstablishTeachersLayout = new javax.swing.GroupLayout(jPanelEstablishTeachers);
         jPanelEstablishTeachers.setLayout(jPanelEstablishTeachersLayout);
@@ -1010,7 +1096,6 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstablishTeachersLayout.createSequentialGroup()
                         .addGroup(jPanelEstablishTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane12, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEstablishTeachersLayout.createSequentialGroup()
                                 .addGroup(jPanelEstablishTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1024,7 +1109,8 @@ public class GUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonRemoveTeacherFromClass)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonAddTeacherToClass)))
+                                .addComponent(jButtonAddTeacherToClass))
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(50, 50, 50))))
         );
         jPanelEstablishTeachersLayout.setVerticalGroup(
@@ -1041,8 +1127,8 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEstablishTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelEstablishTeachersToClassesError, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelEstablishTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1052,56 +1138,80 @@ public class GUI extends javax.swing.JFrame {
         );
 
         jMenuProposeSubject.setText("Propose subject");
-        jMenuProposeSubject.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuProposeSubject.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuProposeSubjectMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuProposeSubject);
 
         jMenuRound1.setText("Round 1");
-        jMenuRound1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuRound1.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuRound1MouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuRound1);
 
         jMenuRound2.setText("Round 2");
-        jMenuRound2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuRound2.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuRound2MouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuRound2);
 
         jMenuEstablishClasses.setText("Establish classes");
-        jMenuEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuEstablishClassesMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuEstablishClasses);
 
         jMenuEstablishTeachers.setText("Establish teachers");
-        jMenuEstablishTeachers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuEstablishTeachers.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuEstablishTeachersMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuEstablishTeachers);
 
+        jMenuSendReport.setText("Send Report");
+        jMenuSendReport.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jMenuSendReportMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuSendReport);
+
         jMenuLogout.setText("Log out");
-        jMenuLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuLogout.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuLogoutMouseClicked(evt);
             }
         });
         jMenuBar1.add(jMenuLogout);
 
         jMenuHelp.setText("Help");
-        jMenuHelp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jMenuHelp.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jMenuHelpMouseClicked(evt);
             }
         });
@@ -1137,30 +1247,27 @@ public class GUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(29, Short.MAX_VALUE))
+            .addComponent(jPanelHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelChooseProposedSubjectsForRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelAddProposedSubject, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelEstablishSubjects, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelEstablishTeachers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelPoll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 29, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -1171,18 +1278,22 @@ public class GUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
-    private void setupStudentSubjectsTable() {
+    private void setupStudentSubjectsTable()
+    {
         subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
         Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
-        for (int i = 0; i < subjectsToBeDisplayed.size(); i++) {
+        for (int i = 0; i < subjectsToBeDisplayed.size(); i++)
+        {
             data[i][0] = subjectsToBeDisplayed.get(i).getName();
             data[i][1] = subjectsToBeDisplayed.get(i).getPoolOptions();
             data[i][2] = subjectsToBeDisplayed.get(i).getTeachersNames();
             data[i][3] = subjectsToBeDisplayed.get(i).getDescription();
         }
-        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames) {
+        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames)
+        {
             @Override
-            public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column)
+            {
                 return false;
             }
         });
@@ -1194,18 +1305,22 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
     }
 
-    private void setupHeadSubjectsTable() {
+    private void setupHeadSubjectsTable()
+    {
         subjectsToBeDisplayed = control.getAllProposedElectiveSubjects();
         Object[][] data = new Object[subjectsToBeDisplayed.size()][4];
-        for (int i = 0; i < subjectsToBeDisplayed.size(); i++) {
+        for (int i = 0; i < subjectsToBeDisplayed.size(); i++)
+        {
             data[i][0] = subjectsToBeDisplayed.get(i).getName();
             data[i][1] = subjectsToBeDisplayed.get(i).getPoolOptions();
             data[i][2] = subjectsToBeDisplayed.get(i).getTeachersNames();
             data[i][3] = subjectsToBeDisplayed.get(i).getDescription();
         }
-        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames) {
+        jTableSubjects.setModel(new DefaultTableModel(data, subjectsTableColumnNames)
+        {
             @Override
-            public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column)
+            {
                 return false;
             }
         });
@@ -1217,8 +1332,10 @@ public class GUI extends javax.swing.JFrame {
 //        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
     }
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-        if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS)) {
-            switch (control.getUser().getUserType().getName()) {
+        if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS))
+        {
+            switch (control.getUser().getUserType().getName())
+            {
                 case "Teacher":
                 case "Student":
                     jPanelLogin.setVisible(false);
@@ -1243,6 +1360,7 @@ public class GUI extends javax.swing.JFrame {
                     jMenuEstablishTeachers.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
+                    jMenuSendReport.setVisible(true);
                     jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
                     jTextFieldUsername.setText("");
                     jTextFieldPassword.setText("");
@@ -1252,7 +1370,9 @@ public class GUI extends javax.swing.JFrame {
                     break;
             }
 
-        } else {
+        }
+        else
+        {
             jLabelLoginError.setText(control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()));
             jTextFieldUsername.setText("");
             jTextFieldPassword.setText("");
@@ -1261,7 +1381,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void jMenuRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound1MouseClicked
         jPanelEstablishSubjects.setVisible(false);
-        switch (control.getUser().getUserType().getName()) {
+        switch (control.getUser().getUserType().getName())
+        {
             case "Teacher":
             case "Student":
                 roundNumber = 1;
@@ -1304,7 +1425,8 @@ public class GUI extends javax.swing.JFrame {
         jPanelHelp.setVisible(false);
         jPanelChooseProposedSubjectsForRound1.setVisible(false);
         jPanelAddProposedSubject.setVisible(false);
-        switch (control.getUser().getUserType().getName()) {
+        switch (control.getUser().getUserType().getName())
+        {
             case "Teacher":
             case "Student":
                 roundNumber = 2;
@@ -1360,6 +1482,7 @@ public class GUI extends javax.swing.JFrame {
         jPanelLogin.setVisible(true);
         jMenuRound1.setVisible(false);
         jMenuRound2.setVisible(false);
+        jMenuSendReport.setVisible(false);
         jMenuLogout.setVisible(false);
         jMenuHelp.setVisible(true);
         jMenuProposeSubject.setVisible(false);
@@ -1371,17 +1494,20 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonSubmitRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitRound1ActionPerformed
         String logMessage;
         if (jComboBox1.getSelectedIndex() > 0 && jComboBox2.getSelectedIndex() > 0
-                && jComboBox3.getSelectedIndex() > 0 && jComboBox4.getSelectedIndex() > 0) {
+                && jComboBox3.getSelectedIndex() > 0 && jComboBox4.getSelectedIndex() > 0)
+        {
             if (!jComboBox1.getSelectedItem().toString().equals(jComboBox2.getSelectedItem().toString())
                     && !jComboBox1.getSelectedItem().toString().equals(jComboBox3.getSelectedItem().toString())
                     && !jComboBox1.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString())
                     && !jComboBox2.getSelectedItem().toString().equals(jComboBox3.getSelectedItem().toString())
                     && !jComboBox2.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString())
-                    && !jComboBox3.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString())) {
+                    && !jComboBox3.getSelectedItem().toString().equals(jComboBox4.getSelectedItem().toString()))
+            {
 
                 logMessage = control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(),
                         jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), roundNumber);
-                if (logMessage.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS)) {
+                if (logMessage.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
+                {
                     jLabelError.setForeground(Color.GREEN);
                     jLabelError.setText("OK");
                     jComboBox1.setEnabled(false);
@@ -1390,37 +1516,48 @@ public class GUI extends javax.swing.JFrame {
                     jComboBox4.setEnabled(false);
                     jButtonSubmitRound1.setEnabled(false);
                     JOptionPane.showMessageDialog(this, "Your votes have been registered!");
-                } else {
+                }
+                else
+                {
                     jLabelError.setForeground(Color.RED);
                     jLabelError.setText(logMessage);
                 }
-            } else {
+            }
+            else
+            {
                 jLabelError.setForeground(Color.RED);
                 jLabelError.setText("Options must be different!");
             }
-        } else {
+        }
+        else
+        {
             jLabelError.setForeground(Color.RED);
             jLabelError.setText("Please select 2 first priorities and 2 second priorities!");
         }
     }//GEN-LAST:event_jButtonSubmitRound1ActionPerformed
 
-    private void setupComboBoxItemsForRound() {
-        if (roundNumber == 1) {
+    private void setupComboBoxItemsForRound()
+    {
+        if (roundNumber == 1)
+        {
             subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
             String[] comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             int poz = 0;
             Object selectedCBItem = jComboBox1.getSelectedItem();
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
                 if (!jComboBox2.getSelectedItem().toString().equals(sb.getName())
                         && !jComboBox3.getSelectedItem().toString().equals(sb.getName())
-                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
+                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
                     comboBoxSubjects[poz] = sb.getName();
                     poz++;
                 }
             }
             String[] comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox1.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1430,17 +1567,20 @@ public class GUI extends javax.swing.JFrame {
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
             subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
                 if (!jComboBox1.getSelectedItem().toString().equals(sb.getName())
                         && !jComboBox3.getSelectedItem().toString().equals(sb.getName())
-                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
+                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
                     comboBoxSubjects[poz] = sb.getName();
                     poz++;
                 }
             }
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox2.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1449,8 +1589,10 @@ public class GUI extends javax.swing.JFrame {
             selectedCBItem = jComboBox3.getSelectedItem();
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
-                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
+                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
                     comboBoxSubjects[poz] = sb.getName();
                     poz++;
                 }
@@ -1458,7 +1600,8 @@ public class GUI extends javax.swing.JFrame {
 
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox3.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1467,30 +1610,39 @@ public class GUI extends javax.swing.JFrame {
             selectedCBItem = jComboBox4.getSelectedItem();
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
-                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName())) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
+                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()))
+                {
                     comboBoxSubjects[poz] = sb.getName();
                     poz++;
                 }
             }
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox4.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
             jComboBox4.setSelectedItem(selectedCBItem);
-        } else {
+        }
+        else
+        {
             subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
             String[] comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             int poz = 0;
             Object selectedCBItem = jComboBox1.getSelectedItem();
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
                 if (!jComboBox2.getSelectedItem().toString().equals(sb.getName())
                         && !jComboBox3.getSelectedItem().toString().equals(sb.getName())
-                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                    if (sb.getPoolOptions() != null) {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
+                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
+                    if (sb.getPoolOptions() != null)
+                    {
+                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                        {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
                         }
@@ -1499,7 +1651,8 @@ public class GUI extends javax.swing.JFrame {
             }
             String[] comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox1.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1509,12 +1662,16 @@ public class GUI extends javax.swing.JFrame {
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
             subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
                 if (!jComboBox1.getSelectedItem().toString().equals(sb.getName())
                         && !jComboBox3.getSelectedItem().toString().equals(sb.getName())
-                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                    if (sb.getPoolOptions() != null) {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
+                        && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
+                    if (sb.getPoolOptions() != null)
+                    {
+                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                        {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
                         }
@@ -1523,7 +1680,8 @@ public class GUI extends javax.swing.JFrame {
             }
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox2.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1532,10 +1690,14 @@ public class GUI extends javax.swing.JFrame {
             selectedCBItem = jComboBox3.getSelectedItem();
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
-                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName())) {
-                    if (sb.getPoolOptions() != null) {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B"))) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
+                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox4.getSelectedItem().toString().equals(sb.getName()))
+                {
+                    if (sb.getPoolOptions() != null)
+                    {
+                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                        {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
                         }
@@ -1545,7 +1707,8 @@ public class GUI extends javax.swing.JFrame {
 
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox3.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1554,10 +1717,14 @@ public class GUI extends javax.swing.JFrame {
             selectedCBItem = jComboBox4.getSelectedItem();
             comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
             poz = 0;
-            for (ProposedSubject sb : subjectsToBeDisplayed) {
-                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName())) {
-                    if (sb.getPoolOptions() != null) {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A"))) {
+            for (ProposedSubject sb : subjectsToBeDisplayed)
+            {
+                if (!jComboBox1.getSelectedItem().toString().equals(sb.getName()) && !jComboBox2.getSelectedItem().toString().equals(sb.getName()) && !jComboBox3.getSelectedItem().toString().equals(sb.getName()))
+                {
+                    if (sb.getPoolOptions() != null)
+                    {
+                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                        {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
                         }
@@ -1566,7 +1733,8 @@ public class GUI extends javax.swing.JFrame {
             }
             comboBoxItemsV2 = new String[poz + 1];
             comboBoxItemsV2[0] = "- no subject -";
-            for (int i = 0; i < poz; i++) {
+            for (int i = 0; i < poz; i++)
+            {
                 comboBoxItemsV2[i + 1] = comboBoxSubjects[i];
             }
             jComboBox4.setModel(new DefaultComboBoxModel(comboBoxItemsV2));
@@ -1574,10 +1742,12 @@ public class GUI extends javax.swing.JFrame {
         }
     }
 
-    private void setupPollSubjects() {
+    private void setupPollSubjects()
+    {
         DefaultListModel model = new DefaultListModel();
         List<ProposedSubject> subjects = control.getAllAliveProposedElectiveSubjects();
-        for (ProposedSubject ps : subjects) {
+        for (ProposedSubject ps : subjects)
+        {
             model.addElement(ps.getName() + "(" + ps.getTeachersNames() + ")");
         }
 
@@ -1585,50 +1755,66 @@ public class GUI extends javax.swing.JFrame {
         jListPollB.setModel(model);
 
         //make the lists enable the multiple selection without having to hold ctrl or shift
-        ListSelectionModel selectionModel1 = new DefaultListSelectionModel() {
+        ListSelectionModel selectionModel1 = new DefaultListSelectionModel()
+        {
             boolean ajustando;
 
             @Override
-            public void setSelectionInterval(int index0, int index1) {
-                if (ajustando) {
+            public void setSelectionInterval(int index0, int index1)
+            {
+                if (ajustando)
+                {
                     return;
                 }
-                if (isSelectedIndex(index1)) {
+                if (isSelectedIndex(index1))
+                {
                     super.removeSelectionInterval(index0, index1);
-                } else {
+                }
+                else
+                {
                     super.addSelectionInterval(index0, index1);
                 }
                 ajustando = getValueIsAdjusting();
             }
 
             @Override
-            public void setValueIsAdjusting(boolean valueIsAdjusting) {
-                if (!valueIsAdjusting) {
+            public void setValueIsAdjusting(boolean valueIsAdjusting)
+            {
+                if (!valueIsAdjusting)
+                {
                     ajustando = false;
                 }
                 super.setValueIsAdjusting(valueIsAdjusting);
             }
 
         };
-        ListSelectionModel selectionModel2 = new DefaultListSelectionModel() {
+        ListSelectionModel selectionModel2 = new DefaultListSelectionModel()
+        {
             boolean ajustando;
 
             @Override
-            public void setSelectionInterval(int index0, int index1) {
-                if (ajustando) {
+            public void setSelectionInterval(int index0, int index1)
+            {
+                if (ajustando)
+                {
                     return;
                 }
-                if (isSelectedIndex(index1)) {
+                if (isSelectedIndex(index1))
+                {
                     super.removeSelectionInterval(index0, index1);
-                } else {
+                }
+                else
+                {
                     super.addSelectionInterval(index0, index1);
                 }
                 ajustando = getValueIsAdjusting();
             }
 
             @Override
-            public void setValueIsAdjusting(boolean valueIsAdjusting) {
-                if (!valueIsAdjusting) {
+            public void setValueIsAdjusting(boolean valueIsAdjusting)
+            {
+                if (!valueIsAdjusting)
+                {
                     ajustando = false;
                 }
                 super.setValueIsAdjusting(valueIsAdjusting);
@@ -1641,35 +1827,45 @@ public class GUI extends javax.swing.JFrame {
 
     }
 
-    private void setupTeachersForProposedSubjects() {
+    private void setupTeachersForProposedSubjects()
+    {
         DefaultListModel model = new DefaultListModel();
         List<User> teachers = control.getAllTeachers();
-        for (User u : teachers) {
+        for (User u : teachers)
+        {
             model.addElement(u.getName());
         }
 
         jListProposedTeachers.setModel(model);
 
         //make the lists enable the multiple selection without having to hold ctrl or shift
-        ListSelectionModel selectionModel1 = new DefaultListSelectionModel() {
+        ListSelectionModel selectionModel1 = new DefaultListSelectionModel()
+        {
             boolean ajustando;
 
             @Override
-            public void setSelectionInterval(int index0, int index1) {
-                if (ajustando) {
+            public void setSelectionInterval(int index0, int index1)
+            {
+                if (ajustando)
+                {
                     return;
                 }
-                if (isSelectedIndex(index1)) {
+                if (isSelectedIndex(index1))
+                {
                     super.removeSelectionInterval(index0, index1);
-                } else {
+                }
+                else
+                {
                     super.addSelectionInterval(index0, index1);
                 }
                 ajustando = getValueIsAdjusting();
             }
 
             @Override
-            public void setValueIsAdjusting(boolean valueIsAdjusting) {
-                if (!valueIsAdjusting) {
+            public void setValueIsAdjusting(boolean valueIsAdjusting)
+            {
+                if (!valueIsAdjusting)
+                {
                     ajustando = false;
                 }
                 super.setValueIsAdjusting(valueIsAdjusting);
@@ -1702,7 +1898,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void jTextFieldPasswordKeyPressed(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextFieldPasswordKeyPressed
     {//GEN-HEADEREND:event_jTextFieldPasswordKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
             jButtonLogin.doClick();
         }
     }//GEN-LAST:event_jTextFieldPasswordKeyPressed
@@ -1716,9 +1913,12 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonSelectSubjectsToVoteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSelectSubjectsToVoteActionPerformed
     {//GEN-HEADEREND:event_jButtonSelectSubjectsToVoteActionPerformed
-        if (roundNumber == 0) {
+        if (roundNumber == 0)
+        {
             // open some add new subject form
-        } else {
+        }
+        else
+        {
             jPanelMain.setVisible(false);
             jPanelRound1.setVisible(true);
         }
@@ -1742,20 +1942,25 @@ public class GUI extends javax.swing.JFrame {
         int[] selected;
         boolean found;
 
-        for (int i = 0; i < selectedIndicesA.length; i++) {
+        for (int i = 0; i < selectedIndicesA.length; i++)
+        {
             found = false;
-            for (int j = 0; j < selectedIndicesB.length; j++) {
-                if (selectedIndicesA[i] == selectedIndicesB[j]) {
+            for (int j = 0; j < selectedIndicesB.length; j++)
+            {
+                if (selectedIndicesA[i] == selectedIndicesB[j])
+                {
                     found = true;
                 }
             }
-            if (found == false) {
+            if (found == false)
+            {
                 selectedIndecesANew.add(selectedIndicesA[i]);
             }
         }
         selected = new int[selectedIndecesANew.size()];
         int k = 0;
-        for (Object o : selectedIndecesANew) {
+        for (Object o : selectedIndecesANew)
+        {
             selected[k] = Integer.parseInt(o.toString());
             k++;
         }
@@ -1820,20 +2025,25 @@ public class GUI extends javax.swing.JFrame {
         int[] selected;
         boolean found;
 
-        for (int i = 0; i < selectedIndicesB.length; i++) {
+        for (int i = 0; i < selectedIndicesB.length; i++)
+        {
             found = false;
-            for (int j = 0; j < selectedIndicesA.length; j++) {
-                if (selectedIndicesB[i] == selectedIndicesA[j]) {
+            for (int j = 0; j < selectedIndicesA.length; j++)
+            {
+                if (selectedIndicesB[i] == selectedIndicesA[j])
+                {
                     found = true;
                 }
             }
-            if (found == false) {
+            if (found == false)
+            {
                 selectedIndecesBNew.add(selectedIndicesB[i]);
             }
         }
         selected = new int[selectedIndecesBNew.size()];
         int k = 0;
-        for (Object o : selectedIndecesBNew) {
+        for (Object o : selectedIndecesBNew)
+        {
             selected[k] = Integer.parseInt(o.toString());
             k++;
         }
@@ -1843,15 +2053,18 @@ public class GUI extends javax.swing.JFrame {
         setupUnsatisfiedStudentsTable();
     }//GEN-LAST:event_jListPollAMouseReleased
 
-    private void setupUnsatisfiedStudentsTable() {
+    private void setupUnsatisfiedStudentsTable()
+    {
 
-        String[] unsatisfiedStudentsTableColumnNames = new String[]{
+        String[] unsatisfiedStudentsTableColumnNames = new String[]
+        {
             "Name", "Choices", "Satisfaction"
         };
         //Unsatisfied logic
         List<User> unsatisfiedStudents = control.getAllStudentsByUnsatisfactionRate();
         Object[][] data = new Object[unsatisfiedStudents.size()][4];
-        for (int i = 0; i < unsatisfiedStudents.size(); i++) {
+        for (int i = 0; i < unsatisfiedStudents.size(); i++)
+        {
             data[i][0] = unsatisfiedStudents.get(i).getName();
             data[i][1]
                     = unsatisfiedStudents.get(i).getVotesByRound(1).get(0).getProposedSubject().getName()
@@ -1860,9 +2073,11 @@ public class GUI extends javax.swing.JFrame {
                     + ", " + unsatisfiedStudents.get(i).getVotesByRound(1).get(3).getProposedSubject().getName();
             data[i][2] = unsatisfiedStudents.get(i).getSatisfaction();
         }
-        jTableUnsatisfiedStudents.setModel(new DefaultTableModel(data, unsatisfiedStudentsTableColumnNames) {
+        jTableUnsatisfiedStudents.setModel(new DefaultTableModel(data, unsatisfiedStudentsTableColumnNames)
+        {
             @Override
-            public boolean isCellEditable(int row, int column) {
+            public boolean isCellEditable(int row, int column)
+            {
                 return false;
             }
         });
@@ -1897,19 +2112,26 @@ public class GUI extends javax.swing.JFrame {
         jListPoolBEstablishClasses.clearSelection();
         jListClasses.clearSelection();
         jTableRound2Votes.clearSelection();
-        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++) {
+        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        {
             jTableRound2Votes.setValueAt(false, i, 3);
         }
 
         List<User> students = control.getAllStudents();
-        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++) {
+        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+        {
             isStudentCheckBoxEditable.set(i, true);
         }
-        for (FinalClass c : control.getAllClasses()) {
-            if (c.getSubject().getPoolOptions().equals("A")) {
-                for (User student : control.getStudentsForClass(c)) {
-                    for (int j = 0; j < students.size(); j++) {
-                        if (student.equals(students.get(j))) {
+        for (FinalClass c : control.getAllClasses())
+        {
+            if (c.getSubject().getPoolOptions().equals("A"))
+            {
+                for (User student : control.getStudentsForClass(c))
+                {
+                    for (int j = 0; j < students.size(); j++)
+                    {
+                        if (student.equals(students.get(j)))
+                        {
                             isStudentCheckBoxEditable.set(j, false);
                         }
                     }
@@ -1924,19 +2146,26 @@ public class GUI extends javax.swing.JFrame {
         jListPoolAEstablishClasses.clearSelection();
         jListClasses.clearSelection();
         jTableRound2Votes.clearSelection();
-        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++) {
+        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        {
             jTableRound2Votes.setValueAt(false, i, 3);
         }
 
         List<User> students = control.getAllStudents();
-        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++) {
+        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+        {
             isStudentCheckBoxEditable.set(i, true);
         }
-        for (FinalClass c : control.getAllClasses()) {
-            if (c.getSubject().getPoolOptions().equals("B")) {
-                for (User student : control.getStudentsForClass(c)) {
-                    for (int j = 0; j < students.size(); j++) {
-                        if (student.equals(students.get(j))) {
+        for (FinalClass c : control.getAllClasses())
+        {
+            if (c.getSubject().getPoolOptions().equals("B"))
+            {
+                for (User student : control.getStudentsForClass(c))
+                {
+                    for (int j = 0; j < students.size(); j++)
+                    {
+                        if (student.equals(students.get(j)))
+                        {
                             isStudentCheckBoxEditable.set(j, false);
                         }
                     }
@@ -1950,28 +2179,118 @@ public class GUI extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jButtonSubmitClassActionPerformed
         List<ProposedSubject> poolA = control.getSubjectsByPool("A");
         List<ProposedSubject> poolB = control.getSubjectsByPool("B");
-        ProposedSubject subject = new ProposedSubject();
+        ProposedSubject subject;
         List<User> students = new ArrayList();
-        if (jListPoolAEstablishClasses.getSelectedIndex() == -1 && (jListPoolBEstablishClasses.getSelectedIndex() == -1)) {    
-        //jLabelNewClassError.setText("Please select a subject!");
-            if(jListClasses.getSelectedIndex() != -1){
-               //change the number of students in the jList                
+        if (jListPoolAEstablishClasses.getSelectedIndex() == -1 && (jListPoolBEstablishClasses.getSelectedIndex() == -1))
+        {
+            if (jListClasses.getSelectedIndex() != -1)
+            {
+                subject = control.getAllClasses().get(jListClasses.getSelectedIndex()).getSubject();
+                for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+                {
+                    if (jTableRound2Votes.getValueAt(i, 3) != null)
+                    {
+                        if ((Boolean) jTableRound2Votes.getValueAt(i, 3))
+                        {
+                            students.add(control.getAllStudents().get(i));
+                            jTableRound2Votes.setValueAt(false, i, 3);
+                            if (subject.getPoolOptions().equals("A"))
+                            {
+                                jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 1);
+                            }
+                            else
+                            {
+                                jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 2);
+                            }
+                        }
+                        else
+                        {
+                            List<Vote> currentVotes = control.getAllStudents().get(i).getVotesByRound(2);
+                            if (!currentVotes.isEmpty())
+                            {
+                                String secondPool = "";
+                                String firstPool = "";
+                                for (Vote vote : currentVotes)
+                                {
+                                    if (vote.getProposedSubject().getPoolOptions().equals("A"))
+                                    {
+                                        if (vote.getPoints() == 2)
+                                        {
+                                            firstPool += "1 " + vote.getProposedSubject().getName();
+                                        }
+                                        else if (vote.getPoints() == 1)
+                                        {
+                                            firstPool += ", 2 " + vote.getProposedSubject().getName();
+                                        }
+                                        if (subject.getPoolOptions().equals("A"))
+                                        {
+                                            jTableRound2Votes.setValueAt(firstPool, i, 2);
+                                        }
+                                    }
+                                    else if (vote.getProposedSubject().getPoolOptions().equals("B"))
+                                    {
+                                        if (vote.getPoints() == 2)
+                                        {
+                                            secondPool += "1 " + vote.getProposedSubject().getName();
+                                        }
+                                        else if (vote.getPoints() == 1)
+                                        {
+                                            secondPool += ", 2 " + vote.getProposedSubject().getName();
+                                        }
+                                        if (subject.getPoolOptions().equals("B"))
+                                        {
+                                            jTableRound2Votes.setValueAt(secondPool, i, 2);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (subject.getPoolOptions().equals("A"))
+                                {
+                                    jTableRound2Votes.setValueAt("No votes yet.", i, 1);
+                                }
+                                else
+                                {
+                                    jTableRound2Votes.setValueAt("No votes yet.", i, 2);
+                                }
+                            }
+                        }
+                    }
+                }
+                control.editStudentsInClass(students, jListClasses.getSelectedIndex());
+                jListPoolAEstablishClasses.clearSelection();
+                jListPoolBEstablishClasses.clearSelection();
+                jListClasses.clearSelection();
+                jTableRound2Votes.clearSelection();
+                fillInClassList();
             }
-        } else {
-            if (jListPoolAEstablishClasses.getSelectedIndex() != -1) {
+        }
+        else
+        {
+            if (jListPoolAEstablishClasses.getSelectedIndex() != -1)
+            {
                 subject = poolA.get(jListPoolAEstablishClasses.getSelectedIndex());
-            } else {
+            }
+            else
+            {
                 subject = poolB.get(jListPoolBEstablishClasses.getSelectedIndex());
             }
 
-            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++) {
-                if (jTableRound2Votes.getValueAt(i, 3) != null) {
-                    if ((Boolean) jTableRound2Votes.getValueAt(i, 3)) {
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+            {
+                if (jTableRound2Votes.getValueAt(i, 3) != null)
+                {
+                    if ((Boolean) jTableRound2Votes.getValueAt(i, 3))
+                    {
                         students.add(control.getAllStudents().get(i));
                         jTableRound2Votes.setValueAt(false, i, 3);
-                        if (subject.getPoolOptions().equals("A")) {
+                        if (subject.getPoolOptions().equals("A"))
+                        {
                             jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 1);
-                        } else {
+                        }
+                        else
+                        {
                             jTableRound2Votes.setValueAt(subject.getName() + " assinged.", i, 2);
                         }
                     }
@@ -1991,8 +2310,10 @@ public class GUI extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jListClassesMouseReleased
         jListPoolAEstablishClasses.clearSelection();
         jListPoolBEstablishClasses.clearSelection();
-        if (jListClasses.getSelectedIndex() != -1) {
-            checkmarkStudents();
+        jTableRound2Votes.clearSelection();
+        if (jListClasses.getSelectedIndex() != -1)
+        {
+            checkmarkStudentsAndMakeUnavailableStudentsUncheckable();
         }
     }//GEN-LAST:event_jListClassesMouseReleased
 
@@ -2015,9 +2336,12 @@ public class GUI extends javax.swing.JFrame {
         List<FinalClass> classes = control.getAllClasses();
         List<ProposedSubject> subjects = control.getSubjectsByPool("A");
         DefaultListModel model = new DefaultListModel();
-        for (FinalClass c : classes) {
-            for (ProposedSubject p : subjects) {
-                if (c.getSubject() == p) {
+        for (FinalClass c : classes)
+        {
+            for (ProposedSubject p : subjects)
+            {
+                if (c.getSubject() == p)
+                {
                     model.addElement(p.getName());
                 }
             }
@@ -2026,9 +2350,12 @@ public class GUI extends javax.swing.JFrame {
 
         subjects = control.getSubjectsByPool("B");
         model = new DefaultListModel();
-        for (FinalClass c : classes) {
-            for (ProposedSubject p : subjects) {
-                if (c.getSubject() == p) {
+        for (FinalClass c : classes)
+        {
+            for (ProposedSubject p : subjects)
+            {
+                if (c.getSubject() == p)
+                {
                     model.addElement(p.getName());
                 }
             }
@@ -2041,92 +2368,175 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRemoveTeacherFromClassActionPerformed
 
-    private void checkmarkStudents() {
-       
+    private void jMenuSendReportMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenuSendReportMouseClicked
+    {//GEN-HEADEREND:event_jMenuSendReportMouseClicked
+        String email = "";
+        while (email.equals(""))
+        {
+            email = JOptionPane.showInputDialog("Which e-mail address do you want to send the report to?");
+            if (email.equals(""))
+            {
+                int response = JOptionPane.showConfirmDialog(rootPane, "You have to enter a valid e-mail address!");
+                if (response != 0)
+                {
+                    email = "x";
+                }
+            }
+            else
+            {
+                if (control.sendMail(email))
+                {
+                    JOptionPane.showConfirmDialog(rootPane, "The e-mail has been successfully sent!");
+                }
+                else
+                {
+                    JOptionPane.showConfirmDialog(rootPane, "The e-mail was not sent!");
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuSendReportMouseClicked
+
+    private void checkmarkStudentsAndMakeUnavailableStudentsUncheckable()
+    {
         List<User> studentsForClass = control.getStudentsForClass(control.getAllClasses().get(jListClasses.getSelectedIndex()));
-        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++) {
+        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        {
+            isStudentCheckBoxEditable.set(i, true);
             jTableRound2Votes.setValueAt(false, i, 3);
-            for (User student : studentsForClass) {
-                if (jTableRound2Votes.getValueAt(i, 0).equals(student.getName())) {
+            for (User student : studentsForClass)
+            {
+                if (jTableRound2Votes.getValueAt(i, 0).equals(student.getName()))
+                {
                     jTableRound2Votes.setValueAt(true, i, 3);
                     break;
                 }
             }
         }
+
+        List<User> allStudents = control.getAllStudents();
+        for (int j = 0; j < control.getAllClasses().size(); j++)
+        {
+            if (jListClasses.getSelectedIndex() != j && control.getAllClasses().get(j).getSubject().getPoolOptions().equals(control.getAllClasses().get(jListClasses.getSelectedIndex()).getSubject().getPoolOptions()))
+            {
+                for (User studentInClass : control.getStudentsForClass(control.getAllClasses().get(j)))
+                {
+                    for (int i = 0; i < allStudents.size(); i++)
+                    {
+                        if (studentInClass == allStudents.get(i))
+                        {
+                            isStudentCheckBoxEditable.set(i, false);
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    private void fillInClassList() {
+    private void fillInClassList()
+    {
         List<FinalClass> classes = control.getAllClasses();
         DefaultListModel model = new DefaultListModel();
-        for (FinalClass c : classes) {
+        for (FinalClass c : classes)
+        {
             model.addElement(c.getName() + " (" + c.getStudents().size() + ")");
         }
         jListClasses.setModel(model);
 
     }
 
-    private void fillInPoolLists() {
+    private void fillInPoolLists()
+    {
         List<ProposedSubject> poolA = control.getSubjectsByPool("A");
         List<ProposedSubject> poolB = control.getSubjectsByPool("B");
 
         DefaultListModel modelA = new DefaultListModel();
-        for (ProposedSubject ps : poolA) {
+        for (ProposedSubject ps : poolA)
+        {
             modelA.addElement(ps.getName());
         }
         jListPoolAEstablishClasses.setModel(modelA);
 
         DefaultListModel modelB = new DefaultListModel();
-        for (ProposedSubject ps : poolB) {
+        for (ProposedSubject ps : poolB)
+        {
             modelB.addElement(ps.getName());
         }
         jListPoolBEstablishClasses.setModel(modelB);
     }
 
-    private void setupRound2VotesTable() {
+    private void setupRound2VotesTable()
+    {
         String[] round2VotesTableColoumnNames
-                = {
+                =
+                {
                     "Name", "Pool A choices", "Pool B choices", "Add"
                 };
         List<User> allStudents = control.getAllStudents();
         Object[][] data = new Object[allStudents.size()][4];
 
-        for (int i = 0; i < allStudents.size(); i++) {
+        for (int i = 0; i < allStudents.size(); i++)
+        {
             List<Vote> currentVotes = allStudents.get(i).getVotesByRound(2);
 
             data[i][0] = allStudents.get(i).getName();
             String error = "No votes yet.";
-            if (!currentVotes.isEmpty()) {
+            if (!currentVotes.isEmpty())
+            {
 
                 String secondPool = "";
                 String firstPool = "";
-                for (Vote vote : currentVotes) {
+                for (Vote vote : currentVotes)
+                {
 
-                    if (vote.getProposedSubject().getPoolOptions().equals("A")) {
-                        if (vote.getPoints() == 2) {
+                    if (vote.getProposedSubject().getPoolOptions().equals("A"))
+                    {
+                        if (vote.getPoints() == 2)
+                        {
                             firstPool += "1 " + vote.getProposedSubject().getName();
-                        } else if (vote.getPoints() == 1) {
+                        }
+                        else if (vote.getPoints() == 1)
+                        {
                             firstPool += ", 2 " + vote.getProposedSubject().getName();
                         }
                         data[i][1] = firstPool;
-                    } else if (vote.getProposedSubject().getPoolOptions().equals("B")) {
-                        if (vote.getPoints() == 2) {
+                    }
+                    else if (vote.getProposedSubject().getPoolOptions().equals("B"))
+                    {
+                        if (vote.getPoints() == 2)
+                        {
                             secondPool += "1 " + vote.getProposedSubject().getName();
-                        } else if (vote.getPoints() == 1) {
+                        }
+                        else if (vote.getPoints() == 1)
+                        {
                             secondPool += ", 2 " + vote.getProposedSubject().getName();
                         }
                         data[i][2] = secondPool;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 data[i][1] = error;
                 data[i][2] = error;
             }
 
         }
-        jTableRound2Votes.setModel(new DefaultTableModel(data, round2VotesTableColoumnNames) {
+
+        for (FinalClass fc : control.getAllClasses())
+        {
+            for (User s : fc.getStudents())
+            {
+
+            }
+        }
+
+        jTableRound2Votes.setModel(new DefaultTableModel(data, round2VotesTableColoumnNames)
+        {
             @Override
-            public boolean isCellEditable(int row, int column) {
-                switch (column) {
+            public boolean isCellEditable(int row, int column)
+            {
+                switch (column)
+                {
                     case 3:
                         return isStudentCheckBoxEditable.get(row);
                     default:
@@ -2135,8 +2545,10 @@ public class GUI extends javax.swing.JFrame {
             }
 
             @Override
-            public Class getColumnClass(int column) {
-                switch (column) {
+            public Class getColumnClass(int column)
+            {
+                switch (column)
+                {
                     case 3:
                         return Boolean.class;
                     default:
@@ -2149,41 +2561,47 @@ public class GUI extends javax.swing.JFrame {
         jTableRound2Votes.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(2).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(3).setPreferredWidth(50);
-
-        for (User s : allStudents) {
-            isStudentCheckBoxEditable.add(true);
-        }
     }
 
-    private void setupJListSubjectsToChooseFromForRound1() {
+    private void setupJListSubjectsToChooseFromForRound1()
+    {
         DefaultListModel model = new DefaultListModel();
         List<ProposedSubject> subjects = control.getAllProposedElectiveSubjects();
-        for (ProposedSubject ps : subjects) {
+        for (ProposedSubject ps : subjects)
+        {
             model.addElement(ps.getName() + " (is alive = " + ps.isIsAlive() + " )");
         }
 
         jListAllProposedSubjects.setModel(model);
 
         //make the lists enable the multiple selection without having to hold ctrl or shift       
-        ListSelectionModel selectionModel1 = new DefaultListSelectionModel() {
+        ListSelectionModel selectionModel1 = new DefaultListSelectionModel()
+        {
             boolean ajustando;
 
             @Override
-            public void setSelectionInterval(int index0, int index1) {
-                if (ajustando) {
+            public void setSelectionInterval(int index0, int index1)
+            {
+                if (ajustando)
+                {
                     return;
                 }
-                if (isSelectedIndex(index1)) {
+                if (isSelectedIndex(index1))
+                {
                     super.removeSelectionInterval(index0, index1);
-                } else {
+                }
+                else
+                {
                     super.addSelectionInterval(index0, index1);
                 }
                 ajustando = getValueIsAdjusting();
             }
 
             @Override
-            public void setValueIsAdjusting(boolean valueIsAdjusting) {
-                if (!valueIsAdjusting) {
+            public void setValueIsAdjusting(boolean valueIsAdjusting)
+            {
+                if (!valueIsAdjusting)
+                {
                     ajustando = false;
                 }
                 super.setValueIsAdjusting(valueIsAdjusting);
@@ -2196,33 +2614,43 @@ public class GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new GUI().setVisible(true);
             }
         });
@@ -2298,6 +2726,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuProposeSubject;
     private javax.swing.JMenu jMenuRound1;
     private javax.swing.JMenu jMenuRound2;
+    private javax.swing.JMenu jMenuSendReport;
     private javax.swing.JPanel jPanelAddProposedSubject;
     private javax.swing.JPanel jPanelChooseProposedSubjectsForRound1;
     private javax.swing.JPanel jPanelEstablishSubjects;
@@ -2310,7 +2739,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2321,8 +2750,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTableRound2Teachers;
     private javax.swing.JTable jTableRound2Votes;
+    private javax.swing.JTable jTableRound2Votes1;
     private javax.swing.JTable jTableSubjects;
     private javax.swing.JTable jTableUnsatisfiedStudents;
     private javax.swing.JPasswordField jTextFieldPassword;
