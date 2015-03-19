@@ -1505,7 +1505,7 @@ public class GUI extends javax.swing.JFrame
             {
 
                 logMessage = control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(),
-                        jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), roundNumber);
+                                                               jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), roundNumber);
                 if (logMessage.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
                 {
                     jLabelError.setForeground(Color.GREEN);
@@ -1975,7 +1975,7 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonProposeSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectActionPerformed
         ProposedSubject p = new ProposedSubject(jTextFieldProposedSubjectName.getText().toString(),
-                jTextFieldProposedSubjectDescription.getText().toString(), true, null);
+                                                jTextFieldProposedSubjectDescription.getText().toString(), true, null);
         String message = control.addProposedSubject(p, jListProposedTeachers.getSelectedIndices());
         jTextFieldProposedSubjectName.setText("");
         jTextFieldProposedSubjectDescription.setText("");
@@ -2370,30 +2370,8 @@ public class GUI extends javax.swing.JFrame
 
     private void jMenuSendReportMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenuSendReportMouseClicked
     {//GEN-HEADEREND:event_jMenuSendReportMouseClicked
-        String email = "";
-        while (email.equals(""))
-        {
-            email = JOptionPane.showInputDialog("Which e-mail address do you want to send the report to?");
-            if (email.equals(""))
-            {
-                int response = JOptionPane.showConfirmDialog(rootPane, "You have to enter a valid e-mail address!");
-                if (response != 0)
-                {
-                    email = "x";
-                }
-            }
-            else
-            {
-                if (control.sendMail(email))
-                {
-                    JOptionPane.showConfirmDialog(rootPane, "The e-mail has been successfully sent!");
-                }
-                else
-                {
-                    JOptionPane.showConfirmDialog(rootPane, "The e-mail was not sent!");
-                }
-            }
-        }
+        String message = control.sendMail();
+        JOptionPane.showConfirmDialog(rootPane, message);
     }//GEN-LAST:event_jMenuSendReportMouseClicked
 
     private void checkmarkStudentsAndMakeUnavailableStudentsUncheckable()
@@ -2561,6 +2539,11 @@ public class GUI extends javax.swing.JFrame
         jTableRound2Votes.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(2).setPreferredWidth(150);
         jTableRound2Votes.getColumnModel().getColumn(3).setPreferredWidth(50);
+
+        for (User s : allStudents)
+        {
+            isStudentCheckBoxEditable.add(true);
+        }
     }
 
     private void setupJListSubjectsToChooseFromForRound1()
@@ -2631,16 +2614,20 @@ public class GUI extends javax.swing.JFrame
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
+        }
+        catch (ClassNotFoundException ex)
         {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
+        }
+        catch (InstantiationException ex)
         {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
+        }
+        catch (IllegalAccessException ex)
         {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

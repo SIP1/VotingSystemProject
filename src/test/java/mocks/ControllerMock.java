@@ -372,4 +372,10 @@ public class ControllerMock implements ControllerInterface {
         String xml = x.toXML(proposedSubjects);
         return xml;
     }
+
+    @Override
+    public String sendMail()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

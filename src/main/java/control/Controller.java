@@ -1,5 +1,6 @@
 package control;
 
+import com.thoughtworks.xstream.XStream;
 import models.FinalClass;
 import models.ProposedSubject;
 import models.User;
@@ -514,9 +515,17 @@ public class Controller implements ControllerInterface
         return c.getStudents();
     }
 
-    public Boolean sendMail(String email)
+    @Override
+    public String sendMail()
     {
-        emailSender = new EmailSender();
-        return emailSender.emailSender(email);
+        XStream xmlParser = new XStream();
+        String xmlClasses = xmlParser.toXML(db.getAllClasses());
+       List<User> receivers = db.getUsersByUserTpe(new UserType("Head"));
+       
+        System.out.println("hahaah " + receivers.size());
+        if(EmailSender.send(receivers.get(0).getEmail(), xmlClasses)){
+            return AcceptanceProtocol.EMAIL_SEND_SUCCESS + receivers.get(0).getEmail();
+        }
+        return AcceptanceProtocol.EMAIL_SEND_FAIL;
     }
 }

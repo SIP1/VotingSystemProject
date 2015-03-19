@@ -159,6 +159,16 @@ public class DbMock
                     }
                 }
                 return students;
+            case "Head":
+                List<User> heads = new ArrayList<>();
+                for (User user : users)
+                {
+                    if (user.getUserType().getName().equals("Head"))
+                    {
+                        heads.add(user);
+                    }
+                }
+                return heads;
             default:
                 return null;
         }
@@ -218,6 +228,7 @@ public class DbMock
         users.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", getUserTypeByName("Teacher")));
+        users.add(new User("god", "4", "God Gods", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
 
         //populate student
         User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
@@ -240,7 +251,7 @@ public class DbMock
         users.add(marek);
 
         //make head of program
-        users.add(new User("1", "1", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
+        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
 
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();

@@ -5,7 +5,6 @@ import models.ProposedSubject;
 import models.User;
 import models.UserType;
 import models.Vote;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ControllerInterface {
@@ -77,5 +76,7 @@ public interface ControllerInterface {
     List<FinalClass> getAllClasses();
     
     List<User> getStudentsForClass(FinalClass c);
+    
+    String sendMail();
     
 }
