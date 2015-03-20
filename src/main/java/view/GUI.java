@@ -7,7 +7,6 @@ import models.Vote;
 import control.Controller;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -27,31 +26,15 @@ public class GUI extends javax.swing.JFrame
 
     Controller control;
     List<ProposedSubject> subjectsToBeDisplayed;
-    int roundNumber;
     String[] subjectsTableColumnNames, round2VotesTableColoumnNames, assignTeachersToSubjectsTableNames;
     List<Boolean> isStudentCheckBoxEditable, isTeachersCheckBoxEditable;
 
     public GUI()
     {
         initComponents();
-        jMenuRound1.setVisible(false);
-        jMenuRound2.setVisible(false);
-        jMenuProposeSubject.setVisible(false);
-        jMenuEstablishClasses.setVisible(false);
-        jMenuAssignTeachers.setVisible(false);
-        jMenuSendReport.setVisible(false);
-        jMenuLogout.setVisible(false);
-        jPanelAddProposedSubject.setVisible(false);
-        jPanelRound1.setVisible(false);
-        jPanelPoll.setVisible(false);
-        jPanelHelp.setVisible(false);
-        jPanelChooseProposedSubjectsForRound1.setVisible(false);
-        jPanelMain.setVisible(false);
-        jPanelEstablishSubjects.setVisible(false);
-        jPanelAssignTeachers.setVisible(false);
-        jTextFieldUsername.requestFocus();
         control = new Controller();
-        roundNumber = 0;
+        setupFirstScreen();
+
         subjectsTableColumnNames = new String[]
         {
             "Name", "Poll", "Teachers", "Description"
@@ -64,6 +47,25 @@ public class GUI extends javax.swing.JFrame
         {
             "Name", "Teaching from Pool A", "Teaching from Pool B", "Assign"
         };
+    }
+
+    private void setupFirstScreen()
+    {
+        jMenuAdminChooseSubjectsForRound1.setVisible(false);
+        jMenuEstablishClasses.setVisible(false);
+        jMenuAssignTeachers.setVisible(false);
+        jMenuSendReport.setVisible(false);
+        jMenuLogout.setVisible(false);
+        jMenuEndVotingRound2.setVisible(false);
+        jPanelAddProposedSubject.setVisible(false);
+        jPanelRound1.setVisible(false);
+        jPanelPoll.setVisible(false);
+        jPanelHelp.setVisible(false);
+        jPanelChooseProposedSubjectsForRound1.setVisible(false);
+        jPanelMain.setVisible(false);
+        jPanelEstablishSubjects.setVisible(false);
+        jPanelAssignTeachers.setVisible(false);
+        jTextFieldUsername.requestFocus();
     }
 
     /**
@@ -79,6 +81,9 @@ public class GUI extends javax.swing.JFrame
         jComboBox5 = new javax.swing.JComboBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        jPanelHelp = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButtonBack = new javax.swing.JButton();
         jPanelLogin = new javax.swing.JPanel();
         jTextFieldUsername = new javax.swing.JTextField();
         jTextFieldPassword = new javax.swing.JPasswordField();
@@ -92,6 +97,24 @@ public class GUI extends javax.swing.JFrame
         jButtonSelectSubjectsToVote = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSubjects = new javax.swing.JTable();
+        jPanelAddProposedSubject = new javax.swing.JPanel();
+        jLabelName = new javax.swing.JLabel();
+        jLabelDescription = new javax.swing.JLabel();
+        jTextFieldProposedSubjectName = new javax.swing.JTextField();
+        jTextFieldProposedSubjectDescription = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonProposeSubjectSubmit = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListProposedTeachers = new javax.swing.JList();
+        jLabelTeachers = new javax.swing.JLabel();
+        jButtonProposeSubjectBack = new javax.swing.JButton();
+        jPanelChooseProposedSubjectsForRound1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListAllProposedSubjects = new javax.swing.JList();
+        jButtonSubmitProposedSubjectsForRound1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabelFeedbackChooseProposedSubjectsForRound1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanelRound1 = new javax.swing.JPanel();
         jLabelFirstPriorityA = new javax.swing.JLabel();
         jLabelSecondPriorityA = new javax.swing.JLabel();
@@ -107,26 +130,6 @@ public class GUI extends javax.swing.JFrame
         jLabelFirstPriorityB = new javax.swing.JLabel();
         jLabelSecondPriorityB = new javax.swing.JLabel();
         jButtonBackRound1 = new javax.swing.JButton();
-        jPanelHelp = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButtonBack = new javax.swing.JButton();
-        jPanelChooseProposedSubjectsForRound1 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jListAllProposedSubjects = new javax.swing.JList();
-        jButtonSubmitProposedSubjectsForRound1 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabelFeedbackChooseProposedSubjectsForRound1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jPanelAddProposedSubject = new javax.swing.JPanel();
-        jLabelName = new javax.swing.JLabel();
-        jLabelDescription = new javax.swing.JLabel();
-        jTextFieldProposedSubjectName = new javax.swing.JTextField();
-        jTextFieldProposedSubjectDescription = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jButtonProposeSubject = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jListProposedTeachers = new javax.swing.JList();
-        jLabelTeachers = new javax.swing.JLabel();
         jPanelPoll = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListPollA = new javax.swing.JList();
@@ -134,7 +137,7 @@ public class GUI extends javax.swing.JFrame
         jListPollB = new javax.swing.JList();
         jLabelA = new javax.swing.JLabel();
         jLabelB = new javax.swing.JLabel();
-        jButtonSubmit = new javax.swing.JButton();
+        jButtonPanelPollSubmit = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -168,9 +171,8 @@ public class GUI extends javax.swing.JFrame
         jScrollPane11 = new javax.swing.JScrollPane();
         jTableAssignTeachersToSubjects = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuProposeSubject = new javax.swing.JMenu();
-        jMenuRound1 = new javax.swing.JMenu();
-        jMenuRound2 = new javax.swing.JMenu();
+        jMenuAdminChooseSubjectsForRound1 = new javax.swing.JMenu();
+        jMenuEndVotingRound2 = new javax.swing.JMenu();
         jMenuEstablishClasses = new javax.swing.JMenu();
         jMenuAssignTeachers = new javax.swing.JMenu();
         jMenuSendReport = new javax.swing.JMenu();
@@ -184,10 +186,52 @@ public class GUI extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
+        jPanelHelp.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelHelp.setMaximumSize(new java.awt.Dimension(800, 550));
+        jPanelHelp.setMinimumSize(new java.awt.Dimension(800, 550));
+        jPanelHelp.setPreferredSize(new java.awt.Dimension(800, 550));
+
+        jLabel5.setText("Here you can find some instructions");
+
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelHelpLayout = new javax.swing.GroupLayout(jPanelHelp);
+        jPanelHelp.setLayout(jPanelHelpLayout);
+        jPanelHelpLayout.setHorizontalGroup(
+            jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHelpLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel5)
+                .addContainerGap(594, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonBack)
+                .addGap(40, 40, 40))
+        );
+        jPanelHelpLayout.setVerticalGroup(
+            jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonBack)
+                .addGap(34, 34, 34))
+        );
+
         jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
         jPanelLogin.setMaximumSize(new java.awt.Dimension(800, 550));
         jPanelLogin.setPreferredSize(new java.awt.Dimension(800, 550));
 
+        jTextFieldUsername.setNextFocusableComponent(jTextFieldPassword);
+
+        jTextFieldPassword.setNextFocusableComponent(jButtonLogin);
         jTextFieldPassword.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyPressed(java.awt.event.KeyEvent evt)
@@ -201,6 +245,7 @@ public class GUI extends javax.swing.JFrame
         jLabel2.setText("Password:");
 
         jButtonLogin.setText("Log in");
+        jButtonLogin.setNextFocusableComponent(jTextFieldUsername);
         jButtonLogin.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -307,6 +352,7 @@ public class GUI extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
+        jTableSubjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableSubjects);
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
@@ -334,6 +380,173 @@ public class GUI extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSelectSubjectsToVote)
                 .addContainerGap())
+        );
+
+        jPanelAddProposedSubject.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelAddProposedSubject.setMaximumSize(new java.awt.Dimension(800, 550));
+        jPanelAddProposedSubject.setMinimumSize(new java.awt.Dimension(800, 550));
+        jPanelAddProposedSubject.setPreferredSize(new java.awt.Dimension(800, 550));
+
+        jLabelName.setText("Name");
+
+        jLabelDescription.setText("Description");
+
+        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jTextFieldProposedSubjectDescriptionActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Propose subject");
+
+        jButtonProposeSubjectSubmit.setText("Submit");
+        jButtonProposeSubjectSubmit.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonProposeSubjectSubmitActionPerformed(evt);
+            }
+        });
+
+        jListProposedTeachers.setModel(new javax.swing.AbstractListModel()
+        {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jListProposedTeachers);
+
+        jLabelTeachers.setText("Teachers");
+
+        jButtonProposeSubjectBack.setText("Cancel");
+        jButtonProposeSubjectBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonProposeSubjectBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelAddProposedSubjectLayout = new javax.swing.GroupLayout(jPanelAddProposedSubject);
+        jPanelAddProposedSubject.setLayout(jPanelAddProposedSubjectLayout);
+        jPanelAddProposedSubjectLayout.setHorizontalGroup(
+            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddProposedSubjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
+            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(jLabelTeachers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddProposedSubjectLayout.createSequentialGroup()
+                                .addComponent(jButtonProposeSubjectBack, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonProposeSubjectSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(249, Short.MAX_VALUE))
+        );
+        jPanelAddProposedSubjectLayout.setVerticalGroup(
+            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(34, 34, 34)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
+                        .addComponent(jLabelTeachers, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 340, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonProposeSubjectSubmit)
+                    .addComponent(jButtonProposeSubjectBack))
+                .addContainerGap())
+        );
+
+        jPanelChooseProposedSubjectsForRound1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelChooseProposedSubjectsForRound1.setMaximumSize(new java.awt.Dimension(800, 550));
+        jPanelChooseProposedSubjectsForRound1.setMinimumSize(new java.awt.Dimension(800, 550));
+        jPanelChooseProposedSubjectsForRound1.setPreferredSize(new java.awt.Dimension(800, 550));
+
+        jListAllProposedSubjects.setModel(new javax.swing.AbstractListModel()
+        {
+            String[] strings = { "Android", "Arduino", "C#", "Game design", "3D printer", "Artificial Inteligence" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jListAllProposedSubjects);
+
+        jButtonSubmitProposedSubjectsForRound1.setText("Submit");
+        jButtonSubmitProposedSubjectsForRound1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonSubmitProposedSubjectsForRound1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Select proposed subjects for round 1 from the list:");
+
+        jLabelFeedbackChooseProposedSubjectsForRound1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabelFeedbackChooseProposedSubjectsForRound1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Proposed subjects - Round 1");
+
+        javax.swing.GroupLayout jPanelChooseProposedSubjectsForRound1Layout = new javax.swing.GroupLayout(jPanelChooseProposedSubjectsForRound1);
+        jPanelChooseProposedSubjectsForRound1.setLayout(jPanelChooseProposedSubjectsForRound1Layout);
+        jPanelChooseProposedSubjectsForRound1Layout.setHorizontalGroup(
+            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                        .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSubmitProposedSubjectsForRound1)))
+                .addGap(29, 29, 29))
+        );
+        jPanelChooseProposedSubjectsForRound1Layout.setVerticalGroup(
+            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSubmitProposedSubjectsForRound1)
+                    .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
 
         jPanelRound1.setBackground(new java.awt.Color(255, 255, 255));
@@ -495,196 +708,6 @@ public class GUI extends javax.swing.JFrame
                 .addGap(24, 24, 24))
         );
 
-        jPanelHelp.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelHelp.setMaximumSize(new java.awt.Dimension(800, 550));
-        jPanelHelp.setMinimumSize(new java.awt.Dimension(800, 550));
-        jPanelHelp.setPreferredSize(new java.awt.Dimension(800, 550));
-
-        jLabel5.setText("Here you can find some instructions");
-
-        jButtonBack.setText("Back");
-        jButtonBack.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonBackActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelHelpLayout = new javax.swing.GroupLayout(jPanelHelp);
-        jPanelHelp.setLayout(jPanelHelpLayout);
-        jPanelHelpLayout.setHorizontalGroup(
-            jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelHelpLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel5)
-                .addContainerGap(594, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonBack)
-                .addGap(40, 40, 40))
-        );
-        jPanelHelpLayout.setVerticalGroup(
-            jPanelHelpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHelpLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonBack)
-                .addGap(34, 34, 34))
-        );
-
-        jPanelChooseProposedSubjectsForRound1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelChooseProposedSubjectsForRound1.setMaximumSize(new java.awt.Dimension(800, 550));
-        jPanelChooseProposedSubjectsForRound1.setMinimumSize(new java.awt.Dimension(800, 550));
-        jPanelChooseProposedSubjectsForRound1.setPreferredSize(new java.awt.Dimension(800, 550));
-
-        jListAllProposedSubjects.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Android", "Arduino", "C#", "Game design", "3D printer", "Artificial Inteligence" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(jListAllProposedSubjects);
-
-        jButtonSubmitProposedSubjectsForRound1.setText("Submit");
-        jButtonSubmitProposedSubjectsForRound1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonSubmitProposedSubjectsForRound1ActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Select proposed subjects for round 1 from the list:");
-
-        jLabelFeedbackChooseProposedSubjectsForRound1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabelFeedbackChooseProposedSubjectsForRound1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Proposed subjects - Round 1");
-
-        javax.swing.GroupLayout jPanelChooseProposedSubjectsForRound1Layout = new javax.swing.GroupLayout(jPanelChooseProposedSubjectsForRound1);
-        jPanelChooseProposedSubjectsForRound1.setLayout(jPanelChooseProposedSubjectsForRound1Layout);
-        jPanelChooseProposedSubjectsForRound1Layout.setHorizontalGroup(
-            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
-                        .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSubmitProposedSubjectsForRound1)))
-                .addGap(29, 29, 29))
-        );
-        jPanelChooseProposedSubjectsForRound1Layout.setVerticalGroup(
-            jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelChooseProposedSubjectsForRound1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(jPanelChooseProposedSubjectsForRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSubmitProposedSubjectsForRound1)
-                    .addComponent(jLabelFeedbackChooseProposedSubjectsForRound1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
-
-        jPanelAddProposedSubject.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelAddProposedSubject.setMaximumSize(new java.awt.Dimension(800, 550));
-        jPanelAddProposedSubject.setMinimumSize(new java.awt.Dimension(800, 550));
-        jPanelAddProposedSubject.setPreferredSize(new java.awt.Dimension(800, 550));
-
-        jLabelName.setText("Name");
-
-        jLabelDescription.setText("Description");
-
-        jTextFieldProposedSubjectDescription.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jTextFieldProposedSubjectDescriptionActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Propose subject");
-
-        jButtonProposeSubject.setText("Submit");
-        jButtonProposeSubject.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonProposeSubjectActionPerformed(evt);
-            }
-        });
-
-        jListProposedTeachers.setModel(new javax.swing.AbstractListModel()
-        {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jListProposedTeachers);
-
-        jLabelTeachers.setText("Teachers");
-
-        javax.swing.GroupLayout jPanelAddProposedSubjectLayout = new javax.swing.GroupLayout(jPanelAddProposedSubject);
-        jPanelAddProposedSubject.setLayout(jPanelAddProposedSubjectLayout);
-        jPanelAddProposedSubjectLayout.setHorizontalGroup(
-            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddProposedSubjectLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
-            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonProposeSubject)
-                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
-                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
-                        .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                            .addComponent(jLabelTeachers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(249, Short.MAX_VALUE))
-        );
-        jPanelAddProposedSubjectLayout.setVerticalGroup(
-            jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAddProposedSubjectLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addGap(34, 34, 34)
-                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldProposedSubjectName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldProposedSubjectDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelAddProposedSubjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTeachers, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButtonProposeSubject)
-                .addGap(32, 32, 32))
-        );
-
         jPanelPoll.setBackground(new java.awt.Color(255, 255, 255));
         jPanelPoll.setMaximumSize(new java.awt.Dimension(800, 550));
         jPanelPoll.setMinimumSize(new java.awt.Dimension(800, 550));
@@ -701,10 +724,6 @@ public class GUI extends javax.swing.JFrame
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
                 jListPollAMouseReleased(evt);
-            }
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jListPollAMouseClicked(evt);
             }
         });
         jListPollA.addListSelectionListener(new javax.swing.event.ListSelectionListener()
@@ -724,10 +743,6 @@ public class GUI extends javax.swing.JFrame
         });
         jListPollB.addMouseListener(new java.awt.event.MouseAdapter()
         {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jListPollBMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
                 jListPollBMouseReleased(evt);
@@ -748,12 +763,12 @@ public class GUI extends javax.swing.JFrame
         jLabelB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelB.setText("POOL B");
 
-        jButtonSubmit.setText("Submit");
-        jButtonSubmit.addActionListener(new java.awt.event.ActionListener()
+        jButtonPanelPollSubmit.setText("Submit");
+        jButtonPanelPollSubmit.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButtonSubmitActionPerformed(evt);
+                jButtonPanelPollSubmitActionPerformed(evt);
             }
         });
 
@@ -806,7 +821,7 @@ public class GUI extends javax.swing.JFrame
                     .addGroup(jPanelPollLayout.createSequentialGroup()
                         .addComponent(jLabelLogPool, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonSubmit))
+                        .addComponent(jButtonPanelPollSubmit))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
                     .addGroup(jPanelPollLayout.createSequentialGroup()
                         .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -843,7 +858,7 @@ public class GUI extends javax.swing.JFrame
                 .addGap(14, 14, 14)
                 .addGroup(jPanelPollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelLogPool, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonPanelPollSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
 
@@ -1147,35 +1162,25 @@ public class GUI extends javax.swing.JFrame
                 .addContainerGap())
         );
 
-        jMenuProposeSubject.setText("Propose subject");
-        jMenuProposeSubject.addMouseListener(new java.awt.event.MouseAdapter()
+        jMenuAdminChooseSubjectsForRound1.setText("Choose subjects for round 1");
+        jMenuAdminChooseSubjectsForRound1.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jMenuProposeSubjectMouseClicked(evt);
+                jMenuAdminChooseSubjectsForRound1MouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenuProposeSubject);
+        jMenuBar1.add(jMenuAdminChooseSubjectsForRound1);
 
-        jMenuRound1.setText("Round 1");
-        jMenuRound1.addMouseListener(new java.awt.event.MouseAdapter()
+        jMenuEndVotingRound2.setText("End voting round #2");
+        jMenuEndVotingRound2.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jMenuRound1MouseClicked(evt);
+                jMenuEndVotingRound2MouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenuRound1);
-
-        jMenuRound2.setText("Round 2");
-        jMenuRound2.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                jMenuRound2MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenuRound2);
+        jMenuBar1.add(jMenuEndVotingRound2);
 
         jMenuEstablishClasses.setText("Establish classes");
         jMenuEstablishClasses.addMouseListener(new java.awt.event.MouseAdapter()
@@ -1312,7 +1317,6 @@ public class GUI extends javax.swing.JFrame
         jTableSubjects.getColumnModel().getColumn(1).setPreferredWidth(20);
         jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(80);
         jTableSubjects.getColumnModel().getColumn(3).setPreferredWidth(140);
-//        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
     }
 
     private void setupHeadSubjectsTable()
@@ -1339,47 +1343,126 @@ public class GUI extends javax.swing.JFrame
         jTableSubjects.getColumnModel().getColumn(1).setPreferredWidth(20);
         jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(80);
         jTableSubjects.getColumnModel().getColumn(3).setPreferredWidth(140);
-//        System.out.println(jTableSubjects.getColumnModel().getTotalColumnWidth());
     }
+
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         if (control.authenticateUser(jTextFieldUsername.getText(), jTextFieldPassword.getText()).equals(AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS))
         {
+            jTextFieldUsername.setText("");
+            jTextFieldPassword.setText("");
             switch (control.getUser().getUserType().getName())
             {
                 case "Teacher":
                 case "Student":
                     jPanelLogin.setVisible(false);
-                    jPanelMain.setVisible(true);
-                    jMenuRound1.setVisible(true);
-                    jMenuRound2.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
-                    jMenuProposeSubject.setVisible(true);
-                    jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
-                    jTextFieldUsername.setText("");
-                    jTextFieldPassword.setText("");
-                    jButtonSelectSubjectsToVote.setVisible(false);
-                    setupStudentSubjectsTable();
+                    jMenuAdminChooseSubjectsForRound1.setVisible(false);
+                    if (control.getRoundNumber() == 0)
+                    {
+                        jButtonSelectSubjectsToVote.setText("Propose new subject");
+                        jPanelMain.setVisible(true);
+                        setupStudentSubjectsTable();
+                        jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
+                    }
+                    else if (control.getRoundNumber() == 1)
+                    {
+                        jButtonSelectSubjectsToVote.setText("Go to subjects voting");
+                        jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
+                        setupStudentSubjectsTable();
+                        jPanelMain.setVisible(true);
+                        setupComboBoxItemsForRound();
+                        jComboBox1.setSelectedIndex(0);
+                        jComboBox2.setSelectedIndex(0);
+                        jComboBox3.setSelectedIndex(0);
+                        jComboBox4.setSelectedIndex(0);
+                        jLabelRoundTitle.setText("Round 1");
+                        jLabelPollA.setVisible(false);
+                        jLabelPollB.setVisible(false);
+                        jLabelFirstPriorityA.setText("Please choose two first priorities:");
+                        jLabelFirstPriorityB.setVisible(false);
+                        jLabelSecondPriorityA.setText("Please choose two second priorities:");
+                        jLabelSecondPriorityB.setVisible(false);
+                        jLabelError.setText("");
+                    }
+                    else if (control.getRoundNumber() == 2)
+                    {
+                        jButtonSelectSubjectsToVote.setText("Go to subjects voting");
+                        jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
+                        setupStudentSubjectsTable();
+                        jPanelMain.setVisible(true);
+                        setupComboBoxItemsForRound();
+                        jComboBox1.setEnabled(true);
+                        jComboBox2.setEnabled(true);
+                        jComboBox3.setEnabled(true);
+                        jComboBox4.setEnabled(true);
+                        jButtonSubmitRound1.setEnabled(true);
+                        jLabelError.setText("");
+                        jComboBox1.setSelectedIndex(0);
+                        jComboBox2.setSelectedIndex(0);
+                        jComboBox3.setSelectedIndex(0);
+                        jComboBox4.setSelectedIndex(0);
+                        jLabelRoundTitle.setText("Round 2");
+                        jLabelPollA.setVisible(true);
+                        jLabelPollB.setVisible(true);
+                        jLabelFirstPriorityA.setText("First Priority:");
+                        jLabelFirstPriorityB.setVisible(true);
+                        jLabelSecondPriorityA.setText("Second Priority:");
+                        jLabelSecondPriorityB.setVisible(true);
+                        jLabelError.setText("");
+                    }
+                    else if (control.getRoundNumber() == 3)
+                    {
+                        jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "! Voting round 2 is finally over, so sit tight & pray!");
+                        setupStudentSubjectsTable();
+                        jButtonSelectSubjectsToVote.setVisible(false);
+                        jPanelMain.setVisible(true);
+                    }
                     break;
                 case "Head":
                     jPanelLogin.setVisible(false);
-                    jPanelMain.setVisible(true);
-                    jMenuRound1.setVisible(true); //to be changed when we implement user story 1
-                    jMenuRound2.setVisible(true);
-                    jMenuEstablishClasses.setVisible(true);
-                    jMenuAssignTeachers.setVisible(true);
                     jMenuHelp.setVisible(false);
                     jMenuLogout.setVisible(true);
-                    jMenuSendReport.setVisible(true);
-                    jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
-                    jTextFieldUsername.setText("");
-                    jTextFieldPassword.setText("");
-                    jButtonSelectSubjectsToVote.setVisible(false);
-                    setupHeadSubjectsTable();
-                    //setupUnsatisfiedStudentsTable();
+                    if (control.getRoundNumber() == 0)
+                    {
+                        jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
+                        setupHeadSubjectsTable();
+                        jButtonSelectSubjectsToVote.setText("Propose new subject");
+                        jButtonSelectSubjectsToVote.setVisible(true);
+                        jPanelMain.setVisible(true);
+                        jMenuAdminChooseSubjectsForRound1.setVisible(true);
+                    }
+                    else if (control.getRoundNumber() == 1)
+                    {
+                        jProgressBar1.setValue(0);
+                        jPanelPoll.setVisible(true);
+                        setupPollSubjects();
+                        setupUnsatisfiedStudentsTable();
+                    }
+                    else if (control.getRoundNumber() == 2)
+                    {
+                        jButtonSubmitClass.setVisible(false);
+                        jPanelEstablishSubjects.setVisible(true);
+                        jMenuEndVotingRound2.setVisible(true);
+                        setupRound2VotesTable();
+                        fillInPoolLists();
+                        fillInClassList();
+                    }
+                    else
+                    {
+                        jMenuEstablishClasses.setVisible(true);
+                        jMenuAssignTeachers.setVisible(true);
+                        jMenuSendReport.setVisible(true);
+                        jPanelEstablishSubjects.setVisible(true);
+                        setupRound2VotesTable();
+                        fillInPoolLists();
+                        fillInClassList();
+                    }
+                    break;
+
+                default:
                     break;
             }
-
         }
         else
         {
@@ -1389,80 +1472,11 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
-    private void jMenuRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound1MouseClicked
-        jPanelEstablishSubjects.setVisible(false);
-        switch (control.getUser().getUserType().getName())
-        {
-            case "Teacher":
-            case "Student":
-                roundNumber = 1;
-                setupComboBoxItemsForRound();
-                jComboBox1.setSelectedIndex(0);
-                jComboBox2.setSelectedIndex(0);
-                jComboBox3.setSelectedIndex(0);
-                jComboBox4.setSelectedIndex(0);
-                jPanelMain.setVisible(false);
-                jPanelRound1.setVisible(true);
-                jPanelHelp.setVisible(false);
-                jPanelAddProposedSubject.setVisible(false);
-                jPanelChooseProposedSubjectsForRound1.setVisible(false);
-                jLabelRoundTitle.setText("Round 1");
-                jLabelPollA.setVisible(false);
-                jLabelPollB.setVisible(false);
-                jLabelFirstPriorityA.setText("Please choose two first priorities:");
-                jLabelFirstPriorityB.setVisible(false);
-                jLabelSecondPriorityA.setText("Please choose two second priorities:");
-                jLabelSecondPriorityB.setVisible(false);
-                jLabelError.setText("");
-                break;
-            case "Head":
-                jPanelChooseProposedSubjectsForRound1.setVisible(true);
-                jPanelAddProposedSubject.setVisible(false);
-                jPanelMain.setVisible(false);
-                jPanelRound1.setVisible(false);
-                jPanelHelp.setVisible(false);
-                jPanelLogin.setVisible(false);
-                jPanelPoll.setVisible(false);
-                setupJListSubjectsToChooseFromForRound1();
-                break;
-        }
-    }//GEN-LAST:event_jMenuRound1MouseClicked
-
-    private void jMenuRound2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuRound2MouseClicked
-        jPanelEstablishSubjects.setVisible(false);
-        jPanelAssignTeachers.setVisible(false);
-        jPanelMain.setVisible(false);
-        jPanelHelp.setVisible(false);
-        jPanelChooseProposedSubjectsForRound1.setVisible(false);
+    private void jMenuAdminChooseSubjectsForRound1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAdminChooseSubjectsForRound1MouseClicked
+        jPanelChooseProposedSubjectsForRound1.setVisible(true);
         jPanelAddProposedSubject.setVisible(false);
-        switch (control.getUser().getUserType().getName())
-        {
-            case "Teacher":
-            case "Student":
-                roundNumber = 2;
-                setupComboBoxItemsForRound();
-                jComboBox1.setSelectedIndex(0);
-                jComboBox2.setSelectedIndex(0);
-                jComboBox3.setSelectedIndex(0);
-                jComboBox4.setSelectedIndex(0);
-                jPanelRound1.setVisible(true);
-                jLabelRoundTitle.setText("Round 2");
-                jLabelPollA.setVisible(true);
-                jLabelPollB.setVisible(true);
-                jLabelFirstPriorityA.setText("First Priority:");
-                jLabelFirstPriorityB.setVisible(true);
-                jLabelSecondPriorityA.setText("Second Priority:");
-                jLabelSecondPriorityB.setVisible(true);
-                jLabelError.setText("");
-                break;
-            case "Head":
-                jProgressBar1.setValue(0);
-                jPanelPoll.setVisible(true);
-                setupPollSubjects();
-                break;
-        }
-
-    }//GEN-LAST:event_jMenuRound2MouseClicked
+        jPanelMain.setVisible(false);
+    }//GEN-LAST:event_jMenuAdminChooseSubjectsForRound1MouseClicked
 
     private void jMenuHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuHelpMouseClicked
         jPanelEstablishSubjects.setVisible(false);
@@ -1490,14 +1504,13 @@ public class GUI extends javax.swing.JFrame
         jPanelAddProposedSubject.setVisible(false);
         jPanelPoll.setVisible(false);
         jPanelLogin.setVisible(true);
-        jMenuRound1.setVisible(false);
-        jMenuRound2.setVisible(false);
+        jMenuAdminChooseSubjectsForRound1.setVisible(false);
+        jMenuEndVotingRound2.setVisible(false);
         jMenuSendReport.setVisible(false);
-        jMenuLogout.setVisible(false);
-        jMenuHelp.setVisible(true);
-        jMenuProposeSubject.setVisible(false);
         jMenuEstablishClasses.setVisible(false);
         jMenuAssignTeachers.setVisible(false);
+        jMenuLogout.setVisible(false);
+        jMenuHelp.setVisible(true);
         jTextFieldUsername.requestFocus();
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
@@ -1515,7 +1528,7 @@ public class GUI extends javax.swing.JFrame
             {
 
                 logMessage = control.addVoteFromParticularUser(jComboBox1.getSelectedItem().toString(), jComboBox2.getSelectedItem().toString(),
-                        jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString(), roundNumber);
+                        jComboBox3.getSelectedItem().toString(), jComboBox4.getSelectedItem().toString());
                 if (logMessage.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
                 {
                     jLabelError.setForeground(Color.GREEN);
@@ -1548,7 +1561,7 @@ public class GUI extends javax.swing.JFrame
 
     private void setupComboBoxItemsForRound()
     {
-        if (roundNumber == 1)
+        if (control.getRoundNumber() == 1)
         {
             subjectsToBeDisplayed = control.getAllAliveProposedElectiveSubjects();
             String[] comboBoxSubjects = new String[subjectsToBeDisplayed.size()];
@@ -1651,7 +1664,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     if (sb.getPoolOptions() != null)
                     {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                        if (!(control.getRoundNumber() == 2 && sb.getPoolOptions().equals("B")))
                         {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
@@ -1680,7 +1693,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     if (sb.getPoolOptions() != null)
                     {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                        if (!(control.getRoundNumber() == 2 && sb.getPoolOptions().equals("A")))
                         {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
@@ -1706,7 +1719,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     if (sb.getPoolOptions() != null)
                     {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("B")))
+                        if (!(control.getRoundNumber() == 2 && sb.getPoolOptions().equals("B")))
                         {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
@@ -1733,7 +1746,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     if (sb.getPoolOptions() != null)
                     {
-                        if (!(roundNumber == 2 && sb.getPoolOptions().equals("A")))
+                        if (!(control.getRoundNumber() == 2 && sb.getPoolOptions().equals("A")))
                         {
                             comboBoxSubjects[poz] = sb.getName();
                             poz++;
@@ -1829,12 +1842,10 @@ public class GUI extends javax.swing.JFrame
                 }
                 super.setValueIsAdjusting(valueIsAdjusting);
             }
-
         };
 
         jListPollA.setSelectionModel(selectionModel1);
         jListPollB.setSelectionModel(selectionModel2);
-
     }
 
     private void setupTeachersForProposedSubjects()
@@ -1923,11 +1934,18 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonSelectSubjectsToVoteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSelectSubjectsToVoteActionPerformed
     {//GEN-HEADEREND:event_jButtonSelectSubjectsToVoteActionPerformed
-        if (roundNumber == 0)
+        if (control.getRoundNumber() == 0)
         {
-            // open some add new subject form
+            jPanelAddProposedSubject.setVisible(true);
+            jPanelMain.setVisible(false);
+            jPanelRound1.setVisible(false);
+            jPanelHelp.setVisible(false);
+            jPanelLogin.setVisible(false);
+            jPanelPoll.setVisible(false);
+            jPanelEstablishSubjects.setVisible(false);
+            setupTeachersForProposedSubjects();
         }
-        else
+        else if (control.getRoundNumber() == 1 || control.getRoundNumber() == 2)
         {
             jPanelMain.setVisible(false);
             jPanelRound1.setVisible(true);
@@ -1939,10 +1957,6 @@ public class GUI extends javax.swing.JFrame
         selectedIndicesA = jListPollA.getSelectedIndices();
         selectedIndicesB = jListPollB.getSelectedIndices();
     }//GEN-LAST:event_jListPollBValueChanged
-
-    private void jListPollBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollBMouseClicked
-
-    }//GEN-LAST:event_jListPollBMouseClicked
 
     private void jListPollBMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollBMouseReleased
         selectedIndicesA = jListPollA.getSelectedIndices();
@@ -1983,7 +1997,7 @@ public class GUI extends javax.swing.JFrame
 
     }//GEN-LAST:event_jTextFieldProposedSubjectDescriptionActionPerformed
 
-    private void jButtonProposeSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectActionPerformed
+    private void jButtonProposeSubjectSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProposeSubjectSubmitActionPerformed
         ProposedSubject p = new ProposedSubject(jTextFieldProposedSubjectName.getText().toString(),
                 jTextFieldProposedSubjectDescription.getText().toString(), true, null);
         String message = control.addProposedSubject(p, jListProposedTeachers.getSelectedIndices());
@@ -1999,33 +2013,28 @@ public class GUI extends javax.swing.JFrame
         jPanelPoll.setVisible(false);
         jPanelEstablishSubjects.setVisible(false);
         setupStudentSubjectsTable();
-    }//GEN-LAST:event_jButtonProposeSubjectActionPerformed
-
-    private void jMenuProposeSubjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuProposeSubjectMouseClicked
-        jPanelAddProposedSubject.setVisible(true);
-        jPanelMain.setVisible(false);
-        jPanelRound1.setVisible(false);
-        jPanelHelp.setVisible(false);
-        jPanelLogin.setVisible(false);
-        jPanelPoll.setVisible(false);
-        jPanelEstablishSubjects.setVisible(false);
-        setupTeachersForProposedSubjects();
-    }//GEN-LAST:event_jMenuProposeSubjectMouseClicked
+    }//GEN-LAST:event_jButtonProposeSubjectSubmitActionPerformed
 
     private void jButtonSubmitProposedSubjectsForRound1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
         int[] indices = jListAllProposedSubjects.getSelectedIndices();
         String result = control.selectSubjectsForRound1(indices);
-        JOptionPane.showMessageDialog(this, result);
+        if (result.equals(AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS))
+        {
+            control.incrementRoundNumber();
+            jProgressBar1.setValue(0);
+            jPanelPoll.setVisible(true);
+            jPanelChooseProposedSubjectsForRound1.setVisible(false);
+            setupPollSubjects();
+            setupUnsatisfiedStudentsTable();
+        }
+        JOptionPane.showMessageDialog(this, result + " The IT System has now advanced to round 1!");
+        jMenuAdminChooseSubjectsForRound1.setVisible(false);
     }//GEN-LAST:event_jButtonSubmitProposedSubjectsForRound1ActionPerformed
 
     private void jListPollAValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPollAValueChanged
         selectedIndicesA = jListPollA.getSelectedIndices();
         selectedIndicesB = jListPollB.getSelectedIndices();
     }//GEN-LAST:event_jListPollAValueChanged
-
-    private void jListPollAMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseClicked
-
-    }//GEN-LAST:event_jListPollAMouseClicked
 
     private void jListPollAMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPollAMouseReleased
         selectedIndicesA = jListPollA.getSelectedIndices();
@@ -2097,21 +2106,29 @@ public class GUI extends javax.swing.JFrame
         jTableSubjects.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
 
-    private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-        JOptionPane.showMessageDialog(null, control.addSubjectsToPolls(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()));
-    }//GEN-LAST:event_jButtonSubmitActionPerformed
+    private void jButtonPanelPollSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPanelPollSubmitActionPerformed
+        if (jListPollA.getSelectedIndices().length == 0 && jListPollB.getSelectedIndices().length == 0)
+        {
+            JOptionPane.showMessageDialog(null, "You have to select a combination of subjects in pools before submitting!");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, control.addSubjectsToPolls(jListPollA.getSelectedIndices(), jListPollB.getSelectedIndices()) + "\nThe IT System has now advanced to round 2!");
+            control.incrementRoundNumber();
+            jPanelPoll.setVisible(false);
+            jButtonSubmitClass.setVisible(false);
+            jPanelEstablishSubjects.setVisible(true);
+            jMenuEndVotingRound2.setVisible(true);
+            setupRound2VotesTable();
+            fillInPoolLists();
+            fillInClassList();
+        }
+    }//GEN-LAST:event_jButtonPanelPollSubmitActionPerformed
 
     private void jMenuEstablishClassesMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenuEstablishClassesMouseClicked
     {//GEN-HEADEREND:event_jMenuEstablishClassesMouseClicked
         jPanelEstablishSubjects.setVisible(true);
         jPanelAssignTeachers.setVisible(false);
-        jPanelAddProposedSubject.setVisible(false);
-        jPanelRound1.setVisible(false);
-        jPanelPoll.setVisible(false);
-        jPanelHelp.setVisible(false);
-        jPanelChooseProposedSubjectsForRound1.setVisible(false);
-        jPanelMain.setVisible(false);
-        //jListStudentsForClass.setModel(new DefaultListModel());
         setupRound2VotesTable();
         fillInPoolLists();
         fillInClassList();
@@ -2119,69 +2136,91 @@ public class GUI extends javax.swing.JFrame
 
     private void jListPoolAEstablishClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListPoolAEstablishClassesMouseReleased
     {//GEN-HEADEREND:event_jListPoolAEstablishClassesMouseReleased
-        jListPoolBEstablishClasses.clearSelection();
-        jListClasses.clearSelection();
-        jTableRound2Votes.clearSelection();
-        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        if (jListPoolAEstablishClasses.getSelectedIndex() != -1)
         {
-            jTableRound2Votes.setValueAt(false, i, 3);
-        }
-
-        List<User> students = control.getAllStudents();
-        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
-        {
-            isStudentCheckBoxEditable.set(i, true);
-        }
-        for (FinalClass c : control.getAllClasses())
-        {
-            if (c.getSubject().getPoolOptions().equals("A"))
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
             {
-                for (User student : control.getStudentsForClass(c))
+                jTableRound2Votes.setValueAt(false, i, 3);
+            }
+
+            List<User> students = control.getAllStudents();
+            for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+            {
+                isStudentCheckBoxEditable.set(i, true);
+            }
+            for (FinalClass c : control.getAllClasses())
+            {
+                if (c.getSubject().getPoolOptions().equals("A"))
                 {
-                    for (int j = 0; j < students.size(); j++)
+                    for (User student : control.getStudentsForClass(c))
                     {
-                        if (student.equals(students.get(j)))
+                        for (int j = 0; j < students.size(); j++)
                         {
-                            isStudentCheckBoxEditable.set(j, false);
+                            if (student.equals(students.get(j)))
+                            {
+                                isStudentCheckBoxEditable.set(j, false);
+                            }
                         }
                     }
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+            {
+                isStudentCheckBoxEditable.set(i, false);
+                jTableRound2Votes.setValueAt(false, i, 3);
+            }
+        }
+        jListPoolBEstablishClasses.clearSelection();
+        jListClasses.clearSelection();
+        jTableRound2Votes.clearSelection();
 
     }//GEN-LAST:event_jListPoolAEstablishClassesMouseReleased
 
     private void jListPoolBEstablishClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListPoolBEstablishClassesMouseReleased
     {//GEN-HEADEREND:event_jListPoolBEstablishClassesMouseReleased
-        jListPoolAEstablishClasses.clearSelection();
-        jListClasses.clearSelection();
-        jTableRound2Votes.clearSelection();
-        for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+        if (jListPoolBEstablishClasses.getSelectedIndex() != -1)
         {
-            jTableRound2Votes.setValueAt(false, i, 3);
-        }
-
-        List<User> students = control.getAllStudents();
-        for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
-        {
-            isStudentCheckBoxEditable.set(i, true);
-        }
-        for (FinalClass c : control.getAllClasses())
-        {
-            if (c.getSubject().getPoolOptions().equals("B"))
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
             {
-                for (User student : control.getStudentsForClass(c))
+                jTableRound2Votes.setValueAt(false, i, 3);
+            }
+
+            List<User> students = control.getAllStudents();
+            for (int i = 0; i < isStudentCheckBoxEditable.size(); i++)
+            {
+                isStudentCheckBoxEditable.set(i, true);
+            }
+            for (FinalClass c : control.getAllClasses())
+            {
+                if (c.getSubject().getPoolOptions().equals("B"))
                 {
-                    for (int j = 0; j < students.size(); j++)
+                    for (User student : control.getStudentsForClass(c))
                     {
-                        if (student.equals(students.get(j)))
+                        for (int j = 0; j < students.size(); j++)
                         {
-                            isStudentCheckBoxEditable.set(j, false);
+                            if (student.equals(students.get(j)))
+                            {
+                                isStudentCheckBoxEditable.set(j, false);
+                            }
                         }
                     }
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+            {
+                isStudentCheckBoxEditable.set(i, false);
+                jTableRound2Votes.setValueAt(false, i, 3);
+            }
+        }
+        jListPoolAEstablishClasses.clearSelection();
+        jListClasses.clearSelection();
+        jTableRound2Votes.clearSelection();
     }//GEN-LAST:event_jListPoolBEstablishClassesMouseReleased
 
     private void jButtonSubmitClassActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSubmitClassActionPerformed
@@ -2206,9 +2245,28 @@ public class GUI extends javax.swing.JFrame
                     }
                 }
 
-                control.editStudentsInClass(students, jListClasses.getSelectedIndex());
+                FinalClass fc = control.editStudentsInClass(students, jListClasses.getSelectedIndex());
+                if (fc == null)
+                {
+                    jLabelNewClassError.setText("Error modifying students in selected class!");
+                }
+                else
+                {
+                    if (fc.getStudents().isEmpty())
+                    {
+                        jLabelNewClassError.setText(fc.getName() + " has been saved with no students in it!");
+                    }
+                    else
+                    {
+                        jLabelNewClassError.setText(fc.getStudents().size() + " students have been successfully assigned to " + fc.getName() + " class.");
+                    }
+                }
                 setupRound2VotesTable();
                 fillInClassList();
+            }
+            else
+            {
+                jLabelNewClassError.setText("You must first select a subject to create a class or a class to edit, then submit!");
             }
         }
         else
@@ -2233,7 +2291,22 @@ public class GUI extends javax.swing.JFrame
                     }
                 }
             }
-            jLabelNewClassError.setText(control.addNewClass(students, subject));
+            FinalClass fc = control.addNewClass(students, subject);
+            if (fc == null)
+            {
+                jLabelNewClassError.setText("Error adding the new class!");
+            }
+            else
+            {
+                if (fc.getStudents().isEmpty())
+                {
+                    jLabelNewClassError.setText(fc.getName() + " has been saved with no students in it!");
+                }
+                else
+                {
+                    jLabelNewClassError.setText(fc.getStudents().size() + " students have been successfully assigned to newly created class " + fc.getName() + ".");
+                }
+            }
             setupRound2VotesTable();
             fillInClassList();
             jListPoolAEstablishClasses.clearSelection();
@@ -2251,10 +2324,19 @@ public class GUI extends javax.swing.JFrame
         {
             checkmarkStudentsAndMakeUnavailableStudentsUncheckable();
         }
+        else
+        {
+            for (int i = 0; i < jTableRound2Votes.getRowCount(); i++)
+            {
+                isStudentCheckBoxEditable.set(i, false);
+                jTableRound2Votes.setValueAt(false, i, 3);
+            }
+        }
     }//GEN-LAST:event_jListClassesMouseReleased
 
     private void jButtonSubmitTeachersToClassActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSubmitTeachersToClassActionPerformed
     {//GEN-HEADEREND:event_jButtonSubmitTeachersToClassActionPerformed
+        FinalClass fc = new FinalClass();
         if (jListPoolAClasses.getSelectedIndex() != -1)
         {
             int selectedClassIndex = -1;
@@ -2279,10 +2361,32 @@ public class GUI extends javax.swing.JFrame
                     teachers.add(control.getAllTeachers().get(i));
                 }
             }
-            control.editTeachersInClass(teachers, selectedClassIndex);
+            fc = control.editTeachersInClass(teachers, selectedClassIndex);
+            if (fc == null)
+            {
+                jLabelEstablishTeachersToClassesError.setText("Error saving teachers for selected class.");
+            }
+            else
+            {
+                if (fc.getTeachers().isEmpty())
+                {
+                    jLabelEstablishTeachersToClassesError.setText(fc.getName() + " class has been saved with no teachers.");
+                }
+                else
+                {
+                    if (fc.getTeachers().size() == 1)
+                    {
+                        jLabelEstablishTeachersToClassesError.setText(fc.getTeachersToString() + " has been set to teach " + fc.getName() + ".");
+                    }
+                    else
+                    {
+                        jLabelEstablishTeachersToClassesError.setText(fc.getTeachersToString() + " have been set to teach " + fc.getName() + ".");
+                    }
+                }
+            }
             jListPoolAClasses.clearSelection();
         }
-        if (jListPoolBClasses.getSelectedIndex() != -1)
+        else if (jListPoolBClasses.getSelectedIndex() != -1)
         {
             int selectedClassIndex = -1;
             for (int i = 0; i < control.getAllClasses().size(); i++)
@@ -2306,10 +2410,35 @@ public class GUI extends javax.swing.JFrame
                     teachers.add(control.getAllTeachers().get(i));
                 }
             }
-            control.editTeachersInClass(teachers, selectedClassIndex);
+            fc = control.editTeachersInClass(teachers, selectedClassIndex);
+            if (fc == null)
+            {
+                jLabelEstablishTeachersToClassesError.setText("Error saving teachers for selected class.");
+            }
+            else
+            {
+                if (fc.getTeachers().isEmpty())
+                {
+                    jLabelEstablishTeachersToClassesError.setText(fc.getName() + " class has been saved with no teachers.");
+                }
+                else
+                {
+                    if (fc.getTeachers().size() == 1)
+                    {
+                        jLabelEstablishTeachersToClassesError.setText(fc.getTeachersToString() + " has been set to teach " + fc.getName() + ".");
+                    }
+                    else
+                    {
+                        jLabelEstablishTeachersToClassesError.setText(fc.getTeachersToString() + " have been set to teach " + fc.getName() + ".");
+                    }
+                }
+            }
             jListPoolBClasses.clearSelection();
         }
-
+        else
+        {
+            jLabelEstablishTeachersToClassesError.setText("You must first select a class to set teachers to it, then submit!");
+        }
         jTableAssignTeachersToSubjects.clearSelection();
         setupAssignedTeachersToSubjects();
     }//GEN-LAST:event_jButtonSubmitTeachersToClassActionPerformed
@@ -2474,6 +2603,14 @@ public class GUI extends javax.swing.JFrame
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < jTableAssignTeachersToSubjects.getRowCount(); i++)
+            {
+                jTableAssignTeachersToSubjects.setValueAt(false, i, 3);
+                isTeachersCheckBoxEditable.set(i, false);
+            }
+        }
     }//GEN-LAST:event_jListPoolAClassesMouseReleased
 
     private void jListPoolBClassesMouseReleased(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListPoolBClassesMouseReleased
@@ -2516,7 +2653,31 @@ public class GUI extends javax.swing.JFrame
                 }
             }
         }
+        else
+        {
+            for (int i = 0; i < jTableAssignTeachersToSubjects.getRowCount(); i++)
+            {
+                jTableAssignTeachersToSubjects.setValueAt(false, i, 3);
+                isTeachersCheckBoxEditable.set(i, false);
+            }
+        }
     }//GEN-LAST:event_jListPoolBClassesMouseReleased
+
+    private void jButtonProposeSubjectBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonProposeSubjectBackActionPerformed
+    {//GEN-HEADEREND:event_jButtonProposeSubjectBackActionPerformed
+        jPanelAddProposedSubject.setVisible(false);
+        jPanelMain.setVisible(true);
+    }//GEN-LAST:event_jButtonProposeSubjectBackActionPerformed
+
+    private void jMenuEndVotingRound2MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jMenuEndVotingRound2MouseClicked
+    {//GEN-HEADEREND:event_jMenuEndVotingRound2MouseClicked
+        control.incrementRoundNumber();
+        jMenuEndVotingRound2.setVisible(false);
+        jButtonSubmitClass.setVisible(true);
+        jMenuEstablishClasses.setVisible(true);
+        jMenuAssignTeachers.setVisible(true);
+        jMenuSendReport.setVisible(true);
+    }//GEN-LAST:event_jMenuEndVotingRound2MouseClicked
 
     private void checkmarkStudentsAndMakeUnavailableStudentsUncheckable()
     {
@@ -2797,9 +2958,10 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JButton jButtonBackRound1;
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonLogin;
-    private javax.swing.JButton jButtonProposeSubject;
+    private javax.swing.JButton jButtonPanelPollSubmit;
+    private javax.swing.JButton jButtonProposeSubjectBack;
+    private javax.swing.JButton jButtonProposeSubjectSubmit;
     private javax.swing.JButton jButtonSelectSubjectsToVote;
-    private javax.swing.JButton jButtonSubmit;
     private javax.swing.JButton jButtonSubmitClass;
     private javax.swing.JButton jButtonSubmitProposedSubjectsForRound1;
     private javax.swing.JButton jButtonSubmitRound1;
@@ -2851,14 +3013,13 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JList jListPoolBClasses;
     private javax.swing.JList jListPoolBEstablishClasses;
     private javax.swing.JList jListProposedTeachers;
+    private javax.swing.JMenu jMenuAdminChooseSubjectsForRound1;
     private javax.swing.JMenu jMenuAssignTeachers;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuEndVotingRound2;
     private javax.swing.JMenu jMenuEstablishClasses;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenu jMenuLogout;
-    private javax.swing.JMenu jMenuProposeSubject;
-    private javax.swing.JMenu jMenuRound1;
-    private javax.swing.JMenu jMenuRound2;
     private javax.swing.JMenu jMenuSendReport;
     private javax.swing.JPanel jPanelAddProposedSubject;
     private javax.swing.JPanel jPanelAssignTeachers;

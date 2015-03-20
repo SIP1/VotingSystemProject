@@ -24,8 +24,11 @@ public class ControllerMock implements ControllerInterface {
     public ArrayList<FinalClass> finalClasses = new ArrayList<>();
     public List<User> teachers = new ArrayList<>();
     public List<User> students = new ArrayList<>();
+    private int roundNumber;
 
     public ControllerMock() {
+        roundNumber = 0;
+        
         //create user types
         userTypes.add(new UserType("Student"));
         userTypes.add(new UserType("Teacher"));
@@ -177,7 +180,7 @@ public class ControllerMock implements ControllerInterface {
 
     //Votes
     @Override
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber) {
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4) {
 
         votes.add(new Vote(user, new ProposedSubject(vote1, "TEST", true, ""), roundNumber, 2));
         votes.add(new Vote(user, new ProposedSubject(vote2, "TEST", true, ""), roundNumber, 2));
@@ -350,11 +353,13 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String addNewClass(List<User> students, ProposedSubject subject) {
-        if (students.size() != 0 && subject != null) {
-            return subject.getName() + "(" + students.size() + ")";
+    public FinalClass addNewClass(List<User> students, ProposedSubject subject) {
+        if (subject != null) {
+            FinalClass fc = new FinalClass(subject);
+            fc.setStudents(students);
+            return fc;
         }
-        return AcceptanceProtocol.FINAL_CLASS_ADDING_ERROR;
+        return null;
     }
 
     @Override

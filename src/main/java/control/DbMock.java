@@ -70,7 +70,7 @@ public class DbMock
         return classes.get(classIndex);
     }
 
-    public String addClass(FinalClass c)
+    public FinalClass addClass(FinalClass c)
     {
         int count = 0;
         for (FinalClass cl : classes)
@@ -82,7 +82,7 @@ public class DbMock
         }
         c.setName(c.getSubject().getName() + (count + 1));
         classes.add(c);
-        return c.getName() + " (" + c.getStudents().size() + ")";
+        return classes.get(classes.size() - 1);
     }
 
     public List<ProposedSubject> getAllProposedSubjects()

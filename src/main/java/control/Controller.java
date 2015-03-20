@@ -33,6 +33,7 @@ public class Controller implements ControllerInterface
     // private ArrayList<User> students;
     private DbMock db;
     private List<User> users;
+    private int roundNumber;
 
     public static void main(String[] args)
     {
@@ -56,10 +57,9 @@ public class Controller implements ControllerInterface
 
     public Controller()
     {
-        //       teachers = new ArrayList<>();
-//        students = new ArrayList<>();
         users = new ArrayList<>();
         db = DbMock.getInstance();
+        roundNumber = 0;
     }
 
     private static Controller instance = null;
@@ -96,6 +96,17 @@ public class Controller implements ControllerInterface
         return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
     }
 
+    public int getRoundNumber()
+    {
+        return roundNumber;
+    }
+    
+    public int incrementRoundNumber()
+    {
+        roundNumber++;
+        return roundNumber;
+    }
+    
     @Override
     public String registerUser(User u)
     {
@@ -176,7 +187,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber)
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4)
     {
         ArrayList<Vote> votedSubjects = new ArrayList<>();
         List<ProposedSubject> availableSubjects = getAllAliveProposedElectiveSubjects();
@@ -491,7 +502,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String addNewClass(List<User> students, ProposedSubject subject)
+    public FinalClass addNewClass(List<User> students, ProposedSubject subject)
     {
         FinalClass c = new FinalClass(subject);
         c.setStudents(students);
