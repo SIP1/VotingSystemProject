@@ -1427,6 +1427,7 @@ public class GUI extends javax.swing.JFrame
                     {
                         jLabelWelcome.setText("Welcome, " + control.getUser().getName() + "!");
                         setupHeadSubjectsTable();
+                        setupJListSubjectsToChooseFromForRound1();
                         jButtonSelectSubjectsToVote.setText("Propose new subject");
                         jButtonSelectSubjectsToVote.setVisible(true);
                         jPanelMain.setVisible(true);
