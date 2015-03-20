@@ -5,7 +5,6 @@ import models.ProposedSubject;
 import models.User;
 import models.UserType;
 import models.Vote;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ControllerInterface {
@@ -46,7 +45,7 @@ public interface ControllerInterface {
     String deleteParticularElectiveSubject(Integer id);
     
     //Votes
-    String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber);
+    String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4);
 
     List<Vote> getAllVotesOfParticularUser();
 
@@ -72,10 +71,12 @@ public interface ControllerInterface {
     
     List<ProposedSubject> getSubjectsByPool(String pool);
     
-    String addNewClass(List<User> students, ProposedSubject subject);
+    FinalClass addNewClass(List<User> students, ProposedSubject subject);
     
     List<FinalClass> getAllClasses();
     
     List<User> getStudentsForClass(FinalClass c);
+    
+    String sendMail();
     
 }

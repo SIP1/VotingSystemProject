@@ -57,22 +57,34 @@ public class DbMock
     {
         return classes;
     }
+
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
+        classes.get(classIndex).setStudents(students);
+        return classes.get(classIndex);
+    }
     
-    public String addClass(FinalClass c)
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
+        classes.get(classIndex).setTeachers(teachers);
+        return classes.get(classIndex);
+    }
+
+    public FinalClass addClass(FinalClass c)
     {
         int count = 0;
-        for(FinalClass cl : classes)
+        for (FinalClass cl : classes)
         {
-            if(cl.getSubject().getName().contains(c.getSubject().getName()))
+            if (cl.getSubject().getName().contains(c.getSubject().getName()))
             {
-                count ++;
+                count++;
             }
         }
         c.setName(c.getSubject().getName() + (count + 1));
         classes.add(c);
-        return c.getName() + " (" +c.getStudents().size()+ ")";
+        return classes.get(classes.size() - 1);
     }
-    
+
     public List<ProposedSubject> getAllProposedSubjects()
     {
         return proposedSubjects;
@@ -153,6 +165,16 @@ public class DbMock
                     }
                 }
                 return students;
+            case "Head":
+                List<User> heads = new ArrayList<>();
+                for (User user : users)
+                {
+                    if (user.getUserType().getName().equals("Head"))
+                    {
+                        heads.add(user);
+                    }
+                }
+                return heads;
             default:
                 return null;
         }
@@ -212,6 +234,7 @@ public class DbMock
         users.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", getUserTypeByName("Teacher")));
         users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", getUserTypeByName("Teacher")));
+        users.add(new User("god", "4", "God Gods", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
 
         //populate student
         User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
@@ -234,7 +257,7 @@ public class DbMock
         users.add(marek);
 
         //make head of program
-        users.add(new User("1", "1", "Caroline", "caroline@gmail.com", getUserTypeByName("Head")));
+        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
 
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();
@@ -271,7 +294,7 @@ public class DbMock
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 1, 1));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(105), 1, 2));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(103), 1, 1));
-        
+
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(101), 2, 2));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(104), 2, 1));
         smaraVotes.add(new Vote(getUserByUsername("2"), getProposedSubjectById(102), 2, 2));

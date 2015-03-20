@@ -1,5 +1,6 @@
 package control;
 
+import com.thoughtworks.xstream.XStream;
 import models.FinalClass;
 import models.ProposedSubject;
 import models.User;
@@ -17,6 +18,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import utilities.AcceptanceProtocol;
+import utilities.EmailSender;
 
 public class Controller implements ControllerInterface
 {
@@ -25,11 +27,13 @@ public class Controller implements ControllerInterface
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
     private User loggedInUser;
+    private EmailSender emailSender;
 
     // private ArrayList<User> teachers;
     // private ArrayList<User> students;
     private DbMock db;
     private List<User> users;
+    private int roundNumber;
 
     public static void main(String[] args)
     {
@@ -53,10 +57,9 @@ public class Controller implements ControllerInterface
 
     public Controller()
     {
-        //       teachers = new ArrayList<>();
-//        students = new ArrayList<>();
         users = new ArrayList<>();
         db = DbMock.getInstance();
+        roundNumber = 0;
     }
 
     private static Controller instance = null;
@@ -93,6 +96,17 @@ public class Controller implements ControllerInterface
         return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
     }
 
+    public int getRoundNumber()
+    {
+        return roundNumber;
+    }
+    
+    public int incrementRoundNumber()
+    {
+        roundNumber++;
+        return roundNumber;
+    }
+    
     @Override
     public String registerUser(User u)
     {
@@ -173,7 +187,7 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4, int roundNumber)
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4)
     {
         ArrayList<Vote> votedSubjects = new ArrayList<>();
         List<ProposedSubject> availableSubjects = getAllAliveProposedElectiveSubjects();
@@ -488,11 +502,21 @@ public class Controller implements ControllerInterface
     }
 
     @Override
-    public String addNewClass(List<User> students, ProposedSubject subject)
+    public FinalClass addNewClass(List<User> students, ProposedSubject subject)
     {
         FinalClass c = new FinalClass(subject);
         c.setStudents(students);
         return db.addClass(c);
+    }
+    
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
+        return db.editStudentsInClass(students, classIndex);
+    }
+    
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
+        return db.editTeachersInClass(teachers, classIndex);
     }
 
     @Override
@@ -507,4 +531,17 @@ public class Controller implements ControllerInterface
         return c.getStudents();
     }
 
+    @Override
+    public String sendMail()
+    {
+        XStream xmlParser = new XStream();
+        String xmlClasses = xmlParser.toXML(db.getAllClasses());
+       List<User> receivers = db.getUsersByUserTpe(new UserType("Head"));
+       
+        System.out.println("hahaah " + receivers.size());
+        if(EmailSender.send(receivers.get(0).getEmail(), xmlClasses)){
+            return AcceptanceProtocol.EMAIL_SEND_SUCCESS + receivers.get(0).getEmail();
+        }
+        return AcceptanceProtocol.EMAIL_SEND_FAIL;
+    }
 }

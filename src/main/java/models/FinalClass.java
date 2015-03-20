@@ -61,8 +61,21 @@ public class FinalClass implements Serializable {
         return subject;
     }
 
-    public List<User> getTeacher() {
+    public List<User> getTeachers() {
         return teachers;
+    }
+    
+    public String getTeachersToString() {
+        String result = "";
+        for (User t : teachers)
+        {
+            result = result + t.getName() + ", ";
+        }
+        if (teachers.isEmpty())
+        {
+            return "";
+        }
+        return result.substring(0, result.length() - 2);
     }
 
     public void setStudents(List<User> students) {
@@ -73,8 +86,7 @@ public class FinalClass implements Serializable {
         this.subject = subject;
     }
 
-    public void setTeacher(List<User> teachers) {
+    public void setTeachers(List<User> teachers) {
         this.teachers = teachers;
     }
-
 }
