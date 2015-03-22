@@ -11,7 +11,6 @@ import interfaces.ControllerInterface;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import utilities.AcceptanceProtocol;
 
 public class ControllerMock implements ControllerInterface {
@@ -28,7 +27,7 @@ public class ControllerMock implements ControllerInterface {
 
     public ControllerMock() {
         roundNumber = 0;
-        
+
         //create user types
         userTypes.add(new UserType("Student"));
         userTypes.add(new UserType("Teacher"));
@@ -94,88 +93,14 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String registerUser(User u) {
-        for (User x : users) {
-            if (x.getUsername().equals(u.getUsername())) {
-                return AcceptanceProtocol.ACCOUNT_REGISTRATION_ERROR;
-            }
-        }
-        users.add(u);
-        return AcceptanceProtocol.ACCOUNT_REGISTRATION_SUCCESS;
-    }
-
-    @Override
-    public String deleteParticularUser() {
-        for (User x : users) {
-            if (x.getUsername().equals(user.getUsername())) {
-                users.remove(x);
-                return AcceptanceProtocol.ACCOUNT_DELETION;
-            }
-        }
-        return AcceptanceProtocol.ACCOUNT_DELETION_ERROR;
-    }
-
-    @Override
-    public User updateParticularUser(String password, User newUserInfo) {
-        if (user.getPassword().equals(password)) {
-            for (User oldUser : users) {
-                if (oldUser.getUsername().equals(newUserInfo.getUsername())) {
-                    oldUser = newUserInfo;
-                    return oldUser;
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
     public User getUser() {
         return user;
-    }
-
-    //UserTypes
-    @Override
-    public String addUserType(String name) {
-        userTypes.add(new UserType(name));
-        return AcceptanceProtocol.USERTYPE_ADD_SUCCESS;
-
-    }
-
-    @Override
-    public UserType updateParticularUserType(Integer id, UserType newUserType) {
-        UserType oldUserType = userTypes.get(id);
-        oldUserType = newUserType;
-        return oldUserType;
-    }
-
-    @Override
-    public String deleteParticularUserType(Integer id) {
-        userTypes.remove(id);
-        return AcceptanceProtocol.USERTYPE_DELETION_SUCCESS;
-    }
-
-    @Override
-    public List<UserType> getAllUserTypes() {
-        return userTypes;
     }
 
     @Override
     public ProposedSubject addProposedElectiveSubject(ProposedSubject pes) {
         proposedSubjects.add(pes);
         return pes;
-    }
-
-    @Override
-    public ProposedSubject updateParticularElectiveSubject(Integer id, ProposedSubject newProposedSubject) {
-        ProposedSubject oldProposedSubject = proposedSubjects.get(id);
-        oldProposedSubject = newProposedSubject;
-        return oldProposedSubject;
-    }
-
-    @Override
-    public String deleteParticularElectiveSubject(Integer id) {
-        proposedSubjects.remove(id);
-        return AcceptanceProtocol.SUBJECT_DELETION_SUCCESS;
     }
 
     //Votes
@@ -188,34 +113,6 @@ public class ControllerMock implements ControllerInterface {
         votes.add(new Vote(user, new ProposedSubject(vote4, "TEST", true, ""), roundNumber, 1));
 
         return AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
-    }
-
-    @Override
-    public List<Vote> getAllVotesOfParticularUser() {
-        return user.getVotes();
-    }
-
-    @Override
-    public Vote updateParticularVoteOfParticularUser(Vote nv) {
-        for (Vote v : user.getVotes()) {
-            if (Objects.equals(v.getId(), nv.getId())) {
-                v = nv;
-                break;
-            }
-        }
-        return nv;
-    }
-
-    @Override
-    public String deleteAllVotesOfParticularUser() {
-        if (user.getVotes().size() > 0) {
-            user.getVotes().clear();
-            return AcceptanceProtocol.VOTE_DELETION_SUCCESS;
-        }
-        if (user.getVotes().isEmpty()) {
-            return AcceptanceProtocol.VOTE_DELETION_NOTHING;
-        }
-        return AcceptanceProtocol.VOTE_DELETION_FAIL;
     }
 
     @Override
@@ -372,15 +269,10 @@ public class ControllerMock implements ControllerInterface {
         return c.getStudents();
     }
 
-    public String createClassesXML() {
-        XStream x = new XStream();
-        String xml = x.toXML(proposedSubjects);
-        return xml;
-    }
-
     @Override
-    public String sendMail()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String sendMail() {
+        XStream xmlParser = new XStream();
+        String xml = xmlParser.toXML(finalClasses);
+        return xml;
     }
 }

@@ -8,8 +8,7 @@ import models.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbMock
-{
+public class DbMock {
 
     private List<ProposedSubject> proposedSubjects;
     private List<User> users;
@@ -18,8 +17,7 @@ public class DbMock
     private List<ProposedSubject> pollA, pollB;
     private List<FinalClass> classes;
 
-    public DbMock()
-    {
+    public DbMock() {
         proposedSubjects = new ArrayList();
         users = new ArrayList();
         userTypes = new ArrayList();
@@ -30,53 +28,42 @@ public class DbMock
 
     private static DbMock instance = null;
 
-    public static DbMock getInstance()
-    {
+    public static DbMock getInstance() {
 
-        if (instance == null)
-        {
+        if (instance == null) {
             instance = new DbMock();
         }
         return instance;
     }
 
-    public List<ProposedSubject> getAliveProposedSubjects()
-    {
+    public List<ProposedSubject> getAliveProposedSubjects() {
         List<ProposedSubject> aliveSubject = new ArrayList<ProposedSubject>();
-        for (ProposedSubject p : proposedSubjects)
-        {
-            if (p.isIsAlive())
-            {
+        for (ProposedSubject p : proposedSubjects) {
+            if (p.isIsAlive()) {
                 aliveSubject.add(p);
             }
         }
         return aliveSubject;
     }
 
-    public List<FinalClass> getAllClasses()
-    {
+    public List<FinalClass> getAllClasses() {
         return classes;
     }
 
-    public FinalClass editStudentsInClass(List<User> students, int classIndex)
-    {
+    public FinalClass editStudentsInClass(List<User> students, int classIndex) {
         classes.get(classIndex).setStudents(students);
         return classes.get(classIndex);
     }
-    
-    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
-    {
+
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex) {
         classes.get(classIndex).setTeachers(teachers);
         return classes.get(classIndex);
     }
 
-    public FinalClass addClass(FinalClass c)
-    {
+    public FinalClass addClass(FinalClass c) {
         int count = 0;
-        for (FinalClass cl : classes)
-        {
-            if (cl.getSubject().getName().contains(c.getSubject().getName()))
-            {
+        for (FinalClass cl : classes) {
+            if (cl.getSubject().getName().contains(c.getSubject().getName())) {
                 count++;
             }
         }
@@ -85,92 +72,71 @@ public class DbMock
         return classes.get(classes.size() - 1);
     }
 
-    public List<ProposedSubject> getAllProposedSubjects()
-    {
+    public List<ProposedSubject> getAllProposedSubjects() {
         return proposedSubjects;
     }
 
-    public List<User> getUsers()
-    {
+    public List<User> getUsers() {
         return users;
     }
 
-    public List<UserType> getUserTypes()
-    {
+    public List<UserType> getUserTypes() {
         return userTypes;
     }
 
-    public List<Vote> getVotes()
-    {
+    public List<Vote> getVotes() {
         return votes;
     }
 
-    public User getUserByUsername(String username)
-    {
-        for (User user : users)
-        {
-            if (user.getUsername().equals(username))
-            {
+    public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
                 return user;
             }
         }
         return null;
     }
 
-    public UserType getUserTypeByName(String username)
-    {
-        for (UserType ut : userTypes)
-        {
-            if (ut.getName().equals(username))
-            {
+    public UserType getUserTypeByName(String username) {
+        for (UserType ut : userTypes) {
+            if (ut.getName().equals(username)) {
                 return ut;
             }
         }
         return null;
     }
 
-    public ProposedSubject getProposedSubjectById(int id)
-    {
-        for (ProposedSubject ps : proposedSubjects)
-        {
-            if (ps.getId() == id)
-            {
+    public ProposedSubject getProposedSubjectById(int id) {
+        for (ProposedSubject ps : proposedSubjects) {
+            if (ps.getId() == id) {
                 return ps;
             }
         }
         return null;
     }
 
-    public List<User> getUsersByUserTpe(UserType ut)
-    {
-        switch (ut.getName())
-        {
+    public List<User> getUsersByUserTpe(UserType ut) {
+        switch (ut.getName()) {
             case "Teacher":
                 List<User> teachers = new ArrayList<>();
-                for (User user : users)
-                {
-                    if (user.getUserType().getName().equals("Teacher"))
-                    {
+                for (User user : users) {
+                    if (user.getUserType().getName().equals("Teacher")) {
                         teachers.add(user);
                     }
                 }
                 return teachers;
             case "Student":
                 List<User> students = new ArrayList<>();
-                for (User user : users)
-                {
-                    if (user.getUserType().getName().equals("Student"))
-                    {
+                for (User user : users) {
+                    if (user.getUserType().getName().equals("Student")) {
                         students.add(user);
                     }
                 }
                 return students;
             case "Head":
                 List<User> heads = new ArrayList<>();
-                for (User user : users)
-                {
-                    if (user.getUserType().getName().equals("Head"))
-                    {
+                for (User user : users) {
+                    if (user.getUserType().getName().equals("Head")) {
                         heads.add(user);
                     }
                 }
@@ -180,29 +146,22 @@ public class DbMock
         }
     }
 
-    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b)
-    {
-        for (ProposedSubject ps : proposedSubjects)
-        {
+    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b) {
+        for (ProposedSubject ps : proposedSubjects) {
             boolean found = false;
-            for (ProposedSubject psa : a)
-            {
-                if (ps.equals(psa))
-                {
+            for (ProposedSubject psa : a) {
+                if (ps.equals(psa)) {
                     ps.setPoolOptions("A");
                     found = true;
                 }
             }
-            for (ProposedSubject psb : b)
-            {
-                if (ps.equals(psb))
-                {
+            for (ProposedSubject psb : b) {
+                if (ps.equals(psb)) {
                     ps.setPoolOptions("B");
                     found = true;
                 }
             }
-            if (found == false)
-            {
+            if (found == false) {
                 ps.setPoolOptions(null);
                 ps.setIsAlive(false);
             }
@@ -210,45 +169,43 @@ public class DbMock
         return "Size of poll A: " + a.size() + ", size of poll B: " + b.size();
     }
 
-    public void addProposedSubject(ProposedSubject ps)
-    {
-        if (proposedSubjects.size() == 0)
-        {
+    public void addProposedSubject(ProposedSubject ps) {
+        if (proposedSubjects.size() == 0) {
             ps.setId(100);
-        }
-        else
-        {
+        } else {
             ps.setId(proposedSubjects.get(proposedSubjects.size() - 1).getId() + 1);
         }
         proposedSubjects.add(ps);
     }
 
-    private void populate()
-    {
+    private void populate() {
         //populate usertypes
         userTypes.add(new UserType("Teacher"));
         userTypes.add(new UserType("Student"));
         userTypes.add(new UserType("Head"));
 
         //populate teachers
-        users.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", getUserTypeByName("Teacher")));
-        users.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", getUserTypeByName("Teacher")));
-        users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", getUserTypeByName("Teacher")));
-        users.add(new User("god", "4", "God Gods", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
+        users.add(new User("pelo", "1", "Peter Lorensen", "pelo@cphbusiness.dk", userTypes.get(0)));
+        users.add(new User("lam", "2", "Lars Mortensen", "lam@cphbusiness.dk", userTypes.get(0)));
+        users.add(new User("tor", "3", "Torben", "tor@cphbusiness.dk", userTypes.get(0)));
+        users.add(new User("god", "4", "God Gods", "boyko.surlev@gmail.com", userTypes.get(2)));
 
         //populate student
-        User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", getUserTypeByName("Student"));
-        User smara = new User("2", "2", "Smaranda Dungeanu", "smara@gmail.com", getUserTypeByName("Student"));
-        User mada = new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", getUserTypeByName("Student"));
-        User cristi = new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", getUserTypeByName("Student"));
-        User peter = new User("peter", "peter", "Peter", "peter@mail.peter", getUserTypeByName("Student"));
-        User marek = new User("marek", "marek", "Marek", "marek@mail.peter", getUserTypeByName("Student"));
-        boyko.setSatisfaction(50);
-        smara.setSatisfaction(25);
-        cristi.setSatisfaction(50);
+        User boyko = new User("boyko", "boyko", "Boyko Surlev", "boyko@gmail.com", userTypes.get(1));
+        User smara = new User("2", "2", "Smaranda Dungeanu", "smara@gmail.com", userTypes.get(1));
+        User mada = new User("mada", "mada", "Madalina Dragan", "mada@gmail.com", userTypes.get(1));
+        User cristi = new User("cristi", "cristi", "Cristi Nita", "cristi@gmail.com", userTypes.get(1));
+        User peter = new User("peter", "peter", "Peter", "peter@mail.peter", userTypes.get(1));
+        User marek = new User("marek", "marek", "Marek", "marek@mail.peter", userTypes.get(1));
+
+        //set satisfaction
+        boyko.setSatisfaction(0);
+        smara.setSatisfaction(0);
+        cristi.setSatisfaction(0);
         mada.setSatisfaction(0);
-        peter.setSatisfaction(75);
-        marek.setSatisfaction(100);
+        peter.setSatisfaction(0);
+        marek.setSatisfaction(0);
+
         users.add(boyko);
         users.add(smara);
         users.add(mada);

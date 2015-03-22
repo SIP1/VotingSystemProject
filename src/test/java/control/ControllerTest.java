@@ -46,49 +46,6 @@ public class ControllerTest {
     }
 
     /**
-     * Test of registerUser method, of class Controller.
-     */
-    @Test
-    public void testRegisterUser() {
-        System.out.println("registerUser");
-        String userName = "Hahaha";
-        String name = "NoName";
-        String password = "qwerty";
-        String email = "bobanka@email.com";
-        User user = new User(userName, name, email, password, controller.userTypes.get(0));
-        String expectedResult = AcceptanceProtocol.ACCOUNT_REGISTRATION_SUCCESS;
-        String actualResult = controller.registerUser(user);
-        assertEquals(expectedResult, actualResult);
-    }
-
-    /**
-     * Test of deleteParticularUser method, of class Controller.
-     */
-    @Test
-    public void testDeleteParticularUser() {
-        System.out.println("deleteParticularUser");
-        String expected = AcceptanceProtocol.ACCOUNT_DELETION;
-        String actualResult = controller.deleteParticularUser();
-        assertEquals(expected, actualResult);
-    }
-
-    /**
-     * Test of updateParticularUser method, of class Controller.
-     */
-    @Test
-    public void testUpdateParticularUser() {
-        System.out.println("updateParticularUser");
-        String userName = "TestUser";
-        String password = "12345";
-        String newPassword = "54321";
-        String name = "Changed";
-        String email = "changed@email.com";
-        User expectedResult = new User(userName, newPassword, name, email, controller.userTypes.get(1));
-        User actualResult = controller.updateParticularUser(password, expectedResult);
-        assertEquals(expectedResult, actualResult);
-    }
-
-    /**
      * Test of getUser method, of class Controller.
      */
     @Test
@@ -100,64 +57,6 @@ public class ControllerTest {
     }
 
     /**
-     * Test of addUserType method, of class Controller.
-     */
-    @Test
-    public void testAddUserType() {
-        System.out.println("addUserType");
-        String name = "New Usertype";
-        String expResult = AcceptanceProtocol.USERTYPE_ADD_SUCCESS;
-        String result = controller.addUserType(name);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of updateParticularUserType method, of class Controller.
-     */
-    @Test()
-    public void testUpdateParticularUserType() {
-        System.out.println("updateParticularUserType");
-        int id = 1;
-        String userType = "Test";
-        UserType expectedResult = new UserType(userType);
-        UserType actualResult = controller.updateParticularUserType(id, expectedResult);
-        assertEquals(expectedResult, actualResult);
-    }
-
-    /**
-     * Test of deleteParticularUserType method, of class Controller.
-     */
-    @Test
-    public void testDeleteParticularUserType() {
-        System.out.println("deleteParticularUserType");
-        String expResult = AcceptanceProtocol.USERTYPE_DELETION_SUCCESS;
-        String result = controller.deleteParticularUserType(2);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of getAllUserTypes method, of class Controller.
-     */
-    @Test
-    public void testGetAllUserTypes() {
-        System.out.println("getAllUserTypes");
-        List<UserType> result = controller.getAllUserTypes();
-        int expectedResult = controller.userTypes.size();
-        assertEquals(expectedResult, result.size());
-    }
-
-    /**
-     * Test of getAllAvailableProposedElectiveSubjects method, of class
-     * Controller.
-     */
-//    @Test
-//    public void testGetAllAvailableProposedElectiveSubjects() {
-//        System.out.println("getAllAvailableProposedElectiveSubjects");
-//        ArrayList<ProposedSubject> actualResult = controller.getAllAvailableProposedElectiveSubjects();
-//        ArrayList<ProposedSubject> expectedResult = controller.proposedSubjects;
-//        assertEquals(expectedResult, actualResult);
-//    }
-    /**
      * Test of addProposedElectiveSubject method, of class Controller.
      */
     @Test
@@ -166,32 +65,6 @@ public class ControllerTest {
         ProposedSubject expectedResult = new ProposedSubject("AI", "testing add", true, "A");
         ProposedSubject actualResult = controller.addProposedElectiveSubject(expectedResult);
         assertEquals(expectedResult, actualResult);
-    }
-
-    /**
-     * Test of updateParticularElectiveSubject method, of class Controller.
-     */
-    @Test
-    public void testUpdateParticularElectiveSubject() {
-        System.out.println("updateParticularElectiveSubject");
-        int id = 1;
-        String name = "Test Subject";
-        String description = "Testing desc";
-        Boolean isAlive = true;
-        String poolOption = "B";
-        ProposedSubject expectedResult = new ProposedSubject(name, description, isAlive, poolOption);
-        ProposedSubject actualResult = controller.updateParticularElectiveSubject(id, expectedResult);
-        assertEquals(expectedResult, actualResult);
-    }
-
-    /**
-     * Test of deleteParticularElectiveSubject method, of class Controller.
-     */
-    @Test
-    public void testDeleteParticularElectiveSubject() {
-        System.out.println("deleteParticularElectiveSubject");
-        String expected = AcceptanceProtocol.SUBJECT_DELETION_SUCCESS;
-        assertEquals(expected, controller.deleteParticularElectiveSubject(1));
     }
 
     /**
@@ -206,49 +79,6 @@ public class ControllerTest {
         String vote4 = "Vote 4";
         String expected = AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
         assertEquals(expected, controller.addVoteFromParticularUser(vote1, vote2, vote3, vote4));
-    }
-
-    /**
-     * Test of getAllVotesOfParticularUser method, of class Controller.
-     */
-    @Test
-    public void testGetAllVotesOfParticularUser() {
-        System.out.println("getAllVotesOfParticularUser");
-
-        List<Vote> votes = controller.getAllVotesOfParticularUser();
-        int expResult = controller.user.getVotes().size();
-        assertEquals(expResult, votes.size());
-    }
-
-    /**
-     * Test of deleteAllVotesOfParticularUser method, of class Controller.
-     */
-    @Test
-    public void testDeleteAllVotesOfParticularUser() {
-        System.out.println("deleteAllVotesOfParticularUser");
-        //First we have to add votes
-        //   ArrayList<Vote> testVotes = votesGenerator();
-//        controller.addVoteFromParticularUser(testVotes);
-        //Then we try to delete them
-        String expectedResult = AcceptanceProtocol.VOTE_DELETION_SUCCESS;
-        String actualResult = controller.deleteAllVotesOfParticularUser();
-        assertThat(actualResult, is(expectedResult));
-    }
-
-    /**
-     * Test of updateParticularVoteOfParticularUser method, of class Controller.
-     */
-    @Test
-    public void testUpdateParticularVoteOfParticularUser() {
-        System.out.println("updateParticularVoteOfParticularUser");
-
-        Vote expResult = controller.user.getVotes().get(0);
-        expResult.setPoints(1);
-        expResult.setProposedSubject(controller.proposedSubjects.get(3));
-        expResult.setRoundNumber(3);
-
-        Vote actualResult = controller.updateParticularVoteOfParticularUser(expResult);
-        assertEquals(expResult, actualResult);
     }
 
     /**
@@ -451,7 +281,6 @@ public class ControllerTest {
 //        System.out.println(result);
 //        assertEquals(expResult, result);
 //    }
-
     /**
      * Test of getAllClasses method, of class Controller.
      */
@@ -478,14 +307,14 @@ public class ControllerTest {
     }
 
     /**
-     * Test of createClassesXML method, of class Controller.
+     * Test of sendMail method, of class Controller.
      */
     @Test
-    public void testCreateClassesXML() {
-        System.out.println("createClassesXML");
+    public void testSendMail() {
+        System.out.println("sendMail");
         XStream x = new XStream();
-        String expResult = x.toXML(controller.proposedSubjects);
-        String result = controller.createClassesXML();
+        String expResult = x.toXML(controller.finalClasses);
+        String result = controller.sendMail();
         assertEquals(expResult, result);
     }
 }

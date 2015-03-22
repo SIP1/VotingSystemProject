@@ -64,15 +64,13 @@ public class FinalClass implements Serializable {
     public List<User> getTeachers() {
         return teachers;
     }
-    
+
     public String getTeachersToString() {
         String result = "";
-        for (User t : teachers)
-        {
+        for (User t : teachers) {
             result = result + t.getName() + ", ";
         }
-        if (teachers.isEmpty())
-        {
+        if (teachers.isEmpty()) {
             return "";
         }
         return result.substring(0, result.length() - 2);

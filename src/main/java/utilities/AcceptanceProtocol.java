@@ -53,10 +53,10 @@ public class AcceptanceProtocol {
     public static final String SUBJECTS_ADDED_TO_POLLS_SUCCESS = "You have successfully formed the polls.";
 
     public static final String SUBJECTS_ADDED_TO_ROUND_1_SUCCESS = "You have successfully added subjects to round 1";
-    
+
     public static final String FINAL_CLASS_ADDING_ERROR = "The final class was not added.";
-    
+
     public static final String EMAIL_SEND_SUCCESS = "You email has been send to : ";
-    
+
     public static final String EMAIL_SEND_FAIL = "You failed to send an email.";
 }
