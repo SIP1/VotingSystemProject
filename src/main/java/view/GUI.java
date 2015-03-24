@@ -2882,7 +2882,7 @@ public class GUI extends javax.swing.JFrame
         List<ProposedSubject> subjects = control.getAllProposedElectiveSubjects();
         for (ProposedSubject ps : subjects)
         {
-            model.addElement(ps.getName() + " (is alive = " + ps.isIsAlive() + " )");
+            model.addElement(ps.getName() + " (is alive = " + ps.isItAlive() + " )");
         }
 
         jListAllProposedSubjects.setModel(model);

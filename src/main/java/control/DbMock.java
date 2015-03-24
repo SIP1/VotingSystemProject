@@ -14,7 +14,6 @@ public class DbMock {
     private List<User> users;
     private List<UserType> userTypes;
     private List<Vote> votes;
-    private List<ProposedSubject> pollA, pollB;
     private List<FinalClass> classes;
 
     public DbMock() {
@@ -39,16 +38,16 @@ public class DbMock {
     public List<ProposedSubject> getAliveProposedSubjects() {
         List<ProposedSubject> aliveSubject = new ArrayList<ProposedSubject>();
         for (ProposedSubject p : proposedSubjects) {
-            if (p.isIsAlive()) {
+            if (p.isItAlive()) {
                 aliveSubject.add(p);
             }
         }
         return aliveSubject;
     }
-    
+
     public ProposedSubject getAliveProposedSubjectByName(String sbName) {
         for (ProposedSubject p : proposedSubjects) {
-            if (p.isIsAlive() && p.getName().equals(sbName)) {
+            if (p.isItAlive() && p.getName().equals(sbName)) {
                 return p;
             }
         }
@@ -223,7 +222,7 @@ public class DbMock {
         users.add(marek);
 
         //make head of program
-        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com",userTypes.get(2)));
+        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com", userTypes.get(2)));
 
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();

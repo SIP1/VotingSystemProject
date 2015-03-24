@@ -49,11 +49,17 @@ public class AcceptanceProtocol {
     public static final String USERTYPE_DELETION_SUCCESS = "You have successfully deleted a usertype";
 
     public static final String NEW_PROPOSED_SUBJECT_SUCCESS = "You have successfully added a new proposed subject.";
+    
+    public static final String NEW_PROPOSED_SUBJECT_FAILURE_TEACHER = "You have to specify at least 1 teacher.";
+    
+    public static final String NEW_PROPOSED_SUBJECT_FAILURE_SUBJECT = "You have to specify the subjectw.";
 
     public static final String SUBJECTS_ADDED_TO_POLLS_SUCCESS = "You have successfully formed the polls.";
+    
+    public static final String SUBJECTS_ADDED_TO_POLLS_FAILURE = "Poll have not been formed.";
 
     public static final String SUBJECTS_ADDED_TO_ROUND_1_SUCCESS = "You have successfully added subjects to round 1";
-    
+
     public static final String SUBJECTS_ADDED_TO_ROUND_1_FAILURE = "You have to select at least 4 subjects for round 1";
 
     public static final String FINAL_CLASS_ADDING_ERROR = "The final class was not added.";

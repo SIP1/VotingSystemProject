@@ -62,7 +62,7 @@ public class ProposedSubject implements Serializable {
         this.description = description;
     }
 
-    public Boolean isIsAlive() {
+    public Boolean isItAlive() {
         return isAlive;
     }
 
