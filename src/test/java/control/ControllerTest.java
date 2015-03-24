@@ -4,18 +4,13 @@ import models.FinalClass;
 import models.ProposedSubject;
 import models.User;
 import models.UserType;
-import models.Vote;
 import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.List;
 import mocks.ControllerMock;
-import static org.hamcrest.CoreMatchers.is;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
 import utilities.AcceptanceProtocol;
 
 /**

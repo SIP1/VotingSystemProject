@@ -45,6 +45,15 @@ public class DbMock {
         }
         return aliveSubject;
     }
+    
+    public ProposedSubject getAliveProposedSubjectByName(String sbName) {
+        for (ProposedSubject p : proposedSubjects) {
+            if (p.isIsAlive() && p.getName().equals(sbName)) {
+                return p;
+            }
+        }
+        return null;
+    }
 
     public List<FinalClass> getAllClasses() {
         return classes;
@@ -214,25 +223,25 @@ public class DbMock {
         users.add(marek);
 
         //make head of program
-        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com", getUserTypeByName("Head")));
+        users.add(new User("1", "1", "Caroline", "boyko.surlev@gmail.com",userTypes.get(2)));
 
         //populate subjects
         List<User> teachersForProposedSubjects = new ArrayList<>();
-        proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, "A"));
+        proposedSubjects.add(new ProposedSubject("Android", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(101);
         teachersForProposedSubjects.add(getUserByUsername("pelo"));
         teachersForProposedSubjects.add(getUserByUsername("lam"));
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
-        proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, "B"));
+        proposedSubjects.add(new ProposedSubject("C#", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(102);
-        proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, "B"));
+        proposedSubjects.add(new ProposedSubject("Arduino", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(103);
-        proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, "A"));
+        proposedSubjects.add(new ProposedSubject("AI", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(104);
         teachersForProposedSubjects.clear();
         teachersForProposedSubjects.add(getUserByUsername("tor"));
         proposedSubjects.get(proposedSubjects.size() - 1).setUsers(teachersForProposedSubjects);
-        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, "A"));
+        proposedSubjects.add(new ProposedSubject("Game Design", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(105);
         proposedSubjects.add(new ProposedSubject("I am dead", "none", Boolean.TRUE, ""));
         proposedSubjects.get(proposedSubjects.size() - 1).setId(106);

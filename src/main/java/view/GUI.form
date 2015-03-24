@@ -197,7 +197,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="594" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
@@ -383,7 +383,7 @@
                       <Component id="jScrollPane1" alignment="0" pref="760" max="32767" attributes="0"/>
                       <Component id="jLabelWelcome" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -909,7 +909,7 @@
         <Component class="javax.swing.JLabel" name="jLabelPollA">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="POOL A"/>
+            <Property name="text" type="java.lang.String" value="POLL A"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelPollB">
@@ -1082,13 +1082,13 @@
         <Component class="javax.swing.JLabel" name="jLabelA">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="POOL A"/>
+            <Property name="text" type="java.lang.String" value="POLL A"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelB">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="POOL B"/>
+            <Property name="text" type="java.lang.String" value="POLL B"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPanelPollSubmit">
@@ -1233,8 +1233,8 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="false" title="All students" type="java.lang.String"/>
-                    <Column editable="false" title="Pool A choices" type="java.lang.String"/>
-                    <Column editable="false" title="Pool B choices" type="java.lang.String"/>
+                    <Column editable="false" title="Poll A choices" type="java.lang.String"/>
+                    <Column editable="false" title="Poll B choices" type="java.lang.String"/>
                     <Column editable="false" title="Is in class" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
@@ -1275,13 +1275,13 @@
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pool A"/>
+            <Property name="text" type="java.lang.String" value="Poll A"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pool B"/>
+            <Property name="text" type="java.lang.String" value="Poll B"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane8">
@@ -1463,13 +1463,13 @@
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pool A Classes"/>
+            <Property name="text" type="java.lang.String" value="Poll A Classes"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Pool B Classes"/>
+            <Property name="text" type="java.lang.String" value="Poll B Classes"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane13">
@@ -1543,8 +1543,8 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="false" title="Name" type="java.lang.String"/>
-                    <Column editable="false" title="Teaching from Pool A" type="java.lang.String"/>
-                    <Column editable="false" title="Teaching from Pool B" type="java.lang.String"/>
+                    <Column editable="false" title="Teaching from Poll A" type="java.lang.String"/>
+                    <Column editable="false" title="Teaching from Poll B" type="java.lang.String"/>
                     <Column editable="false" title="Assign" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
