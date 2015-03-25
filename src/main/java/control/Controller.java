@@ -16,7 +16,8 @@ import java.util.Set;
 import utilities.AcceptanceProtocol;
 import utilities.EmailSender;
 
-public class Controller implements ControllerInterface {
+public class Controller implements ControllerInterface
+{
 
     private User loggedInUser;
 
@@ -24,25 +25,33 @@ public class Controller implements ControllerInterface {
     private DbMock db;
     private int roundNumber;
 
-    public Controller() {
+    public Controller()
+    {
         db = DbMock.getInstance();
         roundNumber = 0;
     }
 
-    public static Controller getInstance() {
-        if (instance == null) {
+    public static Controller getInstance()
+    {
+        if (instance == null)
+        {
             instance = new Controller();
         }
         return instance;
     }
 
     @Override
-    public String authenticateUser(String userName, String password) {
+    public String authenticateUser(String userName, String password)
+    {
         loggedInUser = db.getUserByUsername(userName);
-        if (loggedInUser == null) {
+        if (loggedInUser == null)
+        {
             return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
-        } else {
-            if (loggedInUser.getPassword().equals(password)) {
+        }
+        else
+        {
+            if (loggedInUser.getPassword().equals(password))
+            {
                 return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
             }
             return AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
@@ -50,82 +59,99 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public int getRoundNumber() {
+    public int getRoundNumber()
+    {
         return roundNumber;
     }
 
     @Override
-    public int incrementRoundNumber() {
+    public int incrementRoundNumber()
+    {
         roundNumber++;
         return roundNumber;
     }
 
     @Override
-    public User getUser() {
+    public User getUser()
+    {
         return loggedInUser;
     }
 
     @Override
-    public List<ProposedSubject> getAllAliveProposedElectiveSubjects() {
+    public List<ProposedSubject> getAllAliveProposedElectiveSubjects()
+    {
         return db.getAliveProposedSubjects();
     }
 
     @Override
-    public List<ProposedSubject> getAllProposedElectiveSubjects() {
+    public List<ProposedSubject> getAllProposedElectiveSubjects()
+    {
         return db.getAllProposedSubjects();
     }
 
     @Override
-    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes) {
+    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes)
+    {
         db.addProposedSubject(pes);
         return pes;
     }
 
     @Override
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4) {
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4)
+    {
         ArrayList<Vote> votedSubjects = new ArrayList<>();
         ProposedSubject currentSubject;
         currentSubject = db.getAliveProposedSubjectByName(vote1);
-        if (currentSubject != null) {
+        if (currentSubject != null)
+        {
             votedSubjects.add(new Vote(loggedInUser, currentSubject, roundNumber, 2));
         }
         currentSubject = db.getAliveProposedSubjectByName(vote2);
-        if (currentSubject != null) {
+        if (currentSubject != null)
+        {
             votedSubjects.add(new Vote(loggedInUser, currentSubject, roundNumber, 2));
         }
         currentSubject = db.getAliveProposedSubjectByName(vote3);
-        if (currentSubject != null) {
+        if (currentSubject != null)
+        {
             votedSubjects.add(new Vote(loggedInUser, currentSubject, roundNumber, 1));
         }
         currentSubject = db.getAliveProposedSubjectByName(vote4);
-        if (currentSubject != null) {
+        if (currentSubject != null)
+        {
             votedSubjects.add(new Vote(loggedInUser, currentSubject, roundNumber, 1));
         }
 
         String checkup = isChoiceAccepted(votedSubjects);
-        if (checkup.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS)) {
+        if (checkup.equals(AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS))
+        {
             loggedInUser.setVotes(votedSubjects);
         }
         return checkup;
     }
 
-    private String isChoiceAccepted(ArrayList<Vote> votes) {
+    private String isChoiceAccepted(ArrayList<Vote> votes)
+    {
         int votesSize = votes.size();
-        if (votesSize != 4) {
+        if (votesSize != 4)
+        {
             return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
         }
         List<Integer> pesIDs = new ArrayList();
         List<Integer> roundNos = new ArrayList();
-        for (int i = 0; i < votesSize; i++) {
+        for (int i = 0; i < votesSize; i++)
+        {
             pesIDs.add(votes.get(i).getProposedSubject().getId());
             roundNos.add(votes.get(i).getRoundNumber());
         }
         Set<Integer> setPesIDs = new HashSet<Integer>(pesIDs);
         Set<Integer> setRoundNos = new HashSet<Integer>(roundNos);
-        if (setPesIDs.size() < pesIDs.size()) {
+        if (setPesIDs.size() < pesIDs.size())
+        {
             return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_REPETITION;
         }
-        if (1 != setRoundNos.size()) {
+        if (1 != setRoundNos.size())
+        {
             return AcceptanceProtocol.VOTE_REGISTRATION_ERROR_ROUNDS;
 
         }
@@ -133,54 +159,73 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public List<User> getUsersByUserType(UserType ut) {
+    public List<User> getUsersByUserType(UserType ut)
+    {
         return db.getUsersByUserTpe(ut);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()
+    {
         return db.getUsers();
     }
 
     @Override
-    public void setSatisfactionForStudent(int[] a, int[] b, User student) {
+    public void setSatisfactionForStudent(int[] a, int[] b, User student)
+    {
         List<ProposedSubject> proposedSubjects = db.getAliveProposedSubjects();
         List<Vote> currentVotes = student.getVotesByRound(1);
         List<ProposedSubject> poolA = new ArrayList<>();
         List<ProposedSubject> poolB = new ArrayList<>();
-        for (int i = 0; i < a.length; i++) {
+        for (int i = 0; i < a.length; i++)
+        {
             poolA.add(proposedSubjects.get(a[i]));
         }
-        for (int i = 0; i < b.length; i++) {
+        for (int i = 0; i < b.length; i++)
+        {
             poolB.add(proposedSubjects.get(b[i]));
         }
         int satisfactionA = 0;
         int satisfactionB = 0;
         boolean found;
-        for (Vote vote : currentVotes) {
+        for (Vote vote : currentVotes)
+        {
             found = false;
-            for (ProposedSubject ps : poolA) {
-                if (vote.getProposedSubject().equals(ps)) {
+            for (ProposedSubject ps : poolA)
+            {
+                if (vote.getProposedSubject().equals(ps))
+                {
                     found = true;
-                    if (vote.getPoints() == 2) {
+                    if (vote.getPoints() == 2)
+                    {
                         satisfactionA = 50;
                         break;
-                    } else {
-                        if (satisfactionA < 50) {
+                    }
+                    else
+                    {
+                        if (satisfactionA < 50)
+                        {
                             satisfactionA = 25;
                         }
 
                     }
                 }
             }
-            if (!found) {
-                for (ProposedSubject ps : poolB) {
-                    if (vote.getProposedSubject().equals(ps)) {
-                        if (vote.getPoints() == 2) {
+            if (!found)
+            {
+                for (ProposedSubject ps : poolB)
+                {
+                    if (vote.getProposedSubject().equals(ps))
+                    {
+                        if (vote.getPoints() == 2)
+                        {
                             satisfactionB = 50;
                             break;
-                        } else {
-                            if (satisfactionB < 50) {
+                        }
+                        else
+                        {
+                            if (satisfactionB < 50)
+                            {
                                 satisfactionB = 25;
                             }
                         }
@@ -192,21 +237,26 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public int getOverallSatisfaction(int[] a, int[] b) {
+    public int getOverallSatisfaction(int[] a, int[] b)
+    {
         int totalSatisfaction = 0;
         List<User> allStudents = getUsersByUserType(db.getUserTypeByName("Student"));
         List<User> allUsersWhoVotedInParticularRound = getAllStudentsWhoHadVotedForParticularRound(allStudents);
-        for (User student : allUsersWhoVotedInParticularRound) {
+        for (User student : allUsersWhoVotedInParticularRound)
+        {
             setSatisfactionForStudent(a, b, student);
             totalSatisfaction += student.getSatisfaction();
         }
         return totalSatisfaction / allStudents.size();
     }
 
-    private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents) {
+    private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents)
+    {
         List<User> allStudentsWhoHadVotedForParticularRound = new ArrayList();
-        for (User x : allStudents) {
-            if (x.getVotesByRound(1).size() == 4) {
+        for (User x : allStudents)
+        {
+            if (x.getVotesByRound(1).size() == 4)
+            {
                 allStudentsWhoHadVotedForParticularRound.add(x);
             }
         }
@@ -214,22 +264,28 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllStudentsByUnsatisfactionRate() {
+    public List<User> getAllStudentsByUnsatisfactionRate()
+    {
         List<User> unsatisfied = db.getUsersByUserTpe(db.getUserTypeByName("Student"));
 
-        Collections.sort(unsatisfied, new Comparator<User>() {
+        Collections.sort(unsatisfied, new Comparator<User>()
+        {
 
-            public int compare(User o1, User o2) {
+            public int compare(User o1, User o2)
+            {
                 return (Integer) o1.getSatisfaction() - (Integer) o2.getSatisfaction();
             }
         });
 
-        for (User x : unsatisfied) {
+        for (User x : unsatisfied)
+        {
             List<Vote> votesToBeOrganized = new ArrayList();
             votesToBeOrganized.addAll(x.getVotesByRound(1));
-            Collections.sort(votesToBeOrganized, new Comparator<Vote>() {
+            Collections.sort(votesToBeOrganized, new Comparator<Vote>()
+            {
 
-                public int compare(Vote o1, Vote o2) {
+                public int compare(Vote o1, Vote o2)
+                {
                     return (Integer) o2.getPoints() - (Integer) o1.getPoints();
                 }
             });
@@ -240,15 +296,18 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllTeachers() {
+    public List<User> getAllTeachers()
+    {
         return db.getUsersByUserTpe(db.getUserTypeByName("Teacher"));
     }
 
     @Override
-    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices) {
+    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices)
+    {
         List<User> allTeachers = getAllTeachers();
         List<User> toAdd = new ArrayList<>();
-        for (int i = 0; i < selectedIndices.length; i++) {
+        for (int i = 0; i < selectedIndices.length; i++)
+        {
             toAdd.add(allTeachers.get(selectedIndices[i]));
         }
         ps.setUsers(toAdd);
@@ -257,22 +316,32 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public String addSubjectsToPools(int[] a, int[] b) {
+    public String addSubjectsToPools(int[] a, int[] b)
+    {
         String errorMessage = "";
-        if (a.length < 2 && b.length < 2) {
+        if (a.length < 2 && b.length < 2)
+        {
             errorMessage = "You must select at least 2 subjects in each Pool!";
-        } else if (a.length < 2) {
+        }
+        else if (a.length < 2)
+        {
             errorMessage = "You must select at least 2 subjects in Pool A!";
-        } else if (b.length < 2) {
+        }
+        else if (b.length < 2)
+        {
             errorMessage = "You must select at least 2 subjects in Pool B!";
-        } else {
+        }
+        else
+        {
             List<ProposedSubject> poolA = new ArrayList<>();
             List<ProposedSubject> poolB = new ArrayList<>();
             List<ProposedSubject> proposedSubjects = db.getAliveProposedSubjects();
-            for (int i = 0; i < a.length; i++) {
+            for (int i = 0; i < a.length; i++)
+            {
                 poolA.add(proposedSubjects.get(a[i]));
             }
-            for (int i = 0; i < b.length; i++) {
+            for (int i = 0; i < b.length; i++)
+            {
                 poolB.add(proposedSubjects.get(b[i]));
             }
             errorMessage = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS + "\n" + db.fillPools(poolA, poolB);
@@ -281,15 +350,22 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public String selectSubjectsForRound1(int[] selectedIndexes) {
-        if (selectedIndexes.length < 4) {
+    public String selectSubjectsForRound1(int[] selectedIndexes)
+    {
+        if (selectedIndexes.length < 4)
+        {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_FAILURE;
-        } else {
+        }
+        else
+        {
             List<ProposedSubject> allSubjects = db.getAllProposedSubjects();
-            for (int i = 0; i < allSubjects.size(); i++) {
+            for (int i = 0; i < allSubjects.size(); i++)
+            {
                 boolean found = false;
-                for (int j = 0; j < selectedIndexes.length; j++) {
-                    if (i == selectedIndexes[j]) {
+                for (int j = 0; j < selectedIndexes.length; j++)
+                {
+                    if (i == selectedIndexes[j])
+                    {
                         found = true;
                     }
                 }
@@ -300,16 +376,21 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllStudents() {
+    public List<User> getAllStudents()
+    {
         return getUsersByUserType(db.getUserTypeByName("Student"));
     }
 
     @Override
-    public List<ProposedSubject> getSubjectsByPool(String pool) {
+    public List<ProposedSubject> getSubjectsByPool(String pool)
+    {
         List<ProposedSubject> subj = new ArrayList();
-        for (ProposedSubject ps : db.getAliveProposedSubjects()) {
-            if (!ps.getPoolOptions().equals("")) {
-                if (ps.getPoolOptions().equals(pool)) {
+        for (ProposedSubject ps : db.getAliveProposedSubjects())
+        {
+            if (!ps.getPoolOptions().equals(""))
+            {
+                if (ps.getPoolOptions().equals(pool))
+                {
                     subj.add(ps);
                 }
             }
@@ -318,54 +399,67 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public FinalClass addNewClass(List<User> students, ProposedSubject subject) {
+    public FinalClass addNewClass(List<User> students, ProposedSubject subject)
+    {
         FinalClass c = new FinalClass(subject);
         c.setStudents(students);
         return db.addClass(c);
     }
 
     @Override
-    public FinalClass editStudentsInClass(List<User> students, int classIndex) {
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
         return db.editStudentsInClass(students, classIndex);
     }
 
     @Override
-    public FinalClass editTeachersInClass(List<User> teachers, int classIndex) {
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
         return db.editTeachersInClass(teachers, classIndex);
     }
 
     @Override
-    public List<FinalClass> getAllClasses() {
+    public List<FinalClass> getAllClasses()
+    {
         return db.getAllClasses();
     }
 
     @Override
-    public List<User> getStudentsForClass(FinalClass c) {
+    public List<User> getStudentsForClass(FinalClass c)
+    {
         return c.getStudents();
     }
 
     @Override
-    public String sendMail() {
+    public String sendMail()
+    {
         List<FinalClass> classes = db.getAllClasses();
         String errorMessage = "Error!";
-        for (FinalClass fc : classes) {
-            if (fc.getTeachers().isEmpty()) {
+        for (FinalClass fc : classes)
+        {
+            if (fc.getTeachers().isEmpty())
+            {
                 errorMessage += "\n" + fc.getName() + " class has no teacher!";
             }
-            if (fc.getStudents().isEmpty()) {
+            if (fc.getStudents().isEmpty())
+            {
                 errorMessage += "\n" + fc.getName() + " class has no students!";
             }
         }
-        if (errorMessage.equals("Error!")) {
+        if (errorMessage.equals("Error!"))
+        {
             XStream xmlParser = new XStream();
             String xmlClasses = xmlParser.toXML(classes);
             List<User> receivers = db.getUsersByUserTpe(new UserType("Head"));
 
-            if (EmailSender.send(receivers.get(0).getEmail(), xmlClasses)) {
+            if (EmailSender.send(receivers.get(0).getEmail(), xmlClasses))
+            {
                 return AcceptanceProtocol.EMAIL_SEND_SUCCESS + receivers.get(0).getEmail();
             }
             return AcceptanceProtocol.EMAIL_SEND_FAIL;
-        } else {
+        }
+        else
+        {
             return errorMessage;
         }
     }

@@ -10,7 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "UserType_TBL")
-public class UserType implements Serializable {
+public class UserType implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -20,34 +21,39 @@ public class UserType implements Serializable {
     private Integer id;
     private String name;
 
-    public UserType() {
-        // default constructor
+    public UserType()
+    {
+
     }
 
-    public UserType(String name) {
+    public UserType(String name)
+    {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Integer getId()
+    {
         return id;
     }
 
-    //Needed for testing
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    //Needed for testing
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "UserType{" + "id=" + id + ", name=" + name + '}';
     }
 

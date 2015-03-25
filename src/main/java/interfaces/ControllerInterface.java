@@ -6,7 +6,8 @@ import models.User;
 import models.UserType;
 import java.util.List;
 
-public interface ControllerInterface {
+public interface ControllerInterface
+{
 
     String authenticateUser(String userName, String password);
 

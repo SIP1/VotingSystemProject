@@ -18,21 +18,25 @@ import javax.persistence.Id;
  * @author smarandadungeanu
  */
 @Entity
-public class FinalClass implements Serializable {
+public class FinalClass implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    public FinalClass() {
+    public FinalClass()
+    {
     }
 
-    public Integer getId() {
+    public Integer getId()
+    {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
         this.id = id;
     }
 
@@ -41,50 +45,62 @@ public class FinalClass implements Serializable {
     ProposedSubject subject;
     String name;
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public FinalClass(ProposedSubject subject) {
+    public FinalClass(ProposedSubject subject)
+    {
         this.subject = subject;
     }
 
-    public List<User> getStudents() {
+    public List<User> getStudents()
+    {
         return students;
     }
 
-    public ProposedSubject getSubject() {
+    public ProposedSubject getSubject()
+    {
         return subject;
     }
 
-    public List<User> getTeachers() {
+    public List<User> getTeachers()
+    {
         return teachers;
     }
 
-    public String getTeachersToString() {
+    public String getTeachersToString()
+    {
         String result = "";
-        for (User t : teachers) {
+        for (User t : teachers)
+        {
             result = result + t.getName() + ", ";
         }
-        if (teachers.isEmpty()) {
+        if (teachers.isEmpty())
+        {
             return "";
         }
         return result.substring(0, result.length() - 2);
     }
 
-    public void setStudents(List<User> students) {
+    public void setStudents(List<User> students)
+    {
         this.students = students;
     }
 
-    public void setSubject(ProposedSubject subject) {
+    public void setSubject(ProposedSubject subject)
+    {
         this.subject = subject;
     }
 
-    public void setTeachers(List<User> teachers) {
+    public void setTeachers(List<User> teachers)
+    {
         this.teachers = teachers;
     }
 }

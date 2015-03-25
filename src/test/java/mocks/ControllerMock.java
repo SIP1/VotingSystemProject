@@ -13,7 +13,8 @@ import java.util.Comparator;
 import java.util.List;
 import utilities.AcceptanceProtocol;
 
-public class ControllerMock implements ControllerInterface {
+public class ControllerMock implements ControllerInterface
+{
 
     public User user = new User();
     public ArrayList<ProposedSubject> proposedSubjects = new ArrayList();
@@ -25,7 +26,8 @@ public class ControllerMock implements ControllerInterface {
     public List<User> students = new ArrayList();
     private int roundNumber;
 
-    public ControllerMock() {
+    public ControllerMock()
+    {
         userTypes.add(new UserType("Student"));
         userTypes.add(new UserType("Teacher"));
         userTypes.add(new UserType("Administrator"));
@@ -70,11 +72,13 @@ public class ControllerMock implements ControllerInterface {
         roundNumber = 0;
     }
 
-    //Users
     @Override
-    public String authenticateUser(String userName, String password) {
-        for (User x : users) {
-            if (x.getUsername().equals(userName) && x.getPassword().equals(password)) {
+    public String authenticateUser(String userName, String password)
+    {
+        for (User x : users)
+        {
+            if (x.getUsername().equals(userName) && x.getPassword().equals(password))
+            {
                 user = x;
                 return AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
             }
@@ -83,23 +87,27 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public User getUser() {
+    public User getUser()
+    {
         return user;
     }
 
     @Override
-    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes) {
-        if (pes != null) {
+    public ProposedSubject addProposedElectiveSubject(ProposedSubject pes)
+    {
+        if (pes != null)
+        {
             proposedSubjects.add(pes);
         }
         return pes;
     }
 
-    //Votes
     @Override
-    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4) {
+    public String addVoteFromParticularUser(String vote1, String vote2, String vote3, String vote4)
+    {
 
-        if (vote1 != null && !vote1.equals("") && vote2 != null && !vote2.equals("") && vote3 != null && !vote3.equals("") && vote4 != null && !vote4.equals("")) {
+        if (vote1 != null && !vote1.equals("") && vote2 != null && !vote2.equals("") && vote3 != null && !vote3.equals("") && vote4 != null && !vote4.equals(""))
+        {
             votes.add(new Vote(user, new ProposedSubject(vote1, "TEST", true, ""), roundNumber, 2));
             votes.add(new Vote(user, new ProposedSubject(vote2, "TEST", true, ""), roundNumber, 2));
             votes.add(new Vote(user, new ProposedSubject(vote3, "TEST", true, ""), roundNumber, 1));
@@ -111,10 +119,13 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<User> getUsersByUserType(UserType ut) {
+    public List<User> getUsersByUserType(UserType ut)
+    {
         List<User> filteredUsers = new ArrayList();
-        for (User u : users) {
-            if (u.getUserType() == ut) {
+        for (User u : users)
+        {
+            if (u.getUserType() == ut)
+            {
                 filteredUsers.add(u);
             }
         }
@@ -122,47 +133,61 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()
+    {
         return users;
     }
 
     @Override
-    public void setSatisfactionForStudent(int[] a, int[] b, User student) {
-        if (a.length > 0) {
+    public void setSatisfactionForStudent(int[] a, int[] b, User student)
+    {
+        if (a.length > 0)
+        {
             student.setSatisfaction(50);
-        } else {
+        }
+        else
+        {
             student.setSatisfaction(0);
         }
-        if (b.length > 0) {
+        if (b.length > 0)
+        {
             student.setSatisfaction(student.getSatisfaction() + 25);
         }
     }
 
     @Override
-    public int getOverallSatisfaction(int[] a, int[] b) {
+    public int getOverallSatisfaction(int[] a, int[] b)
+    {
         int overall = 0;
-        if (a.length > 0) {
+        if (a.length > 0)
+        {
             overall = 25;
         }
-        if (b.length > 0) {
+        if (b.length > 0)
+        {
             overall = overall + 25;
         }
         return overall;
     }
 
     @Override
-    public List<User> getAllStudentsByUnsatisfactionRate() {
+    public List<User> getAllStudentsByUnsatisfactionRate()
+    {
         List<User> unsatisfied = new ArrayList();
-        for (User u : users) {
-            if (u.getUserType() == userTypes.get(0)) {
+        for (User u : users)
+        {
+            if (u.getUserType() == userTypes.get(0))
+            {
                 unsatisfied.add(u);
             }
         }
 
-        Collections.sort(unsatisfied, new Comparator<User>() {
+        Collections.sort(unsatisfied, new Comparator<User>()
+        {
 
             @Override
-            public int compare(User o1, User o2) {
+            public int compare(User o1, User o2)
+            {
                 return o1.getSatisfaction() - o2.getSatisfaction();
             }
         });
@@ -170,10 +195,13 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<User> getAllTeachers() {
+    public List<User> getAllTeachers()
+    {
         List<User> teachers = new ArrayList();
-        for (User user : users) {
-            if (user.getUserType() == userTypes.get(1)) {
+        for (User user : users)
+        {
+            if (user.getUserType() == userTypes.get(1))
+            {
                 teachers.add(user);
             }
         }
@@ -181,16 +209,20 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices) {
-        if (ps == null) {
+    public String addProposedSubject(ProposedSubject ps, int[] selectedIndices)
+    {
+        if (ps == null)
+        {
             return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_FAILURE_SUBJECT;
         }
-        if (selectedIndices.length == 0) {
+        if (selectedIndices.length == 0)
+        {
             return AcceptanceProtocol.NEW_PROPOSED_SUBJECT_FAILURE_TEACHER;
         }
         List<User> teachers = getAllTeachers();
         List<User> subjectTeachers = new ArrayList();
-        for (int i = 0; i < selectedIndices.length; i++) {
+        for (int i = 0; i < selectedIndices.length; i++)
+        {
             subjectTeachers.add(teachers.get(selectedIndices[i]));
         }
         ps.setUsers(subjectTeachers);
@@ -198,19 +230,26 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String addSubjectsToPools(int[] a, int[] b) {
-        if (a.length < 2 || b.length < 2) {
+    public String addSubjectsToPools(int[] a, int[] b)
+    {
+        if (a.length < 2 || b.length < 2)
+        {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
-        } else {
+        }
+        else
+        {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS;
         }
     }
 
     @Override
-    public List<ProposedSubject> getAllAliveProposedElectiveSubjects() {
+    public List<ProposedSubject> getAllAliveProposedElectiveSubjects()
+    {
         List<ProposedSubject> aliveSubjects = new ArrayList();
-        for (ProposedSubject proposedSubject : proposedSubjects) {
-            if (proposedSubject.isItAlive()) {
+        for (ProposedSubject proposedSubject : proposedSubjects)
+        {
+            if (proposedSubject.isItAlive())
+            {
                 aliveSubjects.add(proposedSubject);
             }
         }
@@ -218,24 +257,32 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<ProposedSubject> getAllProposedElectiveSubjects() {
+    public List<ProposedSubject> getAllProposedElectiveSubjects()
+    {
         return proposedSubjects;
     }
 
     @Override
-    public String selectSubjectsForRound1(int[] selectedIndexes) {
-        if (selectedIndexes.length < 4) {
+    public String selectSubjectsForRound1(int[] selectedIndexes)
+    {
+        if (selectedIndexes.length < 4)
+        {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_FAILURE;
-        } else {
+        }
+        else
+        {
             return AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
         }
     }
 
     @Override
-    public List<User> getAllStudents() {
+    public List<User> getAllStudents()
+    {
         List<User> students = new ArrayList();
-        for (User user : users) {
-            if (user.getUserType().equals(userTypes.get(0))) {
+        for (User user : users)
+        {
+            if (user.getUserType().equals(userTypes.get(0)))
+            {
                 students.add(user);
             }
         }
@@ -243,10 +290,13 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<ProposedSubject> getSubjectsByPool(String pool) {
+    public List<ProposedSubject> getSubjectsByPool(String pool)
+    {
         List<ProposedSubject> poolSubjects = new ArrayList();
-        for (ProposedSubject proposedSubject : proposedSubjects) {
-            if (proposedSubject.getPoolOptions().equals(pool)) {
+        for (ProposedSubject proposedSubject : proposedSubjects)
+        {
+            if (proposedSubject.getPoolOptions().equals(pool))
+            {
                 poolSubjects.add(proposedSubject);
             }
         }
@@ -254,11 +304,14 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public FinalClass addNewClass(List<User> students, ProposedSubject subject) {
-        if (subject == null) {
+    public FinalClass addNewClass(List<User> students, ProposedSubject subject)
+    {
+        if (subject == null)
+        {
             return null;
         }
-        if (students.isEmpty()) {
+        if (students.isEmpty())
+        {
             return null;
         }
 
@@ -268,43 +321,52 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public List<FinalClass> getAllClasses() {
+    public List<FinalClass> getAllClasses()
+    {
         return finalClasses;
     }
 
     @Override
-    public List<User> getStudentsForClass(FinalClass c) {
+    public List<User> getStudentsForClass(FinalClass c)
+    {
         return c.getStudents();
     }
 
     @Override
-    public String sendMail() {
+    public String sendMail()
+    {
         XStream xmlParser = new XStream();
         String xml = xmlParser.toXML(finalClasses);
         return xml;
     }
 
     @Override
-    public int getRoundNumber() {
+    public int getRoundNumber()
+    {
         return roundNumber;
     }
 
     @Override
-    public int incrementRoundNumber() {
+    public int incrementRoundNumber()
+    {
         roundNumber++;
         return roundNumber;
     }
 
     @Override
-    public FinalClass editStudentsInClass(List<User> students, int classIndex) {
-        if (classIndex > finalClasses.size()) {
+    public FinalClass editStudentsInClass(List<User> students, int classIndex)
+    {
+        if (classIndex > finalClasses.size())
+        {
             return null;
         }
-        if (students == null) {
+        if (students == null)
+        {
 
             return null;
         }
-        if (!students.isEmpty()) {
+        if (!students.isEmpty())
+        {
             return null;
         }
         finalClasses.get(classIndex).setStudents(students);
@@ -312,15 +374,19 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public FinalClass editTeachersInClass(List<User> teachers, int classIndex) {
-        if (classIndex > finalClasses.size()) {
+    public FinalClass editTeachersInClass(List<User> teachers, int classIndex)
+    {
+        if (classIndex > finalClasses.size())
+        {
             return null;
         }
-        if (teachers == null) {
+        if (teachers == null)
+        {
 
             return null;
         }
-        if (!teachers.isEmpty()) {
+        if (!teachers.isEmpty())
+        {
             return null;
         }
         finalClasses.get(classIndex).setTeachers(teachers);

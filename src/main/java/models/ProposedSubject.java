@@ -12,7 +12,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ProposedSubject_TBL")
-public class ProposedSubject implements Serializable {
+public class ProposedSubject implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,82 +27,99 @@ public class ProposedSubject implements Serializable {
     @ManyToMany()
     private List<User> users = new ArrayList();
 
-    public ProposedSubject() {
-        // default constructor
+    public ProposedSubject()
+    {
+
     }
 
-    public ProposedSubject(String name, String description, Boolean isAlive, String poolOptions) {
+    public ProposedSubject(String name, String description, Boolean isAlive, String poolOptions)
+    {
         this.name = name;
         this.description = description;
         this.isAlive = isAlive;
         this.poolOptions = poolOptions;
     }
 
-    public Integer getId() {
+    public Integer getId()
+    {
         return id;
     }
 
-    //Needed for testing
-    public void setId(Integer id) {
+    public void setId(Integer id)
+    {
         this.id = id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
-    public Boolean isItAlive() {
+    public Boolean isItAlive()
+    {
         return isAlive;
     }
 
-    public void setIsAlive(Boolean isAlive) {
+    public void setIsAlive(Boolean isAlive)
+    {
         this.isAlive = isAlive;
     }
 
-    public String getPoolOptions() {
+    public String getPoolOptions()
+    {
         return poolOptions;
     }
 
-    public void setPoolOptions(String poolOptions) {
+    public void setPoolOptions(String poolOptions)
+    {
         this.poolOptions = poolOptions;
     }
 
-    public List<User> getUsers() {
+    public List<User> getUsers()
+    {
         return users;
     }
 
-    public String getTeachersNames() {
+    public String getTeachersNames()
+    {
         String result = "";
-        for (User u : users) {
-            if (u.getUserType().getName().equals("Teacher")) {
+        for (User u : users)
+        {
+            if (u.getUserType().getName().equals("Teacher"))
+            {
                 result = result + u.getName() + ", ";
             }
         }
-        if (result.length() > 1) {
+        if (result.length() > 1)
+        {
             result = result.substring(0, result.length() - 2);
         }
         return result;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<User> users)
+    {
         this.users = users;
     }
 
-    //Needed for testing
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "ProposedSubject{" + "id=" + id + ", name=" + name + ", description="
                 + description + ", isAlive=" + isAlive + ", poolOptions=" + poolOptions
                 + ", users=" + users + '}';

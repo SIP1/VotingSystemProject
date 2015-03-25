@@ -11,18 +11,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class DatabaseFiller {
+public class DatabaseFiller
+{
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIP_PU");
     private EntityManager em = emf.createEntityManager();
     private EntityTransaction tr;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         new DatabaseFiller().base();
 
     }
 
-    private void base() {
+    private void base()
+    {
         UserType ut1 = new UserType("Student");
         UserType ut2 = new UserType("Teacher");
         UserType ut3 = new UserType("GOD");
@@ -90,11 +93,13 @@ public class DatabaseFiller {
         closeTransactions();
     }
 
-    private void initializeTransactions() {
+    private void initializeTransactions()
+    {
         tr = em.getTransaction();
     }
 
-    private void closeTransactions() {
+    private void closeTransactions()
+    {
         em.close();
     }
 
