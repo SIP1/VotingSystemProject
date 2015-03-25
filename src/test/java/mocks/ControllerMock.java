@@ -198,11 +198,11 @@ public class ControllerMock implements ControllerInterface {
     }
 
     @Override
-    public String addSubjectsToPolls(int[] a, int[] b) {
+    public String addSubjectsToPools(int[] a, int[] b) {
         if (a.length < 2 || b.length < 2) {
-            return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_FAILURE;
+            return AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
         } else {
-            return AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
+            return AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS;
         }
     }
 

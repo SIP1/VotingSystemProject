@@ -267,54 +267,54 @@ public class ControllerTest {
     }
 
     /**
-     * Test of addSubjectsToPolls method, of class Controller.
+     * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAddSubjectsToPolls() {
-        System.out.println("addSubjectsToPolls");
+    public void testAddSubjectsToPools() {
+        System.out.println("addSubjectsToPools");
         int[] a = new int[]{1, 2, 3, 4};
         int[] b = new int[]{5, 6, 7, 8};
-        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS;
-        String result = controller.addSubjectsToPolls(a, b);
+        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS;
+        String result = controller.addSubjectsToPools(a, b);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of addSubjectsToPolls method, of class Controller.
+     * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAdd0SubjectsToPolls() {
-        System.out.println("add0SubjectsToPolls");
+    public void testAdd0SubjectsToPools() {
+        System.out.println("add0SubjectsToPools");
         int[] a = new int[]{};
         int[] b = new int[]{};
-        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_FAILURE;
-        String result = controller.addSubjectsToPolls(a, b);
+        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
+        String result = controller.addSubjectsToPools(a, b);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of addSubjectsToPolls method, of class Controller.
+     * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAdd2SubjectsToPolls() {
-        System.out.println("add2SubjectsToPolls");
+    public void testAdd2SubjectsToPools() {
+        System.out.println("add2SubjectsToPools");
         int[] a = new int[]{1};
         int[] b = new int[]{5};
-        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_FAILURE;
-        String result = controller.addSubjectsToPolls(a, b);
+        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
+        String result = controller.addSubjectsToPools(a, b);
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of addSubjectsToPolls method, of class Controller.
+     * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAddNullSubjectsToPolls() {
-        System.out.println("addNullSubjectsToPolls");
+    public void testAddNullSubjectsToPools() {
+        System.out.println("addNullSubjectsToPools");
         int[] a = new int[]{};
         int[] b = new int[]{5, 6, 8};
-        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_FAILURE;
-        String result = controller.addSubjectsToPolls(a, b);
+        String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
+        String result = controller.addSubjectsToPools(a, b);
         assertEquals(expResult, result);
     }
 

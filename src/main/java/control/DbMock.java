@@ -154,7 +154,7 @@ public class DbMock {
         }
     }
 
-    public String fillPolls(List<ProposedSubject> a, List<ProposedSubject> b) {
+    public String fillPools(List<ProposedSubject> a, List<ProposedSubject> b) {
         for (ProposedSubject ps : proposedSubjects) {
             boolean found = false;
             for (ProposedSubject psa : a) {
@@ -174,11 +174,11 @@ public class DbMock {
                 ps.setIsAlive(false);
             }
         }
-        return "Size of poll A: " + a.size() + ", size of poll B: " + b.size();
+        return "Size of pool A: " + a.size() + ", size of pool B: " + b.size();
     }
 
     public void addProposedSubject(ProposedSubject ps) {
-        if (proposedSubjects.size() == 0) {
+        if (proposedSubjects.isEmpty()) {
             ps.setId(100);
         } else {
             ps.setId(proposedSubjects.get(proposedSubjects.size() - 1).getId() + 1);

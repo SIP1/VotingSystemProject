@@ -146,20 +146,20 @@ public class Controller implements ControllerInterface {
     public void setSatisfactionForStudent(int[] a, int[] b, User student) {
         List<ProposedSubject> proposedSubjects = db.getAliveProposedSubjects();
         List<Vote> currentVotes = student.getVotesByRound(1);
-        List<ProposedSubject> pollA = new ArrayList<>();
-        List<ProposedSubject> pollB = new ArrayList<>();
+        List<ProposedSubject> poolA = new ArrayList<>();
+        List<ProposedSubject> poolB = new ArrayList<>();
         for (int i = 0; i < a.length; i++) {
-            pollA.add(proposedSubjects.get(a[i]));
+            poolA.add(proposedSubjects.get(a[i]));
         }
         for (int i = 0; i < b.length; i++) {
-            pollB.add(proposedSubjects.get(b[i]));
+            poolB.add(proposedSubjects.get(b[i]));
         }
         int satisfactionA = 0;
         int satisfactionB = 0;
         boolean found;
         for (Vote vote : currentVotes) {
             found = false;
-            for (ProposedSubject ps : pollA) {
+            for (ProposedSubject ps : poolA) {
                 if (vote.getProposedSubject().equals(ps)) {
                     found = true;
                     if (vote.getPoints() == 2) {
@@ -174,7 +174,7 @@ public class Controller implements ControllerInterface {
                 }
             }
             if (!found) {
-                for (ProposedSubject ps : pollB) {
+                for (ProposedSubject ps : poolB) {
                     if (vote.getProposedSubject().equals(ps)) {
                         if (vote.getPoints() == 2) {
                             satisfactionB = 50;
@@ -206,7 +206,7 @@ public class Controller implements ControllerInterface {
     private List<User> getAllStudentsWhoHadVotedForParticularRound(List<User> allStudents) {
         List<User> allStudentsWhoHadVotedForParticularRound = new ArrayList();
         for (User x : allStudents) {
-            if (!x.getVotesByRound(1).isEmpty() && x.getVotesByRound(1).size() == 4) {
+            if (x.getVotesByRound(1).size() == 4) {
                 allStudentsWhoHadVotedForParticularRound.add(x);
             }
         }
@@ -257,25 +257,25 @@ public class Controller implements ControllerInterface {
     }
 
     @Override
-    public String addSubjectsToPolls(int[] a, int[] b) {
+    public String addSubjectsToPools(int[] a, int[] b) {
         String errorMessage = "";
         if (a.length < 2 && b.length < 2) {
-            errorMessage = "You must select at least 2 subjects in each Poll!";
+            errorMessage = "You must select at least 2 subjects in each Pool!";
         } else if (a.length < 2) {
-            errorMessage = "You must select at least 2 subjects in Poll A!";
+            errorMessage = "You must select at least 2 subjects in Pool A!";
         } else if (b.length < 2) {
-            errorMessage = "You must select at least 2 subjects in Poll B!";
+            errorMessage = "You must select at least 2 subjects in Pool B!";
         } else {
-            List<ProposedSubject> pollA = new ArrayList<>();
-            List<ProposedSubject> pollB = new ArrayList<>();
+            List<ProposedSubject> poolA = new ArrayList<>();
+            List<ProposedSubject> poolB = new ArrayList<>();
             List<ProposedSubject> proposedSubjects = db.getAliveProposedSubjects();
             for (int i = 0; i < a.length; i++) {
-                pollA.add(proposedSubjects.get(a[i]));
+                poolA.add(proposedSubjects.get(a[i]));
             }
             for (int i = 0; i < b.length; i++) {
-                pollB.add(proposedSubjects.get(b[i]));
+                poolB.add(proposedSubjects.get(b[i]));
             }
-            errorMessage = AcceptanceProtocol.SUBJECTS_ADDED_TO_POLLS_SUCCESS + "\n" + db.fillPolls(pollA, pollB);
+            errorMessage = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS + "\n" + db.fillPools(poolA, poolB);
         }
         return errorMessage;
     }

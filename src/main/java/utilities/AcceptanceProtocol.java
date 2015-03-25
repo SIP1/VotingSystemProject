@@ -54,9 +54,9 @@ public class AcceptanceProtocol {
     
     public static final String NEW_PROPOSED_SUBJECT_FAILURE_SUBJECT = "You have to specify the subjectw.";
 
-    public static final String SUBJECTS_ADDED_TO_POLLS_SUCCESS = "You have successfully formed the polls.";
+    public static final String SUBJECTS_ADDED_TO_POOLS_SUCCESS = "You have successfully formed the pools.";
     
-    public static final String SUBJECTS_ADDED_TO_POLLS_FAILURE = "Poll have not been formed.";
+    public static final String SUBJECTS_ADDED_TO_POOLS_FAILURE = "Pool have not been formed.";
 
     public static final String SUBJECTS_ADDED_TO_ROUND_1_SUCCESS = "You have successfully added subjects to round 1";
 

@@ -38,7 +38,7 @@ public interface ControllerInterface {
 
     String addProposedSubject(ProposedSubject ps, int[] selectedIndices);
 
-    String addSubjectsToPolls(int[] a, int[] b);
+    String addSubjectsToPools(int[] a, int[] b);
 
     String selectSubjectsForRound1(int[] selectedIndexes);
 
