@@ -1,7 +1,6 @@
 package utilities;
 
-public class AcceptanceProtocol
-{
+public class AcceptanceProtocol {
 
     public static final String ACCOUNT_LOGIN_SUCCESS = "Authentication successfull!";
 

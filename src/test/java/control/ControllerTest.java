@@ -13,713 +13,627 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import utilities.AcceptanceProtocol;
 
-/**
- *
- * @author Marek
- */
-public class ControllerTest
-{
+public class ControllerTest {
 
     private ControllerMock controller;
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         controller = new ControllerMock();
-        System.out.println("Controller SET UP");
+        System.out.println( "Controller SET UP" );
     }
 
     /**
      * Test of authenticateUser method, of class Controller.
      */
     @Test
-    public void testAuthenticateUser()
-    {
-        System.out.println("authenticateUser");
+    public void testAuthenticateUser() {
+        System.out.println( "authenticateUser" );
         String expectedResult = AcceptanceProtocol.ACCOUNT_LOGIN_SUCCESS;
         String userName = "TestUser";
         String password = "12345";
-        String actualResult = controller.authenticateUser(userName, password);
-        assertEquals(expectedResult, actualResult);
+        String actualResult = controller.authenticateUser( userName, password );
+        assertEquals( expectedResult, actualResult );
     }
 
     /**
      * Test of authenticateUser method, of class Controller.
      */
     @Test
-    public void testFailAuthenticateUser()
-    {
-        System.out.println("failAuthenticateUser");
+    public void testFailAuthenticateUser() {
+        System.out.println( "failAuthenticateUser" );
         String expectedResult = AcceptanceProtocol.ACCOUNT_LOGIN_ERROR;
         String userName = "TestUser12";
         String password = "";
-        String actualResult = controller.authenticateUser(userName, password);
-        assertEquals(expectedResult, actualResult);
+        String actualResult = controller.authenticateUser( userName, password );
+        assertEquals( expectedResult, actualResult );
     }
 
     /**
      * Test of getUser method, of class Controller.
      */
     @Test
-    public void testGetUser()
-    {
-        System.out.println("getUser");
+    public void testGetUser() {
+        System.out.println( "getUser" );
         User expResult = controller.user;
         User result = controller.getUser();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addProposedElectiveSubject method, of class Controller.
      */
     @Test
-    public void testAddProposedElectiveSubject()
-    {
-        System.out.println("addProposedElectiveSubject");
-        ProposedSubject expectedResult = new ProposedSubject("AI", "testing add", true, "A");
-        ProposedSubject actualResult = controller.addProposedElectiveSubject(expectedResult);
-        assertEquals(expectedResult, actualResult);
+    public void testAddProposedElectiveSubject() {
+        System.out.println( "addProposedElectiveSubject" );
+        ProposedSubject expectedResult = new ProposedSubject( "AI", "testing add", true, "A" );
+        ProposedSubject actualResult = controller.addProposedElectiveSubject( expectedResult );
+        assertEquals( expectedResult, actualResult );
     }
 
     /**
      * Test of addProposedElectiveSubject method, of class Controller.
      */
     @Test
-    public void testAddNullProposedElectiveSubject()
-    {
-        System.out.println("addNullProposedElectiveSubject");
+    public void testAddNullProposedElectiveSubject() {
+        System.out.println( "addNullProposedElectiveSubject" );
         ProposedSubject expectedResult = null;
-        ProposedSubject actualResult = controller.addProposedElectiveSubject(expectedResult);
-        assertEquals(expectedResult, actualResult);
+        ProposedSubject actualResult = controller.addProposedElectiveSubject( expectedResult );
+        assertEquals( expectedResult, actualResult );
     }
 
     /**
      * Test of addVoteFromParticularUser method, of class Controller.
      */
     @Test
-    public void testAddVoteFromParticularUser()
-    {
-        System.out.println("addVoteFromParticularUser");
+    public void testAddVoteFromParticularUser() {
+        System.out.println( "addVoteFromParticularUser" );
         String vote1 = "Vote 1";
         String vote2 = "Vote 2";
         String vote3 = "Vote 3";
         String vote4 = "Vote 4";
         String expected = AcceptanceProtocol.VOTE_REGISTRATION_SUCCESS;
-        assertEquals(expected, controller.addVoteFromParticularUser(vote1, vote2, vote3, vote4));
+        assertEquals( expected, controller.addVoteFromParticularUser( vote1, vote2, vote3, vote4 ) );
     }
 
     /**
      * Test of addVoteFromParticularUser method, of class Controller.
      */
     @Test
-    public void testAddNullVoteFromParticularUser()
-    {
-        System.out.println("addNullVoteFromParticularUser");
+    public void testAddNullVoteFromParticularUser() {
+        System.out.println( "addNullVoteFromParticularUser" );
         String vote1 = "";
         String vote2 = "";
         String vote3 = null;
         String vote4 = "";
         String expected = AcceptanceProtocol.VOTE_REGISTRATION_ERROR_AMMOUNT;
-        assertEquals(expected, controller.addVoteFromParticularUser(vote1, vote2, vote3, vote4));
+        assertEquals( expected, controller.addVoteFromParticularUser( vote1, vote2, vote3, vote4 ) );
     }
 
     /**
      * Test of getUsersByUserType method, of class Controller.
      */
     @Test
-    public void testGetUsersByUserType()
-    {
-        System.out.println("getUsersByUserType");
-        UserType ut = controller.userTypes.get(0);
+    public void testGetUsersByUserType() {
+        System.out.println( "getUsersByUserType" );
+        UserType ut = controller.userTypes.get( 0 );
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(0));
-        expResult.add(controller.users.get(3));
-        List<User> result = controller.getUsersByUserType(ut);
-        assertEquals(expResult, result);
+        expResult.add( controller.users.get( 0 ) );
+        expResult.add( controller.users.get( 3 ) );
+        List<User> result = controller.getUsersByUserType( ut );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getUsersByUserType method, of class Controller.
      */
     @Test
-    public void testGetUsersByNonexistingUserType()
-    {
-        System.out.println("getUsersByNonexistingUserType");
-        UserType ut = new UserType("test");
+    public void testGetUsersByNonexistingUserType() {
+        System.out.println( "getUsersByNonexistingUserType" );
+        UserType ut = new UserType( "test" );
         List<User> expResult = new ArrayList();
-        List<User> result = controller.getUsersByUserType(ut);
-        assertEquals(expResult, result);
+        List<User> result = controller.getUsersByUserType( ut );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllUsers method, of class Controller.
      */
     @Test
-    public void testGetAllUsers()
-    {
-        System.out.println("getAllUsers");
+    public void testGetAllUsers() {
+        System.out.println( "getAllUsers" );
         List<User> expResult = controller.users;
         List<User> result = controller.getAllUsers();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of setSatisfactionForStudent method, of class Controller.
      */
     @Test
-    public void testSetSatisfactionForStudent()
-    {
-        System.out.println("setSatisfactionForStudent");
-        int[] a = new int[]
-        {
+    public void testSetSatisfactionForStudent() {
+        System.out.println( "setSatisfactionForStudent" );
+        int[] a = new int[]{
             1
         };
-        int[] b = new int[]
-        {
+        int[] b = new int[]{
             2
         };
         User student = controller.user;
-        controller.setSatisfactionForStudent(a, b, student);
+        controller.setSatisfactionForStudent( a, b, student );
         int expected = 75;
-        assertEquals(expected, controller.user.getSatisfaction());
+        assertEquals( expected, controller.user.getSatisfaction() );
     }
 
     @Test
-    public void testSetNullSatisfactionForStudent()
-    {
-        System.out.println("setSNullatisfactionForStudent");
-        int[] a = new int[]
-        {
-        };
-        int[] b = new int[]
-        {
-        };
+    public void testSetNullSatisfactionForStudent() {
+        System.out.println( "setSNullatisfactionForStudent" );
+        int[] a = new int[]{};
+        int[] b = new int[]{};
         User student = controller.user;
-        controller.setSatisfactionForStudent(a, b, student);
+        controller.setSatisfactionForStudent( a, b, student );
         int expected = 0;
-        assertEquals(expected, controller.user.getSatisfaction());
+        assertEquals( expected, controller.user.getSatisfaction() );
     }
 
     /**
      * Test of getOverallSatisfaction method, of class Controller.
      */
     @Test
-    public void testGetOverallSatisfaction()
-    {
-        System.out.println("getOverallSatisfaction");
-        int[] a = new int[]
-        {
+    public void testGetOverallSatisfaction() {
+        System.out.println( "getOverallSatisfaction" );
+        int[] a = new int[]{
             1
         };
-        int[] b = new int[]
-        {
+        int[] b = new int[]{
             2
         };
         int expected = 50;
-        int actual = controller.getOverallSatisfaction(a, b);
-        assertEquals(expected, actual);
+        int actual = controller.getOverallSatisfaction( a, b );
+        assertEquals( expected, actual );
     }
 
     /**
      * Test of getOverallSatisfaction method, of class Controller.
      */
     @Test
-    public void testGetNullOverallSatisfaction()
-    {
-        System.out.println("getNullOverallSatisfaction");
-        int[] a = new int[]
-        {
-        };
-        int[] b = new int[]
-        {
-        };
+    public void testGetNullOverallSatisfaction() {
+        System.out.println( "getNullOverallSatisfaction" );
+        int[] a = new int[]{};
+        int[] b = new int[]{};
         int expected = 0;
-        int actual = controller.getOverallSatisfaction(a, b);
-        assertEquals(expected, actual);
+        int actual = controller.getOverallSatisfaction( a, b );
+        assertEquals( expected, actual );
     }
 
     /**
      * Test of getTop5UnsatissfiedStudents method, of class Controller.
      */
     @Test
-    public void testGetTop5UnsatissfiedStudents()
-    {
-        System.out.println("getTop5UnsatissfiedStudents");
+    public void testGetTop5UnsatissfiedStudents() {
+        System.out.println( "getTop5UnsatissfiedStudents" );
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(0));
-        expResult.add(controller.users.get(3));
+        expResult.add( controller.users.get( 0 ) );
+        expResult.add( controller.users.get( 3 ) );
         List<User> result = controller.getAllStudentsByUnsatisfactionRate();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllTeachers method, of class Controller.
      */
     @Test
-    public void testGetAllTeachers()
-    {
+    public void testGetAllTeachers() {
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(1));
-        expResult.add(controller.users.get(4));
+        expResult.add( controller.users.get( 1 ) );
+        expResult.add( controller.users.get( 4 ) );
         List<User> result = controller.getAllTeachers();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addProposedSubject method, of class Controller.
      */
     @Test
-    public void testAddProposedSubject()
-    {
-        System.out.println("addProposedSubject");
-        ProposedSubject ps = new ProposedSubject("Test", "It's a test", true, null);
-        int[] selectedIndices = new int[]
-        {
+    public void testAddProposedSubject() {
+        System.out.println( "addProposedSubject" );
+        ProposedSubject ps = new ProposedSubject( "Test", "It's a test", true, null );
+        int[] selectedIndices = new int[]{
             0
         };
         String expResult = AcceptanceProtocol.NEW_PROPOSED_SUBJECT_SUCCESS;
-        String result = controller.addProposedSubject(ps, selectedIndices);
-        assertEquals(expResult, result);
+        String result = controller.addProposedSubject( ps, selectedIndices );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addProposedSubject method, of class Controller.
      */
     @Test
-    public void testAddNullProposedSubject()
-    {
-        System.out.println("addNullProposedSubject");
+    public void testAddNullProposedSubject() {
+        System.out.println( "addNullProposedSubject" );
         ProposedSubject ps = null;
-        int[] selectedIndices = new int[]
-        {
+        int[] selectedIndices = new int[]{
             0
         };
         String expResult = AcceptanceProtocol.NEW_PROPOSED_SUBJECT_FAILURE_SUBJECT;
-        String result = controller.addProposedSubject(ps, selectedIndices);
-        assertEquals(expResult, result);
+        String result = controller.addProposedSubject( ps, selectedIndices );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addProposedSubject method, of class Controller.
      */
     @Test
-    public void testAddProposedSubjectNullTeacher()
-    {
-        System.out.println("addNullProposedSubjectNullTeacher");
-        ProposedSubject ps = new ProposedSubject("Test", "It's a test", true, null);
-        int[] selectedIndices = new int[]
-        {
-        };
+    public void testAddProposedSubjectNullTeacher() {
+        System.out.println( "addNullProposedSubjectNullTeacher" );
+        ProposedSubject ps = new ProposedSubject( "Test", "It's a test", true, null );
+        int[] selectedIndices = new int[]{};
         String expResult = AcceptanceProtocol.NEW_PROPOSED_SUBJECT_FAILURE_TEACHER;
-        String result = controller.addProposedSubject(ps, selectedIndices);
-        assertEquals(expResult, result);
+        String result = controller.addProposedSubject( ps, selectedIndices );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAddSubjectsToPools()
-    {
-        System.out.println("addSubjectsToPools");
-        int[] a = new int[]
-        {
+    public void testAddSubjectsToPools() {
+        System.out.println( "addSubjectsToPools" );
+        int[] a = new int[]{
             1, 2, 3, 4
         };
-        int[] b = new int[]
-        {
+        int[] b = new int[]{
             5, 6, 7, 8
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_SUCCESS;
-        String result = controller.addSubjectsToPools(a, b);
-        assertEquals(expResult, result);
+        String result = controller.addSubjectsToPools( a, b );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAdd0SubjectsToPools()
-    {
-        System.out.println("add0SubjectsToPools");
-        int[] a = new int[]
-        {
-        };
-        int[] b = new int[]
-        {
-        };
+    public void testAdd0SubjectsToPools() {
+        System.out.println( "add0SubjectsToPools" );
+        int[] a = new int[]{};
+        int[] b = new int[]{};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
-        String result = controller.addSubjectsToPools(a, b);
-        assertEquals(expResult, result);
+        String result = controller.addSubjectsToPools( a, b );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAdd2SubjectsToPools()
-    {
-        System.out.println("add2SubjectsToPools");
-        int[] a = new int[]
-        {
+    public void testAdd2SubjectsToPools() {
+        System.out.println( "add2SubjectsToPools" );
+        int[] a = new int[]{
             1
         };
-        int[] b = new int[]
-        {
+        int[] b = new int[]{
             5
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
-        String result = controller.addSubjectsToPools(a, b);
-        assertEquals(expResult, result);
+        String result = controller.addSubjectsToPools( a, b );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addSubjectsToPools method, of class Controller.
      */
     @Test
-    public void testAddNullSubjectsToPools()
-    {
-        System.out.println("addNullSubjectsToPools");
-        int[] a = new int[]
-        {
-        };
-        int[] b = new int[]
-        {
+    public void testAddNullSubjectsToPools() {
+        System.out.println( "addNullSubjectsToPools" );
+        int[] a = new int[]{};
+        int[] b = new int[]{
             5, 6, 8
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_POOLS_FAILURE;
-        String result = controller.addSubjectsToPools(a, b);
-        assertEquals(expResult, result);
+        String result = controller.addSubjectsToPools( a, b );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllAliveProposedElectiveSubjects method, of class Controller.
      */
     @Test
-    public void testGetAllAliveProposedElectiveSubjects()
-    {
-        System.out.println("getAllAliveProposedElectiveSubjects");
+    public void testGetAllAliveProposedElectiveSubjects() {
+        System.out.println( "getAllAliveProposedElectiveSubjects" );
         List<ProposedSubject> allSubjects = controller.proposedSubjects;
         List<ProposedSubject> expResult = new ArrayList<>();
-        for (ProposedSubject subject : allSubjects)
-        {
-            if (subject.isItAlive())
-            {
-                expResult.add(subject);
+        for ( ProposedSubject subject : allSubjects ) {
+            if ( subject.isItAlive() ) {
+                expResult.add( subject );
             }
         }
         List<ProposedSubject> result = controller.getAllAliveProposedElectiveSubjects();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllProposedElectiveSubjects method, of class Controller.
      */
     @Test
-    public void testGetAllProposedElectiveSubjects()
-    {
-        System.out.println("getAllProposedElectiveSubjects");
+    public void testGetAllProposedElectiveSubjects() {
+        System.out.println( "getAllProposedElectiveSubjects" );
         List<ProposedSubject> expResult = controller.proposedSubjects;
         List<ProposedSubject> result = controller.getAllProposedElectiveSubjects();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of selectSubjectsForRound1 method, of class Controller.
      */
     @Test
-    public void testSelectSubjectsForRound1()
-    {
-        System.out.println("selectSubjectsForRound1");
-        int[] selectedIndexes = new int[]
-        {
+    public void testSelectSubjectsForRound1() {
+        System.out.println( "selectSubjectsForRound1" );
+        int[] selectedIndexes = new int[]{
             1, 2, 3, 4
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_SUCCESS;
-        String result = controller.selectSubjectsForRound1(selectedIndexes);
-        assertEquals(expResult, result);
+        String result = controller.selectSubjectsForRound1( selectedIndexes );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of selectSubjectsForRound1 method, of class Controller.
      */
     @Test
-    public void testSelect0SubjectsForRound1()
-    {
-        System.out.println("select0SubjectsForRound1");
-        int[] selectedIndexes = new int[]
-        {
-        };
+    public void testSelect0SubjectsForRound1() {
+        System.out.println( "select0SubjectsForRound1" );
+        int[] selectedIndexes = new int[]{};
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_FAILURE;
-        String result = controller.selectSubjectsForRound1(selectedIndexes);
-        assertEquals(expResult, result);
+        String result = controller.selectSubjectsForRound1( selectedIndexes );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of selectSubjectsForRound1 method, of class Controller.
      */
     @Test
-    public void testSelect2SubjectsForRound1()
-    {
-        System.out.println("select2SubjectsForRound1");
-        int[] selectedIndexes = new int[]
-        {
+    public void testSelect2SubjectsForRound1() {
+        System.out.println( "select2SubjectsForRound1" );
+        int[] selectedIndexes = new int[]{
             1, 2
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_FAILURE;
-        String result = controller.selectSubjectsForRound1(selectedIndexes);
-        assertEquals(expResult, result);
+        String result = controller.selectSubjectsForRound1( selectedIndexes );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of selectSubjectsForRound1 method, of class Controller.
      */
     @Test
-    public void testSelectNullSubjectsForRound1()
-    {
-        System.out.println("selectNullSubjectsForRound1");
-        int[] selectedIndexes = new int[]
-        {
+    public void testSelectNullSubjectsForRound1() {
+        System.out.println( "selectNullSubjectsForRound1" );
+        int[] selectedIndexes = new int[]{
             1
         };
         String expResult = AcceptanceProtocol.SUBJECTS_ADDED_TO_ROUND_1_FAILURE;
-        String result = controller.selectSubjectsForRound1(selectedIndexes);
-        assertEquals(expResult, result);
+        String result = controller.selectSubjectsForRound1( selectedIndexes );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllStudentsByUnsatisfactionRate method, of class Controller.
      */
     @Test
-    public void testGetAllStudentsByUnsatisfactionRate()
-    {
-        System.out.println("getAllStudentsByUnsatisfactionRate");
+    public void testGetAllStudentsByUnsatisfactionRate() {
+        System.out.println( "getAllStudentsByUnsatisfactionRate" );
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(0));
-        expResult.add(controller.users.get(3));
+        expResult.add( controller.users.get( 0 ) );
+        expResult.add( controller.users.get( 3 ) );
         List<User> result = controller.getAllStudentsByUnsatisfactionRate();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllStudents method, of class Controller.
      */
     @Test
-    public void testGetAllStudents()
-    {
-        System.out.println("getAllStudents");
+    public void testGetAllStudents() {
+        System.out.println( "getAllStudents" );
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(0));
-        expResult.add(controller.users.get(3));
+        expResult.add( controller.users.get( 0 ) );
+        expResult.add( controller.users.get( 3 ) );
         List<User> result = controller.getAllStudents();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getSubjectsByPool method, of class Controller.
      */
     @Test
-    public void testGetSubjectsByPool()
-    {
-        System.out.println("getSubjectsByPool");
+    public void testGetSubjectsByPool() {
+        System.out.println( "getSubjectsByPool" );
         String pool = "B";
         List<ProposedSubject> expResult = new ArrayList<>();
-        expResult.add(controller.proposedSubjects.get(0));
-        expResult.add(controller.proposedSubjects.get(3));
-        expResult.add(controller.proposedSubjects.get(4));
-        List<ProposedSubject> result = controller.getSubjectsByPool(pool);
-        assertEquals(expResult, result);
+        expResult.add( controller.proposedSubjects.get( 0 ) );
+        expResult.add( controller.proposedSubjects.get( 3 ) );
+        expResult.add( controller.proposedSubjects.get( 4 ) );
+        List<ProposedSubject> result = controller.getSubjectsByPool( pool );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getAllClasses method, of class Controller.
      */
     @Test
-    public void testGetAllClasses()
-    {
-        System.out.println("getAllClasses");
+    public void testGetAllClasses() {
+        System.out.println( "getAllClasses" );
         List<FinalClass> expResult = controller.finalClasses;
         List<FinalClass> result = controller.getAllClasses();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getStudentsForClass method, of class Controller.
      */
     @Test
-    public void testGetStudentsForClass()
-    {
-        System.out.println("getStudentsForClass");
-        FinalClass c = controller.finalClasses.get(0);
+    public void testGetStudentsForClass() {
+        System.out.println( "getStudentsForClass" );
+        FinalClass c = controller.finalClasses.get( 0 );
         List<User> expResult = new ArrayList<>();
-        expResult.add(controller.users.get(0));
-        expResult.add(controller.users.get(3));
-        List<User> result = controller.getStudentsForClass(c);
-        assertEquals(expResult, result);
+        expResult.add( controller.users.get( 0 ) );
+        expResult.add( controller.users.get( 3 ) );
+        List<User> result = controller.getStudentsForClass( c );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of sendMail method, of class Controller.
      */
     @Test
-    public void testSendMail()
-    {
-        System.out.println("sendMail");
+    public void testSendMail() {
+        System.out.println( "sendMail" );
         XStream x = new XStream();
-        String expResult = x.toXML(controller.finalClasses);
+        String expResult = x.toXML( controller.finalClasses );
         String result = controller.sendMail();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of getRoundNumber method, of class Controller.
      */
     @Test
-    public void testGetRoundNumber()
-    {
-        System.out.println("getRoundNumber");
+    public void testGetRoundNumber() {
+        System.out.println( "getRoundNumber" );
         int expResult = 0;
         int result = controller.getRoundNumber();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of incrementRoundNumber method, of class Controller.
      */
     @Test
-    public void testIncrementRoundNumber()
-    {
-        System.out.println("incrementRoundNumber");
+    public void testIncrementRoundNumber() {
+        System.out.println( "incrementRoundNumber" );
         int expResult = 1;
         int result = controller.incrementRoundNumber();
-        assertEquals(expResult, result);
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addNewClass method, of class Controller.
      */
     @Test
-    public void testAddNewClass()
-    {
-        System.out.println("addNewClass");
+    public void testAddNewClass() {
+        System.out.println( "addNewClass" );
         List<User> students = controller.students;
-        ProposedSubject subject = controller.proposedSubjects.get(0);
-        FinalClass expResult = new FinalClass(subject);
-        expResult.setStudents(students);
-        FinalClass result = controller.addNewClass(students, subject);
-        assertEquals(expResult.getSubject(), result.getSubject());
-        assertEquals(expResult.getStudents(), result.getStudents());
+        ProposedSubject subject = controller.proposedSubjects.get( 0 );
+        FinalClass expResult = new FinalClass( subject );
+        expResult.setStudents( students );
+        FinalClass result = controller.addNewClass( students, subject );
+        assertEquals( expResult.getSubject(), result.getSubject() );
+        assertEquals( expResult.getStudents(), result.getStudents() );
     }
 
     /**
      * Test of addNewClass method, of class Controller.
      */
     @Test
-    public void testAddNewNullClass()
-    {
-        System.out.println("testAddNewNullClass");
+    public void testAddNewNullClass() {
+        System.out.println( "testAddNewNullClass" );
         List<User> students = controller.students;
         ProposedSubject subject = null;
         FinalClass expResult = null;
-        FinalClass result = controller.addNewClass(students, subject);
-        assertEquals(expResult, result);
+        FinalClass result = controller.addNewClass( students, subject );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of addNewClass method, of class Controller.
      */
     @Test
-    public void testAddNewClass0Students()
-    {
-        System.out.println("addNewClass0Students");
+    public void testAddNewClass0Students() {
+        System.out.println( "addNewClass0Students" );
         List<User> students = new ArrayList();
-        ProposedSubject subject = controller.proposedSubjects.get(1);;
+        ProposedSubject subject = controller.proposedSubjects.get( 1 );;
         FinalClass expResult = null;
-        FinalClass result = controller.addNewClass(students, subject);
-        assertEquals(expResult, result);
+        FinalClass result = controller.addNewClass( students, subject );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editStudentsInClass method, of class Controller.
      */
     @Test
-    public void testEditNullStudentsInClass()
-    {
-        System.out.println("editNullStudentsInClass");
+    public void testEditNullStudentsInClass() {
+        System.out.println( "editNullStudentsInClass" );
         List<User> students = null;
         int classIndex = 0;
         FinalClass expResult = null;
-        FinalClass result = controller.editStudentsInClass(students, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editStudentsInClass( students, classIndex );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editStudentsInClass method, of class Controller.
      */
     @Test
-    public void testEditStudentsInNullClass()
-    {
-        System.out.println("editStudentsInNullClass");
+    public void testEditStudentsInNullClass() {
+        System.out.println( "editStudentsInNullClass" );
         List<User> students = null;
         int classIndex = 120;
         FinalClass expResult = null;
-        FinalClass result = controller.editStudentsInClass(students, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editStudentsInClass( students, classIndex );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editStudentsInClass method, of class Controller.
      */
     @Test
-    public void testEditStudentsInClass()
-    {
-        System.out.println("editStudentsInClass");
+    public void testEditStudentsInClass() {
+        System.out.println( "editStudentsInClass" );
         List<User> students = controller.students;
         int classIndex = 0;
         FinalClass expResult = null;
-        FinalClass result = controller.editStudentsInClass(students, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editStudentsInClass( students, classIndex );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editTeachersInClass method, of class Controller.
      */
     @Test
-    public void testEditNullTeachersInClass()
-    {
-        System.out.println("editNullTeachersInClass");
+    public void testEditNullTeachersInClass() {
+        System.out.println( "editNullTeachersInClass" );
         List<User> teachers = null;
         int classIndex = 0;
         FinalClass expResult = null;
-        FinalClass result = controller.editTeachersInClass(teachers, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editTeachersInClass( teachers, classIndex );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editTeachersInClass method, of class Controller.
      */
     @Test
-    public void testEditTeachersInNullClass()
-    {
-        System.out.println("editNullTeachersInNullClass");
+    public void testEditTeachersInNullClass() {
+        System.out.println( "editNullTeachersInNullClass" );
         List<User> teachers = controller.teachers;
         int classIndex = 120;
         FinalClass expResult = null;
-        FinalClass result = controller.editTeachersInClass(teachers, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editTeachersInClass( teachers, classIndex );
+        assertEquals( expResult, result );
     }
 
     /**
      * Test of editTeachersInClass method, of class Controller.
      */
     @Test
-    public void testEditTeachersInClass()
-    {
-        System.out.println("editTeachersInClass");
+    public void testEditTeachersInClass() {
+        System.out.println( "editTeachersInClass" );
         List<User> teachers = controller.teachers;
         int classIndex = 0;
         FinalClass expResult = null;
-        FinalClass result = controller.editTeachersInClass(teachers, classIndex);
-        assertEquals(expResult, result);
+        FinalClass result = controller.editTeachersInClass( teachers, classIndex );
+        assertEquals( expResult, result );
     }
 }

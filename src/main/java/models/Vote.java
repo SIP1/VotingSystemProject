@@ -12,19 +12,18 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Vote_TBL")
-public class Vote implements Serializable
-{
+@Table( name = "Vote_TBL" )
+public class Vote implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "votesSequenceGen")
-    @SequenceGenerator(name = "votesSequenceGen", sequenceName = "votesSequence",
-            initialValue = 1000, allocationSize = 1)
+    @GeneratedValue( strategy = GenerationType.SEQUENCE, generator = "votesSequenceGen" )
+    @SequenceGenerator( name = "votesSequenceGen", sequenceName = "votesSequence",
+            initialValue = 1000, allocationSize = 1 )
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_USERNAME")
+    @ManyToOne( fetch = FetchType.LAZY )
+    @JoinColumn( name = "USER_USERNAME" )
     private User user;
 
     @ManyToOne
@@ -34,72 +33,59 @@ public class Vote implements Serializable
     private Integer roundNumber;
     private Integer points;
 
-    public Vote()
-    {
+    public Vote() {
 
     }
 
-    public Vote(User user, ProposedSubject proposedSubject, Integer roundNumber, Integer points)
-    {
+    public Vote( User user, ProposedSubject proposedSubject, Integer roundNumber, Integer points ) {
         this.user = user;
         this.proposedSubject = proposedSubject;
         this.roundNumber = roundNumber;
         this.points = points;
     }
 
-    public Integer getId()
-    {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id)
-    {
+    public void setId( Integer id ) {
         this.id = id;
     }
 
-    public User getUser()
-    {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(User user)
-    {
+    public void setUser( User user ) {
         this.user = user;
     }
 
-    public ProposedSubject getProposedSubject()
-    {
+    public ProposedSubject getProposedSubject() {
         return proposedSubject;
     }
 
-    public void setProposedSubject(ProposedSubject proposedSubject)
-    {
+    public void setProposedSubject( ProposedSubject proposedSubject ) {
         this.proposedSubject = proposedSubject;
     }
 
-    public Integer getRoundNumber()
-    {
+    public Integer getRoundNumber() {
         return roundNumber;
     }
 
-    public void setRoundNumber(Integer roundNumber)
-    {
+    public void setRoundNumber( Integer roundNumber ) {
         this.roundNumber = roundNumber;
     }
 
-    public Integer getPoints()
-    {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setPoints(Integer points)
-    {
+    public void setPoints( Integer points ) {
         this.points = points;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Vote{" + "id=" + id + ", user=" + user + ", proposedSubject="
                 + proposedSubject + ", roundNumber=" + roundNumber
                 + ", points=" + points + '}';
